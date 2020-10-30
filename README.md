@@ -10,7 +10,7 @@ Ricardo Fontão
 ## Mockups
 
 ![Main list interface](/mockups/list.png)
-![Pet post page](/mockups/petpage.png)
+![Pet post page](/mockups/petPage.png)
 
 ## Navigation
 
