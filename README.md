@@ -2,10 +2,10 @@
 
 ## Members
 
-Ana Inês Oliveira Barros
-João de Jesus Costa - up201806560
-João Lucas Silva Martins - up201806436
-Ricardo Fontão
+- Ana Inês Oliveira Barros
+- João de Jesus Costa - up201806560
+- João Lucas Silva Martins - up201806436
+- Ricardo Fontão
 
 ## Mockups
 
