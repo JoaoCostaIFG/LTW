@@ -1,4 +1,19 @@
 # ltw-project-g10
-ltw-project-g10 created by GitHub Classroom
 
-![SQLite Mockup](database_mockup.png)
+## Members
+
+Ana Inês Oliveira Barros
+João de Jesus Costa - up201806560
+João Lucas Silva Martins - up201806436
+Ricardo Fontão
+
+## Mockups
+
+![Main list interface](/mockups/list.png)
+![Pet post page](/mockups/petpage.png)
+
+## Navigation
+
+## Database
+
+![SQLite Mockup](/mockups/database_mockup.png)
