@@ -1,0 +1,13 @@
+h1 {
+  text-align: center;
+}
+
+
+#menu > ul > li {
+  display: inline-block;
+  position: relative;
+}
+
+#menu > ul > li + li {
+  padding-left: 1em;
+}

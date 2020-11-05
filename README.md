@@ -9,11 +9,11 @@
 
 ## Mockups
 
-![Main list interface](/mockups/list.png)
-![Pet post page](/mockups/petPage.png)
+![Main list interface](/documentation/mockups/list.png)
+![Pet post page](/documentation/mockups/petPage.png)
 
 ## Navigation
 
 ## Database
 
-![SQLite Mockup](/mockups/database_mockup.png)
+![SQLite Mockup](/documentation/mockups/database_mockup.png)
