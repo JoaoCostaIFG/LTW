@@ -1,7 +1,7 @@
 :root {
   --fonts: helvetica, sans-serif;
   --background: #202124;
-  --main: #202124;
+  --main: #cfd3d8;
   --green: #5d8d79;
   --orange: #8d645d;
   --dark: #121212;
@@ -12,12 +12,13 @@ body {
   background-color: var(--background);
   font-family: var(--fonts);
   color: var(--main);
-  padding-left: 1em;
 }
 
+/* HEADERS */
 h1 {
   color: var(--orange);
-  font-size: xx-large;
+  font-size: 3em;
+  font-weight: normal;
 }
 
 h1 a,
@@ -28,6 +29,7 @@ h4 a {
   text-decoration: none;
 }
 
+/* MENU */
 #menu > ul {
   padding: 0;
   margin: 0;
@@ -35,4 +37,51 @@ h4 a {
 
 #menu > ul > li {
   list-style-type: none;
+}
+
+/* LIST */
+/* #list { */
+  /* display: grid; */
+  /* grid-template-columns: repeat(auto-fill, minmax(20%, 1fr)); */
+  /* grid-gap: 2em; */
+  /* align-items: stretch; */
+  /* height: 26em; */
+  /* overflow-y: scroll; */
+
+  /* margin-left: 10%; */
+  /* margin-right: 10%; */
+/* } */
+
+/* .crop { */
+  /* [> width: 20%; <] */
+  /* [> height: 20%; <] */
+  /* [> overflow: hidden; <] */
+/* } */
+
+/* .crop img { */
+  /* width: 20em; */
+  /* height: 20em; */
+  /* [> margin: -25% 0 0 -25%; <] */
+/* } */
+
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  width: 180px;
+  display: inline-block;
+  position: relative;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
 }

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Super Legit News</title>    
+    <title>Become my buddy</title>    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../css/style.css" rel="stylesheet">
     <link href="../../css/layout.css" rel="stylesheet">
   </head>
   <body>
+    <img id="headimg" src="/static/headimg.png" alt="Cute dog looking at camera."/>
     <header>
       <h1><a href="/index.php">Become my buddy</a></h1>
       <div id="signup">
