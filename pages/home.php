@@ -6,6 +6,19 @@
   include('../templates/common/tpl_header.php');
 ?>
 
+<form class="listfilter" action="" method="post">
+  <br>
+  <input type="text" name="name" placeholder="Name">
+  <input type="text" name="sex" placeholder="Sex">
+  <input type="text" name="age" placeholder="Age">
+  <input type="text" name="size" placeholder="Size">
+  <input type="text" name="breed" placeholder="Breed">
+  <input type="text" name="location" placeholder="Location">
+
+  <br>
+  <input type="submit" value="Search">
+</form>
+
 <div class="list">
   <a href="/static/tmp/a.png" class="list-item">
     <ul class="list-item-content">
@@ -62,6 +75,10 @@
     </ul>
   </a>
 </div>
+
+<center>
+  <button type="button" id="showmoreButton">Load More</button>
+</center>
 
 <?php
   include('../templates/common/tpl_footer.php');

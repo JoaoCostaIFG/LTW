@@ -1,8 +1,12 @@
 :root {
   --fonts: helvetica, sans-serif;
+  --list_gap: 2em;
+  --list_gap_inv: -2em;
+
   --background: #202124;
   --main: #cfd3d8;
   --green: #5d8d79;
+  --darkGreen: #2f5e4a;
   --orange: #8d645d;
   --dark: #121212;
   --light: #3c4042;
@@ -44,21 +48,33 @@ h4 a {
   display: inline-flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  margin: 0 0 0 var(--list_gap_inv); /* wait until gap is more wildely spread */
+  width: calc(100% + var(--list_gap));
+
+  /* have scroll */
+  max-height: 48em; /* TODO var */
+  overflow: auto;
+}
+
+.list > * {
+  margin: var(--list_gap) 0 0 var(--list_gap); /* wait until gap is more wildely spread */
 }
 
 .list-item {
+  display: inline;
   color: var(--main);
   border: 2px solid var(--background);
-
-  display: inline;
-  margin-top: 2em;
-  margin-right: 2em;
 
   text-decoration: none;
   text-align: center;
   font-weight: bold;
 
-  border-radius: 12px;
+  border-radius: 14px;
+}
+
+.list-item:hover {
+  border-color: var(--green);
 }
 
 .list-item-content {
@@ -71,22 +87,68 @@ h4 a {
 }
 
 .list-item-content li img {
-  width: 20em;
-  height: 20em;
+  width: 16em;
+  height: 16em;
 
   border-radius: 12px 12px 0px 0px;
 }
 
 .list-item-content li + li {
-  padding: 1em;
+  padding: 0.5em;
   font-size: 1.5em;
 
-  margin-top: -0.4em; /* TODO this is problematic */
+  margin-top: -0.3em; /* TODO this might be problematic */
   border: 4px solid var(--main);
   border-top: none;
   border-radius: 0px 0px 12px 12px;
 }
 
-.list-item:hover {
-  border-color: var(--green);
+/* LIST FORM */
+form {
+  text-align: center;
+}
+
+.listfilter input {
+  padding: 0.7em;
+  border: none;
+
+  background-color: var(--light);
+  color: var(--main);
+  font-weight: bold;
+}
+
+.listfilter input + input {
+  margin-left: 2em;
+}
+
+.listfilter input[type=submit] {
+  padding: 0.7em 2em;
+  margin-top: 1em;
+
+  border-radius: 20px;
+
+  background-color: var(--green);
+  color: var(--background);
+  font-size: large;
+}
+
+.listfilter input[type=submit]:hover {
+  background-color: var(--darkGreen);
+}
+
+#showmoreButton {
+  padding: 0.7em 2em;
+  margin-top: 3em;
+
+  border-radius: 20px;
+  border: none;
+
+  background-color: var(--green);
+  color: var(--background);
+  font-size: large;
+  font-weight: bold;
+}
+
+#showmoreButton:hover {
+  background-color: var(--darkGreen);
 }
