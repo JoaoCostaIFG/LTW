@@ -40,48 +40,53 @@ h4 a {
 }
 
 /* LIST */
-/* #list { */
-  /* display: grid; */
-  /* grid-template-columns: repeat(auto-fill, minmax(20%, 1fr)); */
-  /* grid-gap: 2em; */
-  /* align-items: stretch; */
-  /* height: 26em; */
-  /* overflow-y: scroll; */
-
-  /* margin-left: 10%; */
-  /* margin-right: 10%; */
-/* } */
-
-/* .crop { */
-  /* [> width: 20%; <] */
-  /* [> height: 20%; <] */
-  /* [> overflow: hidden; <] */
-/* } */
-
-/* .crop img { */
-  /* width: 20em; */
-  /* height: 20em; */
-  /* [> margin: -25% 0 0 -25%; <] */
-/* } */
-
-div.gallery {
-  margin: 5px;
-  border: 1px solid #ccc;
-  width: 180px;
-  display: inline-block;
-  position: relative;
+.list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-div.gallery:hover {
-  border: 1px solid #777;
-}
+.list-item {
+  color: var(--main);
+  border: 2px solid var(--background);
 
-div.gallery img {
-  width: 100%;
-  height: auto;
-}
+  display: inline;
+  margin-top: 2em;
+  margin-right: 2em;
 
-div.desc {
-  padding: 15px;
+  text-decoration: none;
   text-align: center;
+  font-weight: bold;
+
+  border-radius: 12px;
+}
+
+.list-item-content {
+  margin: 0;
+  padding: 0;
+}
+
+.list-item-content li {
+  list-style-type: none;
+}
+
+.list-item-content li img {
+  width: 20em;
+  height: 20em;
+
+  border-radius: 12px 12px 0px 0px;
+}
+
+.list-item-content li + li {
+  padding: 1em;
+  font-size: 1.5em;
+
+  margin-top: -0.4em; /* TODO this is problematic */
+  border: 4px solid var(--main);
+  border-top: none;
+  border-radius: 0px 0px 12px 12px;
+}
+
+.list-item:hover {
+  border-color: var(--green);
 }
