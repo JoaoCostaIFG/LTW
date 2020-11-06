@@ -1,3 +1,8 @@
+:root {
+  --list_gap: 2em;
+  --list_gap_inv: -2em;
+}
+
 #headimg {
   display: block;
   margin-left: auto;
@@ -17,4 +22,31 @@ h1 {
 
 #menu > ul > li + li {
   padding-left: 1em;
+}
+
+/* LIST */
+.list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  margin: 0 0 0 var(--list_gap_inv); /* wait until gap is more wildely spread */
+  width: calc(100% + var(--list_gap));
+
+  /* have scroll */
+  max-height: 48em; /* TODO var */
+  overflow: auto;
+}
+
+.list > * {
+  margin: var(--list_gap) 0 0 var(--list_gap); /* wait until gap is more wildely spread */
+}
+
+.list-item {
+  display: inline;
+}
+
+.list-item-content {
+  margin: 0;
+  padding: 0;
 }

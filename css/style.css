@@ -1,7 +1,5 @@
 :root {
   --fonts: helvetica, sans-serif;
-  --list_gap: 2em;
-  --list_gap_inv: -2em;
 
   --background: #202124;
   --main: #cfd3d8;
@@ -44,25 +42,7 @@ h4 a {
 }
 
 /* LIST */
-.list {
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  margin: 0 0 0 var(--list_gap_inv); /* wait until gap is more wildely spread */
-  width: calc(100% + var(--list_gap));
-
-  /* have scroll */
-  max-height: 48em; /* TODO var */
-  overflow: auto;
-}
-
-.list > * {
-  margin: var(--list_gap) 0 0 var(--list_gap); /* wait until gap is more wildely spread */
-}
-
 .list-item {
-  display: inline;
   color: var(--main);
   border: 2px solid var(--background);
 
@@ -75,11 +55,6 @@ h4 a {
 
 .list-item:hover {
   border-color: var(--green);
-}
-
-.list-item-content {
-  margin: 0;
-  padding: 0;
 }
 
 .list-item-content li {
@@ -104,13 +79,14 @@ h4 a {
 }
 
 /* LIST FORM */
-form {
+.listfilter {
   text-align: center;
 }
 
 .listfilter input {
   padding: 0.7em;
   border: none;
+  width: 10%; /* important */
 
   background-color: var(--light);
   color: var(--main);
@@ -122,8 +98,8 @@ form {
 }
 
 .listfilter input[type=submit] {
-  padding: 0.7em 2em;
   margin-top: 1em;
+  text-align: center;
 
   border-radius: 20px;
 
