@@ -15,13 +15,14 @@
         <li><a href="/index.php">Search</a></li>
         <li><a href="/index.php">Contacts</a></li>
       </ul>
-    </nav>
-    <img id="headimg" src="/static/headimg.png" alt="Cute dog looking at camera."/>
-
-    <header>
-      <h1><a href="/index.php">Become my buddy</a></h1>
       <div id="signup">
         <a href="register.html">Sign Up</a>
         <a href="login.html">Log in</a>
       </div>
+    </nav>
+
+    <img id="headimg" src="/static/headimg.png" alt="Cute dog looking at camera."/>
+
+    <header>
+      <h1><a href="/index.php">Become my buddy</a></h1>
     </header>
