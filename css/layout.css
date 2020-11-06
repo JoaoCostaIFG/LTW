@@ -4,7 +4,7 @@
 }
 
 body {
-  margin-top: 4em;
+  margin-top: 3em;
 }
 
 #headimg {
@@ -20,12 +20,30 @@ h1 {
 }
 
 /* MENU */
+#menu {
+  overflow: auto;
+}
+
+#menu > ul {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
 #menu > ul > li {
   display: inline-block;
   position: relative;
 }
 
 #menu > ul > li + li {
+  padding-left: 1em;
+}
+
+#signup {
+  float: right;
+}
+
+#signup a + a {
   padding-left: 1em;
 }
 

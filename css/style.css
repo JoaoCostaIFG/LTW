@@ -36,15 +36,8 @@ h4 a {
 }
 
 /* MENU */
-#signup {
-  float: right;
-  margin-top: -2em;
-}
-
-#menu > ul {
-  padding: 0;
-  margin: 0;
-  text-align: center;
+#menu {
+  font-weight: bold;
 }
 
 #menu > ul > li {
@@ -58,11 +51,20 @@ h4 a {
 #menu > ul > li > a {
   text-decoration: none;
   font-size: large;
-  font-weight: bold;
   color: var(--main);
 }
 
 #menu > ul > li > a:hover {
+  color: var(--green);
+}
+
+#signup a {
+  text-decoration: none;
+  font-size: small;
+  color: var(--main);
+}
+
+#signup a:hover {
   color: var(--green);
 }
 
@@ -93,7 +95,8 @@ h4 a {
   border-radius: 12px 12px 0px 0px;
 }
 
-.list-item-content li + li { /* image's description */
+.list-item-content li + li {
+  /* image's description */
   padding: 0.5em;
   font-size: 1.5em;
   background-color: var(--dark);
@@ -123,7 +126,7 @@ h4 a {
   margin-left: 2em;
 }
 
-.listfilter input[type=submit] {
+.listfilter input[type="submit"] {
   margin-top: 1em;
   text-align: center;
 
@@ -134,7 +137,7 @@ h4 a {
   font-size: large;
 }
 
-.listfilter input[type=submit]:hover {
+.listfilter input[type="submit"]:hover {
   background-color: var(--darkGreen);
 }
 
