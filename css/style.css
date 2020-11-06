@@ -16,6 +16,10 @@ body {
   color: var(--main);
 }
 
+#headimg {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
+}
+
 /* HEADERS */
 h1 {
   color: var(--orange);
@@ -35,10 +39,26 @@ h4 a {
 #menu > ul {
   padding: 0;
   margin: 0;
+  text-align: center;
 }
 
 #menu > ul > li {
   list-style-type: none;
+}
+
+#menu > ul > li + li {
+  margin-left: 2em;
+}
+
+#menu > ul > li > a {
+  text-decoration: none;
+  font-size: large;
+  font-weight: bold;
+  color: var(--main);
+}
+
+#menu > ul > li > a:hover {
+  color: var(--green);
 }
 
 /* LIST */
@@ -68,12 +88,13 @@ h4 a {
   border-radius: 12px 12px 0px 0px;
 }
 
-.list-item-content li + li {
+.list-item-content li + li { /* image's description */
   padding: 0.5em;
   font-size: 1.5em;
+  background-color: var(--dark);
 
   margin-top: -0.3em; /* TODO this might be problematic */
-  border: 4px solid var(--main);
+  border: 2px solid var(--light);
   border-top: none;
   border-radius: 0px 0px 12px 12px;
 }
