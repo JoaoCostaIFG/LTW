@@ -1,20 +1,5 @@
-drop table if exists Commentary;
-create table Commentary(
-    poster_id INTEGER REFERENCES User(id),
-    user_id INTEGER REFERENCES User(id),
-    pet_id INTEGER REFERENCES Pet(id),
-    text VARCHAR(256) UNIQUE NOT NULL,
-    FOREIGN KEY(user_id, pet_id) REFERENCES Post(user_id, pet_id),
-    PRIMARY KEY(user_id, poster_id, pet_id)
-);
-
-drop table if exists Post;
-create table Post(
-    user_id INTEGER REFERENCES User(id),
-    pet_id INTEGER REFERENCES Pet(id),
-    description VARCHAR(256) UNIQUE NOT NULL,
-    PRIMARY KEY(user_id, pet_id)
-);
+.mode columns
+.headers on
 
 drop table if exists User;
 create table User(
@@ -26,46 +11,96 @@ create table User(
     mobile_number CHAR(9) UNIQUE NOT NULL
 );
 
-drop table if exists Pet;
-create table Pet(
+drop table if exists Color;
+create table Color(
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+drop table if exists City;
+create table City(
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(256) NOT NULL
+);
+
+drop table if exists Animal;
+create table Animal(
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+drop table if exists Species;
+create table Species(
+    id INTEGER PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    animal_id REFERENCES Animal(id)
+);
+
+drop table if exists PetPost; 
+create table PetPost( 
     id INTEGER PRIMARY KEY,
     name VARCHAR(256) NOT NULL,
-    species VARCHAR(256) NOT NULL,
-    location VARCHAR(256) NOT NULL,
+    age INTEGER,
+    gender INTEGER CHECK (gender = 1 OR gender = 0),
     size INTEGER,
-    color VARCHAR(32)
+    description VARCHAR(256) NOT NULL,
+    date DATE NOT NULL,
+    color_id INTEGER REFERENCES Color(id),
+    species_id INTEGER REFERENCES Species(id),
+    city_id INTEGER REFERENCES City(id),
+    user_id INTEGER REFERENCES User(id)
+);
+
+drop table if exists Photo; 
+create table Photo( 
+    id INTEGER PRIMARY KEY,
+    post_id INTEGER REFERENCES PetPost(id),
+    photo_path VARCHAR(256),
+    date DATE NOT NULL
+);
+
+drop table if exists Comment;
+create table Comment(
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER REFERENCES User(id),
+    post_id INTEGER REFERENCES PetPost(id),
+    text VARCHAR(256) UNIQUE NOT NULL,
+    date DATE NOT NULL
+);
+
+drop table if exists Question;
+create table Question(
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER REFERENCES User(id),
+    post_id INTEGER REFERENCES PetPost(id),
+    text VARCHAR(256) UNIQUE NOT NULL,
+    date DATE NOT NULL
+);
+
+drop table if exists Answer;
+create table Answer(
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER REFERENCES User(id),
+    question_id INTEGER REFERENCES Question(id),
+    text VARCHAR(256) UNIQUE NOT NULL,
+    date DATE NOT NULL
 );
 
 drop table if exists Favourite;
 create table Favourite(
     user_id INTEGER REFERENCES User(id),
-    pet_id INTEGER REFERENCES Pet(id),
-    PRIMARY KEY(user_id, pet_id)
+    post_id INTEGER REFERENCES PetPost(id),
+    PRIMARY KEY(user_id, post_id)
 );
 
 drop table if exists Proposal;
 create table Proposal(
-    popopipi_id INTEGER REFERENCES User(id),
-    user_id INTEGER,
-    pet_id INTEGER,
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER REFERENCES User(id),
+    post_id INTEGER REFERENCES PetPost(id),
     accepted INTEGER,
-    FOREIGN KEY(user_id, pet_id) REFERENCES Post(user_id, pet_id),
-    PRIMARY KEY(popopipi_id, user_id, pet_id)
+    date DATE NOT NULL
 );
 
 -- TODO Esquema: adicionar seta de poster_id de proposal p/ user_id de post_id
 
-PRAGMA foreign_keys = ON;
-INSERT INTO Pet VALUES(NULL, "Pantufa", "Gatus Gordus", "Costa lmao", 999, "Blaique");
-INSERT INTO Pet VALUES(NULL, "Golden", "Golden Retriever", "Canil da trofa", 30, "Blaique");
-
-INSERT INTO User VALUES(NULL, "Padoru", "Sempre a trolar", "padoru.png", "padoru@padoru.com", "912345678");
-INSERT INTO User VALUES(NULL, "Maynardo", "Jaime do rato trovejante", "maynerd.png", "maynerd@tool.band", "9souonard");
-
-INSERT INTO Favourite VALUES(1, 1);
-
-INSERT INTO Post VALUES(2, 1, "Cute gato");
-
-INSERT INTO Commentary VALUES(1, 2, 1, "Mas o que gacha games. Gato fofo btw.");
-
-INSERT INTO Proposal VALUES(1, 2, 1, 1);
