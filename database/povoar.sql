@@ -42,8 +42,8 @@ INSERT INTO Photo VALUES(NULL, 1, "gatoplank.png", "10/08/2020");
 INSERT INTO Photo VALUES(NULL, 2, "mia.png", "10/08/2020");
 INSERT INTO Photo VALUES(NULL, 3, "lucas.png", "10/08/2020");
 INSERT INTO Photo VALUES(NULL, 4, "bazinga.png", "10/08/2020");
--- INSERT INTO Photo VALUES(NULL, 2, "bobi.png", "01/08/2020");
--- INSERT INTO Photo VALUES(NULL, 3, "poki.png", "01/09/2020");
+INSERT INTO Photo VALUES(NULL, 2, "bobi.png", "01/08/2020");
+INSERT INTO Photo VALUES(NULL, 3, "poki.png", "01/09/2020");
 
 -- Comment
 INSERT INTO Comment VALUES(NULL, 1, 1, "Mas o que gacha games. Gato fofo btw.", "18/09/2020");
