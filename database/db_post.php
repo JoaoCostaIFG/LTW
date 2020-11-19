@@ -2,12 +2,15 @@
 include_once('../database/database.php');
 
   /**
-   * Returns all Pets
+   * Returns all Posts containing the name and photo of the pet
    */
-  function getAllPets() {
+  function getAllPosts() {
     $db = Database::instance()->db();
-    $stmt = $db->prepare('SELECT * FROM Pet');
-    $stmt->execute(array());
+    $stmt = $db->prepare(
+        'SELECT name, photo_path
+         FROM PetPost JOIN Photo ON(PetPost.id = post_id)'
+    );
+    $stmt->execute();
     return $stmt->fetchAll(); 
   }
 ?>
