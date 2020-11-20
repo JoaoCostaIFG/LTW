@@ -139,6 +139,7 @@ h4 a {
 
 .listfilter input[type="submit"]:hover {
   background-color: var(--darkGreen);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 8px 22px 0 rgba(0, 0, 0, 0.3); /* the edgehog */
 }
 
 #showmoreButton {

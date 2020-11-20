@@ -20,10 +20,10 @@
 </form>
 
 <?php
-  include('../templates/tpl_posts.php');
+  include('../templates/tpl_list.php');
   include('../database/db_post.php');
   $posts = getAllPosts();
-  draw_posts($posts);
+  drawPostList($posts);
   include('../templates/common/tpl_footer.php');
 ?>
 

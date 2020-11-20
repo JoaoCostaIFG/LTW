@@ -12,16 +12,20 @@
 
 <?php } ?>
 
-<?php function draw_post($post) {
+<?php function drawPostList($post) {
 /**
  * Draws a given post.
  */ 
   $photo_path = '../static/images/' . $post['photo_path'];
-  ?>
- <a href="<?=$photo_path; ?>" class="list-item">
+?>
+  <a href="<?=$photo_path; ?>" class="list-item">
     <ul class="list-item-content">
-    <li><img src="<?=$photo_path; ?>" alt="<?=$post['name']; ?>'s photo"/></li>
-      <li><?=$post['name']; ?></li>
+      <li>
+        <img src="<?=$photo_path; ?>" alt="<?=$post['name']; ?>'s photo"/>
+      </li>
+      <li>
+        <?=$post['name']; ?>
+      </li>
     </ul>
   </a>
 

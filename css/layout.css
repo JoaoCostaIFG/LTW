@@ -1,6 +1,7 @@
 :root {
   --list_gap: 2em;
   --list_gap_inv: -2em;
+  --list-height: 48em;
 }
 
 body {
@@ -53,7 +54,7 @@ h1 {
   width: calc(100% + var(--list_gap));
 
   /* have scroll */
-  max-height: 48em; /* TODO var */
+  max-height: var(--list-height); /* TODO var */
   overflow: auto;
 }
 
