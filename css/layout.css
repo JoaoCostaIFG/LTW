@@ -35,10 +35,6 @@ h1 {
   position: relative;
 }
 
-#menu > ul > li + li {
-  padding-left: 1em;
-}
-
 #signup {
   float: right;
 }
