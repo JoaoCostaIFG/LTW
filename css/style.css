@@ -88,14 +88,14 @@ h4 a {
   list-style-type: none;
 }
 
-.list-item-content li img {
+.list-item-img div {
   width: 16em;
   height: 16em;
 
   border-radius: 12px 12px 0px 0px;
 }
 
-.list-item-content li + li {
+.list-item-txt {
   /* image's description */
   padding: 0.5em;
   font-size: 1.5em;
