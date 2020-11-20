@@ -1,18 +1,19 @@
-<?php function draw_posts($posts) {
+<?php function drawPostList($posts) {
 /**
  * Draws given posts using the draw_post function.
- */ ?>
+ */
+?>
 
 <div class="list">
   <?php 
     foreach($posts as $post)
-      draw_post($post);
+      drawPostItem($post);
   ?>
 </div>
 
 <?php } ?>
 
-<?php function drawPostList($post) {
+<?php function drawPostItem($post) {
 /**
  * Draws a given post.
  */ 
