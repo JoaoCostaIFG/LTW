@@ -93,6 +93,10 @@ h4 a {
   height: 16em;
 
   border-radius: 12px 12px 0px 0px;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background-size: contain; */
+  /* overflow: hidden; */
 }
 
 .list-item-txt {

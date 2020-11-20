@@ -22,7 +22,7 @@
   <a href="<?=$photo_path; ?>" class="list-item">
     <ul class="list-item-content">
       <li class="list-item-img">
-        <div style="background: url('<?=$photo_path; ?>')"></div>
+        <div style="background: url('<?=$photo_path; ?>') 25% 25%"></div>
       </li>
       <li class="list-item-txt">
         <?=$post['name']; ?>
