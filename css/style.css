@@ -71,7 +71,8 @@ h4 a {
 /* LIST */
 .list-item {
   color: var(--main);
-  border: 2px solid var(--background);
+  background-color: var(--dark);
+  border: 2px solid var(--light);
 
   text-decoration: none;
   text-align: center;
@@ -93,21 +94,21 @@ h4 a {
   height: 16em;
 
   border-radius: 12px 12px 0px 0px;
-  background-position: center;
-  background-repeat: no-repeat;
-  /* background-size: contain; */
-  /* overflow: hidden; */
+  background-size: contain;
 }
 
 .list-item-txt {
   /* image's description */
   padding: 0.5em;
   font-size: 1.5em;
-  background-color: var(--dark);
 
   margin-top: -0.3em; /* TODO this might be problematic */
+
+  /* make this part stand out */
+  background-color: var(--dark); /* hide part of the image that overflows */
+  box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
+  /* inner border to make this section thicker */
   border: 2px solid var(--light);
-  border-top: none;
   border-radius: 0px 0px 12px 12px;
 }
 

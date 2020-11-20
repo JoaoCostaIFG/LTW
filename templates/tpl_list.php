@@ -16,13 +16,15 @@
 <?php function drawPostItem($post) {
 /**
  * Draws a given post.
+ * using /100% on background favors portait frame (vertical) photos
+ * using /auto 100% seems to favor most photos
  */ 
   $photo_path = '../static/images/' . $post['photo_path'];
 ?>
   <a href="<?=$photo_path; ?>" class="list-item">
     <ul class="list-item-content">
       <li class="list-item-img">
-        <div style="background: url('<?=$photo_path; ?>') 25% 25%"></div>
+        <div style="background: url('<?=$photo_path; ?>') no-repeat center /auto 100%"></div>
       </li>
       <li class="list-item-txt">
         <?=$post['name']; ?>
