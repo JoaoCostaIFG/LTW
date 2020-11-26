@@ -22,13 +22,15 @@ include_once('../database/database_instance.php');
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         '
-        SELECT petpost.name as name, age, gender, size, description, date,
+        SELECT petpost.name as name, age, gender, size, description, petpost.date as date,
         Color.name as color, Species.name as species,
-        City.name as location, User.username as user
+        City.name as location, User.username as user,
+        photo_path
         FROM petpost JOIN Color on(petpost.color_id=color.id)
             JOIN Species on(petpost.species_id=species.id)
             JOIN City on(city.id = petpost.city_id)
             JOIN User on (User.id = petpost.user_id)
+            JOIN Photo on (Photo.post_id = petpost.id)
         WHERE petpost.id=' . $post_id
     );
     $stmt->execute();
@@ -46,9 +48,9 @@ include_once('../database/database_instance.php');
         '
         SELECT username, text, date
         FROM Comment JOIN User on(Comment.user_id = User.id)
-        WHERE Comment.user_id=' . $post_id
+        WHERE Comment.post_id=' . $post_id
     );
     $stmt->execute();
-    return $stmt->fetchAll(); 
+    return $stmt->fetchAll();
   }
 ?>

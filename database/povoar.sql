@@ -101,6 +101,7 @@ INSERT INTO Comment VALUES(NULL, 6, 5, "Soo cutee", "20/11/2020");
 INSERT INTO Comment VALUES(NULL, 2, 9, "Meow Meow!!", "20/12/2020");
 INSERT INTO Comment VALUES(NULL, 9, 7, "What a cutie! uwu", "02/12/2020");
 INSERT INTO Comment VALUES(NULL, 11, 7, "If I wasn't so occupied with my two kittens, I'd take her in...:(", "07/12/2020");
+INSERT INTO Comment VALUES(NULL, 2, 12, "Cute turtle.BAZINGA", "18/09/2020");
 
 -- Question
 -- id   user_id     post_id     text    date

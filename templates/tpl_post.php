@@ -11,7 +11,8 @@
     <div class="petpost">
       <ul>
         <li class="list-item-img">
-          <div style="background: url('../static/images/bazinga.png') no-repeat center /auto 100%"></div>
+        <?php echo '<div style="background: url( ../static/images/' . $post['photo_path'] . ') no-repeat center /auto 100%"></div>'?>
+          <!-- <div style="background: url('<?php echo $post['photo_path']; ?>') no-repeat center /auto 100%"></div> -->
         </li>
         <li>Name: <b><?php echo $post['name']; ?></b></li>
         <li>Age: <b><?php echo $post['age']; ?></b></li>
@@ -26,9 +27,10 @@
     <?php echo $post['description']; ?>
 
     <?php
-    foreach($comments as $comment) 
+    foreach($comments as $comment) {
         echo '<br>';
         drawComment($comment);
+    }
     ?>
 <?php } ?>
 
