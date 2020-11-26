@@ -3,6 +3,7 @@
   // include_once('database/news.php');
   // $animals = getAllAnimals();
 
+  include_once('session.php');
   include('../templates/common/tpl_header.php');
 ?>
 
@@ -21,7 +22,7 @@
 
 <?php
   include('../templates/tpl_list.php');
-  include('../database/db_post.php');
+  include('../database/queries/db_post.php');
   $posts = getAllPosts();
   drawPostList($posts);
   include('../templates/common/tpl_footer.php');

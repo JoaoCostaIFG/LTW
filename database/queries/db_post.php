@@ -31,9 +31,9 @@ include_once('../database/database_instance.php');
             JOIN City on(city.id = petpost.city_id)
             JOIN User on (User.id = petpost.user_id)
             JOIN Photo on (Photo.post_id = petpost.id)
-        WHERE petpost.id=' . $post_id
+        WHERE petpost.id=?'
     );
-    $stmt->execute();
+    $stmt->execute(array($post_id));
     $posts = $stmt->fetchAll(); 
     if (count($posts) > 0)
         return $posts[0];
@@ -48,9 +48,9 @@ include_once('../database/database_instance.php');
         '
         SELECT username, text, date
         FROM Comment JOIN User on(Comment.user_id = User.id)
-        WHERE Comment.post_id=' . $post_id
+        WHERE Comment.post_id=?'
     );
-    $stmt->execute();
+    $stmt->execute(array($post_id));
     return $stmt->fetchAll();
   }
 ?>

@@ -16,8 +16,8 @@
         <li><a href="/index.php">Contacts</a></li>
       </ul>
       <div id="signup">
-        <a href="register.html">Sign Up</a>
-        <a href="login.html">Log in</a>
+        <a href="register.php">Sign Up</a>
+        <a href="login.php">Log in</a>
       </div>
     </nav>
 
