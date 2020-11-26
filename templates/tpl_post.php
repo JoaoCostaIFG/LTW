@@ -3,18 +3,28 @@
  * Draws given a given post page
  */
 ?>
-    <h1> <?php echo $post['name']; ?> </h1>
-    <?php
-    echo $post['age'];
-    echo $post['gender'];
-    echo $post['size'];
-    echo $post['description'];
-    echo $post['date'];
-    echo $post['color_name'];
-    echo $post['species_name'];
-    echo $post['city_name'];
-    echo $post['owner_name'];
-    ?>
+
+    <h2>
+      <b><?php echo $post['name']; ?></b> </br>
+      for adoption from <b><?php echo $post['user']; ?></b>
+    </h2>
+    <div class="petpost">
+      <ul>
+        <li class="list-item-img">
+          <div style="background: url('../static/images/bazinga.png') no-repeat center /auto 100%"></div>
+        </li>
+        <li>Name: <b><?php echo $post['name']; ?></b></li>
+        <li>Age: <b><?php echo $post['age']; ?></b></li>
+        <li>Breed: <b><?php echo $post['species']; ?></b></li>
+        <li>Genre: <b><?php echo $post['gender']; ?></b></li>
+        <li>Size: <b><?php echo $post['size']; ?></b></li>
+        <li>Location: <b><?php echo $post['location']; ?></b></li>
+      </ul>
+      <?php echo $post['date']; ?>
+    </div>
+    
+    <?php echo $post['description']; ?>
+
     <?php
     foreach($comments as $comment) 
         echo '<br>';

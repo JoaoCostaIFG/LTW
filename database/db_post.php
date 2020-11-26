@@ -23,8 +23,8 @@ include_once('../database/database_instance.php');
     $stmt = $db->prepare(
         '
         SELECT petpost.name as name, age, gender, size, description, date,
-        Color.name as color_name, Species.name as species_name,
-        City.name as city_name, User.username as user_name
+        Color.name as color, Species.name as species,
+        City.name as location, User.username as user
         FROM petpost JOIN Color on(petpost.color_id=color.id)
             JOIN Species on(petpost.species_id=species.id)
             JOIN City on(city.id = petpost.city_id)
