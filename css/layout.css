@@ -1,13 +1,82 @@
+:root {
+  --list_gap: 2em;
+  --list_gap_inv: -2em;
+  --list-height: 48em;
+}
+
+body {
+  margin-top: 3em;
+}
+
+#headimg {
+  display: block;
+  margin: 1em auto 0 auto;
+  width: 100%;
+}
+
+/* HEADERS */
 h1 {
+  margin-top: 0.2em;
   text-align: center;
 }
 
+/* MENU */
+#menu {
+  overflow: auto;
+}
+
+#menu > ul {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
 
 #menu > ul > li {
   display: inline-block;
   position: relative;
 }
 
-#menu > ul > li + li {
+#signup, #logout {
+  float: right;
+}
+
+#logout > li {
+  display: inline-block;
+  position: relative;
+}
+
+#signup a + a {
   padding-left: 1em;
+}
+
+#logout * + * {
+  padding-left: 1em;
+}
+
+
+/* LIST */
+.list {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  margin: 0 0 0 var(--list_gap_inv); /* wait until gap is more wildely spread */
+  width: calc(100% + var(--list_gap));
+
+  /* have scroll */
+  max-height: var(--list-height); /* TODO var */
+  overflow: auto;
+}
+
+.list > * {
+  margin: var(--list_gap) 0 0 var(--list_gap); /* wait until gap is more wildely spread */
+}
+
+.list-item {
+  display: inline;
+}
+
+.list-item-content {
+  margin: 0;
+  padding: 0;
 }
