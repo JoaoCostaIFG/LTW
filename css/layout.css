@@ -36,13 +36,23 @@ h1 {
   position: relative;
 }
 
-#signup {
+#signup, #logout {
   float: right;
+}
+
+#logout > li {
+  display: inline-block;
+  position: relative;
 }
 
 #signup a + a {
   padding-left: 1em;
 }
+
+#logout * + * {
+  padding-left: 1em;
+}
+
 
 /* LIST */
 .list {

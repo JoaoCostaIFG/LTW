@@ -15,9 +15,27 @@
         <li><a href="/index.php">Search</a></li>
         <li><a href="/index.php">Contacts</a></li>
       </ul>
-      <div id="signup">
-        <a href="register.php">Sign Up</a>
-        <a href="login.php">Log in</a>
-      </div>
+
+    <?php
+      if (!isset($_SESSION['username'])) {
+          ?>
+          <div id="signup">
+            <a href="register.php">Sign Up</a>
+            <a href="login.php">Log in</a>
+          </div>
+        
+      <?php
+      } else {?>
+        <ul id="logout">
+        <li>Logged in as <?php echo $_SESSION['username'] ?></li>
+          <li>
+            <form method="post" action="../actions/action_logout.php">
+              <input type="submit" value="Logout">
+            </form>
+          </li>
+        </ul>
+      <?php }?>
+      
+
     </nav>
 

@@ -73,6 +73,24 @@ h4 a {
   color: var(--green);
 }
 
+#logout input[type="submit"] {
+  border: none;
+  font-weight: bold;
+  font-size: medium;
+  color: var(--main);
+}
+
+#logout > li:first-child {
+  border: none;
+  font-weight: normal;
+  font-size: medium;
+  color: var(--main);
+}
+
+#logout input[type="submit"]:hover {
+  color: var(--green);
+}
+
 /* LIST */
 .list-item {
   color: var(--main);
