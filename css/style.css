@@ -28,7 +28,7 @@ h1 {
 }
 
 h2 {
-  font-size: 1.5em;
+  font-size: 1.7em;
   font-weight: normal;
 }
 
@@ -167,4 +167,28 @@ h4 a {
 
 #showmoreButton:hover {
   background-color: var(--darkGreen);
+}
+
+/* POST PAGE */
+.petpost {
+  margin: 0;
+  margin-top: 1.6em;
+  padding: 0;
+  list-style-position: inside;
+  font-size: 1.4em;
+}
+
+.petpost li {
+  list-style-type: none;
+  padding: 0.2em;
+  margin-left: 12em;
+}
+
+.petpost-img {
+  width: 16em;
+  height: 16em;
+
+  border-radius: 12px 12px 0px 0px;
+  background-size: contain;
+  float: left;
 }
