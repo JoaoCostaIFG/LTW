@@ -53,4 +53,22 @@ include_once('../database/database_instance.php');
     $stmt->execute();
     return $stmt->fetchAll();
   }
+
+  /**
+   * Returns a post comments
+   */
+  function getQuestionsAnswers($post_id) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        '
+        SELECT Question.text as question, Answer.text as answer, 
+        Question.date as question_date, Answer.date as answer_date
+        FROM Question JOIN Answer on (Question.id = Answer.question_id)
+        WHERE Question.post_id=' . $post_id
+    );
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
+
 ?>
