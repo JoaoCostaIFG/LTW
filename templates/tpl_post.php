@@ -1,71 +1,80 @@
-<?php function drawPost($post, $comments) {
+<?php
+function ageToString($age) {
+  $years=intdiv($age, 12);
+  $months=$age % 12;
+
+  $ret="";
+  if ($years == 0) {
+    if ($months != 0)
+      $ret=$months . " months old";
+    else
+      $ret="0 years old";
+  }
+  else {
+    $ret=$years . " years";
+    if ($months != 0)
+      $ret=$ret . " and " . $months . " months old";
+    else
+      $ret=$ret . " old";
+  }
+  return $ret;
+}
+
+function genderToString($gender) {
+  if ($gender == 0)
+    return "Male";
+  else
+    return "Female";
+}
+
+function sizeToString($size) {
+  if ($size == 1)
+    return "Small";
+  else if ($size == 2)
+    return "Medium";
+  else
+    return "Big";
+}
+
+function drawPost($post, $comments) {
 /**
  * Draws given a given post page
  */
 ?>
+  <h2>
+    <b><?php echo $post['name']; ?></b> </br>
+    for adoption from <b><?php echo $post['user']; ?></b>
+  </h2>
+  <div class="petpost-img" style="background: url(../static/images/<?php echo $post['photo_path']; ?>) no-repeat center /auto 100%"></div>
+  <ul class="petpost">
+    <li>Name: <b><?php echo $post['name']; ?></b></li>
+    <li>Age: <b><?php echo ageToString($post['age']); ?></b></li>
+    <li>Breed: <b><?php echo $post['species']; ?></b></li>
+    <li>Genre: <b><?php echo genderToString($post['gender']); ?></b></li>
+    <li>Size: <b><?php echo sizeToString($post['size']); ?></b></li>
+    <li>Location: <b><?php echo $post['location']; ?></b></li>
+    <li>Posted in: <b><?php echo $post['date']; ?></b></li>
+  </ul>
 
-    <h2>
-      <b><?php echo $post['name']; ?></b> </br>
-      for adoption from <b><?php echo $post['user']; ?></b>
-    </h2>
-    <div class="petpost-img" style="background: url(../static/images/<?php echo $post['photo_path']; ?>) no-repeat center /auto 100%"></div>
-    <ul class="petpost">
-      <li>Name: <b><?php echo $post['name']; ?></b></li>
-      <li>Age: <b>
+  <br>
+  <br>
+  
+  <h3>Description</h3>
+  <div class="petpost-description">
+    <p> <?php echo $post['description']; ?> </p>
+  </div>
+
+  <h3>Comments</h3>
 <?php
-  $years=intdiv($post['age'], 12);
-  $months=$post['age'] % 12;
-  if ($years == 0) {
-    if ($months != 0)
-      echo $months . " months old";
-    else
-      echo "0 years old";
+  $cnt=0;
+  foreach($comments as $comment) {
+    $cnt=$cnt + 1;
+    drawComment($comment);
+    echo '<br>';
   }
-  else {
-    echo $years . " years";
-    if ($months != 0)
-      echo " and " . $months . " months old";
-    else
-      echo " old";
-  }
+  if ($cnt == 0)
+    echo "<i>There are no comments on this post. Be the first one</i>";
 ?>
-      </b></li>
-      <li>Breed: <b><?php echo $post['species']; ?></b></li>
-      <li>Genre: <b>
-<?php
-  if ($post['gender'] == 0)
-    echo "Male";
-  else
-    echo "Female";
-?>
-      </b></li>
-      <li>Size: <b>
-<?php
-  if ($post['size'] == 1)
-    echo "Small";
-  else if ($post['size'] == 2)
-    echo "Medium";
-  else
-    echo "Big";
-?></b></li>
-      <li>Location: <b><?php echo $post['location']; ?></b></li>
-    </ul>
-
-    <br>
-    <br>
-
-    <?php echo $post['date']; ?>
-    
-    <div class="petpost-description">
-      <?php echo $post['description']; ?>
-    </div>
-
-    <?php
-    foreach($comments as $comment) {
-        echo '<br>';
-        drawComment($comment);
-    }
-    ?>
 <?php } ?>
 
 <?php function drawComment($comment) {
@@ -73,7 +82,9 @@
  * Draws given a comment
  */
 ?>
-    <h2> <?php echo $comment['date']; ?> </h2>
-    <h2> <?php echo $comment['username']; ?> </h2>
-    <p> <?php echo $comment['text']; ?> </p>
+  <div class="petpost-comment" >
+    <p><?php echo $comment['text']; ?></p>
+    <p><?php echo $comment['date']; ?></p>
+    <p><?php echo $comment['username']; ?></p>
+  </div>
 <?php } ?>

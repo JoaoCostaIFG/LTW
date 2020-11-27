@@ -181,14 +181,36 @@ h4 a {
 .petpost li {
   list-style-type: none;
   padding: 0.2em;
-  margin-left: 12em;
+  margin-left: 13em;
 }
 
 .petpost-img {
-  width: 16em;
-  height: 16em;
+  width: 17em;
+  height: 17em;
 
   border-radius: 12px;
   background-size: contain;
   float: left;
+}
+
+.petpost-description, .petpost-comment {
+  display: inline-block;
+  border-radius: 10px;
+}
+
+.petpost-description {
+  background-color: var(--dark);
+}
+
+.petpost-description p {
+  margin: 1em;
+}
+
+.petpost-comment {
+  background-color: var(--light);
+  margin-bottom: 1em;
+}
+
+.petpost-comment:first-child {
+  margin: 1em;
 }
