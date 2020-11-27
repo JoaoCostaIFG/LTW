@@ -14,6 +14,8 @@
 
 ## Navigation
 
+![Navigation Diagram](/documentation/mockups/navigation_diagram.png)
+
 ## Database
 
 ![SQLite Mockup](/documentation/mockups/database_mockup.png)
