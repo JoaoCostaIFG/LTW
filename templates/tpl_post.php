@@ -11,20 +11,54 @@
     <div class="petpost-img" style="background: url(../static/images/<?php echo $post['photo_path']; ?>) no-repeat center /auto 100%"></div>
     <ul class="petpost">
       <li>Name: <b><?php echo $post['name']; ?></b></li>
-      <li>Age: <b><?php echo $post['age']; ?></b></li>
+      <li>Age: <b>
+<?php
+  $years=intdiv($post['age'], 12);
+  $months=$post['age'] % 12;
+  if ($years == 0) {
+    if ($months != 0)
+      echo $months . " months old";
+    else
+      echo "0 years old";
+  }
+  else {
+    echo $years . " years";
+    if ($months != 0)
+      echo " and " . $months . " months old";
+    else
+      echo " old";
+  }
+?>
+      </b></li>
       <li>Breed: <b><?php echo $post['species']; ?></b></li>
-      <li>Genre: <b><?php echo $post['gender']; ?></b></li>
-      <li>Size: <b><?php echo $post['size']; ?></b></li>
+      <li>Genre: <b>
+<?php
+  if ($post['gender'] == 0)
+    echo "Male";
+  else
+    echo "Female";
+?>
+      </b></li>
+      <li>Size: <b>
+<?php
+  if ($post['size'] == 1)
+    echo "Small";
+  else if ($post['size'] == 2)
+    echo "Medium";
+  else
+    echo "Big";
+?></b></li>
       <li>Location: <b><?php echo $post['location']; ?></b></li>
     </ul>
 
     <br>
     <br>
-    <br>
 
-    <?php echo $post['date']; ?> <br>
+    <?php echo $post['date']; ?>
     
-    <?php echo $post['description']; ?>
+    <div class="petpost-description">
+      <?php echo $post['description']; ?>
+    </div>
 
     <?php
     foreach($comments as $comment) {

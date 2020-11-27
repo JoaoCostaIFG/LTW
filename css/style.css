@@ -188,7 +188,7 @@ h4 a {
   width: 16em;
   height: 16em;
 
-  border-radius: 12px 12px 0px 0px;
+  border-radius: 12px;
   background-size: contain;
   float: left;
 }
