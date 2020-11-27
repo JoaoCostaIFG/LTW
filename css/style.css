@@ -27,6 +27,11 @@ h1 {
   font-weight: normal;
 }
 
+h2 {
+  font-size: 1.7em;
+  font-weight: normal;
+}
+
 h1 a,
 h2 a,
 h3 a,
@@ -45,7 +50,7 @@ h4 a {
 }
 
 #menu > ul > li + li {
-  margin-left: 2em;
+  margin-left: 3em;
 }
 
 #menu > ul > li > a {
@@ -68,10 +73,29 @@ h4 a {
   color: var(--green);
 }
 
+#logout input[type="submit"] {
+  border: none;
+  font-weight: bold;
+  font-size: medium;
+  color: var(--main);
+}
+
+#logout > li:first-child {
+  border: none;
+  font-weight: normal;
+  font-size: medium;
+  color: var(--main);
+}
+
+#logout input[type="submit"]:hover {
+  color: var(--green);
+}
+
 /* LIST */
 .list-item {
   color: var(--main);
-  border: 2px solid var(--background);
+  background-color: var(--dark);
+  border: 2px solid var(--light);
 
   text-decoration: none;
   text-align: center;
@@ -88,22 +112,26 @@ h4 a {
   list-style-type: none;
 }
 
-.list-item-content li img {
+.list-item-img div {
   width: 16em;
   height: 16em;
 
   border-radius: 12px 12px 0px 0px;
+  background-size: contain;
 }
 
-.list-item-content li + li {
+.list-item-txt {
   /* image's description */
   padding: 0.5em;
   font-size: 1.5em;
-  background-color: var(--dark);
 
   margin-top: -0.3em; /* TODO this might be problematic */
+
+  /* make this part stand out */
+  background-color: var(--dark); /* hide part of the image that overflows */
+  box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
+  /* inner border to make this section thicker */
   border: 2px solid var(--light);
-  border-top: none;
   border-radius: 0px 0px 12px 12px;
 }
 
@@ -139,6 +167,7 @@ h4 a {
 
 .listfilter input[type="submit"]:hover {
   background-color: var(--darkGreen);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 8px 22px 0 rgba(0, 0, 0, 0.3); /* the edgehog */
 }
 
 #showmoreButton {
@@ -156,4 +185,28 @@ h4 a {
 
 #showmoreButton:hover {
   background-color: var(--darkGreen);
+}
+
+/* POST PAGE */
+.petpost {
+  margin: 0;
+  margin-top: 1.6em;
+  padding: 0;
+  list-style-position: inside;
+  font-size: 1.4em;
+}
+
+.petpost li {
+  list-style-type: none;
+  padding: 0.2em;
+  margin-left: 12em;
+}
+
+.petpost-img {
+  width: 16em;
+  height: 16em;
+
+  border-radius: 12px;
+  background-size: contain;
+  float: left;
 }

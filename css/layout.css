@@ -1,6 +1,7 @@
 :root {
   --list_gap: 2em;
   --list_gap_inv: -2em;
+  --list-height: 48em;
 }
 
 body {
@@ -35,17 +36,23 @@ h1 {
   position: relative;
 }
 
-#menu > ul > li + li {
-  padding-left: 1em;
+#signup, #logout {
+  float: right;
 }
 
-#signup {
-  float: right;
+#logout > li {
+  display: inline-block;
+  position: relative;
 }
 
 #signup a + a {
   padding-left: 1em;
 }
+
+#logout * + * {
+  padding-left: 1em;
+}
+
 
 /* LIST */
 .list {
@@ -57,7 +64,7 @@ h1 {
   width: calc(100% + var(--list_gap));
 
   /* have scroll */
-  max-height: 48em; /* TODO var */
+  max-height: var(--list-height); /* TODO var */
   overflow: auto;
 }
 

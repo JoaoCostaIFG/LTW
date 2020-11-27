@@ -4,46 +4,46 @@
 drop table if exists User;
 create table User(
     id INTEGER PRIMARY KEY,
-    username VARCHAR(256) NOT NULL,
-    password VARCHAR(256) NOT NULL,
-    picture VARCHAR(256),
-    email VARCHAR(256) UNIQUE NOT NULL,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    picture TEXT,
+    email TEXT UNIQUE NOT NULL,
     mobile_number CHAR(9) UNIQUE NOT NULL
 );
 
 drop table if exists Color;
 create table Color(
     id INTEGER PRIMARY KEY,
-    name VARCHAR(50) NOT NULL
+    name TEXT NOT NULL
 );
 
 drop table if exists City;
 create table City(
     id INTEGER PRIMARY KEY,
-    name VARCHAR(256) NOT NULL
+    name TEXT NOT NULL
 );
 
 drop table if exists Animal;
 create table Animal(
     id INTEGER PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
+    name TEXT NOT NULL
 );
 
 drop table if exists Species;
 create table Species(
     id INTEGER PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    name TEXT NOT NULL,
     animal_id REFERENCES Animal(id)
 );
 
 drop table if exists PetPost; 
 create table PetPost( 
     id INTEGER PRIMARY KEY,
-    name VARCHAR(256) NOT NULL,
+    name TEXT NOT NULL,
     age INTEGER,
-    gender INTEGER CHECK (gender = 1 OR gender = 0),
-    size INTEGER,
-    description VARCHAR(256) NOT NULL,
+    gender INTEGER CHECK (gender = 1 OR gender = 0), -- 0 male, 1 female
+    size INTEGER CHECK (size = 1 OR size = 2 OR size = 3), -- 1 small, 2 medium, 3 big
+    description TEXT NOT NULL,
     date DATE NOT NULL,
     color_id INTEGER REFERENCES Color(id),
     species_id INTEGER REFERENCES Species(id),
@@ -55,7 +55,7 @@ drop table if exists Photo;
 create table Photo( 
     id INTEGER PRIMARY KEY,
     post_id INTEGER REFERENCES PetPost(id),
-    photo_path VARCHAR(256),
+    photo_path TEXT,
     date DATE NOT NULL
 );
 
@@ -64,7 +64,7 @@ create table Comment(
     id INTEGER PRIMARY KEY,
     user_id INTEGER REFERENCES User(id),
     post_id INTEGER REFERENCES PetPost(id),
-    text VARCHAR(256) UNIQUE NOT NULL,
+    text TEXT NOT NULL,
     date DATE NOT NULL
 );
 
@@ -73,7 +73,7 @@ create table Question(
     id INTEGER PRIMARY KEY,
     user_id INTEGER REFERENCES User(id),
     post_id INTEGER REFERENCES PetPost(id),
-    text VARCHAR(256) UNIQUE NOT NULL,
+    text TEXT NOT NULL,
     date DATE NOT NULL
 );
 
@@ -82,7 +82,7 @@ create table Answer(
     id INTEGER PRIMARY KEY,
     user_id INTEGER REFERENCES User(id),
     question_id INTEGER REFERENCES Question(id),
-    text VARCHAR(256) UNIQUE NOT NULL,
+    text TEXT NOT NULL,
     date DATE NOT NULL
 );
 
@@ -102,5 +102,4 @@ create table Proposal(
     date DATE NOT NULL
 );
 
--- TODO Esquema: adicionar seta de poster_id de proposal p/ user_id de post_id
 
