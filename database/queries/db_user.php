@@ -24,4 +24,23 @@ function insertUser($username, $password, $picture, $email, $mobile_number) {
         $picture, $email, $mobile_number));
 }
 
+/**
+ * Retrieves user public info given an username
+ */
+function getUserPublicInfo($user_id) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        '
+        SELECT username, picture, email, mobile_number 
+        FROM User 
+        WHERE User.id = ?'
+    );
+
+    $stmt->execute(array($user_id));
+    $users = $stmt->fetchAll(); 
+
+    if (count($users) > 0) return $users[0];
+    else return null;
+}
+
 ?>
