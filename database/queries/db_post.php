@@ -70,21 +70,4 @@ include_once('../database/database_instance.php');
     return $stmt->fetchAll();
   }
 
-  /**
-   * Returns all Posts made by an User
-   */
-  function getPostsByUser($user_id) {
-    $db = Database::instance()->db();
-    $stmt = $db->prepare(
-        'SELECT DISTINCT post_id, name, photo_path
-         FROM PetPost 
-         JOIN Photo ON(PetPost.id = Photo.post_id)
-         JOIN User ON(User.id = PetPost.user_id)
-         WHERE User.id = ?
-         GROUP BY PetPost.id'
-    );
-    $stmt->execute(array($user_id));
-    return $stmt->fetchAll(); 
-  }
-
 ?>

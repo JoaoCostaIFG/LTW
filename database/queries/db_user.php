@@ -27,7 +27,10 @@ function insertUser($username, $password, $picture, $email, $mobile_number) {
 /**
  * Retrieves user public info given an username
  */
-function getUserPublicInfo($user_id) {
+function getUserPublicInfo($username) {
+
+    $user_id = getUserId($username);
+
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         '
@@ -42,5 +45,44 @@ function getUserPublicInfo($user_id) {
     if (count($users) > 0) return $users[0];
     else return null;
 }
+
+/**
+ * Retrieves user public info given an username
+ */
+function getUserId($username) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        '
+        SELECT id 
+        FROM User 
+        WHERE User.username = ?'
+    );
+
+    $stmt->execute(array($username));
+    $user_id = $stmt->fetchAll(); 
+
+    if (count($user_id) > 0) return $user_id[0];
+    else return null;
+}
+
+  /**
+   * Returns all Posts made by an User
+   */
+  function getPostsByUser($username) {
+
+    $user_id = getUserId($username);
+
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'SELECT DISTINCT post_id, name, photo_path
+         FROM PetPost 
+         JOIN Photo ON(PetPost.id = Photo.post_id)
+         JOIN User ON(User.id = PetPost.user_id)
+         WHERE User.id = ?
+         GROUP BY PetPost.id'
+    );
+    $stmt->execute(array($user_id));
+    return $stmt->fetchAll(); 
+  }
 
 ?>
