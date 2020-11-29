@@ -80,7 +80,7 @@ h4 a {
   color: var(--main);
 }
 
-#logout > li:first-child {
+#logout {
   border: none;
   font-weight: normal;
   font-size: medium;
