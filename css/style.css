@@ -188,6 +188,10 @@ h4 a {
 }
 
 /* POST PAGE */
+.petpost-page {
+  margin-left: 1em;
+}
+
 .petpost {
   margin: 0;
   margin-top: 1.6em;
@@ -199,14 +203,44 @@ h4 a {
 .petpost li {
   list-style-type: none;
   padding: 0.2em;
-  margin-left: 12em;
+  margin-left: 13em;
 }
 
 .petpost-img {
-  width: 16em;
-  height: 16em;
+  width: 17em;
+  height: 17em;
 
   border-radius: 12px;
   background-size: contain;
   float: left;
+}
+
+.petpost-description, .petpost-comment {
+  display: inline-block;
+  border-radius: 10px;
+  margin-left: 1em;
+}
+
+.petpost-description {
+  width: 80%;
+  background-color: var(--dark);
+  padding: 0.3em 1em;
+}
+
+/* POST PAGE COMMENTS */
+.petpost-comment {
+  background-color: var(--light);
+  margin-bottom: 1em;
+  padding: 0.2em 1em;
+  width: 80%;
+}
+
+.petpost-comment p + p { /* data + author */
+  text-align: right;
+
+  font-size: 0.9em;
+  font-weight: bold;
+  font-style: italic;
+
+  margin-top: 2em;
 }
