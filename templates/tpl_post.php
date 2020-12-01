@@ -41,6 +41,8 @@ function drawPost($post, $comments) {
  * Draws given a given post page
  */
 ?>
+  <div class="petpost-page">
+
   <h2>
     <b><?php echo $post['name']; ?></b> </br>
     for adoption from <b><?php echo $post['user']; ?></b>
@@ -75,6 +77,8 @@ function drawPost($post, $comments) {
   if ($cnt == 0)
     echo "<i>There are no comments on this post. Be the first one</i>";
 ?>
+
+</div>
 <?php } ?>
 
 <?php function drawComment($comment) {
@@ -84,7 +88,6 @@ function drawPost($post, $comments) {
 ?>
   <div class="petpost-comment" >
     <p><?php echo $comment['text']; ?></p>
-    <p><?php echo $comment['date']; ?></p>
-    <p><?php echo $comment['username']; ?></p>
+    <p><?php echo $comment['date'] . ", " . $comment['username']; ?></p>
   </div>
 <?php } ?>
