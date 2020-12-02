@@ -110,20 +110,15 @@ function drawPost($post, $comments) {
             <p>Name <input type="text" name="name" placeholder="name of the pet" required></p>
             <p>Age<input type="number" name="age" placeholder="age of the pet" required></p>
 
-            <p>Gender<br><input type="radio" id="male" name="gender" value="0">
-            <label for="male">Male</label><br>
-            <input type="radio" id="female" name="gender" value="1">
-            <label for="female">Female</label><br></p>
-
+            <p> <?php drawGendersRadio() ?> </p>
             <p>Size<input type="number" name="size" placeholder="size" required></p>
             <p>Description<textarea id="description" name="description" rows="4" cols="50"> </textarea></p>
             <p>Date<input type="date" name="date" placeholder="date of birth of your pet" required></p>
 
-            <?php
-            drawColors();
-            drawSpecies();
-            drawCities();
-            ?>
+            
+            <p><?php drawColors(); ?> </p>
+            <p><?php drawSpecies(); ?> </p>
+            <p><?php drawCities(); ?> </p>
             <p><input type="submit" value="Add pet"></p>
         </form>
     </section>

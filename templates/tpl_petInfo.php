@@ -1,6 +1,18 @@
 <?php 
 include_once('../database/queries/db_post.php');
 
+function drawGendersRadio() {
+    /*
+    * Draws Gender options
+    */
+?>
+    <p>Gender<br><input type="radio" id="male" name="gender" value="0">
+    <label for="male">Male</label><br>
+    <input type="radio" id="female" name="gender" value="1">
+    <label for="female">Female</label><br></p>
+
+<?php }
+
 function drawOption($option_id, $option_name) {
     /*
     * Draws a given option with its $option_id and $option_name
@@ -9,19 +21,25 @@ function drawOption($option_id, $option_name) {
 }
 ?>
 
-<?php function drawOptions($options, $options_name, $options_id) {
+<?php function drawOptions($any_option, $options, $options_name, $options_id) {
     /*
     * Draws a set of $options with the $options_id and $options_name tags
     */
-    echo '<p>' . $options_name . '<select name="' . $options_name . '" id="' . $options_id . '">';
 
-    foreach ($options as $option)
+    echo $options_name . '<select name="' . $options_name . '" id="' . $options_id . '">';
+
+    if ($any_option)
+        drawOption('any', 'Any');
+
+    foreach ($options as $option) {
         drawOption($option['id'], $option['name']);
-    echo'</p></select>';
+        echo "\n";
+    }
+    echo'</select>';
 }
 ?>
 
-<?php function drawSpecies() {
+<?php function drawSpecies($any_option) {
     /*
     * Draws a given species
     */
@@ -34,26 +52,43 @@ function drawOption($option_id, $option_name) {
         );
         array_push($options, $option);
     }
-    drawOptions($options, 'Species', 'species');
+    drawOptions($any_option, $options, 'species', 'species');
 }
 ?>
 
-<?php function drawCities() {
+<?php function drawCities($any_option) {
     /*
     * Draws all Cities in the database
     */
 
     $cities = getCities();
-    drawOptions($cities, 'Cities', 'cities');
+    drawOptions($any_option, $cities, 'city', 'city');
 }
 ?>
 
 
-<?php function drawColors() {
+<?php function drawColors($any_option) {
     /*
     * Draws all colors in the database
     */
     $colors = getColors();
-    drawOptions($colors, 'Colors', 'colors');
+    drawOptions($any_option, $colors, 'colors', 'color');
+}
+?>
+
+<?php function drawGenders($any_option) {
+    /*
+    * Draws all colors in the database
+    */
+    $option_male = array(
+        'id' => '0',
+        'name' => 'Male'
+    );
+    $option_female = array(
+        'id' => '1',
+        'name' => 'Female'
+    );
+    $genders = array($option_male, $option_female);
+    drawOptions($any_option, $genders, 'gender', 'gender');
 }
 ?>

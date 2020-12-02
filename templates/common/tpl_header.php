@@ -1,4 +1,4 @@
-<?php include('tpl_header_noimg.php'); ?>
+<?php include_once('tpl_header_noimg.php'); ?>
 
     <img id="headimg" src="/static/headimg.png" alt="Cute dog looking at camera."/>
 

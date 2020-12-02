@@ -40,6 +40,12 @@
     * Draws the search bar
     */
     ?>
+<form class="listfilter" action="" method="post">
+<input type="text" name="name" placeholder="Name">
+<?php
 
+?>
+  <input type="submit" value="Search">
+</form>
 
 <?php }?>

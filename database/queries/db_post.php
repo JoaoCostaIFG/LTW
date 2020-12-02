@@ -9,17 +9,35 @@ include_once('../database/database_instance.php');
         $stmt->execute($post);
     }
 
+    function conditionsToString($query_conditions_array) {
+        if (count($query_conditions_array) == 0)
+            return '';
+        $res = 'WHERE ';
+        $i = 0;
+        while ($i < (count($query_conditions_array) - 1)) {
+            $res .= $query_conditions_array[$i] . ' AND ';
+            $i += 1;
+        }
+        $res .= $query_conditions_array[$i];
+        return $res;
+    }
+
   /**
    * Returns all Posts containing the name and photo of the pet
    */
-  function getAllPosts() {
+  function getAllPosts($search_options, $query_conditions_array) {
+    $query_conditions = conditionsToString($query_conditions_array);
     $db = Database::instance()->db();
+    print_r($query_conditions); 
+    echo '<br>';
+    print_r($search_options);
     $stmt = $db->prepare(
-        'SELECT DISTINCT post_id, name, photo_path
-         FROM PetPost JOIN Photo ON(PetPost.id = post_id)
-         GROUP BY PetPost.id' // Select only one from posts
+        'SELECT DISTINCT post_id, name, age, gender, size, city_id, species_id, photo_path
+         FROM PetPost JOIN Photo ON(PetPost.id = post_id) ' .
+         $query_conditions .
+         ' GROUP BY PetPost.id'
     );
-    $stmt->execute();
+    $stmt->execute($search_options);
     return $stmt->fetchAll(); 
   }
 
