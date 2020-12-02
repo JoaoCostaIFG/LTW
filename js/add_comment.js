@@ -20,6 +20,7 @@ function addComment(post_id, username) {
 
 function appendComment(text, username) {
     //TODO CHECK IF THERE ARE 0 COMMENTS AND CHANGE STRING
+    //TODO CHECK JS DATE
     let date = new Date();
     let date_string = date.getDay() + '/' + date.getMonth() + '/' + date.getYear();
     
