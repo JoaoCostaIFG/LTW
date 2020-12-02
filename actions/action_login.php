@@ -4,8 +4,6 @@
 
     $username = $_POST['username'];
     $password = $_POST['password'];
-    echo 'aaa';
-    die('asdas');
 
     if (checkUserPassword($username, $password)) {
         $_SESSION['username'] = $username;

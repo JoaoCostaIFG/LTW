@@ -116,9 +116,9 @@ function drawPost($post, $comments) {
             <p>Date<input type="date" name="date" placeholder="date of birth of your pet" required></p>
 
             
-            <p><?php drawColors(); ?> </p>
-            <p><?php drawSpecies(); ?> </p>
-            <p><?php drawCities(); ?> </p>
+            <p><?php drawColors(false, null); ?> </p>
+            <p><?php drawSpecies(false, null); ?> </p>
+            <p><?php drawCities(false, null); ?> </p>
             <p><input type="submit" value="Add pet"></p>
         </form>
     </section>
