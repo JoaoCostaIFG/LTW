@@ -67,6 +67,7 @@ function drawPost($post, $comments) {
   </div>
 
   <h3>Comments</h3>
+  <section id="comments">
 <?php
   $cnt=0;
   foreach($comments as $comment) {
@@ -77,6 +78,8 @@ function drawPost($post, $comments) {
   if ($cnt == 0)
     echo "<i>There are no comments on this post. Be the first one</i>";
 ?>
+
+  </section>
 
 </div>
 <?php } ?>
@@ -93,7 +96,7 @@ function drawPost($post, $comments) {
 <?php } ?>
 
 
-<?php function drawCommentForm() {
+<?php function drawCommentForm($post_id, $username) {
 /**
  * Draws given a comment
  */
@@ -101,6 +104,12 @@ function drawPost($post, $comments) {
   <script src="../js/add_comment.js" type="text/javascript" defer></script>
   <section id="comment-input">
     <textarea name="comment_text" rows="2" column="20" placeholder="Write your comment..." required></textarea>
-    <button type="button" onclick="addComment(<?=$_GET['post_id']?>)">Comment</button>
+    <button type="button" onclick="addComment(<?php echo $post_id . ', \'' . $username . '\'';?>)">Comment</button>
   </section>
 <?php } ?>
+
+<?php function drawCommentLoginPrompt() { ?>
+  <section id="comment-input">
+    <p>Log in to comment</p>
+  </section>
+<?php }?>

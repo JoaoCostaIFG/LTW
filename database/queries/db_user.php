@@ -30,7 +30,6 @@ function getUserId($username) {
            'SELECT id FROM User WHERE username LIKE ?'
        );
    
-       // Default is bcrypt
        $stmt->execute(array($username));
        return $stmt->fetch();
    }
