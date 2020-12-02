@@ -25,12 +25,10 @@ include_once('../database/database_instance.php');
   /**
    * Returns all Posts containing the name and photo of the pet
    */
-  function getAllPosts($search_options, $query_conditions_array) {
+  function getPosts($search_options, $query_conditions_array) {
     $query_conditions = conditionsToString($query_conditions_array);
     $db = Database::instance()->db();
-    print_r($query_conditions); 
     echo '<br>';
-    print_r($search_options);
     $stmt = $db->prepare(
         'SELECT DISTINCT post_id, name, age, gender, size, city_id, species_id, photo_path
          FROM PetPost JOIN Photo ON(PetPost.id = post_id) ' .
