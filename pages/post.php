@@ -9,6 +9,7 @@
   $post = getPost($_GET['post_id']);
   $comments = getComments($_GET['post_id']);
   drawPost($post, $comments);
+  drawCommentForm();
 
   include('../templates/common/tpl_footer.php');
 ?>

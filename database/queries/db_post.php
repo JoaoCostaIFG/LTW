@@ -64,11 +64,22 @@ include_once('../database/database_instance.php');
         SELECT Question.text as question, Answer.text as answer, 
         Question.date as question_date, Answer.date as answer_date
         FROM Question JOIN Answer on (Question.id = Answer.question_id)
-        WHERE Question.post_id=' . $post_id
+        WHERE Question.post_id=?'
     );
-    $stmt->execute();
+    $stmt->execute(array($post_id));
     return $stmt->fetchAll();
   }
 
 
+  // Text input is already validated
+  function insertComment($user_id, $post_id, $text) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'INSERT INTO Comment VALUES(NULL, ?, ?, ?, ?)'
+    );
+
+    $stmt->execute(array($user_id, $post_id, $text, date("d/m/Y")));
+  }
+
 ?>
+

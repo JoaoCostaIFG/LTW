@@ -91,3 +91,16 @@ function drawPost($post, $comments) {
     <p><?php echo $comment['date'] . ", " . $comment['username']; ?></p>
   </div>
 <?php } ?>
+
+
+<?php function drawCommentForm() {
+/**
+ * Draws given a comment
+ */
+?>
+  <script src="../js/add_comment.js" type="text/javascript" defer></script>
+  <section id="comment-input">
+    <textarea name="comment_text" rows="2" column="20" placeholder="Write your comment..." required></textarea>
+    <button type="button" onclick="addComment(<?=$_GET['post_id']?>)">Comment</button>
+  </section>
+<?php } ?>
