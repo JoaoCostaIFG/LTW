@@ -34,3 +34,12 @@
   </a>
 
 <?php } ?>
+
+<?php function drawSearch() {
+   /* 
+    * Draws the search bar
+    */
+    ?>
+
+
+<?php }?>
