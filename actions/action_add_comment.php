@@ -3,7 +3,7 @@
     include_once('../database/queries/db_user.php');
     include_once('../database/queries/db_post.php');
 
-    if (!isset($_SESSION['username']))
+    if (!isset($_SESSION['username']) || !isset($_GET['post_id']) || !isset($_GET['comment_text']))
       die(); // TODO CHANGE LATER
 
     
@@ -12,5 +12,7 @@
     $text = $_GET['comment_text'];
 
     insertComment($user_id, $post_id, htmlspecialchars($text));
+
+    echo "success";
 
 ?>

@@ -3,14 +3,16 @@
 function addComment(post_id, username) {
     let text = document.getElementsByName("comment_text")[0].value;
     if(text === ""){
-        //TODO return error
         return;
     }
     var xhttp = new XMLHttpRequest();
     // console.log(text)
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            appendComment(text, username);
+            //Trim is used because the reponse text comes with new lines behind
+            if(xhttp.responseText.trim("\n") === "success"){
+                appendComment(text, username);
+            }
         }
     };
 
@@ -19,10 +21,14 @@ function addComment(post_id, username) {
 }
 
 function appendComment(text, username) {
-    //TODO CHECK IF THERE ARE 0 COMMENTS AND CHANGE STRING
-    //TODO CHECK JS DATE
+    
+    // Checks if there are 0 comments and if so removes the string
+    let noCommentsText = document.getElementById('no-comments');
+    if(noCommentsText)
+        noCommentsText.remove();
+
     let date = new Date();
-    let date_string = date.getDay() + '/' + date.getMonth() + '/' + date.getYear();
+    let date_string = date.getUTCDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     
     let comment = document.createElement('div');
     comment.setAttribute('class', 'petpost-comment');

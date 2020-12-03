@@ -76,7 +76,7 @@ function drawPost($post, $comments) {
     echo '<br>';
   }
   if ($cnt == 0)
-    echo "<i>There are no comments on this post. Be the first one</i>";
+    echo "<i id='no-comments'>There are no comments on this post. Be the first one</i>";
 ?>
 
   </section>
@@ -110,6 +110,6 @@ function drawPost($post, $comments) {
 
 <?php function drawCommentLoginPrompt() { ?>
   <section id="comment-input">
-    <p>Log in to comment</p>
+    <p id="comment-login-prompt">Log in to comment</p>
   </section>
 <?php }?>
