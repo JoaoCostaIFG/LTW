@@ -12,6 +12,6 @@
   $values = $filterOptions['values'];
   drawSearch($values);
   drawPostList($posts);
-  require '../templates/common/tl_footer.php';
+  require '../templates/common/tpl_footer.php';
 ?>
 
