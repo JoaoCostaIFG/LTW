@@ -57,26 +57,27 @@ function drawPost($post, $comments)
     $photo_path = "../static/images/" . $post['photo_id'] . "." . $post['photo_extension'];
     ?>
 
-  <div class="petpost-page">
-
+<div class="petpost-page">
   <h2>
     <b><?php echo $post['name']; ?></b> </br>
     for adoption from <b><?php echo $post['user']; ?></b>
   </h2>
-  <div class="petpost-img" style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
-  <ul class="petpost">
-    <li>Name: <b><?php echo $post['name']; ?></b></li>
-    <li>Age: <b><?php echo ageToString($post['age']); ?></b></li>
-    <li>Breed: <b><?php echo $post['species']; ?></b></li>
-    <li>Genre: <b><?php echo genderToString($post['gender']); ?></b></li>
-    <li>Size: <b><?php echo sizeToString($post['size']); ?></b></li>
-    <li>Location: <b><?php echo $post['location']; ?></b></li>
-    <li>Posted in: <b><?php echo $post['date']; ?></b></li>
-  </ul>
 
-  <br>
-  <br>
-  
+  <div class="petpost">
+    <div class="petpost-img" >
+      <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
+    </div>
+    <ul class="petpost-info">
+      <li>Name: <b><?php echo $post['name']; ?></b></li>
+      <li>Age: <b><?php echo ageToString($post['age']); ?></b></li>
+      <li>Breed: <b><?php echo $post['species']; ?></b></li>
+      <li>Genre: <b><?php echo genderToString($post['gender']); ?></b></li>
+      <li>Size: <b><?php echo sizeToString($post['size']); ?></b></li>
+      <li>Location: <b><?php echo $post['location']; ?></b></li>
+      <li>Posted in: <b><?php echo $post['date']; ?></b></li>
+    </ul>
+  </div>
+
   <h3>Description</h3>
   <div class="petpost-description">
     <p> <?php echo $post['description']; ?> </p>

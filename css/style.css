@@ -8,6 +8,8 @@
   --orange: #8d645d;
   --dark: #121212;
   --light: #3c4042;
+
+  --petpost-img-size: 18em;
 }
 
 body {
@@ -192,26 +194,45 @@ h4 a {
 }
 
 .petpost {
-  margin: 0;
-  margin-top: 1.6em;
-  padding: 0;
-  list-style-position: inside;
-  font-size: 1.4em;
-}
-
-.petpost li {
-  list-style-type: none;
-  padding: 0.2em;
-  margin-left: 13em;
+  margin-top: 1em;
+  margin-bottom: 2em;
 }
 
 .petpost-img {
-  width: 17em;
-  height: 17em;
+  display: inline-block;
+  vertical-align: middle;
+
+  border: solid var(--green) 2px;
+  box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
+  border-radius: 12px;
+  background-color: var(--dark);
+}
+
+.petpost-img div {
+  width: var(--petpost-img-size);
+  height: var(--petpost-img-size);
 
   border-radius: 12px;
   background-size: contain;
-  float: left;
+}
+
+.petpost-info {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  margin-left: 1em;
+  padding: 0;
+
+  font-size: 1.4em;
+}
+
+.petpost-info li {
+  list-style-type: none;
+}
+
+.petpost-info li + li {
+  list-style-type: none;
+  margin-top: 0.5em;
 }
 
 .petpost-description,
@@ -222,17 +243,21 @@ h4 a {
 }
 
 .petpost-description {
-  width: 80%;
-  background-color: var(--dark);
   padding: 0.3em 1em;
+  width: 60em;
+  box-sizing: border-box;
+
+  background-color: var(--dark);
 }
 
 /* POST PAGE COMMENTS */
 .petpost-comment {
-  background-color: var(--light);
   margin-bottom: 1em;
   padding: 0.2em 1em;
-  width: 80%;
+  width: 60em;
+  box-sizing: border-box;
+
+  background-color: var(--light);
 }
 
 .petpost-comment p + p {
@@ -255,7 +280,7 @@ h4 a {
 }
 
 .signupform-item {
-  width: 60%; /* important */
+  max-width: 40em; /* important */
 }
 
 .signupform-item + .signupform-item {
@@ -314,3 +339,7 @@ h4 a {
   background-color: var(--darkGreen);
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 8px 22px 0 rgba(0, 0, 0, 0.3); /* the edgehog */
 }
+
+/* * { */
+  /* border: solid orange 1px; */
+/* } */
