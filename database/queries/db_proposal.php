@@ -11,6 +11,8 @@ include_once('../database/database_instance.php');
     }
 
     function hasProposal($user_id, $post_id) {
+        $tmp = $user_id . '-' . $post_id;
+        echo "<script> console.log('$tmp')</script>";
         $db = Database::instance()->db();
         $stmt = $db->prepare(
             'SELECT * FROM Proposal 

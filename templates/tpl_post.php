@@ -1,5 +1,6 @@
 <?php
 include_once('../templates/tpl_petInfo.php');
+include_once('../database/queries/db_proposal.php');
 
 /* GETTERS */
 
@@ -52,7 +53,9 @@ function drawPost($post, $comments) {
   <?php 
     $current_user = $_SESSION['username'];
     $post = $_POST['post'];
-    if (hasProposal($current_user, $post))
+    if (hasProposal($current_user, $post['id']))
+        die('asd');
+
 ?>
    <form method="post" action="../actions/action_make_proposal.php">
    <input type="hidden" name="current_user" value="<?php echo $_SESSION['username']; ?>">
