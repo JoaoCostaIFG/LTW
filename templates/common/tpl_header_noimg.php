@@ -27,6 +27,8 @@
       <?php
       } else {?>
         <ul id="logout">
+            
+        <li><a href="add_post.php">+</a></li>
         <li>Logged in as <?php echo $_SESSION['username'] ?></li>
           <li>
             <form method="post" action="../actions/action_logout.php">

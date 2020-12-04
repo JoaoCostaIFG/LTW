@@ -1,5 +1,4 @@
 <?php
-
     session_start();
 
     function generate_random_token() {

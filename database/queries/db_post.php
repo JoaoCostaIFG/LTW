@@ -1,17 +1,41 @@
 <?php
 include_once('../database/database_instance.php');
 
+    function insertPost($post) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare(
+            'INSERT INTO PetPost VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+        );
+        $stmt->execute($post);
+    }
+
+    function conditionsToString($query_conditions_array) {
+        if (count($query_conditions_array) == 0)
+            return '';
+        $res = 'WHERE ';
+        $i = 0;
+        while ($i < (count($query_conditions_array) - 1)) {
+            $res .= $query_conditions_array[$i] . ' AND ';
+            $i += 1;
+        }
+        $res .= $query_conditions_array[$i];
+        return $res;
+    }
+
   /**
    * Returns all Posts containing the name and photo of the pet
    */
-  function getAllPosts() {
+  function getPosts($search_options, $query_conditions_array) {
+    $query_conditions = conditionsToString($query_conditions_array);
     $db = Database::instance()->db();
+    echo '<br>';
     $stmt = $db->prepare(
-        'SELECT DISTINCT post_id, name, photo_path
-         FROM PetPost JOIN Photo ON(PetPost.id = post_id)
-         GROUP BY PetPost.id' // Select only one from posts
+        'SELECT DISTINCT post_id, name, age, gender, size, city_id, species_id, photo_path
+         FROM PetPost JOIN Photo ON(PetPost.id = post_id) ' .
+         $query_conditions .
+         ' GROUP BY PetPost.id'
     );
-    $stmt->execute();
+    $stmt->execute($search_options);
     return $stmt->fetchAll(); 
   }
 
@@ -34,10 +58,7 @@ include_once('../database/database_instance.php');
         WHERE petpost.id=?'
     );
     $stmt->execute(array($post_id));
-    $posts = $stmt->fetchAll(); 
-    if (count($posts) > 0)
-        return $posts[0];
-    else return null;
+    return $stmt->fetch();
   }
   /**
    * Returns a post comments
@@ -64,11 +85,41 @@ include_once('../database/database_instance.php');
         SELECT Question.text as question, Answer.text as answer, 
         Question.date as question_date, Answer.date as answer_date
         FROM Question JOIN Answer on (Question.id = Answer.question_id)
-        WHERE Question.post_id=' . $post_id
+        WHERE Question.post_id=?');
+    $stmt->execute(array($post_id));
+    return $stmt->fetchAll();
+  }
+
+  function getColors() {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        '
+        SELECT id, name
+        FROM Color'
     );
     $stmt->execute();
     return $stmt->fetchAll();
   }
 
+  function getSpecies() {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        '
+        SELECT Species.id, Species.name as species_name, Animal.name as animal_name
+        FROM Species JOIN Animal ON (Species.animal_id = Animal.id)'
+    );
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
 
+  function getCities() {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        '
+        SELECT id, name
+        FROM City'
+    );
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
 ?>
