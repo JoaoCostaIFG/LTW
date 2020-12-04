@@ -22,7 +22,7 @@ include_once('../database/queries/db_post.php');
  * using /100% on background favors portait frame (vertical) photos
  * using /auto 100% seems to favor most photos
  */ 
-  $photo_path = '../static/images/' . $post['photo_path'];
+  $photo_path = '../static/images/' . $post['photo_id'] . '.' . $post['photo_extension'];
   $post_path = 'post.php?post_id=' . $post['post_id'];
 ?>
   <a href="<?=$post_path; ?>" class="list-item">

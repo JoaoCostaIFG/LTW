@@ -46,6 +46,7 @@ function drawPost($post, $comments) {
 /**
  * Draws given a given post page
  */
+    $photo_path = "../static/images/" . $post['photo_id'] . "." . $post['photo_extension'];
 ?>
   <div class="petpost-page">
 
@@ -53,7 +54,7 @@ function drawPost($post, $comments) {
     <b><?php echo $post['name']; ?></b> </br>
     for adoption from <b><?php echo $post['user']; ?></b>
   </h2>
-  <div class="petpost-img" style="background: url(../static/images/<?php echo $post['photo_path']; ?>) no-repeat center /auto 100%"></div>
+  <div class="petpost-img" style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
   <ul class="petpost">
     <li>Name: <b><?php echo $post['name']; ?></b></li>
     <li>Age: <b><?php echo ageToString($post['age']); ?></b></li>
@@ -106,9 +107,13 @@ function drawPost($post, $comments) {
     <section id="addPost">
         <header><h2>Create a new Post</h2></header>
 
-        <form method="post" action="../actions/action_add_post.php">
+        <form method="post" action="../actions/action_add_post.php" enctype="multipart/form-data">
             <p>Name <input type="text" name="name" placeholder="name of the pet" required></p>
             <p>Age<input type="number" name="age" placeholder="age of the pet" required></p>
+
+            <label>Photo
+                <input type="file" name="image">
+            </label>
 
             <p> <?php drawGendersRadio() ?> </p>
             <p>Size<input type="number" name="size" placeholder="size" required></p>

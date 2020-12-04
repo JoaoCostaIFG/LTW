@@ -2,6 +2,14 @@
     include_once('../pages/session.php');
     include_once('../database/queries/db_user.php');
     include_once('../database/queries/db_post.php');
+    include_once('../actions/action_upload.php');
+
+    // Check if file is not image
+    $type = exif_imagetype($_FILES['image']['tmp_name']);
+    if ($type !== IMAGETYPE_PNG && $type !== IMAGETYPE_JPEG) {
+        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Wrong file format');
+        return;
+    }
 
     $name = $_POST['name'];
     $age = $_POST['age'];
@@ -17,7 +25,9 @@
         $color, $species, $city, $user_id);
 
     try {
-        insertPost($post_info);
+        $post_id = insertPost($post_info);
+        uploadPhoto($post_id, $type);
+
         $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully added post');
         header('Location: ../pages/list.php');
     } catch (PDOException $e) {

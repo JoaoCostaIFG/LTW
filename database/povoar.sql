@@ -74,23 +74,23 @@ INSERT INTO PetPost VALUES(14, "Gatoplank", 12, 0, 2, "Well behaved cat. He is r
 
 -- Photo
 -- id   post_id photo_path  date
-INSERT INTO Photo VALUES(NULL, 1, "pantufa.jpg", "10/08/2020");
-INSERT INTO Photo VALUES(NULL, 1, "pantufa2.jpg", "10/08/2020");
-INSERT INTO Photo VALUES(NULL, 2, "bobi.jpg", "01/08/2020");
-INSERT INTO Photo VALUES(NULL, 3, "poki.jpeg", "01/09/2020");
-INSERT INTO Photo VALUES(NULL, 4, "piupiu.jpeg", "14/09/2020");
-INSERT INTO Photo VALUES(NULL, 4, "lourito.jpg", "15/09/2020");
-INSERT INTO Photo VALUES(NULL, 5, "sisel.jpeg", "14/09/2020");
-INSERT INTO Photo VALUES(NULL, 6, "ninja.jpg", "22/11/2020");
-INSERT INTO Photo VALUES(NULL, 7, "bolinhas.jpg", "01/11/2020");
-INSERT INTO Photo VALUES(NULL, 8, "daisy.png", "01/11/2020");
-INSERT INTO Photo VALUES(NULL, 9, "mia.jpg", "03/11/2020");
-INSERT INTO Photo VALUES(NULL, 9, "mia2.jpg", "03/11/2020");
-INSERT INTO Photo VALUES(NULL, 10, "spot.png", "03/10/2020");
-INSERT INTO Photo VALUES(NULL, 11, "golden.png", "09/10/2020");
-INSERT INTO Photo VALUES(NULL, 12, "bazinga.png", "29/11/2020");
-INSERT INTO Photo VALUES(NULL, 13, "chico.jpg", "31/12/2020");
-INSERT INTO Photo VALUES(NULL, 14, "plank.png", "20/12/2020");
+INSERT INTO Photo VALUES(NULL, 1, "jpg", "10/08/2020");
+INSERT INTO Photo VALUES(NULL, 1, "jpg", "10/08/2020");
+INSERT INTO Photo VALUES(NULL, 2, "jpg", "01/08/2020");
+INSERT INTO Photo VALUES(NULL, 3, "jpg", "01/09/2020");
+INSERT INTO Photo VALUES(NULL, 4, "jpg", "14/09/2020");
+INSERT INTO Photo VALUES(NULL, 4, "jpg", "15/09/2020");
+INSERT INTO Photo VALUES(NULL, 5, "jpg", "14/09/2020");
+INSERT INTO Photo VALUES(NULL, 6, "jpg", "22/11/2020");
+INSERT INTO Photo VALUES(NULL, 7, "jpg", "01/11/2020");
+INSERT INTO Photo VALUES(NULL, 8, "png", "01/11/2020");
+INSERT INTO Photo VALUES(NULL, 9, "jpg", "03/11/2020");
+INSERT INTO Photo VALUES(NULL, 9, "jpg", "03/11/2020");
+INSERT INTO Photo VALUES(NULL, 10, "png", "03/10/2020");
+INSERT INTO Photo VALUES(NULL, 11, "png", "09/10/2020");
+INSERT INTO Photo VALUES(NULL, 12, "jpg", "29/11/2020");
+INSERT INTO Photo VALUES(NULL, 13, "jpg", "31/12/2020");
+INSERT INTO Photo VALUES(NULL, 14, "png", "20/12/2020");
 
 -- Comment
 -- id   user_id     post_id     text    date

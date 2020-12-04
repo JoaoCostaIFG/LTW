@@ -1,13 +1,28 @@
 <?php
 include_once('../database/database_instance.php');
 
+    /* INSERTS */
+
     function insertPost($post) {
         $db = Database::instance()->db();
         $stmt = $db->prepare(
             'INSERT INTO PetPost VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
         );
         $stmt->execute($post);
+        return $db->lastInsertId();
     }
+
+    function insertPhoto($post_id, $type) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare(
+            'INSERT INTO Photo VALUES(NULL, ?, ?, ?)'
+        );
+        $date = date("Y-m-d");
+        $stmt->execute(array($post_id, $type, $date));
+        return $db->lastInsertId();
+    }
+
+    /* GETTERS */
 
     function conditionsToString($query_conditions_array) {
         if (count($query_conditions_array) == 0)
@@ -30,7 +45,8 @@ include_once('../database/database_instance.php');
     $db = Database::instance()->db();
     echo '<br>';
     $stmt = $db->prepare(
-        'SELECT DISTINCT post_id, name, age, gender, size, city_id, species_id, photo_path
+        'SELECT DISTINCT post_id, name, age, gender, size, city_id, species_id,
+         Photo.id as photo_id, Photo.extension as photo_extension
          FROM PetPost JOIN Photo ON(PetPost.id = post_id) ' .
          $query_conditions .
          ' GROUP BY PetPost.id'
@@ -47,9 +63,8 @@ include_once('../database/database_instance.php');
     $stmt = $db->prepare(
         '
         SELECT petpost.name as name, age, gender, size, description, petpost.date as date,
-        Color.name as color, Species.name as species,
-        City.name as location, User.username as user,
-        photo_path
+        Color.name as color, Species.name as species, City.name as location,
+        User.username as user, Photo.id as photo_id, Photo.extension as photo_extension
         FROM petpost JOIN Color on(petpost.color_id=color.id)
             JOIN Species on(petpost.species_id=species.id)
             JOIN City on(city.id = petpost.city_id)
