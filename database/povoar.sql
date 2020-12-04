@@ -124,9 +124,9 @@ INSERT INTO Favourite VALUES(6, 5);
 
 -- Proposal
 -- id   user_id      post_id    accepted    date
-INSERT INTO Proposal VALUES(NULL, 2, 1, 0, "21/09/2020");
-INSERT INTO Proposal VALUES(NULL, 5, 2, 1, "21/10/2020");
-INSERT INTO Proposal VALUES(NULL, 4, 4, 1, "23/10/2020");
-INSERT INTO Proposal VALUES(NULL, 5, 9, 0, "21/12/2020");
+INSERT INTO Proposal VALUES(2, 1, 0, "21/09/2020");
+INSERT INTO Proposal VALUES(5, 2, 1, "21/10/2020");
+INSERT INTO Proposal VALUES(4, 4, 1, "23/10/2020");
+INSERT INTO Proposal VALUES(5, 9, 0, "21/12/2020");
 
 

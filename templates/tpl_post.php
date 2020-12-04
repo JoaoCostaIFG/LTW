@@ -1,5 +1,7 @@
 <?php
 require_once '../templates/tpl_petInfo.php';
+include_once('../database/queries/db_proposal.php');
+include_once('../database/queries/db_user.php');
 
 /* GETTERS */
 
@@ -58,6 +60,18 @@ function drawPost($post, $comments)
     ?>
 
 <div class="petpost-page">
+  <?php 
+    $current_user = getUserId($_SESSION['username'])['id'];
+    if (!hasProposal($current_user, $post['id']) && !isOwner($current_user, $post['id'])) { ?>
+       <form method="post" action="../actions/action_make_proposal.php">
+       <input type="hidden" name="user_id" value="<?php echo $current_user; ?>">
+       <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
+            <input type="submit" value="Make pet proposal">
+       </form>
+<?php
+    }
+?>
+
   <h2>
     <b><?php echo $post['name']; ?></b> </br>
     for adoption from <b><?php echo $post['user']; ?></b>
