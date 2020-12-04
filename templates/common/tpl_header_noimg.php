@@ -27,13 +27,18 @@
       <?php
       } else {?>
         <ul id="logout">
-        <li>Logged in as <?php echo $_SESSION['username'] ?></li>
           <li>
             <form method="post" action="../actions/action_logout.php">
               <input type="submit" value="Logout">
             </form>
           </li>
         </ul>
+
+        <ul id="profile">
+            <a href="../pages/profile.php?username=<?php echo $_SESSION['username']; ?>" >
+          <?php echo $_SESSION['username']; ?> </a>
+        </ul>
+        
       <?php }?>
       
 

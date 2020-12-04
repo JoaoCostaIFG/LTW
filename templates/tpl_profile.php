@@ -1,4 +1,7 @@
-<?php function drawProfile($user, $user_posts)
+<?php 
+include('../templates/tpl_list.php');
+
+function drawProfile($user, $user_posts)
 {
     /**
      * Draws an user's profile 
@@ -6,17 +9,20 @@
 ?>
 
     <h2>
-        <b>Profile</b>
+        <b><?php echo $user['username'];?>&#39 s Profile</b>
     </h2>
 
     <div class="profile">
         <!-- photo like this? -->
-        <div class="profile-pic" style="background: url(../static/images/users/Pics<?php echo $user['picture']; ?>) no-repeat center /auto 100%"></div>
-
+        <?php 
+            if($user['picture'] != null) $pic = $user['picture'];
+            else $pic = "default.png";
+        ?>
+        <img src="../static/images/usersPics/<?php echo $pic ?>" alt="User Profile Picture" width="80">
         <ul class=profile-info>
             <li><b><?php echo $user['username']; ?></b></li>
             <li><?php echo $user['email']; ?></li>
-            <li><?php echo $user['phone']; ?></li>
+            <li><?php echo $user['mobile_number']; ?></li>
         </ul>
 
     </div>

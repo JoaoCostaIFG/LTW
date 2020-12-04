@@ -30,7 +30,7 @@ function insertUser($username, $password, $picture, $email, $mobile_number) {
 function getUserPublicInfo($username) {
 
     $user_id = getUserId($username);
-
+    
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         '
@@ -40,7 +40,7 @@ function getUserPublicInfo($username) {
     );
 
     $stmt->execute(array($user_id));
-    $users = $stmt->fetchAll(); 
+    $users = $stmt->fetchAll();         
 
     if (count($users) > 0) return $users[0];
     else return null;
@@ -59,10 +59,7 @@ function getUserId($username) {
     );
 
     $stmt->execute(array($username));
-    $user_id = $stmt->fetchAll(); 
-
-    if (count($user_id) > 0) return $user_id[0];
-    else return null;
+    return $stmt->fetch()[id]; 
 }
 
   /**
@@ -83,6 +80,29 @@ function getUserId($username) {
     );
     $stmt->execute(array($user_id));
     return $stmt->fetchAll(); 
+  }
+
+   /**
+   * Returns user picture
+   */
+  function getUserPic($username) {
+
+    $user_id = getUserId($username);
+    
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        '
+        SELECT picture
+        FROM User 
+        WHERE User.id = ?'
+    );
+
+    $stmt->execute(array($user_id));
+    $pic = $stmt->fetch()[picture]; 
+
+    if($pic == null)
+        return "default.png";
+    else return $pic;
   }
 
 ?>
