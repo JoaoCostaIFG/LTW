@@ -49,6 +49,10 @@ function drawPost($post, $comments) {
 ?>
   <div class="petpost-page">
 
+   <form method="post" action="../actions/action_make_proposal.php">
+       <input type="submit" value="Make pet proposal">
+   </form>
+
   <h2>
     <b><?php echo $post['name']; ?></b> </br>
     for adoption from <b><?php echo $post['user']; ?></b>
