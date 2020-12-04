@@ -11,9 +11,9 @@
 }
 
 body {
-  background-color: var(--background);
   font-family: var(--fonts);
   color: var(--main);
+  background-color: var(--background);
 }
 
 #headimg {
@@ -41,25 +41,31 @@ h4 a {
 }
 
 /* MENU */
-#menu {
+#top-bar {
   font-weight: bold;
+
+  width: 100%;
+  padding: 1em;
+  box-sizing: border-box;
+
+  background-color: var(--dark);
 }
 
-#menu > ul > li {
+#top-bar > ul > li {
   list-style-type: none;
 }
 
-#menu > ul > li + li {
+#top-bar > ul > li + li {
   margin-left: 3em;
 }
 
-#menu > ul > li > a {
+#top-bar > ul > li > a {
   text-decoration: none;
   font-size: large;
   color: var(--main);
 }
 
-#menu > ul > li > a:hover {
+#top-bar > ul > li > a:hover {
   color: var(--green);
 }
 

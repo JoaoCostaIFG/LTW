@@ -1,5 +1,6 @@
 <?php
   include_once('session.php');
+  $title="Register";
   include_once('../templates/common/tpl_header_noimg.php');
   include_once('../templates/tpl_auth.php');
 

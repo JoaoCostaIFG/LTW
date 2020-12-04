@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-  <title>Become my buddy<?php if($title) echo ' - ' . $title; ?></title>
+    <title><?php if($title) echo $title . ' | '; ?>Become my buddy</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/style.css" rel="stylesheet">
@@ -9,11 +9,11 @@
     <link href="../css/responsive.css" rel="stylesheet">
   </head>
   <body>
-    <nav id="menu">
+    <nav id="top-bar">
       <ul>
         <li><a href="/index.php">Home</a></li>
-        <li><a href="/index.php">Search</a></li>
-        <li><a href="/index.php">Contacts</a></li>
+        <li><a href="/pages/list.php">Search</a></li>
+        <li><a href="/pages/contacts.php">Contacts</a></li>
       </ul>
 
       <?php if (!isset($_SESSION['username'])) { ?>
@@ -33,4 +33,3 @@
         </ul>
       <?php }?>
     </nav>
-

@@ -1,4 +1,5 @@
 <?php
+  include_once('session.php');
   $title="Home";
   include('../templates/common/tpl_header.php');
 ?>

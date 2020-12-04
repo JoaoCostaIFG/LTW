@@ -1,5 +1,6 @@
 <?php
   include_once('session.php');
+  $title="List";
   include('../templates/common/tpl_header.php');
   include_once('../templates/tpl_petInfo.php');
   include_once('../templates/tpl_list.php');

@@ -1,4 +1,5 @@
 <?php
+  $title="404";
   include('../templates/common/tpl_header_noimg.php');
 ?>
 
