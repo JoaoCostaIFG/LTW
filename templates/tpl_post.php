@@ -1,52 +1,60 @@
 <?php
-include_once('../templates/tpl_petInfo.php');
+require_once '../templates/tpl_petInfo.php';
 
 /* GETTERS */
 
-function ageToString($age) {
-  $years=intdiv($age, 12);
-  $months=$age % 12;
+function ageToString($age)
+{
+    $years=intdiv($age, 12);
+    $months=$age % 12;
 
-  $ret="";
-  if ($years == 0) {
-    if ($months != 0)
-      $ret=$months . " months old";
-    else
-      $ret="0 years old";
-  }
-  else {
-    $ret=$years . " years";
-    if ($months != 0)
-      $ret=$ret . " and " . $months . " months old";
-    else
-      $ret=$ret . " old";
-  }
-  return $ret;
+    $ret="";
+    if ($years == 0) {
+        if ($months != 0) {
+            $ret=$months . " months old";
+        } else {
+            $ret="0 years old";
+        }
+    }
+    else {
+        $ret=$years . " years";
+        if ($months != 0) {
+            $ret=$ret . " and " . $months . " months old";
+        } else {
+            $ret=$ret . " old";
+        }
+    }
+    return $ret;
 }
 
-function genderToString($gender) {
-  if ($gender == 0)
-    return "Male";
-  else
-    return "Female";
+function genderToString($gender)
+{
+    if ($gender == 0) {
+        return "Male";
+    } else {
+        return "Female";
+    }
 }
 
-function sizeToString($size) {
-  if ($size == 1)
-    return "Small";
-  else if ($size == 2)
-    return "Medium";
-  else
-    return "Big";
+function sizeToString($size)
+{
+    if ($size == 1) {
+        return "Small";
+    } else if ($size == 2) {
+        return "Medium";
+    } else {
+        return "Big";
+    }
 }
 
 /* DRAWERS */
 
-function drawPost($post, $comments) {
-/**
- * Draws given a given post page
- */
-?>
+function drawPost($post, $comments)
+{
+    /**
+     * Draws given a given post page
+     */
+    ?>
   <div class="petpost-page">
 
   <h2>
@@ -73,36 +81,40 @@ function drawPost($post, $comments) {
   </div>
 
   <h3>Comments</h3>
-<?php
-  $cnt=0;
-  foreach($comments as $comment) {
-    $cnt=$cnt + 1;
-    drawComment($comment);
-    echo '<br>';
-  }
-  if ($cnt == 0)
-    echo "<i>There are no comments on this post. Be the first one</i>";
-?>
+    <?php
+    $cnt=0;
+    foreach($comments as $comment) {
+        $cnt=$cnt + 1;
+        drawComment($comment);
+        echo '<br>';
+    }
+    if ($cnt == 0) {
+        echo "<i>There are no comments on this post. Be the first one</i>";
+    }
+    ?>
 
 </div>
 <?php } ?>
 
-<?php function drawComment($comment) {
-/**
- * Draws given a comment
- */
-?>
+<?php function drawComment($comment)
+{
+    /**
+     * Draws given a comment
+     */
+    ?>
   <div class="petpost-comment" >
     <p><?php echo $comment['text']; ?></p>
     <p><?php echo $comment['date'] . ", " . $comment['username']; ?></p>
   </div>
 <?php } ?>
 
-<?php function drawAddPost() { 
-/** TODO Meter min e max's
- * Draws a form to add a post
- */
-?>
+<?php function drawAddPost()
+{ 
+    /**
+ * TODO Meter min e max's
+     * Draws a form to add a post
+     */
+    ?>
     <section id="addPost">
         <header><h2>Create a new Post</h2></header>
 

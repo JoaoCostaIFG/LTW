@@ -16,6 +16,15 @@ body {
   background-color: var(--background);
 }
 
+a {
+  color: var(--main);
+  font-weight: bold;
+}
+
+p {
+  width: 60em;
+}
+
 #headimg {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
 }
@@ -144,35 +153,11 @@ h4 a {
 /* LIST FORM */
 .listfilter {
   text-align: center;
+  margin-bottom: 1em; /* gives space for the list */
 }
 
 .listfilter-item {
-  position: relative;
-  display: inline-block;
   width: 12%; /* important */
-
-  text-align: left;
-}
-
-.listfilter-item > label {
-  position: absolute;
-  bottom: 100%;
-  left: 0;
-
-  font-weight: bold;
-}
-
-.listfilter-item > input,
-.listfilter-item > select,
-.listfilter-button {
-  border: none;
-  width: 100%; /* important */
-  padding: 0.7em;
-  box-sizing: border-box;
-
-  background-color: var(--light);
-  color: var(--main);
-  font-weight: bold;
 }
 
 .listfilter-item + .listfilter-item {
@@ -181,19 +166,7 @@ h4 a {
 
 .listfilter-button {
   margin-top: 1em;
-  text-align: center;
-
   width: 8em; /* important */
-  border-radius: 20px;
-
-  background-color: var(--green);
-  color: var(--background);
-  font-size: large;
-}
-
-.listfilter-button:hover {
-  background-color: var(--darkGreen);
-  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 8px 22px 0 rgba(0, 0, 0, 0.3); /* the edgehog */
 }
 
 #showmoreButton {
@@ -271,4 +244,73 @@ h4 a {
   font-style: italic;
 
   margin-top: 2em;
+}
+
+/* AUTH FORMS */
+.signupform {
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.signupform-item {
+  width: 60%; /* important */
+}
+
+.signupform-item + .signupform-item {
+  margin-top: 2em;
+}
+
+.signupform-button {
+  margin-top: 2em;
+  width: 8em; /* important */
+}
+
+/* FORMS */
+.form-item {
+  position: relative;
+  display: inline-block;
+
+  text-align: left;
+}
+
+.form-item > label {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+
+  font-weight: bold;
+}
+
+.form-item > input,
+.form-item > select {
+  border: none;
+  width: 100%; /* important */
+  padding: 0.7em;
+  box-sizing: border-box;
+
+  background-color: var(--light);
+  color: var(--main);
+  font-weight: bold;
+}
+
+.form-button {
+  padding: 0.7em;
+  box-sizing: border-box;
+
+  border: none;
+  border-radius: 20px;
+
+  background-color: var(--green);
+  color: var(--background);
+
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
+}
+
+.form-button:hover {
+  background-color: var(--darkGreen);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 8px 22px 0 rgba(0, 0, 0, 0.3); /* the edgehog */
 }
