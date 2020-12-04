@@ -1,11 +1,12 @@
 <?php 
-include_once('../database/queries/db_post.php');
+require_once '../database/queries/db_post.php';
 
-function drawGendersRadio() {
+function drawGendersRadio()
+{
     /*
     * Draws Gender options
     */
-?>
+    ?>
     <p>Gender<br><input type="radio" id="male" name="gender" value="0">
     <label for="male">Male</label><br>
     <input type="radio" id="female" name="gender" value="1">
@@ -13,45 +14,51 @@ function drawGendersRadio() {
 
 <?php }
 
-function drawOption($option_id, $option_name, $is_selected) {
+function drawOption($option_id, $option_name, $is_selected)
+{
     /*
     * Draws a given option with its $option_id and $option_name
     */
-    if ($is_selected)
+    if ($is_selected) {
         echo '<option value="' . $option_id . '" selected>' . $option_name . '</option>';
-    else
+    } else {
         echo '<option value="' . $option_id . '">' . $option_name . '</option>';
+    }
 }
 ?>
 
-<?php function drawOptions($any_option, $options, $options_name, $options_id, $selected_value) {
+<?php function drawOptions($any_option, $options, $options_name, $options_id, $selected_value)
+{
     /*
     * Draws a set of $options with the $options_id and $options_name tags
     */
-?>
-    <div class="listfilter-item" >
-<?php
-    echo '<label for="' . $options_id . '">' . $options_name . '</label>';
-    echo '<select name="' . $options_id . '" id="' . $options_id . '">';
+    ?>
+    <div class="form-item listfilter-item" >
+      <?php
+        echo '<label for="' . $options_id . '">' . $options_name . '</label>';
+        echo '<select name="' . $options_id . '" id="' . $options_id . '">';
 
-    if ($any_option)
-        drawOption('any', 'Any', false);
+        if ($any_option) {
+            drawOption('any', 'Any', false);
+        }
 
-    foreach ($options as $option) {
-        if ($selected_value == $option['id'])
-            drawOption($option['id'], $option['name'], true);
-        else
-            drawOption($option['id'], $option['name'], false);
-        echo "\n";
-    }
-    echo'</select>';
-?>
-  </div>
-<?php
+        foreach ($options as $option) {
+            if ($selected_value == $option['id']) {
+                drawOption($option['id'], $option['name'], true);
+            } else {
+                drawOption($option['id'], $option['name'], false);
+            }
+            echo "\n"; // improve readability
+        }
+        ?>
+      </select>
+    </div>
+    <?php
 }
 ?>
 
-<?php function drawSpecies($any_option, $selected_value) {
+<?php function drawSpecies($any_option, $selected_value)
+{
     /*
     * Draws a given species
     */
@@ -68,7 +75,8 @@ function drawOption($option_id, $option_name, $is_selected) {
 }
 ?>
 
-<?php function drawCities($any_option, $selected_value) {
+<?php function drawCities($any_option, $selected_value)
+{
     /*
     * Draws all Cities in the database
     */
@@ -79,7 +87,8 @@ function drawOption($option_id, $option_name, $is_selected) {
 ?>
 
 
-<?php function drawColors($any_option, $selected_value) {
+<?php function drawColors($any_option, $selected_value)
+{
     /*
     * Draws all colors in the database
     */
@@ -88,7 +97,8 @@ function drawOption($option_id, $option_name, $is_selected) {
 }
 ?>
 
-<?php function drawGenders($any_option, $selected_value) {
+<?php function drawGenders($any_option, $selected_value)
+{
     /*
     * Draws all colors in the database
     */

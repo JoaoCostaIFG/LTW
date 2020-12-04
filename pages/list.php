@@ -1,8 +1,9 @@
 <?php
-  include_once('session.php');
-  include('../templates/common/tpl_header.php');
-  include_once('../templates/tpl_petInfo.php');
-  include_once('../templates/tpl_list.php');
+  require_once 'session.php';
+  $title="List";
+  require '../templates/common/tpl_header.php';
+  require_once '../templates/tpl_petInfo.php';
+  require_once '../templates/tpl_list.php';
 ?>
 
 <?php
@@ -11,6 +12,6 @@
   $values = $filterOptions['values'];
   drawSearch($values);
   drawPostList($posts);
-  include('../templates/common/tl_footer.php');
+  require '../templates/common/tl_footer.php';
 ?>
 

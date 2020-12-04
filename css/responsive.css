@@ -10,7 +10,7 @@
   }
 
   .listfilter-item + .listfilter-item {
-    margin-left: 0;
+    margin-left: 0; /* resetting option set by other css */
     margin-top: 2em;
   }
 
