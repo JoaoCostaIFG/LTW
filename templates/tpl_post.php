@@ -49,8 +49,15 @@ function drawPost($post, $comments) {
 ?>
   <div class="petpost-page">
 
+  <?php 
+    $current_user = $_SESSION['username'];
+    $post = $_POST['post'];
+    if (hasProposal($current_user, $post))
+?>
    <form method="post" action="../actions/action_make_proposal.php">
-       <input type="submit" value="Make pet proposal">
+   <input type="hidden" name="current_user" value="<?php echo $_SESSION['username']; ?>">
+   <input type="hidden" name="post" value="<?php echo $post['id']; ?>">
+        <input type="submit" value="Make pet proposal">
    </form>
 
   <h2>

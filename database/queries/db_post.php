@@ -46,7 +46,7 @@ include_once('../database/database_instance.php');
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         '
-        SELECT petpost.name as name, age, gender, size, description, petpost.date as date,
+        SELECT petpost.id, petpost.name, age, gender, size, description, petpost.date,
         Color.name as color, Species.name as species,
         City.name as location, User.username as user,
         photo_path
