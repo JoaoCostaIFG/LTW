@@ -28,8 +28,7 @@ function insertUser($username, $password, $picture, $email, $mobile_number) {
  * Retrieves user public info given an username
  */
 function getUserPublicInfo($username) {
-
-    $user_id = getUserId($username);
+    $user_id = getUserId($username)['id'];
     
     $db = Database::instance()->db();
     $stmt = $db->prepare(
@@ -46,32 +45,17 @@ function getUserPublicInfo($username) {
     else return null;
 }
 
-/**
- * Retrieves user public info given an username
- */
-function getUserId($username) {
-    $db = Database::instance()->db();
-    $stmt = $db->prepare(
-        '
-        SELECT id 
-        FROM User 
-        WHERE User.username = ?'
-    );
-
-    $stmt->execute(array($username));
-    return $stmt->fetch()[id]; 
-}
-
   /**
    * Returns all Posts made by an User
    */
   function getPostsByUser($username) {
 
-    $user_id = getUserId($username);
+    $user_id = getUserId($username)['id'];
 
     $db = Database::instance()->db();
     $stmt = $db->prepare(
-        'SELECT DISTINCT post_id, name, photo_path
+        'SELECT DISTINCT post_id, name,
+        Photo.id as photo_id, Photo.extension as photo_extension
          FROM PetPost 
          JOIN Photo ON(PetPost.id = Photo.post_id)
          JOIN User ON(User.id = PetPost.user_id)
@@ -87,7 +71,7 @@ function getUserId($username) {
    */
   function getUserPic($username) {
 
-    $user_id = getUserId($username);
+    $user_id = getUserId($username)[id];
     
     $db = Database::instance()->db();
     $stmt = $db->prepare(
@@ -104,5 +88,16 @@ function getUserId($username) {
         return "default.png";
     else return $pic;
   }
+
+function getUserId($username) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'SELECT id FROM User WHERE username LIKE ?'
+    );
+
+    // Default is bcrypt
+    $stmt->execute(array($username));
+    return $stmt->fetch();
+}
 
 ?>

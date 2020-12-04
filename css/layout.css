@@ -1,37 +1,38 @@
 :root {
+  --top-bar-height: 4em;
   --list_gap: 2em;
   --list_gap_inv: -2em;
   --list-height: 48em;
 }
 
 body {
-  margin-top: 3em;
+  margin-top: var(--top-bar-height); /* reserve space for the top bar */
 }
 
 #headimg {
   display: block;
   margin: 1em auto 0 auto;
   width: 100%;
+  box-sizing: border-box;
 }
 
-/* HEADERS */
-h1 {
-  margin-top: 0.2em;
-  text-align: center;
-}
+/* TOP BAR */
+#top-bar {
+  position: fixed;
+  left:0;
+  top: 0;
+  z-index: 2; /* make top bar show on top */
 
-/* MENU */
-#menu {
   overflow: auto;
 }
 
-#menu > ul {
+#top-bar > ul {
   display: inline-block;
   padding: 0;
   margin: 0;
 }
 
-#menu > ul > li {
+#top-bar > ul > li {
   display: inline-block;
   position: relative;
 }
@@ -53,6 +54,11 @@ h1 {
   padding-left: 1em;
 }
 
+/* HEADERS */
+h1 {
+  margin-top: 0.2em;
+  text-align: center;
+}
 
 /* LIST */
 .list {

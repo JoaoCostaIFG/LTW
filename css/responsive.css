@@ -5,13 +5,13 @@
     align-items: center;
   }
 
-  .listfilter input {
+  .listfilter-item {
     width: 60%;
   }
 
-  .listfilter input + input {
-    margin-left: 0;
-    margin-top: 1em;
+  .listfilter-item + .listfilter-item {
+    margin-left: 0; /* resetting option set by other css */
+    margin-top: 2em;
   }
 
   #menu > ul > li > a {

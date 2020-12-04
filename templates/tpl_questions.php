@@ -1,8 +1,9 @@
-<?php function drawQuestionAnswer($questionAnswer) {
-/**
- * Draws given a comment
- */
-?>
+<?php function drawQuestionAnswer($questionAnswer)
+{
+    /**
+     * Draws given a comment
+     */
+    ?>
     <section class="question">
         <h2> <?php echo 'Q: ' . $questionAnswer['question']; ?> </h2>
         <p> <?php echo 'Date: ' . $questionAnswer['question_date']; ?> </p>

@@ -8,12 +8,23 @@
   --orange: #8d645d;
   --dark: #121212;
   --light: #3c4042;
+
+  --petpost-img-size: 18em;
 }
 
 body {
-  background-color: var(--background);
   font-family: var(--fonts);
   color: var(--main);
+  background-color: var(--background);
+}
+
+a {
+  color: var(--main);
+  font-weight: bold;
+}
+
+p {
+  width: 60em;
 }
 
 #headimg {
@@ -41,25 +52,31 @@ h4 a {
 }
 
 /* MENU */
-#menu {
+#top-bar {
   font-weight: bold;
+
+  width: 100%;
+  padding: 1em;
+  box-sizing: border-box;
+
+  background-color: var(--dark);
 }
 
-#menu > ul > li {
+#top-bar > ul > li {
   list-style-type: none;
 }
 
-#menu > ul > li + li {
+#top-bar > ul > li + li {
   margin-left: 3em;
 }
 
-#menu > ul > li > a {
+#top-bar > ul > li > a {
   text-decoration: none;
   font-size: large;
   color: var(--main);
 }
 
-#menu > ul > li > a:hover {
+#top-bar > ul > li > a:hover {
   color: var(--green);
 }
 
@@ -80,7 +97,7 @@ h4 a {
   color: var(--main);
 }
 
-#logout > li:first-child {
+#logout {
   border: none;
   font-weight: normal;
   font-size: medium;
@@ -138,36 +155,20 @@ h4 a {
 /* LIST FORM */
 .listfilter {
   text-align: center;
+  margin-bottom: 1em; /* gives space for the list */
 }
 
-.listfilter input {
-  padding: 0.7em;
-  border: none;
-  width: 10%; /* important */
-
-  background-color: var(--light);
-  color: var(--main);
-  font-weight: bold;
+.listfilter-item {
+  width: 12%; /* important */
 }
 
-.listfilter input + input {
+.listfilter-item + .listfilter-item {
   margin-left: 2em;
 }
 
-.listfilter input[type="submit"] {
+.listfilter-button {
   margin-top: 1em;
-  text-align: center;
-
-  border-radius: 20px;
-
-  background-color: var(--green);
-  color: var(--background);
-  font-size: large;
-}
-
-.listfilter input[type="submit"]:hover {
-  background-color: var(--darkGreen);
-  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 8px 22px 0 rgba(0, 0, 0, 0.3); /* the edgehog */
+  width: 8em; /* important */
 }
 
 #showmoreButton {
@@ -188,25 +189,157 @@ h4 a {
 }
 
 /* POST PAGE */
-.petpost {
-  margin: 0;
-  margin-top: 1.6em;
-  padding: 0;
-  list-style-position: inside;
-  font-size: 1.4em;
+.petpost-page {
+  margin-left: 1em;
 }
 
-.petpost li {
-  list-style-type: none;
-  padding: 0.2em;
-  margin-left: 12em;
+.petpost {
+  margin-top: 1em;
+  margin-bottom: 2em;
 }
 
 .petpost-img {
-  width: 16em;
-  height: 16em;
+  display: inline-block;
+  vertical-align: middle;
+
+  border: solid var(--green) 2px;
+  box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
+  border-radius: 12px;
+  background-color: var(--dark);
+}
+
+.petpost-img div {
+  width: var(--petpost-img-size);
+  height: var(--petpost-img-size);
 
   border-radius: 12px;
   background-size: contain;
-  float: left;
 }
+
+.petpost-info {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  margin-left: 1em;
+  padding: 0;
+
+  font-size: 1.4em;
+}
+
+.petpost-info li {
+  list-style-type: none;
+}
+
+.petpost-info li + li {
+  list-style-type: none;
+  margin-top: 0.5em;
+}
+
+.petpost-description,
+.petpost-comment {
+  display: inline-block;
+  border-radius: 10px;
+  margin-left: 1em;
+}
+
+.petpost-description {
+  padding: 0.3em 1em;
+  width: 60em;
+  box-sizing: border-box;
+
+  background-color: var(--dark);
+}
+
+/* POST PAGE COMMENTS */
+.petpost-comment {
+  margin-bottom: 1em;
+  padding: 0.2em 1em;
+  width: 60em;
+  box-sizing: border-box;
+
+  background-color: var(--light);
+}
+
+.petpost-comment p + p {
+  /* data + author */
+  text-align: right;
+
+  font-size: 0.9em;
+  font-weight: bold;
+  font-style: italic;
+
+  margin-top: 2em;
+}
+
+/* AUTH FORMS */
+.signupform {
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.signupform-item {
+  max-width: 40em; /* important */
+}
+
+.signupform-item + .signupform-item {
+  margin-top: 2em;
+}
+
+.signupform-button {
+  margin-top: 2em;
+  width: 8em; /* important */
+}
+
+/* FORMS */
+.form-item {
+  position: relative;
+  display: inline-block;
+
+  text-align: left;
+}
+
+.form-item > label {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+
+  font-weight: bold;
+}
+
+.form-item > input,
+.form-item > select {
+  border: none;
+  width: 100%; /* important */
+  padding: 0.7em;
+  box-sizing: border-box;
+
+  background-color: var(--light);
+  color: var(--main);
+  font-weight: bold;
+}
+
+.form-button {
+  padding: 0.7em;
+  box-sizing: border-box;
+
+  border: none;
+  border-radius: 20px;
+
+  background-color: var(--green);
+  color: var(--background);
+
+  text-align: center;
+  font-weight: bold;
+  font-size: large;
+}
+
+.form-button:hover {
+  background-color: var(--darkGreen);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 8px 22px 0 rgba(0, 0, 0, 0.3); /* the edgehog */
+}
+
+/* * { */
+  /* border: solid orange 1px; */
+/* } */
