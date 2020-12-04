@@ -2,6 +2,7 @@
   --fonts: helvetica, sans-serif;
 
   --background: #202124;
+  --background-dark: #161616;
   --main: #cfd3d8;
   --green: #5d8d79;
   --darkGreen: #2f5e4a;
@@ -235,40 +236,41 @@ h4 a {
   margin-top: 0.5em;
 }
 
+/* POST PAGE DESCRIPTION + COMMENTS */
 .petpost-description,
 .petpost-comment {
   display: inline-block;
-  border-radius: 10px;
   margin-left: 1em;
+  padding: 0.3em 1em;
+  box-sizing: border-box;
+
+  border-radius: 10px;
+}
+
+.petpost-description:hover,
+.petpost-comment:hover {
+  background-color: var(--background-dark);
 }
 
 .petpost-description {
-  padding: 0.3em 1em;
-  width: 60em;
-  box-sizing: border-box;
-
   background-color: var(--dark);
 }
 
-/* POST PAGE COMMENTS */
 .petpost-comment {
   margin-bottom: 1em;
-  padding: 0.2em 1em;
-  width: 60em;
-  box-sizing: border-box;
 
   background-color: var(--light);
 }
 
 .petpost-comment p + p {
-  /* data + author */
-  text-align: right;
-
-  font-size: 0.9em;
-  font-weight: bold;
-  font-style: italic;
-
+  /* date + author */
   margin-top: 2em;
+  width: 100%;
+
+  text-align: right;
+  font-weight: bold;
+  font-size: 0.8em;
+  font-style: italic;
 }
 
 /* AUTH FORMS */
@@ -341,5 +343,5 @@ h4 a {
 }
 
 /* * { */
-  /* border: solid orange 1px; */
+/* border: solid orange 1px; */
 /* } */
