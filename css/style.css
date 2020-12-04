@@ -140,24 +140,44 @@ h4 a {
   text-align: center;
 }
 
-.listfilter input {
-  padding: 0.7em;
+.listfilter-item {
+  position: relative;
+  display: inline-block;
+  width: 12%; /* important */
+
+  text-align: left;
+}
+
+.listfilter-item > label {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+
+  font-weight: bold;
+}
+
+.listfilter-item > input,
+.listfilter-item > select,
+.listfilter-button {
   border: none;
-  width: 10%; /* important */
+  width: 100%; /* important */
+  padding: 0.7em;
+  box-sizing: border-box;
 
   background-color: var(--light);
   color: var(--main);
   font-weight: bold;
 }
 
-.listfilter input + input {
+.listfilter-item + .listfilter-item {
   margin-left: 2em;
 }
 
-.listfilter input[type="submit"] {
+.listfilter-button {
   margin-top: 1em;
   text-align: center;
 
+  width: 8em; /* important */
   border-radius: 20px;
 
   background-color: var(--green);
@@ -165,7 +185,7 @@ h4 a {
   font-size: large;
 }
 
-.listfilter input[type="submit"]:hover {
+.listfilter-button:hover {
   background-color: var(--darkGreen);
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 8px 22px 0 rgba(0, 0, 0, 0.3); /* the edgehog */
 }
@@ -215,7 +235,8 @@ h4 a {
   float: left;
 }
 
-.petpost-description, .petpost-comment {
+.petpost-description,
+.petpost-comment {
   display: inline-block;
   border-radius: 10px;
   margin-left: 1em;
@@ -235,7 +256,8 @@ h4 a {
   width: 80%;
 }
 
-.petpost-comment p + p { /* data + author */
+.petpost-comment p + p {
+  /* data + author */
   text-align: right;
 
   font-size: 0.9em;
