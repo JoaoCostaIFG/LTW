@@ -18,7 +18,7 @@ function drawProfile($user, $user_posts)
             if($user['picture'] != null) $pic = $user['picture'];
             else $pic = "default.png";
         ?>
-        <img src="../static/images/usersPics/<?php echo $pic ?>" alt="User Profile Picture" width="80">
+        <img src="../static/images/usersPics/<?php echo $pic ?>" alt="User Profile Picture" width="400">
         <ul class=profile-info>
             <li><b><?php echo $user['username']; ?></b></li>
             <li><?php echo $user['email']; ?></li>
@@ -26,6 +26,10 @@ function drawProfile($user, $user_posts)
         </ul>
 
     </div>
+
+    <h3>
+        <b>Posts by <?php echo $user['username']?></b>
+    </h3>
 
     <?php drawPostList($user_posts);
 
