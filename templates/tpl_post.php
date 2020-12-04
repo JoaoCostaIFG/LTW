@@ -77,9 +77,10 @@ function drawPost($post, $comments) {
   }
   if ($cnt == 0)
     echo "<i id='no-comments'>There are no comments on this post. Be the first one</i>";
-?>
 
+?>
   </section>
+
 
 </div>
 <?php } ?>
@@ -103,8 +104,8 @@ function drawPost($post, $comments) {
 ?>
   <script src="../js/add_comment.js" type="text/javascript" defer></script>
   <section id="comment-input">
-    <textarea name="comment_text" rows="2" column="20" placeholder="Write your comment..." required></textarea>
-    <button type="button" onclick="addComment(<?php echo $post_id . ', \'' . $username . '\'';?>)">Comment</button>
+    <textarea name="comment_text" rows="2" column="40" placeholder="Write your comment..." required></textarea>
+    <button id="comment-input-button" type="button" onclick="addComment(<?php echo $post_id . ', \'' . $username . '\'';?>)">Comment</button>
   </section>
 <?php } ?>
 

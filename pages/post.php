@@ -11,11 +11,12 @@
   $comments = getComments($_GET['post_id']);
   drawPost($post, $comments);
 
-  if(isset($_SESSION['username'])){
+  if($_SESSION['username']){
     drawCommentForm($_GET['post_id'], $_SESSION['username']);
   } else {
     drawCommentLoginPrompt();
   }
 
+  
   include('../templates/common/tpl_footer.php');
 ?>
