@@ -38,16 +38,20 @@ include_once('../database/queries/db_post.php');
 
 <?php } ?>
 
-<?php function drawSearch() {
+<?php function drawSearch($values) {
    /* 
     * Draws the search bar
     */
     ?>
-<form class="listfilter" action="" method="post">
-<input type="text" name="name" placeholder="Name">
-<?php
-
-?>
+<form class="listfilter" action="../pages/list.php" method="GET">
+  <br>
+  Name<input type="text" name="name" value="<?php echo $values['name'] ?>">
+  <?php drawGenders(true, $values['gender']); ?>
+  Age<input type="text" name="age" value="<?php echo $values['age'] ?>">
+  Size<input type="text" name="size" value="<?php echo $values['size'] ?>">
+  <?php drawSpecies(true, $values['species']); ?>
+  <?php drawCities(true, $values['city']); ?>
+  <br>
   <input type="submit" value="Search">
 </form>
 

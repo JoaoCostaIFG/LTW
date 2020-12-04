@@ -58,7 +58,7 @@ function drawOption($option_id, $option_name, $is_selected) {
         );
         array_push($options, $option);
     }
-    drawOptions($any_option, $options, 'species', 'species', $selected_value);
+    drawOptions($any_option, $options, 'Species', 'species', $selected_value);
 }
 ?>
 
@@ -68,7 +68,7 @@ function drawOption($option_id, $option_name, $is_selected) {
     */
 
     $cities = getCities();
-    drawOptions($any_option, $cities, 'city', 'city', $selected_value);
+    drawOptions($any_option, $cities, 'City', 'city', $selected_value);
 }
 ?>
 
@@ -78,7 +78,7 @@ function drawOption($option_id, $option_name, $is_selected) {
     * Draws all colors in the database
     */
     $colors = getColors();
-    drawOptions($any_option, $colors, 'colors', 'color', $selected_value);
+    drawOptions($any_option, $colors, 'Colors', 'color', $selected_value);
 }
 ?>
 
@@ -95,6 +95,6 @@ function drawOption($option_id, $option_name, $is_selected) {
         'name' => 'Female'
     );
     $genders = array($option_male, $option_female);
-    drawOptions($any_option, $genders, 'gender', 'gender', $selected_value);
+    drawOptions($any_option, $genders, 'Gender', 'gender', $selected_value);
 }
 ?>
