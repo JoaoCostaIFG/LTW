@@ -1,6 +1,7 @@
 <?php
 include_once('../templates/tpl_petInfo.php');
 include_once('../database/queries/db_proposal.php');
+include_once('../database/queries/db_user.php');
 
 /* GETTERS */
 
@@ -47,15 +48,16 @@ function drawPost($post, $comments) {
 /**
  * Draws given a given post page
  */
+    $photo_path = "../static/images/" . $post['photo_id'] . "." . $post['photo_extension'];
 ?>
   <div class="petpost-page">
 
   <?php 
-    $current_user = $_SESSION['username'];
-    if (!hasProposal($current_user, $post['id'])) { ?>
+    $current_user = getUserId($_SESSION['username'])['id'];
+    if (!hasProposal($current_user, $post['id']) && !isOwner($current_user, $post['id'])) { ?>
        <form method="post" action="../actions/action_make_proposal.php">
-       <input type="hidden" name="current_user" value="<?php echo $_SESSION['username']; ?>">
-       <input type="hidden" name="post" value="<?php echo $post['id']; ?>">
+       <input type="hidden" name="user_id" value="<?php echo $current_user; ?>">
+       <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
             <input type="submit" value="Make pet proposal">
        </form>
 <?php
@@ -66,7 +68,7 @@ function drawPost($post, $comments) {
     <b><?php echo $post['name']; ?></b> </br>
     for adoption from <b><?php echo $post['user']; ?></b>
   </h2>
-  <div class="petpost-img" style="background: url(../static/images/<?php echo $post['photo_path']; ?>) no-repeat center /auto 100%"></div>
+  <div class="petpost-img" style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
   <ul class="petpost">
     <li>Name: <b><?php echo $post['name']; ?></b></li>
     <li>Age: <b><?php echo ageToString($post['age']); ?></b></li>
@@ -119,9 +121,13 @@ function drawPost($post, $comments) {
     <section id="addPost">
         <header><h2>Create a new Post</h2></header>
 
-        <form method="post" action="../actions/action_add_post.php">
+        <form method="post" action="../actions/action_add_post.php" enctype="multipart/form-data">
             <p>Name <input type="text" name="name" placeholder="name of the pet" required></p>
             <p>Age<input type="number" name="age" placeholder="age of the pet" required></p>
+
+            <label>Photo
+                <input type="file" name="image">
+            </label>
 
             <p> <?php drawGendersRadio() ?> </p>
             <p>Size<input type="number" name="size" placeholder="size" required></p>

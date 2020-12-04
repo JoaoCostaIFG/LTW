@@ -3,16 +3,15 @@ include_once('../database/database_instance.php');
 
     function insertProposal($user_id, $post_id) {
         $db = Database::instance()->db();
+        $date = date("Y-m-d");
         $stmt = $db->prepare(
-            'INSERT INTO Proposal VALUES(NULL, ?, ?, 0)'
+            'INSERT INTO Proposal VALUES(?, ?, 0, ?)'
         );
-        $stmt->execute(array($user_id, $post_id));
+        $stmt->execute(array($user_id, $post_id, $date));
         return $db->lastInsertId();
     }
 
     function hasProposal($user_id, $post_id) {
-        $tmp = $user_id . '-' . $post_id;
-        echo "<script> console.log('$tmp')</script>";
         $db = Database::instance()->db();
         $stmt = $db->prepare(
             'SELECT * FROM Proposal 
@@ -20,7 +19,7 @@ include_once('../database/database_instance.php');
              post_id = ?'
         );
         $stmt->execute(array($user_id, $post_id));
-        $proposal = $stmt->fetch;
+        $proposal = $stmt->fetch();
         return $proposal != false;
     }
 ?>
