@@ -81,7 +81,7 @@ function drawPost($post, $comments)
   </h2>
 
   <div class="petpost">
-    <div class="petpost-img" >
+    <div class="petimage petpost-img" >
       <!--Need to add if -->
     <?php if(isset($_SESSION['username'])) { ?>
         <script src="../js/favourite.js" type="text/javascript" defer></script>

@@ -12,10 +12,13 @@
   --light: #3c4042;
 
   --button-corner-radius: 2em;
-  --items-corner-radius: 1em;
+
   --items-text-corner-radius: 0.6em;
   --comment-corner-radius: 0.6em;
 
+  --petimage-corner-radius: 1em;
+  --petimage-corner-radius-inner: 0.85em;
+  --petimage-size: 16em;
   --petpost-img-size: 18em;
 }
 
@@ -64,6 +67,18 @@ input[type="submit"] {
   text-align: center;
 }
 
+textarea {
+  resize: none;
+
+  margin: 0;
+  padding: 1em;
+  width: 85%;
+
+  border-radius: 0.5em;
+
+  font-size: x-large;
+}
+
 /* || UTILITIES */
 
 .error {
@@ -85,6 +100,21 @@ input[type="submit"] {
 
 #headimg {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
+}
+
+.petimage {
+  border-radius: var(--petimage-corner-radius);
+  background-color: var(--dark);
+}
+
+.petimage div {
+  width: var(--petimage-size);
+  height: var(--petimage-size);
+
+  /* the inner corner radius needs to be smaller than the outer
+   otherwise the image won't cover the corners */
+  border-radius: var(--petimage-corner-radius);
+  background-size: contain;
 }
 
 /* || TOPBAR */
@@ -206,45 +236,37 @@ input[type="submit"] {
 
 /* || SEARCH PAGE */
 .list-item {
-  color: var(--main);
-  background-color: var(--dark);
   border: 2px solid var(--light);
+  border-radius: var(--petimage-corner-radius);
 
   text-align: center;
   font-weight: bold;
-
-  border-radius: var(--items-corner-radius);
 }
 
 .list-item:hover {
   border-color: var(--green);
 }
 
-.list-item-img div {
-  width: 16em;
-  height: 16em;
-
+.list-item-img {
   /* the inner corner radius needs to be smaller than the outer
    otherwise the image won't cover the corners */
-  border-radius: calc(var(--items-corner-radius) - 0.2em)
-    calc(var(--items-corner-radius) - 0.2em) 0 0;
-  background-size: contain;
+  border-radius: var(--petimage-corner-radius-inner) var(--petimage-corner-radius-inner) 0 0 !important;
 }
 
 .list-item-txt {
   /* image's description */
-  padding: 0.5em;
-  font-size: 1.5em;
-
   margin-top: -0.3em; /* TODO this might be problematic */
+  padding: 0.5em;
+  font-size: x-large;
 
-  /* make this part stand out */
-  background-color: var(--dark); /* hide part of the image that overflows */
-  box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
   /* inner border to make this section thicker */
   border: 2px solid var(--light);
   border-radius: 0 0 var(--items-text-corner-radius)
     var(--items-text-corner-radius);
+
+  /* make this part stand out */
+  background-color: var(--dark); /* hide part of the image that overflows */
+  box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
 }
 
 /* || LIST FORM */
@@ -283,15 +305,13 @@ input[type="submit"] {
 
   border: solid var(--green) 2px;
   box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
-  border-radius: var(--items-corner-radius);
-  background-color: var(--dark);
 }
 
 .petpost-img div {
   width: var(--petpost-img-size);
   height: var(--petpost-img-size);
 
-  border-radius: var(--items-corner-radius);
+  border-radius: var(--petimage-corner-radius-inner);
   background-size: contain;
 }
 
@@ -357,29 +377,20 @@ input[type="submit"] {
 }
 
 #comment-input {
+  margin-top: 1em;
   margin-left: 1em;
   width: 60em;
 }
 
-#comment-input textarea,
+#comment-input-ta,
 #comment-input-button {
   display: inline-block;
 
-  border-radius: var(--button-corner-radius);
+  border: none;
   vertical-align: middle;
 
   color: var(--main);
   background-color: var(--light);
-}
-
-#comment-input textarea {
-  /*Comment text input*/
-  /* resize: vertical; */
-  margin: 0;
-  padding: 1em;
-  width: 85%;
-
-  font-size: x-large;
 }
 
 #comment-input-button {

@@ -30,14 +30,12 @@ require_once '../database/queries/db_post.php';
     ?>
 
   <a class="nounderline list-item" href="<?php echo $post_path; ?>">
-    <ul class="nobullets list-item-content">
-      <div class="list-item-img">
-        <div style="background: url('<?php echo $photo_path; ?>') no-repeat center /auto 100%"></div>
-      </div>
-      <li class="list-item-txt">
-        <?php echo $post['name']; ?>
-      </li>
-    </ul>
+    <div class="petimage">
+      <div class="list-item-img" style="background: url('<?php echo $photo_path; ?>') no-repeat center /auto 100%"></div>
+    </div>
+    <div class="list-item-txt">
+      <?php echo $post['name']; ?>
+    </div>
   </a>
 
 <?php } ?>
