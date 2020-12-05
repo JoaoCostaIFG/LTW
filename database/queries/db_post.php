@@ -75,9 +75,9 @@ include_once('../database/database_instance.php');
   function insertComment($user_id, $post_id, $text) {
     $db = Database::instance()->db();
     $stmt = $db->prepare(
-        'INSERT INTO Comment VALUES(NULL, ?, ?, ?, ?)'
+      'INSERT INTO Comment VALUES(NULL, ?, ?, ?, ?)'
     );
-
+    
     $stmt->execute(array($user_id, $post_id, $text, date("d/m/Y")));
   }
 

@@ -19,7 +19,12 @@
   $post_id = $_GET['post_id'];
   $safe_text = htmlspecialchars($text);
 
-  insertComment($user_id, $post_id, $safe_text);
+  try {
+    insertComment($user_id, $post_id, $safe_text);
+  } catch (PDOException $e) {
+    echo '<p id="comment-error">An error ocurred.</p>';
+    die;
+  }
 
   $comment = [
     "text" => $safe_text,
