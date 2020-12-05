@@ -12,7 +12,7 @@ function addComment(post_id) {
     //Only text area in post
     let text = document.getElementsByName("comment_text")[0].value;
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
+    xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             //Trim is used because the reponse text comes with new lines behind
             let response = xhttp.responseText.trim('\n');
@@ -30,10 +30,4 @@ function removeError() {
     if (commentError) {
         commentError.remove();
     }
-}
-
-function encodeForAjax(data) {
-    return Object.keys(data).map(function (k) {
-        return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
-    }).join('&');
 }

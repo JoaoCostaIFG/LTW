@@ -97,7 +97,7 @@ drop table if exists Proposal;
 create table Proposal(
     user_id INTEGER REFERENCES User(id),
     post_id INTEGER REFERENCES PetPost(id),
-    accepted INTEGER CHECK (accepted = 0 OR accepted = 1),
+    accepted INTEGER CHECK (accepted = 0 OR accepted = 1 OR accepted = -1),
     date DATE NOT NULL,
     PRIMARY KEY(user_id, post_id)
 );

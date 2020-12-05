@@ -1,5 +1,6 @@
 <?php
 require_once '../templates/tpl_petInfo.php';
+require_once '../templates/tpl_utils.php';
 include_once('../database/queries/db_proposal.php');
 include_once('../database/queries/db_user.php');
 
@@ -56,22 +57,35 @@ function drawPost($post, $comments)
     /**
      * Draws given a given post page
      */
-    $photo_path = "../static/images/" . $post['photo_id'] . "." . $post['photo_extension'];
     ?>
 
 <div class="petpost-page">
   <?php 
     if(isset($_SESSION['username'])){
       $current_user = getUserId($_SESSION['username'])['id'];
-      if (!hasProposal($current_user, $post['id']) && !isOwner($current_user, $post['id'])) { ?>
-      
-       <form method="post" action="../actions/action_make_proposal.php">
-       <input type="hidden" name="user_id" value="<?php echo $current_user; ?>">
-       <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
-            <input type="submit" value="Make pet proposal">
-       </form>
-    <?php }?>
-<?php
+      $post_id = $post['id'];
+      if (!hasProposal($current_user, $post_id) && !isOwner($current_user, $post_id)) { ?>
+            <script src="../js/utils.js" type="text/javascript" defer></script>
+            <script src="../js/proposal.js" type="text/javascript" defer></script>
+
+            <button id="makeProposalButton" onclick="make_proposal(<?php echo "$post_id, $current_user";?>)">
+                Make Proposal</button>
+            <p id="proposalSentText"></p>
+    <?php }
+      else if (hasProposal($current_user, $post_id)) {
+            $status = getProposalStatus($current_user, $post_id)['status'];
+
+            if ($status == -1)
+                $text = "Your Proposal is Pending";
+            else if ($status == 0)
+                $text = "Your Proposal was Rejected";
+            else if ($status == 1)
+                $text = "Your Proposal was Accepted";
+            ?>
+            <p id="proposalSentText"><?php echo $text; ?></p>
+    <?php
+      }
+
     }
 ?>
 
@@ -81,9 +95,7 @@ function drawPost($post, $comments)
   </h2>
 
   <div class="petpost">
-    <div class="petpost-img" >
-      <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
-    </div>
+    <?php drawPetPhoto($post['photo_id'], $post['photo_extension'], "petpost-img"); ?>
     <ul class="petpost-info">
       <li>Name: <b><?php echo $post['name']; ?></b></li>
       <li>Age: <b><?php echo ageToString($post['age']); ?></b></li>
@@ -138,6 +150,7 @@ function drawPost($post, $comments)
  * Draws given a comment
  */
 ?>
+  <script src="../js/utils.js" type="text/javascript" defer></script>
   <script src="../js/add_comment.js" type="text/javascript" defer></script>
   <section id="comment-input">
     <textarea name="comment_text" rows="2" column="40" placeholder="Write your comment..." required></textarea>

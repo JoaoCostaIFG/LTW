@@ -94,7 +94,7 @@ h4 a {
   font-weight: normal;
 }
 
-.addpost-button input[type="submit"] {
+.topbar-button input[type="submit"] {
   /* add post button */
   border: none;
   border-radius: 100%;
@@ -106,7 +106,7 @@ h4 a {
   font-weight: bold;
 }
 
-.addpost-button input[type="submit"]:hover {
+.topbar-button input[type="submit"]:hover {
   color: var(--dark);
   background-color: var(--green);
 }

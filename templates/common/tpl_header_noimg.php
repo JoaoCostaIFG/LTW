@@ -24,7 +24,9 @@
         </div>
       <?php } else { ?>
         <ul id="logout">
-          <li class="addpost-button"><a href="add_post.php"><input type="submit" value="+"></a></li>
+          <li class="topbar-button"><a href="list_sent_proposals.php"><input type="submit" value="See sent proposals"></a></li>
+          <li class="topbar-button"><a href="list_received_proposals.php"><input type="submit" value="See received proposals"></a></li>
+          <li class="topbar-button"><a href="add_post.php"><input type="submit" value="+"></a></li>
           <li>Logged in as <b><?php echo $_SESSION['username'] ?></b></li>
           <li class="logout-button">
             <a href='../actions/action_logout.php'><input type="submit" value="Logout"></a>
