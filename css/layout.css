@@ -5,6 +5,8 @@
   --list-height: 48em;
 }
 
+/* || GENERAL STYLES */
+
 body {
   margin-top: var(--top-bar-height); /* reserve space for the top bar */
 }

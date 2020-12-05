@@ -29,11 +29,11 @@ require_once '../database/queries/db_post.php';
     $post_path = 'post.php?post_id=' . $post['post_id'];
     ?>
 
-  <a href="<?php echo $post_path; ?>" class="list-item">
-    <ul class="list-item-content">
-      <li class="list-item-img">
+  <a class="nounderline list-item" href="<?php echo $post_path; ?>">
+    <ul class="nobullets list-item-content">
+      <div class="list-item-img">
         <div style="background: url('<?php echo $photo_path; ?>') no-repeat center /auto 100%"></div>
-      </li>
+      </div>
       <li class="list-item-txt">
         <?php echo $post['name']; ?>
       </li>
