@@ -221,11 +221,23 @@ h4 a {
 .petpost-img {
   display: inline-block;
   vertical-align: middle;
+  position: relative;
 
   border: solid var(--green) 2px;
   box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
   border-radius: 12px;
   background-color: var(--dark);
+}
+
+.petpost-img button {
+  position: absolute;
+  display: inline;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  border: none;
+  color: goldenrod;
+  font-size: xx-large;
 }
 
 .petpost-img div {

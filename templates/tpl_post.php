@@ -82,6 +82,17 @@ function drawPost($post, $comments)
 
   <div class="petpost">
     <div class="petpost-img" >
+      <!--Need to add if -->
+<?php if(isset($_SESSION['username'])){ ?>
+        <script src="../js/favourite.js" type="text/javascript" defer></script>
+        <button id="favourite-star" onclick="favourite(<?php echo $post['id']?>)">
+<?php     if(isFavourite($current_user, $post['id'])){?>
+            &bigstar;
+        <?php } else {?>
+            &star;
+        <?php }?>
+      </button>
+<?php }?>
       <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
     </div>
     <ul class="petpost-info">
@@ -133,7 +144,7 @@ function drawPost($post, $comments)
 <?php } ?>
 
 
-<?php function drawCommentForm($post_id, $username) {
+<?php function drawCommentForm($post_id) {
 /**
  * Draws given a comment
  */

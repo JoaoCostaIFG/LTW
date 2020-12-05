@@ -46,5 +46,33 @@ function isOwner($user_id, $post_id) {
         return $post != false;
 }
 
+function isFavourite($user_id, $post_id) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'SELECT * FROM Favourite 
+            WHERE post_id = ? AND user_id = ?'
+    );
+    $stmt->execute(array($post_id, $user_id));
+    $favourite = $stmt->fetch();
+    return $favourite != false;
+}
+
+function addFavouritePost($user_id, $post_id) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+      'INSERT INTO Favourite VALUES(?, ?)'
+  );
+  $stmt->execute(array($user_id, $post_id));
+}
+
+function removeFavouritePost($user_id, $post_id) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+      'DELETE FROM Favourite 
+      WHERE post_id = ? AND user_id = ?'
+  );
+  $stmt->execute(array($post_id, $user_id));
+}
+
 ?>
 
