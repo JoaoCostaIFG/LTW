@@ -53,10 +53,10 @@ function drawEditProfile($user)
             <b>Edit Profile</b>
         </h2>
 
-        <form id="editProfile">
+        <form id="editProfile" method="post" action="../actions/action_edit_profile.php" enctype="multipart/form-data">
             <div class="form-item">
-                <label for="username">Name</label>
-                <input id="username" type="text" name="name" placeholder="<?php echo $user['username']; ?>">
+                <label for="username">Username</label>
+                <input id="username" type="text" name="username" placeholder="<?php echo $user['username']; ?>">
                 <div class="Note">
                     <p>This is the name other users will see when intereacting with you.</p>
                     <br>
