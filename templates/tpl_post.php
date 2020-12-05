@@ -95,7 +95,7 @@ function drawPost($post, $comments)
   </h2>
 
   <div class="petpost">
-    <div class="petpost-img" >
+    <div class="petimage petpost-img" >
       <!--Need to add if -->
     <?php if(isset($_SESSION['username'])) { ?>
         <script src="../js/favourite.js" type="text/javascript" defer></script>
@@ -109,7 +109,7 @@ function drawPost($post, $comments)
     <?php }?>
       <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
     </div>
-    <ul class="petpost-info">
+    <ul class="petpost-info nobullets">
       <li>Name: <b><?php echo $post['name']; ?></b></li>
       <li>Age: <b><?php echo ageToString($post['age']); ?></b></li>
       <li>Breed: <b><?php echo $post['species']; ?></b></li>

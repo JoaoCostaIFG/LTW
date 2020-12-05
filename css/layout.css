@@ -5,6 +5,8 @@
   --list-height: 48em;
 }
 
+/* || GENERAL STYLES */
+
 body {
   margin-top: var(--top-bar-height); /* reserve space for the top bar */
 }
@@ -80,9 +82,4 @@ h1 {
 
 .list-item {
   display: inline;
-}
-
-.list-item-content {
-  margin: 0;
-  padding: 0;
 }
