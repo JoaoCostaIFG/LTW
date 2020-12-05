@@ -341,6 +341,40 @@ h4 a {
   font-weight: bold;
 }
 
+#comment-input {
+  width: 80%;
+  margin-left: 1em;
+  padding: 0.2em 1em;
+}
+
+#comment-input textarea { /*Comment text input*/
+  resize: vertical;
+
+  background-color: var(--light);
+  width: 87%;
+  margin: 0;
+
+  color: white;
+  font-size: 1.5em;
+
+  border-radius: 12px;
+  float: left;
+}
+
+#comment-input-button { /*Comment text input button*/
+  background-color: var(--light);
+  width: 9%;
+  margin: 0.5em;
+
+  color: white;
+  font-size: 1.5em;
+
+  border-radius: 12px;
+}
+
+/* * {
+  border: solid orange 1px;
+} */
 .form-button {
   padding: 0.7em;
   box-sizing: border-box;

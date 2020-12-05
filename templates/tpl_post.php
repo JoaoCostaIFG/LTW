@@ -61,13 +61,16 @@ function drawPost($post, $comments)
 
 <div class="petpost-page">
   <?php 
-    $current_user = getUserId($_SESSION['username'])['id'];
-    if (!hasProposal($current_user, $post['id']) && !isOwner($current_user, $post['id'])) { ?>
+    if(isset($_SESSION['username'])){
+      $current_user = getUserId($_SESSION['username'])['id'];
+      if (!hasProposal($current_user, $post['id']) && !isOwner($current_user, $post['id'])) { ?>
+      
        <form method="post" action="../actions/action_make_proposal.php">
        <input type="hidden" name="user_id" value="<?php echo $current_user; ?>">
        <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
             <input type="submit" value="Make pet proposal">
        </form>
+    <?php }?>
 <?php
     }
 ?>
@@ -98,17 +101,21 @@ function drawPost($post, $comments)
   </div>
 
   <h3>Comments</h3>
-    <?php
-    $cnt=0;
-    foreach($comments as $comment) {
-        $cnt=$cnt + 1;
-        drawComment($comment);
-        echo '<br>';
-    }
-    if ($cnt == 0) {
-        echo "<i>There are no comments on this post. Be the first one</i>";
-    }
-    ?>
+  <section id="comments">
+<?php
+  $cnt=0;
+  foreach($comments as $comment) {
+    $cnt=$cnt + 1;
+    drawComment($comment);
+    echo '<br>';
+  }
+  if ($cnt == 0){
+    echo "<i id='no-comments'>There are no comments on this post. Be the first one</i>";
+  }
+
+?>
+  </section>
+
 
 </div>
 <?php } ?>
@@ -124,6 +131,25 @@ function drawPost($post, $comments)
     <p><?php echo $comment['date'] . ", " . $comment['username']; ?></p>
   </div>
 <?php } ?>
+
+
+<?php function drawCommentForm($post_id, $username) {
+/**
+ * Draws given a comment
+ */
+?>
+  <script src="../js/add_comment.js" type="text/javascript" defer></script>
+  <section id="comment-input">
+    <textarea name="comment_text" rows="2" column="40" placeholder="Write your comment..." required></textarea>
+    <button id="comment-input-button" type="button" onclick="addComment(<?php echo $post_id?>)">Comment</button>
+  </section>
+<?php } ?>
+
+<?php function drawCommentLoginPrompt() { ?>
+  <section id="comment-input">
+    <p id="comment-login-prompt">Log in to comment</p>
+  </section>
+<?php }?>
 
 <?php function drawAddPost()
 { 
