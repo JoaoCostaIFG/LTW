@@ -5,7 +5,7 @@
   include_once('../templates/tpl_post.php');
 
   if (!isset($_SESSION['username']) || !isset($_GET['post_id']) || !isset($_GET['question_text'])){
-    echo '<p id="comment-error">An error ocurred.</p>';
+    echo '<p id="question-error">An error ocurred.</p>';
     die;
   }
   
@@ -32,5 +32,5 @@
     "user_id" => $user_id
   ];
 
-  //The response is used by js to draw the comment
+  //The response is used by js to draw the question
   drawQuestionAnswer($post_id, $_SESSION['username'], $question);

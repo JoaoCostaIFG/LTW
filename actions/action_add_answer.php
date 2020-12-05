@@ -5,7 +5,7 @@
   include_once('../templates/tpl_post.php');
 
   if (!isset($_SESSION['username']) || !isset($_GET['question_id']) || !isset($_GET['answer_text'])){
-    echo '<p id="comment-error">An error ocurred.</p>';
+    echo '<p id="answer-error">An error ocurred.</p>';
     die;
   }
   
@@ -31,5 +31,5 @@
     "answer_date" => date("d/m/Y")
   ];
 
-  //The response is used by js to draw the comment
+  //The response is used by js to draw the answer
   drawAnswer($answer);

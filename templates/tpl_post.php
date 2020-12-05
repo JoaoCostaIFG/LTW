@@ -125,18 +125,6 @@ function drawPost($post, $questionsAnswers)
   </div>
 <?php } ?>
 
-<?php function drawComment($comment)
-{
-  /**
-   * Draws given a comment
-   */
-?>
-  <div class="petpost-comment">
-    <p><?php echo $comment['text']; ?></p>
-    <p><?php echo $comment['date'] . ", " . $comment['username']; ?></p>
-  </div>
-<?php } ?>
-
 <?php function drawAddPost()
 {
   /**
