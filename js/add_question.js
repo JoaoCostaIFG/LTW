@@ -16,8 +16,12 @@ function addQuestion(post_id) {
         if (this.readyState == 4 && this.status == 200) {
             //Trim is used because the reponse text comes with new lines behind
             let response = xhttp.responseText.trim('\n');
+            //Used to append before input
+            let doc = new DOMParser().parseFromString(response, 'text/html').getElementsByClassName("petpost-question")[0];
+            console.log(doc);
+            let form = document.getElementById("question-input");
             let questions = document.getElementById("petpost-questions");
-            questions.innerHTML += response;
+            questions.insertBefore(doc, form);
         }
     };
 

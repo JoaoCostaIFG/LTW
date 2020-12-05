@@ -29,7 +29,7 @@
   $question = [
     "question" => $safe_text,
     "question_date" => date("d/m/Y"),
-    "id" => $user_id
+    "user_id" => $user_id
   ];
 
   //The response is used by js to draw the comment

@@ -157,5 +157,14 @@ include_once('../database/database_instance.php');
     
     $stmt->execute(array($user_id, $post_id, $question, date("d/m/Y")));
   }
+
+  function insertAnswer($user_id, $question_id, $answer) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+      'INSERT INTO Answer VALUES(NULL, ?, ?, ?, ?)'
+    );
+    
+    $stmt->execute(array($user_id, $question_id, $answer, date("d/m/Y")));
+  }
 ?>
 
