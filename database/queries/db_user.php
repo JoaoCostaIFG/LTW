@@ -25,14 +25,26 @@ function insertUser($username, $password, $picture, $email, $mobile_number) {
 }
 
 function getUserId($username) {
-       $db = Database::instance()->db();
-       $stmt = $db->prepare(
-           'SELECT id FROM User WHERE username LIKE ?'
-       );
-   
-       $stmt->execute(array($username));
-       return $stmt->fetch();
-   }
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'SELECT id FROM User WHERE username LIKE ?'
+    );
+
+    // Default is bcrypt
+    $stmt->execute(array($username));
+    return $stmt->fetch();
+}
+
+function isOwner($user_id, $post_id) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare(
+            'SELECT * FROM PetPost 
+             WHERE id = ? AND user_id = ?'
+        );
+        $stmt->execute(array($post_id, $user_id));
+        $post = $stmt->fetch();
+        return $post != false;
+}
 
 ?>
 
