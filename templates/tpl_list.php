@@ -53,8 +53,9 @@ require_once '../database/queries/db_post.php';
     <label for="name">Name</label>
     <input id="name" type="text" name="name" value="<?php echo $values['name'] ?>">
   </div>
-
+  <div class="form-item listfilter-item" >
     <?php drawGenders(true, $values['gender']); ?>
+  </div>
   <div class="form-item listfilter-item" >
     <label for="age">Age</label>
     <input id="age" type="text" name="age" value="<?php echo $values['age'] ?>">
@@ -63,10 +64,12 @@ require_once '../database/queries/db_post.php';
     <label for="size">Size</label>
     <input id="age" type="text" name="size" value="<?php echo $values['size'] ?>">
   </div>
-  
+  <div class="form-item listfilter-item" >
     <?php drawSpecies(true, $values['species']); ?>
+  </div>
+  <div class="form-item listfilter-item" >
     <?php drawCities(true, $values['city']); ?>
-
+  </div>
   <br>
   <input class="form-button listfilter-button" type="submit" value="Search">
 </form>

@@ -5,6 +5,7 @@ function drawGendersRadio()
 {
     /*
     * Draws Gender options
+    * TODO remove <p>
     */
     ?>
     <p>Gender<br><input type="radio" id="male" name="gender" value="0">
@@ -33,7 +34,6 @@ function drawOption($option_id, $option_name, $is_selected)
     * Draws a set of $options with the $options_id and $options_name tags
     */
     ?>
-    <div class="form-item listfilter-item" >
       <?php
         echo '<label for="' . $options_id . '">' . $options_name . '</label>';
         echo '<select name="' . $options_id . '" id="' . $options_id . '">';
@@ -52,7 +52,6 @@ function drawOption($option_id, $option_name, $is_selected)
         }
         ?>
       </select>
-    </div>
     <?php
 }
 ?>

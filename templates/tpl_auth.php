@@ -28,7 +28,7 @@
   <section id="register">
       <header><h2>Create a new account</h2></header>
 
-      <form class="signupform" method="post" action="../actions/action_register.php">
+      <form class="verticalform signupform" method="post" action="../actions/action_register.php">
         <div class="form-item signupform-item" >
           <label for="username">Username</label>
           <input id="username" type="text" name="username" placeholder="username" required>

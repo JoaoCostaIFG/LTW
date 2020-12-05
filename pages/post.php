@@ -12,5 +12,11 @@ if (!$_GET['post_id']) { // go to 404 if there is no post id
   $comments = getComments($_GET['post_id']);
   drawPost($post, $comments);
 
+  if(isset($_SESSION['username'])){
+    drawCommentForm($_GET['post_id']);
+  } else {
+    drawCommentLoginPrompt();
+  }
+
   require '../templates/common/tpl_footer.php';
 ?>

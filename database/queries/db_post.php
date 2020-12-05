@@ -126,7 +126,16 @@ include_once('../database/database_instance.php');
     return $stmt->fetchAll();
   }
 
- 
+    // Text input is already valdated
+    function insertComment($user_id, $post_id, $text) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+      'INSERT INTO Comment VALUES(NULL, ?, ?, ?, ?)'
+    );
+    
+    $stmt->execute(array($user_id, $post_id, $text, date("d/m/Y")));
+  }
+
   function getCities() {
     $db = Database::instance()->db();
     $stmt = $db->prepare(
