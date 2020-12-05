@@ -210,8 +210,8 @@ function drawPost($post, $comments)
         <input id="age" type="number" name="age" placeholder="age of the pet" required>
       </div>
       <div class="form-item addpostform-item" >
-        <label for="photo">Photo</label>
-        <input id="photo" type="file" name="photo" required>
+        <label for="image">Photo</label>
+        <input id="image" type="file" name="image" required>
       </div>
 
       <div class="form-item listfilter-item" >

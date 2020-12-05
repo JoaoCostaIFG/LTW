@@ -9,7 +9,7 @@
   include('../templates/tpl_profile.php');
 
   $username = $_GET['username'];
-  $user = getUserPublicInfo($username);
+  $user = getUserInfo($username);
   $user_posts = getPostsByUser($username);
   
   drawProfile($user, $user_posts);
