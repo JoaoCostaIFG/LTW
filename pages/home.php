@@ -1,5 +1,5 @@
 <?php
-  require_once 'session.php';
+  require 'session.php';
   $title="Home";
   require '../templates/common/tpl_header.php';
 ?>

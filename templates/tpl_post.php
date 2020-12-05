@@ -1,8 +1,8 @@
 <?php
 require_once '../templates/tpl_petInfo.php';
 require_once '../templates/tpl_utils.php';
-include_once('../database/queries/db_proposal.php');
-include_once('../database/queries/db_user.php');
+require_once('../database/queries/db_proposal.php');
+require_once('../database/queries/db_user.php');
 
 /* GETTERS */
 
@@ -61,6 +61,7 @@ function drawPost($post, $comments)
 
 <div class="petpost-page">
   <?php 
+    $photo_path = "../static/images/" . $post['photo_id'] . "." . $post['photo_extension'];
     if(isset($_SESSION['username'])){
       $current_user = getUserId($_SESSION['username'])['id'];
       $post_id = $post['id'];
@@ -85,9 +86,8 @@ function drawPost($post, $comments)
             <p id="proposalSentText"><?php echo $text; ?></p>
     <?php
       }
-
     }
-?>
+    ?>
 
   <h2>
     <b><?php echo $post['name']; ?></b> </br>
@@ -95,7 +95,20 @@ function drawPost($post, $comments)
   </h2>
 
   <div class="petpost">
-    <?php drawPetPhoto($post['photo_id'], $post['photo_extension'], "petpost-img"); ?>
+    <div class="petpost-img" >
+      <!--Need to add if -->
+    <?php if(isset($_SESSION['username'])) { ?>
+        <script src="../js/favourite.js" type="text/javascript" defer></script>
+        <button id="favourite-star" onclick="favourite(<?php echo $post['id']?>)">
+        <?php     if(isFavourite($current_user, $post['id'])) {?>
+            &bigstar;
+        <?php } else {?>
+            &star;
+        <?php }?>
+      </button>
+    <?php }?>
+      <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
+    </div>
     <ul class="petpost-info">
       <li>Name: <b><?php echo $post['name']; ?></b></li>
       <li>Age: <b><?php echo ageToString($post['age']); ?></b></li>
@@ -114,18 +127,18 @@ function drawPost($post, $comments)
 
   <h3>Comments</h3>
   <section id="comments">
-<?php
-  $cnt=0;
-  foreach($comments as $comment) {
-    $cnt=$cnt + 1;
-    drawComment($comment);
-    echo '<br>';
-  }
-  if ($cnt == 0){
-    echo "<i id='no-comments'>There are no comments on this post. Be the first one</i>";
-  }
+    <?php
+    $cnt=0;
+    foreach($comments as $comment) {
+        $cnt=$cnt + 1;
+        drawComment($comment);
+        echo '<br>';
+    }
+    if ($cnt == 0) {
+        echo "<i id='no-comments'>There are no comments on this post. Be the first one</i>";
+    }
 
-?>
+    ?>
   </section>
 
 
@@ -145,20 +158,48 @@ function drawPost($post, $comments)
 <?php } ?>
 
 
-<?php function drawCommentForm($post_id, $username) {
-/**
- * Draws given a comment
- */
-?>
+<?php function drawCommentForm($post_id)
+{
+    /**
+     * Draws given a comment
+     */
+    ?>
   <script src="../js/utils.js" type="text/javascript" defer></script>
   <script src="../js/add_comment.js" type="text/javascript" defer></script>
-  <section id="comment-input">
-    <textarea name="comment_text" rows="2" column="40" placeholder="Write your comment..." required></textarea>
+
+  <div id="comment-input">
+    <textarea id="comment-input-ta" name="comment_text" rows="1" column="40"
+      placeholder="Write your comment..." maxlength="256" required></textarea>
     <button id="comment-input-button" type="button" onclick="addComment(<?php echo $post_id?>)">Comment</button>
-  </section>
+  </div>
+
+  <script type="text/javascript">
+    // see: https://stackoverflow.com/questions/7745741/auto-expanding-textarea/24824750#24824750
+    var textarea = document.getElementById("comment-input-ta");
+    var limitRows = 5;
+    var messageLastScrollHeight = textarea.scrollHeight;
+
+    textarea.oninput = function() {
+      var rows = parseInt(textarea.getAttribute("rows"));
+      // If we don't decrease the amount of rows, the scrollHeight would show the scrollHeight for all the rows
+      // even if there is no text.
+      textarea.setAttribute("rows", "1");
+
+      if (rows < limitRows && textarea.scrollHeight > messageLastScrollHeight) {
+          rows++;
+      } else if (rows > 1 && textarea.scrollHeight < messageLastScrollHeight) {
+          rows--;
+      }
+
+      messageLastScrollHeight = textarea.scrollHeight;
+      textarea.setAttribute("rows", rows);
+    };
+  </script>
 <?php } ?>
 
-<?php function drawCommentLoginPrompt() { ?>
+<?php function drawCommentLoginPrompt()
+{
+    ?>
   <section id="comment-input">
     <p id="comment-login-prompt">Log in to comment</p>
   </section>
@@ -167,33 +208,57 @@ function drawPost($post, $comments)
 <?php function drawAddPost()
 { 
     /**
- * TODO Meter min e max's
+     * TODO Meter min e max's
      * Draws a form to add a post
      */
     ?>
-    <section id="addPost">
-        <header><h2>Create a new Post</h2></header>
+  <section id="addPost">
+    <header><h2>Create a new Post</h2></header>
 
-        <form method="post" action="../actions/action_add_post.php" enctype="multipart/form-data">
-            <p>Name <input type="text" name="name" placeholder="name of the pet" required></p>
-            <p>Age<input type="number" name="age" placeholder="age of the pet" required></p>
+    <form class="verticalform addpostform" method="post" action="../actions/action_add_post.php" enctype="multipart/form-data">
+      <div class="form-item addpostform-item" >
+        <label for="name">Name</label>
+        <input id="name" type="text" name="name" placeholder="name of the pet" required>
+      </div>
+      <div class="form-item addpostform-item" >
+        <label for="age">Age</label>
+        <input id="age" type="number" name="age" placeholder="age of the pet" required>
+      </div>
+      <div class="form-item addpostform-item" >
+        <label for="image">Photo</label>
+        <input id="image" type="file" name="image" required>
+      </div>
 
-            <label>Photo
-                <input type="file" name="image">
-            </label>
+      <div class="form-item listfilter-item" >
+        <?php drawGendersRadio() ?>
+      </div>
 
-            <p> <?php drawGendersRadio() ?> </p>
-            <p>Size<input type="number" name="size" placeholder="size" required></p>
-            <p>Description<textarea id="description" name="description" rows="4" cols="50"> </textarea></p>
-            <p>Date<input type="date" name="date" placeholder="date of birth of your pet" required></p>
+      <div class="form-item addpostform-item" >
+        <label for="size">Size</label>
+        <input id="size" type="number" name="size" placeholder="size" required>
+      </div>
+      <div class="form-item addpostform-item" >
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="8" cols="86"></textarea>
+      </div>
+      <div class="form-item addpostform-item" >
+        <label for="date">Birth date</label>
+        <input id="date" type="date" name="date" placeholder="date of birth of your pet" required>
+      </div>
 
-            
-            <p><?php drawColors(false, null); ?> </p>
-            <p><?php drawSpecies(false, null); ?> </p>
-            <p><?php drawCities(false, null); ?> </p>
-            <p><input type="submit" value="Add pet"></p>
-        </form>
-    </section>
+      <div class="form-item addpostform-item" >
+        <?php drawColors(false, null); ?>
+      </div>
+      <div class="form-item addpostform-item" >
+        <?php drawSpecies(false, null); ?>
+      </div>
+      <div class="form-item addpostform-item" >
+        <?php drawCities(false, null); ?>
+      </div>
 
+      <br>
+      <input class="form-button addpostform-button" type="submit" value="Add pet">
+    </form>
+  </section>
 <?php } ?>
 

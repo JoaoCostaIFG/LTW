@@ -3,6 +3,7 @@ include_once '../templates/tpl_utils.php';
 
 function drawSentProposal($proposal) {
     $post_path = 'post.php?post_id=' . $proposal['post_id'];
+    $photo_path = "../static/images/" . $proposal['photo_id'] . "." . $proposal['photo_extension'];
 ?>
     <!-- Proposal from/to -->
     You made a proposal to
@@ -12,7 +13,9 @@ function drawSentProposal($proposal) {
 
     <!-- Pet Image -->
     <a href="<?php echo $post_path; ?>" class="list-item">
-      <?php drawPetPhoto($proposal['photo_id'], $proposal['photo_extension'], "petpost-img");?>
+      <div class="petpost-img">
+        <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
+      </div>
     </a>
     <br>
 
@@ -52,6 +55,7 @@ function drawAcceptProposal($user_id, $post_id) { ?>
 
 function  drawReceivedProposal($proposal) {
     $post_path = 'post.php?post_id=' . $proposal['post_id'];
+    $photo_path = "../static/images/" . $proposal['photo_id'] . "." . $proposal['photo_extension'];
 ?>
     <!-- Proposal from/to -->
     You received a proposal from
@@ -61,7 +65,10 @@ function  drawReceivedProposal($proposal) {
 
     <!-- Pet Image -->
     <a href="<?php echo $post_path; ?>" class="list-item">
-      <?php drawPetPhoto($proposal['photo_id'], $proposal['photo_extension'], "petpost-img");?>
+
+      <div class="petpost-img">
+        <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
+      </div>
     </a>
     <br>
 

@@ -1,14 +1,14 @@
 <?php
 
-function drawPetPhoto($photo_id, $photo_extension, $class) {
-    $photo_path = "../static/images/" . $photo_id . "." . $photo_extension;
+//function drawPetPhoto($photo_id, $photo_extension, $class) {
+    //$photo_path = "../static/images/" . $photo_id . "." . $photo_extension;
 ?>
     
-    <div class="<?php echo $class; ?>" >
+    <!-- <div class="<?php echo $class; ?>" >
         <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
-    </div>
+    </div> -->
 <?php
-}
+//}
 
 function drawOption($option_id, $option_name, $is_selected)
 {
@@ -28,7 +28,6 @@ function drawOptions($any_option, $options, $options_name, $options_id, $selecte
     * Draws a set of $options with the $options_id and $options_name tags
     */
     ?>
-    <div class="form-item listfilter-item" >
       <?php
         echo '<label for="' . $options_id . '">' . $options_name . '</label>';
         echo '<select name="' . $options_id . '" id="' . $options_id . '">';
@@ -47,7 +46,6 @@ function drawOptions($any_option, $options, $options_name, $options_id, $selecte
         }
         ?>
       </select>
-    </div>
     <?php
 }
 ?>

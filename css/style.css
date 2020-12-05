@@ -29,6 +29,11 @@ p {
   width: 60em;
 }
 
+.error {
+  color: red;
+  font-weight: bold;
+}
+
 #headimg {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
 }
@@ -221,11 +226,23 @@ h4 a {
 .petpost-img {
   display: inline-block;
   vertical-align: middle;
+  position: relative;
 
   border: solid var(--green) 2px;
   box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
   border-radius: 12px;
   background-color: var(--dark);
+}
+
+.petpost-img button {
+  position: absolute;
+  display: inline;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  border: none;
+  color: goldenrod;
+  font-size: xx-large;
 }
 
 .petpost-img div {
@@ -292,12 +309,46 @@ h4 a {
   font-style: italic;
 }
 
+#comment-input {
+  margin-left: 1em;
+  width: 60em;
+}
+
+#comment-input textarea,
+#comment-input-button {
+  display: inline-block;
+
+  border: none;
+  border-radius: 12px;
+  vertical-align: middle;
+
+  color: var(--main);
+  background-color: var(--light);
+}
+
+#comment-input textarea {
+  /*Comment text input*/
+  /* resize: vertical; */
+  margin: 0;
+  padding: 1em;
+  width: 85%;
+
+  font-size: x-large;
+}
+
+#comment-input-button {
+  /*Comment text input button*/
+  font-size: large;
+  padding: 0.3em;
+}
+
+#comment-input-button:hover {
+  background-color: var(--dark);
+}
+
 /* AUTH FORMS */
 .signupform {
   margin-top: 3em;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
 }
 
 .signupform-item {
@@ -313,7 +364,31 @@ h4 a {
   width: 8em; /* important */
 }
 
+/* ADDPOST FORM */
+.addpostform {
+  margin-top: 3em;
+}
+
+.addpostform-item {
+  max-width: 40em; /* important */
+}
+
+.addpostform-item + .addpostform-item {
+  margin-top: 2em; /* important */
+}
+
+.addpostform-button {
+  margin-top: 2em;
+  width: 8em; /* important */
+}
+
 /* FORMS */
+.verticalform {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
 .form-item {
   position: relative;
   display: inline-block;
@@ -339,37 +414,6 @@ h4 a {
   background-color: var(--light);
   color: var(--main);
   font-weight: bold;
-}
-
-#comment-input {
-  width: 80%;
-  margin-left: 1em;
-  padding: 0.2em 1em;
-}
-
-#comment-input textarea { /*Comment text input*/
-  resize: vertical;
-
-  background-color: var(--light);
-  width: 87%;
-  margin: 0;
-
-  color: white;
-  font-size: 1.5em;
-
-  border-radius: 12px;
-  float: left;
-}
-
-#comment-input-button { /*Comment text input button*/
-  background-color: var(--light);
-  width: 9%;
-  margin: 0.5em;
-
-  color: white;
-  font-size: 1.5em;
-
-  border-radius: 12px;
 }
 
 /* * {

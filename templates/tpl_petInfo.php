@@ -6,6 +6,7 @@ function drawGendersRadio()
 {
     /*
     * Draws Gender options
+    * TODO remove <p>
     */
     ?>
     <p>Gender<br><input type="radio" id="male" name="gender" value="0">
@@ -14,7 +15,6 @@ function drawGendersRadio()
     <label for="female">Female</label><br></p>
 
 <?php } ?>
-
 
 <?php function drawSpecies($any_option, $selected_value)
 {

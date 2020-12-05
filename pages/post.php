@@ -13,7 +13,7 @@ if (!$_GET['post_id']) { // go to 404 if there is no post id
   drawPost($post, $comments);
 
   if(isset($_SESSION['username'])){
-    drawCommentForm($_GET['post_id'], $_SESSION['username']);
+    drawCommentForm($_GET['post_id']);
   } else {
     drawCommentLoginPrompt();
   }

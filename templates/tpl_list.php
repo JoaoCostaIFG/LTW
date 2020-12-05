@@ -32,7 +32,10 @@ require_once '../templates/tpl_utils.php';
 
   <a href="<?php echo $post_path; ?>" class="list-item">
     <ul class="list-item-content">
-      <?php drawPetPhoto($post['photo_id'], $post['photo_extension'], "list-item-img"); ?>
+
+      <div class="list-item-img" >
+        <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
+      </div> 
       <li class="list-item-txt">
         <?php echo $post['name']; ?>
       </li>
@@ -52,8 +55,9 @@ require_once '../templates/tpl_utils.php';
     <label for="name">Name</label>
     <input id="name" type="text" name="name" value="<?php echo $values['name'] ?>">
   </div>
-
+  <div class="form-item listfilter-item" >
     <?php drawGenders(true, $values['gender']); ?>
+  </div>
   <div class="form-item listfilter-item" >
     <label for="age">Age</label>
     <input id="age" type="text" name="age" value="<?php echo $values['age'] ?>">
@@ -62,10 +66,12 @@ require_once '../templates/tpl_utils.php';
     <label for="size">Size</label>
     <input id="age" type="text" name="size" value="<?php echo $values['size'] ?>">
   </div>
-  
+  <div class="form-item listfilter-item" >
     <?php drawSpecies(true, $values['species']); ?>
+  </div>
+  <div class="form-item listfilter-item" >
     <?php drawCities(true, $values['city']); ?>
-
+  </div>
   <br>
   <input class="form-button listfilter-button" type="submit" value="Search">
 </form>
