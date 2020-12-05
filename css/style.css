@@ -5,6 +5,7 @@
   --background-dark: #161616;
   --main: #cfd3d8;
   --green: #5d8d79;
+  --red: #b94642;
   --darkGreen: #2f5e4a;
   --orange: #8d645d;
   --dark: #121212;
@@ -63,50 +64,68 @@ h4 a {
   background-color: var(--dark);
 }
 
-#top-bar > ul > li {
+#top-bar a {
+  text-decoration: none;
+}
+
+#top-bar > li {
   list-style-type: none;
 }
 
-#top-bar > ul > li + li {
+#menu {
+  font-size: large;
+}
+
+#menu > li + li {
   margin-left: 3em;
 }
 
-#top-bar > ul > li > a {
-  text-decoration: none;
-  font-size: large;
-  color: var(--main);
-}
-
-#top-bar > ul > li > a:hover {
-  color: var(--green);
-}
-
-#signup a {
-  text-decoration: none;
-  font-size: small;
-  color: var(--main);
-}
-
+#menu > li > a:hover,
 #signup a:hover {
   color: var(--green);
 }
 
-#logout input[type="submit"] {
-  border: none;
-  font-weight: bold;
-  font-size: medium;
-  color: var(--main);
+#signup,
+#logout {
+  font-size: small;
 }
 
 #logout {
-  border: none;
   font-weight: normal;
-  font-size: medium;
-  color: var(--main);
 }
 
-#logout input[type="submit"]:hover {
-  color: var(--green);
+.addpost-button input[type="submit"] {
+  /* add post button */
+  border: none;
+  border-radius: 100%;
+
+  color: var(--main);
+  background-color: var(--background-dark);
+  box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
+
+  font-weight: bold;
+}
+
+.addpost-button input[type="submit"]:hover {
+  color: var(--dark);
+  background-color: var(--green);
+}
+
+.logout-button input[type="submit"] {
+  border: none;
+  border-radius: 10px;
+
+  color: var(--red);
+  background-color: var(--dark);
+
+  font-weight: bold;
+}
+
+.logout-button input[type="submit"]:hover {
+  /* color: var(--green); */
+  background-color: var(--background-dark);
+  box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
+  display: inline-block;
 }
 
 /* LIST */
