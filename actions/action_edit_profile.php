@@ -12,13 +12,19 @@
     );
   
     try {
-        /* updateUser($post_info); */
+        updateUser($user_info);
         $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully updated profile.');
-        header('Location: ../pages/profile.php');
         
     } catch (PDOException $e) {
         die($e->getMessage());
         $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Failed to update profile!');
         header('Location: ../pages/profile.php');
     }
+
+    if($user_info['username']){
+        $_SESSION['username'] = $user_info['username'];
+    }  // Update username session
+
+    header("Location: ../pages/profile.php?username=" . $_SESSION['username']);
+
 ?>

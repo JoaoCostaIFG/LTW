@@ -139,5 +139,36 @@ function removeFavouritePost($user_id, $post_id) {
   $stmt->execute(array($post_id, $user_id));
 }
 
+function updateUser($user_info){
+    $db = Database::instance()->db();
+
+    if($user_info['username']){
+        $stmt_username = $db->prepare(
+            'UPDATE User SET username = ? 
+            WHERE id = ?'
+        );
+    
+        $stmt_username->execute(array($user_info['username'], $user_info['id']));
+    }
+
+    if($user_info['email']){
+        $stmt_email = $db->prepare(
+            'UPDATE User SET email = ? 
+            WHERE id = ?'
+        );
+    
+        $stmt_email->execute(array($user_info['email'], $user_info['id']));
+    }
+
+    if($user_info['mobile_number']){
+        $stmt_mobile_number = $db->prepare(
+            'UPDATE User SET mobile_number = ? 
+            WHERE id = ?'
+        );
+    
+        $stmt_mobile_number->execute(array($user_info['mobile_number'], $user_info['id']));
+    }
+}
+
 ?>
 
