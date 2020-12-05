@@ -24,15 +24,12 @@
         </div>
       <?php } else { ?>
         <ul id="logout">
-          <li><a href="add_post.php">+</a></li>
-          <li>Logged in as   <a href="../pages/profile.php?username=<?php echo $_SESSION['username']; ?>" >
-          <?php echo $_SESSION['username']; ?> </a></li>
-          <li>
-            <form method="post" action="../actions/action_logout.php">
-              <input type="submit" value="Logout">
-            </form>
           <li class="addpost-button"><a href="add_post.php"><input type="submit" value="+"></a></li>
-          <li>Logged in as <b><?php echo $_SESSION['username'] ?></b></li>
+          <li>Logged in as 
+            <a href="../pages/profile.php?username=<?php echo $_SESSION['username']; ?>" >
+              <b><?php echo $_SESSION['username'] ?></b> 
+            </a> 
+          </li>
           <li class="logout-button">
             <a href='../actions/action_logout.php'><input type="submit" value="Logout"></a>
           </li>

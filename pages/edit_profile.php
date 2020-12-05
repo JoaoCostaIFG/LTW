@@ -8,11 +8,9 @@
   include('../database/queries/db_user.php');
   include('../templates/tpl_profile.php');
 
-  $username = $_GET['username'];
-  $user = getUserPublicInfo($username);
-  $user_posts = getPostsByUser($username);
+  $user = getUserPublicInfo($_SESSION['username']);
   
-  drawProfile($user, $user_posts);
+  drawEditProfile($user);
 
   include_once('../templates/common/tpl_footer.php');
 ?>
