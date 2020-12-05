@@ -20,7 +20,7 @@
     can <a href="/pages/contacts.php">contact us</a> anytime!
   </p>
 
-  <img id="aboutimg" src="/static/images/bazinga.png" alt="Turtle."/>
+  <img id="aboutimg" src="/static/bazinga.jpg" alt="Turtle."/>
 
 <?php
   require '../templates/common/tpl_footer.php';
