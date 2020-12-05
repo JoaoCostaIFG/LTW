@@ -1,18 +1,31 @@
 <?php
-    include_once('../pages/session.php');
-    include_once('../database/queries/db_user.php');
-    include_once('../database/queries/db_post.php');
+  include_once('../pages/session.php');
+  include_once('../database/queries/db_user.php');
+  include_once('../database/queries/db_post.php');
+  include_once('../templates/tpl_post.php');
 
-    if (!isset($_SESSION['username']) || !isset($_GET['post_id']) || !isset($_GET['comment_text']))
-      die(); // TODO CHANGE LATER
+  if (!isset($_SESSION['username']) || !isset($_GET['post_id']) || !isset($_GET['comment_text'])){
+    echo '<p id="comment-error">An error ocurred.</p>';
+    die;
+  }
+  
+  $text = $_GET['comment_text'];
+  if ($text == ""){
+    echo '<p id="comment-error">An error ocurred.</p>';
+    die;
+  }
+  
+  $user_id = getUserId($_SESSION['username'])['id'];
+  $post_id = $_GET['post_id'];
+  $safe_text = htmlspecialchars($text);
 
-    
-    $user_id = getUserId($_SESSION['username'])['id'];
-    $post_id = $_GET['post_id'];
-    $text = $_GET['comment_text'];
+  insertComment($user_id, $post_id, $safe_text);
 
-    insertComment($user_id, $post_id, htmlspecialchars($text));
+  $comment = [
+    "text" => $safe_text,
+    "date" => date("d/m/Y"),
+    "username" => $_SESSION['username']
+  ];
 
-    echo "success";
-
-?>
+  //The response is used by js to draw the comment
+  drawComment($comment);

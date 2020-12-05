@@ -105,7 +105,7 @@ function drawPost($post, $comments) {
   <script src="../js/add_comment.js" type="text/javascript" defer></script>
   <section id="comment-input">
     <textarea name="comment_text" rows="2" column="40" placeholder="Write your comment..." required></textarea>
-    <button id="comment-input-button" type="button" onclick="addComment(<?php echo $post_id . ', \'' . $username . '\'';?>)">Comment</button>
+    <button id="comment-input-button" type="button" onclick="addComment(<?php echo $post_id?>)">Comment</button>
   </section>
 <?php } ?>
 
