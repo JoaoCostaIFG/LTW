@@ -35,6 +35,17 @@ function getUserId($username) {
     return $stmt->fetch();
 }
 
+function getUsername($user_id) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'SELECT username FROM User WHERE id LIKE ?'
+    );
+
+    // Default is bcrypt
+    $stmt->execute(array($user_id));
+    return $stmt->fetch()['username'];
+}
+
 function isOwner($user_id, $post_id) {
         $db = Database::instance()->db();
         $stmt = $db->prepare(

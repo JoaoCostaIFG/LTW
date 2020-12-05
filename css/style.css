@@ -269,7 +269,8 @@ h4 a {
 
 /* POST PAGE DESCRIPTION + COMMENTS */
 .petpost-description,
-.petpost-comment {
+.petpost-question,
+.petpost-answer {
   display: inline-block;
   margin-left: 1em;
   padding: 0.3em 1em;
@@ -278,8 +279,13 @@ h4 a {
   border-radius: 10px;
 }
 
+.petpost-answer {
+  margin-left: 10em;
+}
+
 .petpost-description:hover,
-.petpost-comment:hover {
+.petpost-question:hover,
+.petpost-answer:hover {
   background-color: var(--background-dark);
 }
 
@@ -287,13 +293,20 @@ h4 a {
   background-color: var(--dark);
 }
 
-.petpost-comment {
+.petpost-question {
   margin-bottom: 1em;
 
   background-color: var(--light);
 }
 
-.petpost-comment p + p {
+.petpost-answer {
+  margin-bottom: 1em;
+
+  background-color: var(--dark);
+}
+
+.petpost-question p + p,
+.petpost-answer p + p {
   /* date + author */
   margin-top: 2em;
   width: 100%;
@@ -353,13 +366,13 @@ h4 a {
   font-weight: bold;
 }
 
-#comment-input {
+#question-input {
   width: 80%;
   margin-left: 1em;
   padding: 0.2em 1em;
 }
 
-#comment-input textarea { /*Comment text input*/
+#question-input textarea { /*Comment text input*/
   resize: vertical;
 
   background-color: var(--light);
@@ -373,7 +386,7 @@ h4 a {
   float: left;
 }
 
-#comment-input-button { /*Comment text input button*/
+#question-input-button { /*Comment text input button*/
   background-color: var(--light);
   width: 9%;
   margin: 0.5em;
