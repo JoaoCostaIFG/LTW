@@ -99,7 +99,7 @@ include_once('../database/database_instance.php');
         '
         SELECT Question.text as question, Answer.text as answer, 
         Question.date as question_date, Answer.date as answer_date,
-        Question.user_id as id
+        Question.user_id as user_id,Question.id as id
         FROM Question LEFT JOIN Answer on (Question.id = Answer.question_id)
         WHERE Question.post_id=?');
     $stmt->execute(array($post_id));

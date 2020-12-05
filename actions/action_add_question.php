@@ -29,8 +29,8 @@
   $question = [
     "question" => $safe_text,
     "question_date" => date("d/m/Y"),
-    "id" => $_SESSION['username']
+    "id" => $user_id
   ];
 
   //The response is used by js to draw the comment
-  drawQuestionAnswer($_SESSION['username'], $question);
+  drawQuestionAnswer($post_id, $_SESSION['username'], $question);

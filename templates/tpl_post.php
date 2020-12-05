@@ -115,9 +115,9 @@ function drawPost($post, $questionsAnswers)
   <section id="petpost-questions">
 <?php
   if(isset($_SESSION['username'])){
-    drawQuestionsAnswers($current_user, $questionsAnswers);
+    drawQuestionsAnswers($post['id'], $current_user, $questionsAnswers);
   } else {
-    drawQuestionsAnswers(NULL, $questionsAnswers);
+    drawQuestionsAnswers($post['id'], NULL, $questionsAnswers);
   }
 ?>
   </section>
@@ -137,21 +137,6 @@ function drawPost($post, $questionsAnswers)
     <p><?php echo $comment['date'] . ", " . $comment['username']; ?></p>
   </div>
 <?php } ?>
-
-
-<?php function drawQuestionForm($post_id) {?>
-  <script src="../js/add_question.js" type="text/javascript" defer></script>
-  <section id="question-input">
-    <textarea name="question_text" rows="2" column="40" placeholder="Write your question..." required></textarea>
-    <button id="question-input-button" type="button" onclick="addQuestion(<?php echo $post_id?>)">Post Question</button>
-  </section>
-<?php } ?>
-
-<?php function drawQuestionsLoginPrompt() { ?>
-  <section id="question-input">
-    <p id="question-login-prompt">Log in to post questions</p>
-  </section>
-<?php }?>
 
 <?php function drawAddPost()
 { 
@@ -186,20 +171,31 @@ function drawPost($post, $questionsAnswers)
 
 <?php } ?>
 
-<?php function drawQuestionAnswer($user_id, $questionAnswer)
+<?php 
+//user_id is the one currently on the page
+function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
 {
     ?>
     <section class="QA">
         <section class="petpost-question">
             <p> <?php echo 'Q: ' . $questionAnswer['question']; ?> </p>
-            <p> <?php echo $questionAnswer['question_date'] . ", " . getUsername($questionAnswer['id']); ?> </p>
-            <?php if(isset($_SESSION['username'])) {
-                      if(getUserId($_SESSION['username'])['id'] == $user_id && $questionAnswer['answer'] == NULL){
-                        ?> <button>Answer</button>
+            <p> <?php echo $questionAnswer['question_date'] . ", " . getUsername($questionAnswer['user_id']); ?> </p>
+            <?php if(isset($user_id)) {
+                      if(isOwner($user_id, $post_id) && !isset($questionAnswer['answer'])){
+                        ?>
+                        <script src="../js/add_answer.js" type="text/javascript" defer></script> 
+                        <button class="answer-button" onclick="toggleAnswer(<?php echo $questionAnswer['id']?>)">Answer</button>
+                        </section>
+                        <!-- Used in answer input -->
+                        <section class="answer-input" id="<?php echo 'answer-input' . $questionAnswer['id'];?>" style="display: none;">
+                          <textarea name="answer_text" rows="2" column="40" placeholder="Write your answer..." required></textarea>
+                          <button id="answer-input-button" type="button" onclick="addAnswer(<?php echo $post_id . ',' . $questionAnswer['id'] ?>)">Post Answer</button>
+                        </section>
+                <?php } else {?>
+                  </section>
                 <?php }
                     }?>
-        </section>
-
+        
         <?php if(isset($questionAnswer['answer'])) { ?>
           <section class="petpost-answer">
               <p> <?php echo 'A: ' . $questionAnswer['answer']; ?> </p>
@@ -209,21 +205,38 @@ function drawPost($post, $questionsAnswers)
     </section>
 <?php } ?>
 
-<?php function drawQuestionsAnswers($username, $questionsAnswers) {
-
-  if($username != NULL){
-    $user_id = getUserId($username);
-  } else {
-    $user_id = NULL;
-  }
+<?php function drawQuestionsAnswers($post_id, $user_id, $questionsAnswers) {
   $cnt=0;
   foreach($questionsAnswers as $questionAnswer) {
     $cnt=$cnt + 1;
-    drawQuestionAnswer($user_id, $questionAnswer);
+    drawQuestionAnswer($post_id, $user_id, $questionAnswer);
     echo '<br>';
   }
   if ($cnt == 0){
     echo "<i id='no-questions'>There are no questions on this post. Make the first question</i>";
   }
+
+  if(!isOwner($user_id, $post_id)){
+    if(isset($_SESSION['username'])){
+      // drawCommentForm($_GET['post_id'], $_SESSION['username']);
+      drawQuestionForm($post_id);
+    } else {
+      drawQuestionsLoginPrompt();
+    }
+  }
+  
 }?>
 
+<?php function drawQuestionForm($post_id) {?>
+  <script src="../js/add_question.js" type="text/javascript" defer></script>
+  <section id="question-input">
+    <textarea name="question_text" rows="2" column="40" placeholder="Write your question..." required></textarea>
+    <button id="question-input-button" type="button" onclick="addQuestion(<?php echo $post_id?>)">Post Question</button>
+  </section>
+<?php } ?>
+
+<?php function drawQuestionsLoginPrompt() { ?>
+  <section id="question-input">
+    <p id="question-login-prompt">Log in to post questions</p>
+  </section>
+<?php }?>

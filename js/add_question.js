@@ -16,8 +16,8 @@ function addQuestion(post_id) {
         if (this.readyState == 4 && this.status == 200) {
             //Trim is used because the reponse text comes with new lines behind
             let response = xhttp.responseText.trim('\n');
-            let comments = document.getElementById("petpost-questions");
-            comments.innerHTML += response;
+            let questions = document.getElementById("petpost-questions");
+            questions.innerHTML += response;
         }
     };
 

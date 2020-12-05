@@ -13,12 +13,5 @@ if (!$_GET['post_id']) { // go to 404 if there is no post id
   $questionsAnswers = getQuestionsAnswers($_GET['post_id']);
   drawPost($post, $questionsAnswers);
 
-  if(isset($_SESSION['username'])){
-    // drawCommentForm($_GET['post_id'], $_SESSION['username']);
-    drawQuestionForm($_GET['post_id']);
-  } else {
-    drawQuestionsLoginPrompt();
-  }
-
   require '../templates/common/tpl_footer.php';
 ?>
