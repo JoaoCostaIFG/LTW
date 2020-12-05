@@ -61,13 +61,16 @@ function drawPost($post, $comments)
 
 <div class="petpost-page">
   <?php 
-    $current_user = getUserId($_SESSION['username'])['id'];
-    if (!hasProposal($current_user, $post['id']) && !isOwner($current_user, $post['id'])) { ?>
+    if(isset($_SESSION['username'])){
+      $current_user = getUserId($_SESSION['username'])['id'];
+      if (!hasProposal($current_user, $post['id']) && !isOwner($current_user, $post['id'])) { ?>
+      
        <form method="post" action="../actions/action_make_proposal.php">
        <input type="hidden" name="user_id" value="<?php echo $current_user; ?>">
        <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
             <input type="submit" value="Make pet proposal">
        </form>
+    <?php }?>
 <?php
     }
 ?>
@@ -129,7 +132,6 @@ function drawPost($post, $comments)
   </div>
 <?php } ?>
 
-<<<<<<< HEAD
 
 <?php function drawCommentForm($post_id, $username) {
 /**
@@ -148,7 +150,7 @@ function drawPost($post, $comments)
     <p id="comment-login-prompt">Log in to comment</p>
   </section>
 <?php }?>
-=======
+
 <?php function drawAddPost()
 { 
     /**
@@ -182,4 +184,3 @@ function drawPost($post, $comments)
 
 <?php } ?>
 
->>>>>>> development
