@@ -82,6 +82,17 @@ function drawPost($post, $comments)
 
   <div class="petpost">
     <div class="petpost-img" >
+      <!--Need to add if -->
+    <?php if(isset($_SESSION['username'])) { ?>
+        <script src="../js/favourite.js" type="text/javascript" defer></script>
+        <button id="favourite-star" onclick="favourite(<?php echo $post['id']?>)">
+        <?php     if(isFavourite($current_user, $post['id'])) {?>
+            &bigstar;
+        <?php } else {?>
+            &star;
+        <?php }?>
+      </button>
+    <?php }?>
       <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
     </div>
     <ul class="petpost-info">
@@ -133,17 +144,42 @@ function drawPost($post, $comments)
 <?php } ?>
 
 
-<?php function drawCommentForm($post_id, $username)
+<?php function drawCommentForm($post_id)
 {
     /**
      * Draws given a comment
      */
     ?>
   <script src="../js/add_comment.js" type="text/javascript" defer></script>
-  <section id="comment-input">
-    <textarea name="comment_text" rows="2" column="40" placeholder="Write your comment..." required></textarea>
+
+  <div id="comment-input">
+    <textarea id="comment-input-ta" name="comment_text" rows="1" column="40"
+      placeholder="Write your comment..." maxlength="256" required></textarea>
     <button id="comment-input-button" type="button" onclick="addComment(<?php echo $post_id?>)">Comment</button>
-  </section>
+  </div>
+
+  <script type="text/javascript">
+    // see: https://stackoverflow.com/questions/7745741/auto-expanding-textarea/24824750#24824750
+    var textarea = document.getElementById("comment-input-ta");
+    var limitRows = 5;
+    var messageLastScrollHeight = textarea.scrollHeight;
+
+    textarea.oninput = function() {
+      var rows = parseInt(textarea.getAttribute("rows"));
+      // If we don't decrease the amount of rows, the scrollHeight would show the scrollHeight for all the rows
+      // even if there is no text.
+      textarea.setAttribute("rows", "1");
+
+      if (rows < limitRows && textarea.scrollHeight > messageLastScrollHeight) {
+          rows++;
+      } else if (rows > 1 && textarea.scrollHeight < messageLastScrollHeight) {
+          rows--;
+      }
+
+      messageLastScrollHeight = textarea.scrollHeight;
+      textarea.setAttribute("rows", rows);
+    };
+  </script>
 <?php } ?>
 
 <?php function drawCommentLoginPrompt()

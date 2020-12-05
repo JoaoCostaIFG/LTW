@@ -221,11 +221,23 @@ h4 a {
 .petpost-img {
   display: inline-block;
   vertical-align: middle;
+  position: relative;
 
   border: solid var(--green) 2px;
   box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
   border-radius: 12px;
   background-color: var(--dark);
+}
+
+.petpost-img button {
+  position: absolute;
+  display: inline;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  border: none;
+  color: goldenrod;
+  font-size: xx-large;
 }
 
 .petpost-img div {
@@ -290,6 +302,43 @@ h4 a {
   font-weight: bold;
   font-size: 0.8em;
   font-style: italic;
+}
+
+#comment-input {
+  margin-left: 1em;
+  width: 60em;
+}
+
+#comment-input textarea,
+#comment-input-button {
+  display: inline-block;
+
+  border: none;
+  border-radius: 12px;
+  vertical-align: middle;
+
+  color: var(--main);
+  background-color: var(--light);
+}
+
+#comment-input textarea {
+  /*Comment text input*/
+  /* resize: vertical; */
+  margin: 0;
+  padding: 1em;
+  width: 85%;
+
+  font-size: x-large;
+}
+
+#comment-input-button {
+  /*Comment text input button*/
+  font-size: large;
+  padding: 0.3em;
+}
+
+#comment-input-button:hover {
+  background-color: var(--dark);
 }
 
 /* AUTH FORMS */
@@ -360,37 +409,6 @@ h4 a {
   background-color: var(--light);
   color: var(--main);
   font-weight: bold;
-}
-
-#comment-input {
-  width: 80%;
-  margin-left: 1em;
-  padding: 0.2em 1em;
-}
-
-#comment-input textarea { /*Comment text input*/
-  resize: vertical;
-
-  background-color: var(--light);
-  width: 87%;
-  margin: 0;
-
-  color: white;
-  font-size: 1.5em;
-
-  border-radius: 12px;
-  float: left;
-}
-
-#comment-input-button { /*Comment text input button*/
-  background-color: var(--light);
-  width: 9%;
-  margin: 0.5em;
-
-  color: white;
-  font-size: 1.5em;
-
-  border-radius: 12px;
 }
 
 /* * {
