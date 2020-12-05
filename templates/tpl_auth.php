@@ -28,7 +28,7 @@
   <section id="register">
       <header><h2>Create a new account</h2></header>
 
-      <form class="verticalform signupform" method="post" action="../actions/action_register.php">
+      <form class="verticalform signupform" method="post" action="../actions/action_register.php" enctype="multipart/form-data">
         <div class="form-item signupform-item" >
           <label for="username">Username</label>
           <input id="username" type="text" name="username" placeholder="username" required>
@@ -50,16 +50,17 @@
           <input id="mobile" type="text" name="mobile number" placeholder="mobile number" required>
         </div>
         <div class="form-item signupform-item" >
-          <label for="picture">Picture</label>
-          <input id="picture" type="file" name="picture" required>
-        </div>
+          <label for="image">Photo</label>
+            <input id="image" type="file" name="image" required>
+      </div>
 
+        <p class="error">
     <?php
     if ($_SESSION['messages']['type'] == 'signUpError') {
-        echo '<p class="error">' . $_SESSION['messages']['content'] . '</p>'; 
+        echo $_SESSION['messages']['content']; 
         $_SESSION['messages'] = [];
-    }
-    ?>
+    }?>
+        </p>
 
         <input class="form-button signupform-button" type="submit" value="Signup">
       </form>

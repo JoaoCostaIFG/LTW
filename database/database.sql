@@ -6,7 +6,6 @@ create table User(
     id INTEGER PRIMARY KEY,
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
-    picture TEXT,
     email TEXT UNIQUE NOT NULL,
     mobile_number CHAR(9) UNIQUE NOT NULL
 );

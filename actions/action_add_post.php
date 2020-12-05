@@ -5,10 +5,9 @@
     include_once('../actions/action_upload.php');
 
     // Check if file is not image
-    $type = exif_imagetype($_FILES['image']['tmp_name']);
-    if ($type !== IMAGETYPE_PNG && $type !== IMAGETYPE_JPEG) {
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Wrong file format');
-        return;
+    $type = photoIsValid($_FILES['image']['tmp_name']);
+    if (!$type) {
+        die(header('Location: ../pages/add_post.php'));
     }
 
     $name = $_POST['name'];
@@ -26,13 +25,13 @@
 
     try {
         $post_id = insertPost($post_info);
-        uploadPhoto($post_id, $type);
+        uploadPhoto($post_id, $type, false);
 
         $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully added post');
-        header('Location: ../pages/list.php');
+        die(header('Location: ../pages/list.php'));
     } catch (PDOException $e) {
-        die($e->getMessage()); // TODO is this ok here?
+        // die($e->getMessage()); // TODO is this ok here?
         $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Failed to add post!');
-        header('Location: ../pages/add_post.php');
+        die(header('Location: ../pages/add_post.php'));
     }
 ?>
