@@ -295,9 +295,6 @@ h4 a {
 /* AUTH FORMS */
 .signupform {
   margin-top: 3em;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
 }
 
 .signupform-item {
@@ -313,7 +310,31 @@ h4 a {
   width: 8em; /* important */
 }
 
+/* ADDPOST FORM */
+.addpostform {
+  margin-top: 3em;
+}
+
+.addpostform-item {
+  max-width: 40em; /* important */
+}
+
+.addpostform-item + .addpostform-item {
+  margin-top: 2em; /* important */
+}
+
+.addpostform-button {
+  margin-top: 2em;
+  width: 8em; /* important */
+}
+
 /* FORMS */
+.verticalform {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
 .form-item {
   position: relative;
   display: inline-block;
