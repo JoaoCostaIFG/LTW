@@ -4,7 +4,7 @@
 drop table if exists User;
 create table User(
     id INTEGER PRIMARY KEY,
-    username TEXT NOT NULL,
+    username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     picture TEXT,
     email TEXT UNIQUE NOT NULL,

@@ -29,6 +29,11 @@ p {
   width: 60em;
 }
 
+.error {
+  color: red;
+  font-weight: bold;
+}
+
 #headimg {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
 }

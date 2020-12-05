@@ -42,10 +42,6 @@
           <input id="password_r" type="password" name="password_r" placeholder="password (again)" required>
         </div>
         <div class="form-item signupform-item" >
-          <label for="picture">Picture</label>
-          <input id="picture" type="text" name="picture" placeholder="picture" required>
-        </div>
-        <div class="form-item signupform-item" >
           <label for="email">Email address</label>
           <input id="email" type="text" name="email" placeholder="email" required>
         </div>
@@ -53,6 +49,17 @@
           <label for="mobile">Mobile phone number</label>
           <input id="mobile" type="text" name="mobile number" placeholder="mobile number" required>
         </div>
+        <div class="form-item signupform-item" >
+          <label for="picture">Picture</label>
+          <input id="picture" type="file" name="picture" required>
+        </div>
+
+    <?php
+    if ($_SESSION['messages']['type'] == 'signUpError') {
+        echo '<p class="error">' . $_SESSION['messages']['content'] . '</p>'; 
+        $_SESSION['messages'] = [];
+    }
+    ?>
 
         <input class="form-button signupform-button" type="submit" value="Signup">
       </form>
