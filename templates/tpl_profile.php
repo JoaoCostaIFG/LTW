@@ -135,10 +135,17 @@ function drawSettings()
                 <input id="password_r" type="password" name="password_r" placeholder="password (again)" required>
             </div>
 
+            <?php
+            if ($_SESSION['messages']['type'] == 'passwordError') { ?>
+            <br>
+            <p class="error"><?php     
+                echo $_SESSION['messages']['content']; 
+                $_SESSION['messages'] = [];?>
+            </p>
+            <?php }?>
+
             <input class="form-button" type="submit" value="Submit">
         </form>
-        <br>
-        <button>Delete Account</button>
 
     </section>
 <?php

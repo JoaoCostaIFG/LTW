@@ -175,7 +175,16 @@ function updateUser($user_info){
     
         $stmt_mobile_number->execute(array($user_info['picture'], $user_info['id']));
     }
+
+    if($user_info['password']){
+        $options = ['cost' => 12]; // Default is 10 but 12 is better
+        $stmt_password = $db->prepare(
+            'UPDATE User SET password = ? 
+            WHERE id = ?'
+        );
+    
+        $stmt_password->execute(array(password_hash($user_info['password'], PASSWORD_DEFAULT, $options), $user_info['id']));
+    }
 }
 
 ?>
-
