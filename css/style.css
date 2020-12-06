@@ -249,6 +249,8 @@ textarea {
 
 /* || SEARCH PAGE */
 .list-item {
+  position: relative;
+
   border: 2px solid var(--light);
   border-radius: var(--petimage-corner-radius);
 

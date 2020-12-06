@@ -24,14 +24,15 @@ require_once '../templates/tpl_utils.php';
 
 <?php } ?>
 
-<?php function drawFavouriteStar($post){
-  if(isset($_SESSION['username']) && isset($post['isFavourite'])) { ?>
-    <p id="favourite-star">
-    <?php if ($post['isFavourite']) {
+<?php function drawFavouriteStar($post)
+{
+    if(isset($_SESSION['username']) && isset($post['isFavourite'])) { ?>
+    <div id="favourite-star">
+        <?php if ($post['isFavourite']) {
             echo '&bigstar;';
-          }?>
-    </p>
-<?php }
+        }?>
+    </div>
+    <?php }
 } ?>
 
 <?php function drawPostItem($post)
@@ -46,8 +47,8 @@ require_once '../templates/tpl_utils.php';
     ?>
 
   <a class="nounderline list-item" href="<?php echo $post_path; ?>">
+    <?php drawFavouriteStar($post); //Draws favourite star if logged in?>
     <div class="petimage">
-      <?php drawFavouriteStar($post); //Draws favourite star if logged in?> 
       <div class="list-item-img" style="background: url('<?php echo $photo_path; ?>') no-repeat center /auto 100%"></div>
     </div>
     <div class="list-item-txt">
@@ -150,34 +151,35 @@ require_once '../templates/tpl_utils.php';
     $posts = getPosts($search_options, $query_conditions);
 
     //Adds a parameter isFavourite to each post when there are no search options
-    if(empty($search_options) && isset($_SESSION['username'])){
-      $posts = tagFavouritesAndSort($posts);
+    if(empty($search_options) && isset($_SESSION['username'])) {
+        $posts = tagFavouritesAndSort($posts);
     }
 
     return array(
       'posts'=>$posts,
       'values'=> $current_values);
-    }?>
+}?>
 
 
-<?php function tagFavouritesAndSort($posts){
-  $posts = array_map(
-    function($post){
-      $post['isFavourite'] = isFavourite(getUserId($_SESSION['username'])['id'], $post['post_id']);
-      return $post;
-    },
-    $posts
-  );
+<?php function tagFavouritesAndSort($posts)
+{
+    $posts = array_map(
+        function ($post) {
+            $post['isFavourite'] = isFavourite(getUserId($_SESSION['username'])['id'], $post['post_id']);
+            return $post;
+        },
+        $posts
+    );
 
-  //Places favourite posts before others
-  usort(
-    $posts,
-    function($p1, $p2){
-      if ($p1['isFavourite'] == $p2['isFavourite']) {
-        return 0;
-      }
-      return ($p1['isFavourite']) ? -1 : 1;
-    }
-  );
-  return $posts;
+    //Places favourite posts before others
+    usort(
+        $posts,
+        function ($p1, $p2) {
+            if ($p1['isFavourite'] == $p2['isFavourite']) {
+                return 0;
+            }
+            return ($p1['isFavourite']) ? -1 : 1;
+        }
+    );
+    return $posts;
 } ?>
