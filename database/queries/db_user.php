@@ -13,18 +13,18 @@ function checkUserPassword($username, $password)
     return $user !== false && password_verify($password, $user['password']); // Verify hash
 }
 
-function insertUser($username, $password, $email, $mobile_number)
+function insertUser($username, $password, $email, $mobile_number, $img)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare(
-        'INSERT INTO User VALUES(NULL, ?, ?, ?, ?)'
+        'INSERT INTO User VALUES(NULL, ?, ?, ?, ?, ?)'
     );
 
     // Default is bcrypt
     $options = ['cost' => 12]; // Default is 10 but 12 is better
     $stmt->execute(
         array($username, password_hash($password, PASSWORD_DEFAULT, $options),
-        $email, $mobile_number)
+        $email, $mobile_number, $img)
     );
     return $db->lastInsertId();
 }
@@ -38,7 +38,7 @@ function getUserInfo($username) {
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         '
-        SELECT id, username, email, mobile_number 
+        SELECT id, username, email, mobile_number, picture
         FROM User 
         WHERE User.id = ?'
     );
@@ -154,6 +154,15 @@ function updateUser($user_info){
         );
     
         $stmt_mobile_number->execute(array($user_info['mobile_number'], $user_info['id']));
+    }
+
+    if($user_info['picture']){
+        $stmt_mobile_number = $db->prepare(
+            'UPDATE User SET picture = ? 
+            WHERE id = ?'
+        );
+    
+        $stmt_mobile_number->execute(array($user_info['picture'], $user_info['id']));
     }
 }
 

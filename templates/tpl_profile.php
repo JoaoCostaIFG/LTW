@@ -13,7 +13,7 @@ function drawProfile($user, $user_posts)
     </h2>
 
     <div class="profile">
-        <img src="../static/images/usersPics/<?php echo $user['id']; ?>" alt="User Profile Picture" width="400">
+        <img src="<?php echo $user['picture']; ?>" alt="User Profile Picture" width="400">
         <ul class=profile-info>
             <li><b><?php echo $user['username']; ?></b></li>
             <li><?php echo $user['email']; ?></li>

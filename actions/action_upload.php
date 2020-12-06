@@ -19,7 +19,7 @@ function photoIsValid($image_path)
     return $type;
 }
 
-function uploadPhoto($post_id, $type)
+function uploadPetPhoto($post_id, $type)
 {
     if ($type === IMAGETYPE_PNG) {
         $img_type = "png";
@@ -67,4 +67,22 @@ function uploadPhoto($post_id, $type)
     //imagejpeg($medium, $mediumFileName);
 }
 
+function uploadUserPhoto($user_id, $type)
+{
+    if ($type === IMAGETYPE_PNG) {
+        $img_type = "png";
+    } else if ($type === IMAGETYPE_JPEG) {
+        $img_type = "jpg";
+    } else {
+        return;
+    }
+
+    // Generate filenames for original, small and medium files
+    $originalFileName .= "../static/users/";
+    $originalFileName .= "$user_id.$img_type";
+
+    move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
+
+    return $originalFileName;
+}
 ?>
