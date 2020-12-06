@@ -25,7 +25,7 @@
 
     try {
         $post_id = insertPost($post_info);
-        uploadPhoto($post_id, $type, false);
+        uploadPhoto($post_id, $type);
 
         $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully added post');
         die(header('Location: ../pages/list.php'));

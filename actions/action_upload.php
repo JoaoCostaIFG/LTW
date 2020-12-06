@@ -19,7 +19,7 @@ function photoIsValid($image_path)
     return $type;
 }
 
-function uploadPhoto($post_id, $type, $is_user)
+function uploadPhoto($post_id, $type)
 {
     if ($type === IMAGETYPE_PNG) {
         $img_type = "png";
@@ -32,11 +32,7 @@ function uploadPhoto($post_id, $type, $is_user)
     $id = insertPhoto($post_id, $img_type);
 
     // Generate filenames for original, small and medium files
-    $originalFileName = "../static/";
-    if ($is_user)
-      $originalFileName .= "users/";
-    else
-      $originalFileName .= "images/";
+    $originalFileName .= "../static/images/";
     $originalFileName .= "$id.$img_type";
     //$smallFileName = "images/thumbs_small/$id.jpg";
 

@@ -17,7 +17,7 @@ function insertPhoto($post_id, $type)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare(
-        'INSERT INTO Photo VALUES(NULL, ?, ?, ?)'
+        'INSERT INTO PetPhoto VALUES(NULL, ?, ?, ?)'
     );
     $date = date("Y-m-d");
     $stmt->execute(array($post_id, $type, $date));
@@ -51,8 +51,8 @@ function getPosts($search_options, $query_conditions_array)
     echo '<br>';
     $stmt = $db->prepare(
         'SELECT DISTINCT post_id, name, age, gender, size, city_id, species_id,
-         Photo.id as photo_id, Photo.extension as photo_extension
-         FROM PetPost JOIN Photo ON(PetPost.id = post_id) ' .
+         PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
+         FROM PetPost JOIN PetPhoto ON(PetPost.id = post_id) ' .
         $query_conditions .
         ' GROUP BY PetPost.id'
     );
@@ -70,12 +70,12 @@ function getPost($post_id)
         '
         SELECT petpost.id, petpost.name, age, gender, size, description, petpost.date,
         Color.name as color, Species.name as species, City.name as location,
-        User.username as user, Photo.id as photo_id, Photo.extension as photo_extension
+        User.username as user, PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
         FROM petpost JOIN Color on(petpost.color_id=color.id)
             JOIN Species on(petpost.species_id=species.id)
             JOIN City on(city.id = petpost.city_id)
             JOIN User on (User.id = petpost.user_id)
-            JOIN Photo on (Photo.post_id = petpost.id)
+            JOIN PetPhoto on (PetPhoto.post_id = petpost.id)
         WHERE petpost.id=?'
     );
     $stmt->execute(array($post_id));

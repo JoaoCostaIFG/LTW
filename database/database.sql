@@ -50,8 +50,8 @@ create table PetPost(
     user_id INTEGER REFERENCES User(id)
 );
 
-drop table if exists Photo; 
-create table Photo( 
+drop table if exists PetPhoto; 
+create table PetPhoto( 
     id INTEGER PRIMARY KEY,
     post_id INTEGER REFERENCES PetPost(id),
     extension TEXT CHECK(extension LIKE "jpg" OR extension LIKE "png"),

@@ -28,7 +28,7 @@ if (!$type) { // check if the given image is jpeg/png
 
 try {
     $user_id = insertUser($username, $password, $email, $mobile_number);
-    uploadPhoto($user_id, $type, true);
+    /* uploadPhoto($user_id, $type); */
 
     $_SESSION['username'] = $username;
     $_SESSION['messages'] = array('type' => 'success', 'content' => 'Signed up and logged in!');
