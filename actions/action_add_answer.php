@@ -1,30 +1,30 @@
 <?php
-  include_once('../pages/session.php');
-  include_once('../database/queries/db_user.php');
-  include_once('../database/queries/db_post.php');
-  include_once('../templates/tpl_post.php');
+  require_once '../pages/session.php';
+  require_once '../database/queries/db_user.php';
+  require_once '../database/queries/db_post.php';
+  require_once '../templates/tpl_post.php';
 
-  if (!isset($_SESSION['username']) || !isset($_GET['question_id']) || !isset($_GET['answer_text'])){
+if (!isset($_SESSION['username']) || !isset($_GET['question_id']) || !isset($_GET['answer_text'])) {
     echo '<p id="answer-error">An error ocurred.</p>';
     die;
-  }
+}
   
   $text = $_GET['answer_text'];
-  if ($text == ""){
+if ($text == "") {
     echo '<p id="answer-error">An error ocurred.</p>';
     die;
-  }
+}
   
   $user_id = getUserId($_SESSION['username'])['id'];
   $question_id = $_GET['question_id'];
   $safe_text = htmlspecialchars($text);
 
-  try {
+try {
     insertAnswer($user_id, $question_id, $safe_text);
-  } catch (PDOException $e) {
+} catch (PDOException $e) {
     echo '<p id="answer-error">An error ocurred.</p>';
     die;
-  }
+}
 
   $answer = [
     "answer" => $safe_text,
@@ -33,4 +33,4 @@
 
   //The response is used by js to draw the answer
   drawAnswer($answer);
-?>
+    ?>

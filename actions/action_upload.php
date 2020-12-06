@@ -1,6 +1,7 @@
 <?php
-    require_once '../pages/session.php';
-    require_once '../database/queries/db_post.php';
+  require_once '../pages/session.php';
+  require_once '../database/queries/db_post.php';
+  require_once '../templates/tpl_utils.php';
 
 function photoIsValid($image_path)
 {
@@ -12,7 +13,7 @@ function photoIsValid($image_path)
     }
 
     if ($type === false || ($type !== IMAGETYPE_PNG && $type !== IMAGETYPE_JPEG)) {
-        $_SESSION['messages'] = array('type' => 'error', 'content' => 'Image is not a jpg or png file!');
+        setSessionMessage('error', 'Image is not a jpg or png file!');
         return false;
     }
     return $type;

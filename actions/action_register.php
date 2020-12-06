@@ -1,11 +1,12 @@
 <?php
-    require_once '../pages/session.php';
-    require_once '../database/queries/db_user.php';
-    require_once '../actions/action_upload.php';
+  require_once '../pages/session.php';
+  require_once '../database/queries/db_user.php';
+  require_once '../actions/action_upload.php';
+  require_once '../templates/tpl_utils.php';
 
 function registerFail($msg)
 {
-    $_SESSION['messages'] = array('type' => 'signUpError', 'content' => $msg);
+    setSessionMessage('signUpError', $msg);
     die(header('Location: ../pages/register.php'));
 }
 
@@ -32,7 +33,7 @@ try {
     uploadPhoto($user_id, $type, true);
 
     $_SESSION['username'] = $username;
-    $_SESSION['messages'] = array('type' => 'success', 'content' => 'Signed up and logged in!');
+    setSessionMessage('success', 'Signed up and logged in!');
     header('Location: ../pages/list.php');
 } catch (PDOException $e) {
     registerFail('Failed to signup!');

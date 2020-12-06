@@ -1,5 +1,6 @@
 <?php 
-require '../templates/tpl_list.php';
+  require '../templates/tpl_list.php';
+  require_once '../templates/tpl_utils.php';
 
 function drawProfile($user, $user_posts)
 {
@@ -76,14 +77,13 @@ function drawEditProfile($user)
             <input class="form-button profileform-button" type="submit" value="Submit Changes">
         </form>
 
+        <p class="error">
         <?php
-        if ($_SESSION['messages']['type'] == 'updateUserError') { ?>
-        <p class="error"><?php     
-            echo $_SESSION['messages']['content']; 
-            $_SESSION['messages'] = [];?>
+          $msg = getSessionMessage('updateUserError');
+          if ($msg) {
+              echo $msg; 
+          }?>
         </p>
-        <br>
-        <?php }?>
     </section>
 
     <?php 
@@ -112,14 +112,13 @@ function drawSettings()
         <input class="form-button" type="submit" value="Submit">
       </form>
 
+      <p class="error">
       <?php
-        if ($_SESSION['messages']['type'] == 'passwordError') { ?>
-        <br>
-        <p class="error"><?php     
-          echo $_SESSION['messages']['content']; 
-          $_SESSION['messages'] = [];?>
-          </p>
-        <?php }?>
+        $msg = getSessionMessage('passwordError');
+        if ($msg) {
+            echo $msg; 
+        }?>
+      </p>
     </section>
     <?php
 }?>

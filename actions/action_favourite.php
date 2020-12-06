@@ -1,17 +1,17 @@
 <?php
-  include_once('../pages/session.php');
-  include_once('../database/queries/db_user.php');
+  require_once '../pages/session.php';
+  require_once '../database/queries/db_user.php';
+  require_once '../templates/tpl_utils.php';
   
-  if (!isset($_SESSION['username']) || !isset($_GET['post_id'])){
+if (!isset($_SESSION['username']) || !isset($_GET['post_id'])) {
     echo 'error';
     die;
-  }
+}
   
   $user_id = getUserId($_SESSION['username'])['id'];
   $post_id = $_GET['post_id'];
 
-
-  try {
+try {
     if(isFavourite($user_id, $post_id)) {
         removeFavouritePost($user_id, $post_id);
         echo 'removed';
@@ -19,8 +19,8 @@
         addFavouritePost($user_id, $post_id);
         echo 'added';
     }
-  } catch (PDOException $e) {
+} catch (PDOException $e) {
     echo 'error';
     die;
-  }
+}
 ?>
