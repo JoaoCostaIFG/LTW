@@ -65,10 +65,11 @@ function drawPost($post, $questionsAnswers)
         $current_user = getUserId($_SESSION['username'])['id'];
         $post_id = $post['id'];
         if (!hasProposal($current_user, $post_id) && !isOwner($current_user, $post_id)) { ?>
+            <script src="../js/confirmation_bar.js" type="text/javascript" defer></script>
             <script src="../js/utils.js" type="text/javascript" defer></script>
             <script src="../js/proposal.js" type="text/javascript" defer></script>
 
-            <button id="makeProposalButton" onclick="make_proposal(<?php echo "$post_id, $current_user";?>)">
+            <button id="makeProposalButton" onclick="make_proposal_confirmation(<?php echo "$post_id, $current_user";?>)">
                 Make Proposal</button>
             <p id="proposalSentText"></p>
         <?php }
