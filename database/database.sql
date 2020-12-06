@@ -8,7 +8,7 @@ create table User(
     password TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
     mobile_number CHAR(9) UNIQUE NOT NULL,
-    picture TEXT
+    extension TEXT
 );
 
 drop table if exists Color;

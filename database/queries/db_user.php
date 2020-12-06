@@ -13,7 +13,7 @@ function checkUserPassword($username, $password)
     return $user !== false && password_verify($password, $user['password']); // Verify hash
 }
 
-function insertUser($username, $password, $email, $mobile_number, $img)
+function insertUser($username, $password, $email, $mobile_number, $extension)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare(
@@ -24,7 +24,7 @@ function insertUser($username, $password, $email, $mobile_number, $img)
     $options = ['cost' => 12]; // Default is 10 but 12 is better
     $stmt->execute(
         array($username, password_hash($password, PASSWORD_DEFAULT, $options),
-        $email, $mobile_number, $img)
+        $email, $mobile_number, $extension)
     );
     return $db->lastInsertId();
 }
@@ -39,7 +39,7 @@ function getUserInfo($username)
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         '
-        SELECT id, username, email, mobile_number, picture
+        SELECT id, username, email, mobile_number, extension
         FROM User 
         WHERE User.id = ?'
     );

@@ -63,7 +63,7 @@ require_once '../database/database_instance.php';
         $stmt = $db->prepare(
             'SELECT DISTINCT post_id, name, age, gender, size, city_id, species_id,
              PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
-             FROM PetPost JOIN Photo ON(PetPost.id = post_id) ' .
+             FROM PetPost JOIN PetPhoto ON(PetPost.id = post_id) ' .
             $query_conditions .
             ' GROUP BY PetPost.id'
         );
@@ -98,8 +98,8 @@ require_once '../database/database_instance.php';
         $db = Database::instance()->db();
         $stmt = $db->prepare(
             '
-            SELECT Photo.id as photo_id, PetPhoto.extension as photo_extension
-            FROM PetPost JOIN Photo on (PetPhoto.post_id = PetPost.id)
+            SELECT PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
+            FROM PetPost JOIN PetPhoto on (PetPhoto.post_id = PetPost.id)
             WHERE PetPost.id=?'
         );
         $stmt->execute(array($post_id));

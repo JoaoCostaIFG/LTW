@@ -25,7 +25,7 @@
 
     try {
         $post_id = insertPost($post_info);
-        uploadPetPhoto($post_id, $type);
+        uploadPhoto($post_id, $type, false);
 
         $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully added post');
         header("Location: ../pages/post.php?post_id=$post_id");

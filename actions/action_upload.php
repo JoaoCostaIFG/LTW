@@ -59,6 +59,7 @@ function uploadPhoto($id, $type, $is_user)
     $originalFileName = "../static/";
     if ($is_user) {
       $originalFileName .= "users/";
+      $photo_id = $id; // photo id is user_id
     }
     else {
       $originalFileName .= "images/";
