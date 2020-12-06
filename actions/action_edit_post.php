@@ -10,7 +10,7 @@
         $has_photo = true;
         $type = photoIsValid($_FILES['image']['tmp_name']);
         if ($type == null) {
-            $_SESSION['messages'][] = array('type' => 'error', 'content' => "Invalid photo!");
+            $_SESSION['messages'] = array('type' => 'error', 'content' => "Invalid photo!");
             die(header("Location: ../pages/post.php?post_id=$post_id"));
         }
 
@@ -18,7 +18,7 @@
 
     $user_id = getUserId($_SESSION['username'])['id'];
     if (!ownsPost($user_id, $post_id)) {
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => "User doesn't own this post!");
+        $_SESSION['messages'] = array('type' => 'error', 'content' => "User doesn't own this post!");
         die(header("Location: ../pages/post.php?post_id=$post_id"));
     }
     
@@ -38,11 +38,10 @@
             updatePhoto($photo_id, $type, false);
         }
 
-        $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully edited post');
+        $_SESSION['messages'] = array('type' => 'success', 'content' => 'Successfully edited post');
         header("Location: ../pages/post.php?post_id=$post_id");
     } catch (PDOException $e) {
-        die($e->getMessage());
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Failed to edit post!');
+        $_SESSION['messages'] = array('type' => 'error', 'content' => 'Failed to edit post!');
         die(header("Location: ../pages/post.php?post_id=$post_id"));
     }
 ?>

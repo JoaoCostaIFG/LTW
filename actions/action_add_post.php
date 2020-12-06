@@ -27,11 +27,11 @@
         $post_id = insertPost($post_info);
         uploadPhoto($post_id, $type, false);
 
-        $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully added post');
+        $_SESSION['messages'] = array('type' => 'success', 'content' => 'Successfully added post');
         header("Location: ../pages/post.php?post_id=$post_id");
     } catch (PDOException $e) {
         // die($e->getMessage()); // TODO is this ok here?
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Failed to add post!');
+        $_SESSION['messages'] = array('type' => 'error', 'content' => 'Failed to add post!');
         die(header('Location: ../pages/add_post.php'));
     }
 ?>

@@ -145,7 +145,7 @@ function updateUser($user_info)
 {
     $db = Database::instance()->db();
 
-    if($user_info['username']) {
+    if(isset($user_info['username'])) {
         $stmt_username = $db->prepare(
             'UPDATE User SET username = ? 
             WHERE id = ?'
@@ -154,7 +154,7 @@ function updateUser($user_info)
         $stmt_username->execute(array($user_info['username'], $user_info['id']));
     }
 
-    if($user_info['email']) {
+    if(isset($user_info['email'])) {
         $stmt_email = $db->prepare(
             'UPDATE User SET email = ? 
             WHERE id = ?'
@@ -163,7 +163,7 @@ function updateUser($user_info)
         $stmt_email->execute(array($user_info['email'], $user_info['id']));
     }
 
-    if($user_info['mobile_number']) {
+    if(isset($user_info['mobile_number'])) {
         $stmt_mobile_number = $db->prepare(
             'UPDATE User SET mobile_number = ? 
             WHERE id = ?'
@@ -172,7 +172,7 @@ function updateUser($user_info)
         $stmt_mobile_number->execute(array($user_info['mobile_number'], $user_info['id']));
     }
 
-    if($user_info['picture']) {
+    if(isset($user_info['picture'])) {
         $stmt_mobile_number = $db->prepare(
             'UPDATE User SET picture = ? 
             WHERE id = ?'
@@ -181,7 +181,7 @@ function updateUser($user_info)
         $stmt_mobile_number->execute(array($user_info['picture'], $user_info['id']));
     }
 
-    if($user_info['password']) {
+    if(isset($user_info['password'])) {
         $options = ['cost' => 12]; // Default is 10 but 12 is better
         $stmt_password = $db->prepare(
             'UPDATE User SET password = ? 

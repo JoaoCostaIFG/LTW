@@ -7,7 +7,7 @@
     $post_id = $_GET['post_id'];
     $poster_id = getUserId($_SESSION['username'])['id'];
     if (!isOwner($poster_id, $post_id)) {
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'You are not the owner of this post!');
+        $_SESSION['messages'] = array('type' => 'error', 'content' => 'You are not the owner of this post!');
         die('Location: ../pages/home.php');
     }
 
@@ -15,7 +15,7 @@
         acceptProposal($user_id, $post_id);
     } catch (PDOException $e) {
         die($e->getMessage());
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Failed to accept proposal!');
+        $_SESSION['messages'] = array('type' => 'error', 'content' => 'Failed to accept proposal!');
         header('Location: ../pages/add_post.php');
     }
 

@@ -6,7 +6,7 @@
 
     $curr_user_id = getUserId($_SESSION['username'])['id'];
     if ($curr_user_id != $_GET['user_id']) {
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'You are not logged in as this user!');
+        $_SESSION['messages'] = array('type' => 'error', 'content' => 'You are not logged in as this user!');
         die('Location: ../pages/home.php');
     }
     
