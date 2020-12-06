@@ -21,7 +21,32 @@
   #signup a {
     font-size: small;
   }
+
+  #profile {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "pf-pic"
+      "pf-info"
+      "pf-options"
+      "pf-posts";
+
+    text-align: center;
+  }
 }
 
-@media (max-width: 30em) {
+@media (max-width: 40em) {
+  #changePassword {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #changePassword .form-item {
+    margin-top: 2em;
+    max-width: 80%;
+  }
+
+  #changePassword input[type="submit"] {
+    margin-top: 2em;
+    width: 10em;
+  }
 }
