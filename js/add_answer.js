@@ -16,8 +16,8 @@ function hideAnswerButton(question_id){
 }
 
 function addAnswer(question_id){
-    console.log("answer_text" + question_id);
-    console.log(document.getElementsByName("answer_text" + question_id));
+
+    removeError();
     let text = document.getElementsByName("answer_text" + question_id)[0].value;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -26,6 +26,11 @@ function addAnswer(question_id){
             let response = xhttp.responseText.trim('\n');
             let questions = document.getElementById("QA" + question_id);
             questions.innerHTML += response;
+            //Error
+            console.log(response.substr(0, 2));
+            if(response.substr(0, 2) === "<p"){
+                return;
+            }
             toggleAnswerInput(question_id);
             hideAnswerButton(question_id);
         }
@@ -33,4 +38,11 @@ function addAnswer(question_id){
     
     xhttp.open("GET", "../actions/action_add_answer.php?" + encodeForAjax({ question_id: question_id, answer_text: text }), true);
     xhttp.send();
+}
+
+function removeError() {
+    let questionError = document.getElementById('answer-error');
+    if (questionError) {
+        questionError.remove();
+    }
 }

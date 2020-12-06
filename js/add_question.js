@@ -18,9 +18,12 @@ function addQuestion(post_id) {
             let response = xhttp.responseText.trim('\n');
             //Used to append before input
             let doc = new DOMParser().parseFromString(response, 'text/html').getElementsByClassName("petpost-question")[0];
-            console.log(doc);
-            let form = document.getElementById("question-input");
             let questions = document.getElementById("petpost-questions");
+            if(!doc){
+                questions.innerHTML += response;
+                return;
+            }
+            let form = document.getElementById("question-input");
             questions.insertBefore(doc, form);
         }
     };
