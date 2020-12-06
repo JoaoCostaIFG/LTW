@@ -1,5 +1,6 @@
 <?php 
 require_once '../database/queries/db_post.php';
+require_once '../templates/tpl_utils.php';
 ?>
 <?php function drawPostList($posts)
 {
@@ -29,17 +30,14 @@ require_once '../database/queries/db_post.php';
     $post_path = 'post.php?post_id=' . $post['post_id'];
     ?>
 
-  <a href="<?php echo $post_path; ?>" class="list-item">
-    <ul class="list-item-content">
-      <li class="list-item-img">
-        <div style="background: url('<?php echo $photo_path; ?>') no-repeat center /auto 100%"></div>
-      </li>
-      <li class="list-item-txt">
-        <?php echo $post['name']; ?>
-      </li>
-    </ul>
+  <a class="nounderline list-item" href="<?php echo $post_path; ?>">
+    <div class="petimage">
+      <div class="list-item-img" style="background: url('<?php echo $photo_path; ?>') no-repeat center /auto 100%"></div>
+    </div>
+    <div class="list-item-txt">
+      <?php echo $post['name']; ?>
+    </div>
   </a>
-
 <?php } ?>
 
 <?php function drawSearch($values)

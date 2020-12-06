@@ -13,7 +13,7 @@ if(count($questionsAnswers) == 0) {
     echo '<p> No questions about this pet</p>';
 } else {
     foreach($questionsAnswers as $questionAnswer){
-        drawQuestionAnswer($questionAnswer);
+        drawQuestionAnswer(NULL, $questionAnswer);
     }
 }
 

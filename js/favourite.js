@@ -20,3 +20,9 @@ function favourite(post_id){
     xhttp.open("GET", "../actions/action_favourite.php?" + encodeForAjax({ post_id: post_id}), true);
     xhttp.send();
 }
+
+function encodeForAjax(data) {
+    return Object.keys(data).map(function (k) {
+        return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
+    }).join('&');
+}

@@ -106,10 +106,10 @@ function getQuestionsAnswers($post_id)
     $stmt = $db->prepare(
         '
         SELECT Question.text as question, Answer.text as answer, 
-        Question.date as question_date, Answer.date as answer_date
-        FROM Question JOIN Answer on (Question.id = Answer.question_id)
-        WHERE Question.post_id=?'
-    );
+        Question.date as question_date, Answer.date as answer_date,
+        Question.user_id as user_id,Question.id as id
+        FROM Question LEFT JOIN Answer on (Question.id = Answer.question_id)
+        WHERE Question.post_id=?');
     $stmt->execute(array($post_id));
     return $stmt->fetchAll();
 }
@@ -159,5 +159,23 @@ function getCities()
     );
     $stmt->execute();
     return $stmt->fetchAll();
-}
+  }
+
+  function insertQuestion($user_id, $post_id, $question) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+      'INSERT INTO Question VALUES(NULL, ?, ?, ?, ?)'
+    );
+    
+    $stmt->execute(array($user_id, $post_id, $question, date("d/m/Y")));
+  }
+
+  function insertAnswer($user_id, $question_id, $answer) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+      'INSERT INTO Answer VALUES(NULL, ?, ?, ?, ?)'
+    );
+    
+    $stmt->execute(array($user_id, $question_id, $answer, date("d/m/Y")));
+  }
 ?>
