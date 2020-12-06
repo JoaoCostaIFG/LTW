@@ -75,7 +75,6 @@ textarea {
 
   margin: 0;
   padding: 1em;
-  width: 85%;
 
   border-radius: 0.5em;
 
@@ -387,33 +386,6 @@ textarea {
   font-style: italic;
 }
 
-#comment-input {
-  margin-top: 1em;
-  margin-left: 1em;
-  width: 60em;
-}
-
-#comment-input-ta,
-#comment-input-button {
-  display: inline-block;
-
-  border: none;
-  vertical-align: middle;
-
-  color: var(--main);
-  background-color: var(--light);
-}
-
-#comment-input-button {
-  /*Comment text input button*/
-  font-size: large;
-  padding: 0.3em;
-}
-
-#comment-input-button:hover {
-  background-color: var(--dark);
-}
-
 /* || AUTH FORMS */
 .signupform {
   margin-top: 3em;
@@ -461,34 +433,36 @@ textarea {
 }
 
 #question-input {
-  width: 80%;
+  margin-top: 1em;
   margin-left: 1em;
-  padding: 0.2em 1em;
+  width: 60em;
 }
 
-#question-input textarea { /*Comment text input*/
-  resize: vertical;
+#question-input-ta,
+#question-input-button {
+  display: inline-block;
 
+  border: none;
+  vertical-align: middle;
+
+  color: var(--main);
   background-color: var(--light);
-  width: 87%;
-  margin: 0;
-
-  color: white;
-  font-size: 1.5em;
-
-  border-radius: 12px;
-  float: left;
 }
 
-#question-input-button { /*Comment text input button*/
-  background-color: var(--light);
-  width: 9%;
-  margin: 0.5em;
+#question-input-ta {
+  width: 80%;
+}
 
-  color: white;
-  font-size: 1.5em;
+#question-input-button {
+  /*Comment text input button*/
+  font-size: large;
+  padding: 0.3em;
+}
 
-  border-radius: 12px;
+#question-input-button:hover {
+  background-color: var(--dark);
+}
+
 /* || ADDPOST FORM */
 .addpostform {
   margin-top: 3em;
