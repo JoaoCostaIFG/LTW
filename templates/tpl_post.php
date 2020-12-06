@@ -1,52 +1,52 @@
 <?php
 require_once '../templates/tpl_petInfo.php';
 require_once '../templates/tpl_utils.php';
-require_once('../database/queries/db_proposal.php');
-require_once('../database/queries/db_user.php');
+require_once '../database/queries/db_proposal.php';
+require_once '../database/queries/db_user.php';
 
 /* GETTERS */
 
 function ageToString($age)
 {
-  $years = intdiv($age, 12);
-  $months = $age % 12;
+    $years = intdiv($age, 12);
+    $months = $age % 12;
 
-  $ret = "";
-  if ($years == 0) {
-    if ($months != 0) {
-      $ret = $months . " months old";
+    $ret = "";
+    if ($years == 0) {
+        if ($months != 0) {
+            $ret = $months . " months old";
+        } else {
+            $ret = "0 years old";
+        }
     } else {
-      $ret = "0 years old";
+        $ret = $years . " years";
+        if ($months != 0) {
+            $ret = $ret . " and " . $months . " months old";
+        } else {
+            $ret = $ret . " old";
+        }
     }
-  } else {
-    $ret = $years . " years";
-    if ($months != 0) {
-      $ret = $ret . " and " . $months . " months old";
-    } else {
-      $ret = $ret . " old";
-    }
-  }
-  return $ret;
+    return $ret;
 }
 
 function genderToString($gender)
 {
-  if ($gender == 0) {
-    return "Male";
-  } else {
-    return "Female";
-  }
+    if ($gender == 0) {
+        return "Male";
+    } else {
+        return "Female";
+    }
 }
 
 function sizeToString($size)
 {
-  if ($size == 1) {
-    return "Small";
-  } else if ($size == 2) {
-    return "Medium";
-  } else {
-    return "Big";
-  }
+    if ($size == 1) {
+        return "Small";
+    } else if ($size == 2) {
+        return "Medium";
+    } else {
+        return "Big";
+    }
 }
 
 function proposalStatusToString($status) {
@@ -139,7 +139,7 @@ function drawPost($post, $questionsAnswers)
     ?>
 
 <div class="petpost-page">
-  <?php 
+    <?php 
     $photo_path = "../static/images/" . $post['photo_id'] . "." . $post['photo_extension'];
     if(isset($_SESSION['username'])){
       $current_user = getUserId($_SESSION['username'])['id'];
@@ -201,12 +201,12 @@ function drawPost($post, $questionsAnswers)
     <h3>Questions & Answers</h3>
     <section id="petpost-questions">
       <?php
-      if (isset($_SESSION['username'])) {
-        drawQuestionsAnswers($post['id'], $current_user, $questionsAnswers);
-      } else {
-        drawQuestionsAnswers($post['id'], NULL, $questionsAnswers);
-      }
-      ?>
+        if (isset($_SESSION['username'])) {
+            drawQuestionsAnswers($post['id'], $current_user, $questionsAnswers);
+        } else {
+            drawQuestionsAnswers($post['id'], null, $questionsAnswers);
+        }
+        ?>
     </section>
 
 
@@ -216,14 +216,15 @@ function drawPost($post, $questionsAnswers)
 <?php
 //user_id is the one currently on the page
 function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
-{ ?>
+{
+    ?>
   <section id="<?php echo 'QA' . $questionAnswer['id'] ?>" class="QA">
     <section class="petpost-question">
       <p> <?php echo 'Q: ' . $questionAnswer['question']; ?> </p>
       <p> <?php echo $questionAnswer['question_date'] . ", " . getUsername($questionAnswer['user_id']); ?> </p>
       <?php if (isset($user_id)) { //Checks if a user is logged in
-        if (isOwner($user_id, $post_id) && !isset($questionAnswer['answer'])) { // Checks if the current user is the owner of the post
-      ?>     
+            if (isOwner($user_id, $post_id) && !isset($questionAnswer['answer'])) { // Checks if the current user is the owner of the post
+                ?>     
             <script src="../js/add_answer.js" type="text/javascript" defer></script>
             <button id="<?php echo 'answer-button' . $questionAnswer['id'] ?>" class="answer-button" onclick="toggleAnswerInput(<?php echo $questionAnswer['id'] ?>)">Answer</button>
           </section>
@@ -232,41 +233,42 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
             <textarea name="<?php echo 'answer_text' . $questionAnswer['id'] ?>" rows="2" column="40" placeholder="Write your answer..." required></textarea>
             <button id="answer-input-button" type="button" onclick="addAnswer(<?php echo $questionAnswer['id'] ?>)">Post Answer</button>
           </section>
-  <?php } 
+            <?php } 
       }else { ?>
   </section>
-  <?php } 
+      <?php } 
 
-  if (isset($questionAnswer['answer'])) {
-    drawAnswer($questionAnswer);
-  } ?>
+      if (isset($questionAnswer['answer'])) {
+          drawAnswer($questionAnswer);
+      } ?>
 </section>
 <?php } ?>
 
 <?php function drawQuestionsAnswers($post_id, $user_id, $questionsAnswers)
 {
-  $cnt = 0;
-  foreach ($questionsAnswers as $questionAnswer) {
-    $cnt = $cnt + 1;
-    drawQuestionAnswer($post_id, $user_id, $questionAnswer);
-    echo '<br>';
-  }
-  if ($cnt == 0) {
-    echo "<i id='no-questions'>There are no questions on this post. Make the first question</i>";
-  }
-
-  if (!isOwner($user_id, $post_id)) {
-    if (isset($_SESSION['username'])) {
-      // drawCommentForm($_GET['post_id'], $_SESSION['username']);
-      drawQuestionForm($post_id);
-    } else {
-      drawQuestionsLoginPrompt();
+    $cnt = 0;
+    foreach ($questionsAnswers as $questionAnswer) {
+        $cnt = $cnt + 1;
+        drawQuestionAnswer($post_id, $user_id, $questionAnswer);
+        echo '<br>';
     }
-  }
+    if ($cnt == 0) {
+        echo "<i id='no-questions'>There are no questions on this post. Make the first question</i>";
+    }
+
+    if (!isOwner($user_id, $post_id)) {
+        if (isset($_SESSION['username'])) {
+            // drawCommentForm($_GET['post_id'], $_SESSION['username']);
+            drawQuestionForm($post_id);
+        } else {
+            drawQuestionsLoginPrompt();
+        }
+    }
 } ?>
 
 <?php function drawQuestionForm($post_id)
-{ ?>
+{
+    ?>
   <script src="../js/utils.js" type="text/javascript" defer></script>
   <script src="../js/add_question.js" type="text/javascript" defer></script>
   <section id="question-input">
@@ -300,7 +302,8 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
 <?php } ?>
 
 <?php function drawQuestionsLoginPrompt()
-{ ?>
+{
+    ?>
   <section id="question-input">
     <p id="question-login-prompt">Log in to post questions</p>
   </section>
@@ -365,7 +368,8 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
 <?php } ?>
 
 <?php function drawAnswer($questionAnswer)
-{ ?>
+{
+    ?>
   <section class="petpost-answer">
     <p> <?php echo 'A: ' . $questionAnswer['answer']; ?> </p>
     <p> <?php echo $questionAnswer['answer_date'] ?> </p>

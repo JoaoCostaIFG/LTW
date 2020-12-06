@@ -67,7 +67,22 @@ input[type="submit"] {
   border-radius: var(--button-corner-radius);
 
   color: var(--main);
+  background-color: var(--background-dark);
   text-align: center;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  color: var(--green);
+  background-color: var(--dark);
+}
+
+.rejbutton:hover {
+  color: var(--red) !important;
+}
+
+.hoverable:hover {
+  color: var(--green);
 }
 
 textarea {
@@ -85,6 +100,11 @@ textarea {
 
 .error {
   color: red;
+  font-weight: bold;
+}
+
+.success {
+  color: green;
   font-weight: bold;
 }
 
@@ -233,6 +253,8 @@ textarea {
 
 /* || SEARCH PAGE */
 .list-item {
+  position: relative;
+
   border: 2px solid var(--light);
   border-radius: var(--petimage-corner-radius);
 
@@ -247,7 +269,8 @@ textarea {
 .list-item-img {
   /* the inner corner radius needs to be smaller than the outer
    otherwise the image won't cover the corners */
-  border-radius: var(--petimage-corner-radius-inner) var(--petimage-corner-radius-inner) 0 0 !important;
+  border-radius: var(--petimage-corner-radius-inner)
+    var(--petimage-corner-radius-inner) 0 0 !important;
 }
 
 .list-item-txt {
@@ -329,7 +352,7 @@ textarea {
   margin-left: 1em;
   padding: 0;
 
-  font-size: 1.4em;
+  font-size: x-large;
 }
 
 .petpost-info li + li {
@@ -386,22 +409,22 @@ textarea {
   font-style: italic;
 }
 
-/* || AUTH FORMS */
-.signupform {
+/* || PROFILE FORMS */
+#profileform {
   margin-top: 3em;
 }
 
-.signupform-item {
+.profileform-item {
   max-width: 40em; /* important */
 }
 
-.signupform-item + .signupform-item {
+.profileform-item + .profileform-item {
   margin-top: 2em;
 }
 
-.signupform-button {
+.profileform-button {
   margin-top: 2em;
-  width: 8em; /* important */
+  width: 10em; /* important */
 }
 
 /* FORMS */
@@ -479,4 +502,44 @@ textarea {
 .addpostform-button {
   margin-top: 2em;
   width: 8em; /* important */
+}
+
+/* || Profile */
+#profile {
+  margin-left: 1em;
+
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas:
+    "pf-pic pf-posts"
+    "pf-info pf-posts"
+    "pf-options pf-posts";
+}
+
+#profile-pic {
+  grid-area: pf-pic;
+}
+
+#profile-pic img {
+  width: 100%;
+  max-width: 20em;
+  height: auto;
+}
+
+#profile-info {
+  grid-area: pf-info;
+  padding: 1em;
+}
+
+#profile-options {
+  grid-area: pf-options;
+  padding: 1em;
+}
+
+#profile-posts {
+  grid-area: pf-posts;
+  padding: 1em;
+
+  background-color: var(--background-dark);
+  border-radius: var(--button-corner-radius);
 }

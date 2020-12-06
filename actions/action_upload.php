@@ -49,20 +49,23 @@ function updatePhoto($photo_id, $type, $is_user) {
     move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
 }
 
-function uploadPhoto($post_id, $type, $is_user)
+function uploadPhoto($id, $type, $is_user)
 {
     $img_type = typeToString($type);
     if (!$img_type)
         return;
-    $id = insertPhoto($post_id, $img_type);
 
     // Generate filenames for original, small and medium files
     $originalFileName = "../static/";
-    if ($is_user)
+    if ($is_user) {
       $originalFileName .= "users/";
-    else
+    }
+    else {
       $originalFileName .= "images/";
-    $originalFileName .= "$id.$img_type";
+      $photo_id = insertPhoto($id, $img_type);
+    }
+
+    $originalFileName .= "$photo_id.$img_type";
     //$smallFileName = "images/thumbs_small/$id.jpg";
 
     //$mediumFileName = "images/thumbs_medium/$id.jpg";
@@ -96,4 +99,22 @@ function uploadPhoto($post_id, $type, $is_user)
     //imagejpeg($medium, $mediumFileName);
 }
 
-?>
+//function uploadUserPhoto($user_id, $type)
+//{
+    //if ($type === IMAGETYPE_PNG) {
+        //$img_type = "png";
+    //} else if ($type === IMAGETYPE_JPEG) {
+        //$img_type = "jpg";
+    //} else {
+        //return;
+    //}
+
+    //// Generate filenames for original, small and medium files
+    //$originalFileName .= "../static/users/";
+    //$originalFileName .= "$user_id.$img_type";
+    //unlink($originalFileName);
+    //move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
+
+    //return $originalFileName;
+//}
+//?>

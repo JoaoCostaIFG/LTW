@@ -16,7 +16,7 @@ require_once '../database/database_instance.php';
     {
         $db = Database::instance()->db();
         $stmt = $db->prepare(
-            'INSERT INTO Photo VALUES(NULL, ?, ?, ?)'
+            'INSERT INTO PetPhoto VALUES(NULL, ?, ?, ?)'
         );
         $date = date("Y-m-d");
         $stmt->execute(array($post_id, $type, $date));
@@ -62,7 +62,7 @@ require_once '../database/database_instance.php';
         echo '<br>';
         $stmt = $db->prepare(
             'SELECT DISTINCT post_id, name, age, gender, size, city_id, species_id,
-             Photo.id as photo_id, Photo.extension as photo_extension
+             PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
              FROM PetPost JOIN Photo ON(PetPost.id = post_id) ' .
             $query_conditions .
             ' GROUP BY PetPost.id'
@@ -81,12 +81,12 @@ require_once '../database/database_instance.php';
             '
             SELECT petpost.id, petpost.name, age, gender, size, description, petpost.date,
             Color.name as color, Species.name as species, City.name as location,
-            User.username as user, Photo.id as photo_id, Photo.extension as photo_extension
-            FROM petpost JOIN Color on(petpost.color_id=color.id)
-                JOIN Species on(petpost.species_id=species.id)
-                JOIN City on(city.id = petpost.city_id)
-                JOIN User on (User.id = petpost.user_id)
-                JOIN Photo on (Photo.post_id = petpost.id)
+            User.username as user, PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
+            FROM PetPost JOIN Color on(PetPost.color_id=color.id)
+                JOIN Species on(PetPost.species_id=species.id)
+                JOIN City on(city.id = PetPost.city_id)
+                JOIN User on (User.id = PetPost.user_id)
+                JOIN PetPhoto on (PetPhoto.post_id = PetPost.id)
             WHERE petpost.id=?'
         );
         $stmt->execute(array($post_id));
@@ -98,9 +98,9 @@ require_once '../database/database_instance.php';
         $db = Database::instance()->db();
         $stmt = $db->prepare(
             '
-            SELECT Photo.id as photo_id, Photo.extension as photo_extension
-            FROM PetPost JOIN Photo on (Photo.post_id = petpost.id)
-            WHERE petpost.id=?'
+            SELECT Photo.id as photo_id, PetPhoto.extension as photo_extension
+            FROM PetPost JOIN Photo on (PetPhoto.post_id = PetPost.id)
+            WHERE PetPost.id=?'
         );
         $stmt->execute(array($post_id));
         return $stmt->fetch();

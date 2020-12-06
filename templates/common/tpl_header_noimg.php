@@ -34,11 +34,15 @@
             <a class="nounderline" href="add_post.php"><input type="submit" value="+"></a>
           </li>
           <li>
-            Logged in as <b><?php echo $_SESSION['username'] ?></b>
+            Logged in as 
+            <a href="../pages/profile.php?username=<?php echo $_SESSION['username']; ?>" >
+              <b><?php echo $_SESSION['username'] ?></b> 
+            </a>
           </li>
           <li id="logout-button">
             <a class="nounderline" href='../actions/action_logout.php'><input type="submit" value="Logout"></a>
           </li>
         </ul>
+        
       <?php }?>
     </nav>
