@@ -80,7 +80,7 @@ function uploadUserPhoto($user_id, $type)
     // Generate filenames for original, small and medium files
     $originalFileName .= "../static/users/";
     $originalFileName .= "$user_id.$img_type";
-
+    unlink($originalFileName);
     move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
 
     return $originalFileName;

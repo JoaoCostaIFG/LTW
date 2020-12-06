@@ -79,11 +79,11 @@ function drawEditProfile($user)
 
             <div class="form-item" >
                 <?php if($user['picture'] != null) { ?>
-                    <img src="../static/images/usersPics/<?php echo $user['picture'] ?>" alt="User Profile Picture" width="400">
+                    <img src="<?php echo $user['picture'] ?>" alt="User Profile Picture" width="400">
                 <?php }?>
   
-                <label for="photo">Photo</label>
-                <input id="photo" type="file" name="photo">
+                <label for="image">Picture</label>
+                <input id="image" type="file" name="image">
             </div>
             <br>
             <br>
