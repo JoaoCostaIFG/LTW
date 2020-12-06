@@ -11,6 +11,14 @@ create table User(
     picture TEXT
 );
 
+drop table if exists Photo;
+create table Photo( 
+    id INTEGER PRIMARY KEY,
+    post_id INTEGER REFERENCES PetPost(id),
+    extension TEXT CHECK(extension LIKE "jpg" OR extension LIKE "png"),
+    date DATE NOT NULL
+);
+
 drop table if exists Color;
 create table Color(
     id INTEGER PRIMARY KEY,
