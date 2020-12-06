@@ -1,15 +1,4 @@
 <?php
-
-//function drawPetPhoto($photo_id, $photo_extension, $class) {
-    //$photo_path = "../static/images/" . $photo_id . "." . $photo_extension;
-?>
-    
-    <!-- <div class="<?php echo $class; ?>" >
-        <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
-    </div> -->
-<?php
-//}
-
 function drawOption($option_id, $option_name, $is_selected)
 {
     /*
@@ -47,5 +36,24 @@ function drawOptions($any_option, $options, $options_name, $options_id, $selecte
         ?>
       </select>
     <?php
+}
+
+function setSessionMessage($type, $content) {
+  $_SESSION['messages'] = array('type' => $type, 'content' => $content);
+}
+
+function getSessionMessage($type)
+{
+    if (!isset($_SESSION['messages']) || !isset($_SESSION['messages']['type'])) {
+        return false;
+    }
+
+    if ($_SESSION['messages']['type'] !== $type) {
+        return false;
+    }
+
+    $ret = $_SESSION['messages']['content'];
+    $_SESSION['messages'] = [];
+    return $ret;
 }
 ?>

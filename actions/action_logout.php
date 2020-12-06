@@ -1,13 +1,10 @@
 <?php
-    include_once('../pages/session.php');
+    require_once '../pages/session.php';
+    require_once '../templates/tpl_utils.php';
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
+    session_unset();
     session_destroy();
-    session_start();
 
-    $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Logged out!');
-
-    header('Location: ../pages/list.php');
+    setSessionMessage('success', 'Logged out!');
+    header('Location: ../index.php');
 ?>

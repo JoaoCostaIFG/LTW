@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\map;
-
 require_once '../database/queries/db_post.php';
 require_once '../database/queries/db_user.php';
 require_once '../templates/tpl_utils.php';

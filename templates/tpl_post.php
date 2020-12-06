@@ -62,10 +62,11 @@ function proposalStatusToString($status) {
 /* DRAWERS */
 
 function drawProposalButton($post_id, $user_id) { ?>
+    <script src="../js/confirmation_bar.js" type="text/javascript" defer></script>
     <script src="../js/utils.js" type="text/javascript" defer></script>
     <script src="../js/proposal.js" type="text/javascript" defer></script>
 
-    <button id="makeProposalButton" onclick="make_proposal(<?php echo "$post_id, $user_id";?>)">
+    <button id="makeProposalButton" onclick="make_proposal_confirmation(<?php echo "$post_id, $user_id";?>)">
         Make Proposal</button>
     <p id="proposalSentText"></p>
 <?php }
@@ -222,26 +223,23 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
     <section class="petpost-question">
       <p> <?php echo 'Q: ' . $questionAnswer['question']; ?> </p>
       <p> <?php echo $questionAnswer['question_date'] . ", " . getUsername($questionAnswer['user_id']); ?> </p>
-      <?php if (isset($user_id)) { //Checks if a user is logged in
-            if (isOwner($user_id, $post_id) && !isset($questionAnswer['answer'])) { // Checks if the current user is the owner of the post
-                ?>     
-            <script src="../js/add_answer.js" type="text/javascript" defer></script>
-            <button id="<?php echo 'answer-button' . $questionAnswer['id'] ?>" class="answer-button" onclick="toggleAnswerInput(<?php echo $questionAnswer['id'] ?>)">Answer</button>
-          </section>
-          <!-- Used in answer input -->
-          <section class="answer-input" id="<?php echo 'answer-input' . $questionAnswer['id']; ?>" style="display: none;">
-            <textarea name="<?php echo 'answer_text' . $questionAnswer['id'] ?>" rows="2" column="40" placeholder="Write your answer..." required></textarea>
-            <button id="answer-input-button" type="button" onclick="addAnswer(<?php echo $questionAnswer['id'] ?>)">Post Answer</button>
-          </section>
-            <?php } 
-      }else { ?>
-  </section>
-      <?php } 
+      <?php if (isset($user_id) && isOwner($user_id, $post_id) && !isset($questionAnswer['answer'])) { // Checks if the current user is the owner of the post?>     
+                <script src="../js/add_answer.js" type="text/javascript" defer></script>
+                <button id="<?php echo 'answer-button' . $questionAnswer['id'] ?>" class="answer-button" onclick="toggleAnswerInput(<?php echo $questionAnswer['id'] ?>)">Answer</button>
+              </section>
+              <!-- Used in answer input -->
+              <section class="answer-input" id="<?php echo 'answer-input' . $questionAnswer['id']; ?>" style="display: none;">
+                <textarea name="<?php echo 'answer_text' . $questionAnswer['id'] ?>" rows="2" column="40" placeholder="Write your answer..." required></textarea>
+                <button id="answer-input-button" type="button" onclick="addAnswer(<?php echo $questionAnswer['id'] ?>)">Post Answer</button>
+              </section>
+      <?php } else {?>
+              </section>
+      <?php } ?> 
 
-      if (isset($questionAnswer['answer'])) {
-          drawAnswer($questionAnswer);
-      } ?>
-</section>
+      <?php if (isset($questionAnswer['answer'])) {
+                drawAnswer($questionAnswer);
+            } ?>
+      </section>
 <?php } ?>
 
 <?php function drawQuestionsAnswers($post_id, $user_id, $questionsAnswers)

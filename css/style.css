@@ -543,3 +543,28 @@ textarea {
   background-color: var(--background-dark);
   border-radius: var(--button-corner-radius);
 }
+
+/* Confirmation Bar */
+#confirmationBar {
+  font-weight: bold;
+
+  width: 100%;
+  padding: 1em;
+  box-sizing: border-box;
+
+  background-color: var(--dark);
+}
+
+#acceptConfirmationButton {
+  background-color: green;
+  font-size: large;
+  width: 10%;
+  border-radius: var(--button-corner-radius);
+}
+
+#rejectConfirmationButton {
+  background-color: red;
+  width: 10%;
+  font-size: large;
+  border-radius: var(--button-corner-radius);
+}

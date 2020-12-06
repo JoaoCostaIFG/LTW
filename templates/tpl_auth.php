@@ -1,4 +1,7 @@
-<?php function draw_login()
+<?php
+require_once 'tpl_utils.php';
+
+function draw_login()
 {
     /* 
      * Draws the login section
@@ -66,9 +69,9 @@
 
       <p class="error">
     <?php
-    if ($_SESSION['messages']['type'] == 'signUpError') {
-        echo $_SESSION['messages']['content']; 
-        $_SESSION['messages'] = [];
+    $msg = getSessionMessage('signUpError');
+    if ($msg) {
+        echo $msg; 
     }?>
       </p>
   

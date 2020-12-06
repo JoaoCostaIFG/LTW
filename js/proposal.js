@@ -38,3 +38,7 @@ function make_proposal(post_id, user_id) {
         encodeForAjax({post_id: post_id, user_id: user_id}), true);
     xhttp.send();
 }
+
+function make_proposal_confirmation(post_id, user_id) {
+    showConfirmationPrompt("Are you sure you want to make this adoption proposal?", "make_proposal(" + post_id + "," + user_id + ")");
+}

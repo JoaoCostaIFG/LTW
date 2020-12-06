@@ -1,6 +1,7 @@
 <?php
-    require_once '../pages/session.php';
-    require_once '../database/queries/db_post.php';
+  require_once '../pages/session.php';
+  require_once '../database/queries/db_post.php';
+  require_once '../templates/tpl_utils.php';
 
 function photoIsValid($image_path)
 {
@@ -11,9 +12,8 @@ function photoIsValid($image_path)
         $type = false;
     }
 
-    $type = exif_imagetype($image_path);
-    if ($type == false || ($type !== IMAGETYPE_PNG && $type !== IMAGETYPE_JPEG)) {
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Image is not a jpg or png file!');
+    if ($type === false || ($type !== IMAGETYPE_PNG && $type !== IMAGETYPE_JPEG)) {
+        setSessionMessage('error', 'Image is not a jpg or png file!');
         return false;
     }
     return $type;
@@ -111,11 +111,11 @@ function uploadPhoto($id, $type, $is_user)
     //}
 
     //// Generate filenames for original, small and medium files
-    //$originalFileName .= "../static/users/";
+    //$originalFileName = "../static/users/";
     //$originalFileName .= "$user_id.$img_type";
     //unlink($originalFileName);
     //move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
 
     //return $originalFileName;
 //}
-//?>
+?>
