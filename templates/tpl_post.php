@@ -49,7 +49,87 @@ function sizeToString($size)
   }
 }
 
+function proposalStatusToString($status) {
+    if ($status == -1)
+        $text = "Your Proposal is Pending";
+    else if ($status == 0)
+        $text = "Your Proposal was Rejected";
+    else if ($status == 1)
+        $text = "Your Proposal was Accepted";
+    return $text;
+}
+
 /* DRAWERS */
+
+function drawProposalButton($post_id, $user_id) { ?>
+    <script src="../js/utils.js" type="text/javascript" defer></script>
+    <script src="../js/proposal.js" type="text/javascript" defer></script>
+
+    <button id="makeProposalButton" onclick="make_proposal(<?php echo "$post_id, $user_id";?>)">
+        Make Proposal</button>
+    <p id="proposalSentText"></p>
+<?php }
+
+function drawProposalStatus($status) { ?>
+    <p id="proposalSentText"><?php echo proposalStatusToString($status); ?></p>
+<?php }
+
+function drawEditButtons($post_id) { ?>
+    <script src="../js/utils.js" type="text/javascript" defer></script>
+    <script src="../js/edit_post.js" type="text/javascript" defer></script>
+
+    <button id="editButton" onclick="edit_post()">
+        Edit Post</button>
+
+    <form class="deleteButton" method="post" action="../actions/action_delete_post.php">
+      <input type="hidden" id="post_id" name="post_id" value="<?php echo $post_id; ?>">
+      <input class="form-button addpostform-button" type="submit" value="Remove post">
+    </form>
+<?php }
+
+function drawEditOptions($post) { ?>
+    <div class="petpost-edit" style="display: none">
+        
+        <form class="verticalform addpostform" method="post" action="../actions/action_edit_post.php" enctype="multipart/form-data">
+          <div class="form-item addpostform-item" >
+            <label for="name">Name</label>
+            <input id="name" type="text" name="name" value="<?php echo $post['name']; ?>" required>
+          </div>
+          <div class="form-item addpostform-item" >
+            <label for="age">Age</label>
+            <input id="age" type="number" name="age" value="<?php echo $post['age']; ?>" required>
+          </div>
+          <div class="form-item addpostform-item" >
+            <label for="image">Photo</label>
+            <input id="image" type="file" name="image" onchange="edit_photo(event)">
+          </div>
+
+          <div class="form-item addpostform-item" >
+            <label for="size">Size</label>
+            <input id="size" type="number" name="size" value="<?php echo $post['size']; ?>" required>
+          </div>
+          <div class="form-item addpostform-item" >
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="8" cols="86"><?php echo $post['description']; ?></textarea>
+          </div>
+          <div class="form-item addpostform-item" >
+            <label for="date">Birth date</label>
+            <input id="date" type="date" name="date" value="<?php echo $post['date']; ?>" required>
+          </div>
+
+          <div class="form-item addpostform-item" >
+            <?php drawColors(false, null); ?>
+          </div>
+          <div class="form-item addpostform-item" >
+            <?php drawCities(false, null); ?>
+          </div>
+
+          <br>
+          <input type="hidden" id="post_id" name="post_id" value="<?php echo $post['id']; ?>">
+          <input class="form-button addpostform-button" type="submit" value="Update pet">
+        </form>
+    </div>
+<?php }
 
 function drawPost($post, $questionsAnswers)
 {
@@ -64,26 +144,15 @@ function drawPost($post, $questionsAnswers)
     if(isset($_SESSION['username'])){
       $current_user = getUserId($_SESSION['username'])['id'];
       $post_id = $post['id'];
-      if (!hasProposal($current_user, $post_id) && !isOwner($current_user, $post_id)) { ?>
-            <script src="../js/utils.js" type="text/javascript" defer></script>
-            <script src="../js/proposal.js" type="text/javascript" defer></script>
-
-            <button id="makeProposalButton" onclick="make_proposal(<?php echo "$post_id, $current_user";?>)">
-                Make Proposal</button>
-            <p id="proposalSentText"></p>
-    <?php }
-      else if (hasProposal($current_user, $post_id)) {
+      if (isOwner($current_user, $post_id)) {
+        drawEditButtons($post_id);
+      } else {
+          if (hasProposal($current_user, $post_id)) {
             $status = getProposalStatus($current_user, $post_id)['status'];
-
-            if ($status == -1)
-                $text = "Your Proposal is Pending";
-            else if ($status == 0)
-                $text = "Your Proposal was Rejected";
-            else if ($status == 1)
-                $text = "Your Proposal was Accepted";
-            ?>
-            <p id="proposalSentText"><?php echo $text; ?></p>
-    <?php
+            drawProposalStatus($status);
+          } else {
+            drawProposalButton($post_id, $current_user);
+          }
       }
     }
     ?>
@@ -99,15 +168,20 @@ function drawPost($post, $questionsAnswers)
     <?php if(isset($_SESSION['username'])) { ?>
         <script src="../js/favourite.js" type="text/javascript" defer></script>
         <button id="favourite-star" onclick="favourite(<?php echo $post['id']?>)">
-        <?php     if(isFavourite($current_user, $post['id'])) {?>
-            &bigstar;
-        <?php } else {?>
-            &star;
-        <?php }?>
+        <?php     
+          if (!isOwner($current_user, $post['id'])) {
+            if (isFavourite($current_user, $post['id'])) {?>
+              &bigstar;
+            <?php }
+            else {?>
+              &star;
+            <?php }
+          }?>
       </button>
     <?php }?>
-      <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
+      <div id="petphoto" style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
     </div>
+    <?php drawEditOptions($post); ?>
     <ul class="petpost-info nobullets">
       <li>Name: <b><?php echo $post['name']; ?></b></li>
       <li>Age: <b><?php echo ageToString($post['age']); ?></b></li>

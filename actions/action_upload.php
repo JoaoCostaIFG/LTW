@@ -19,16 +19,41 @@ function photoIsValid($image_path)
     return $type;
 }
 
-function uploadPhoto($post_id, $type, $is_user)
-{
+function typeToString($type) {
     if ($type === IMAGETYPE_PNG) {
-        $img_type = "png";
+        return "png";
     } else if ($type === IMAGETYPE_JPEG) {
-        $img_type = "jpg";
+        return "jpg";
     } else {
         return;
     }
+}
 
+function updatePhoto($photo_id, $type, $is_user) {
+    $img_type = typeToString($type);
+    if (!$img_type)
+        return;
+
+    $originalFileName = "../static/";
+    if ($is_user)
+      $originalFileName .= "users/";
+    else
+      $originalFileName .= "images/";
+
+    $originalFileName .= "$photo_id.$img_type";
+    //$smallFileName = "images/thumbs_small/$id.jpg";
+
+    //$mediumFileName = "images/thumbs_medium/$id.jpg";
+
+    // Move the uploaded file to its final destination
+    move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
+}
+
+function uploadPhoto($post_id, $type, $is_user)
+{
+    $img_type = typeToString($type);
+    if (!$img_type)
+        return;
     $id = insertPhoto($post_id, $img_type);
 
     // Generate filenames for original, small and medium files

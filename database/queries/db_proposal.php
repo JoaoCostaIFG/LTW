@@ -1,6 +1,7 @@
 <?php
 include_once('../database/database_instance.php');
 
+    /* INSERTS */
     function insertProposal($user_id, $post_id) {
         $db = Database::instance()->db();
         $date = date("Y-m-d");
@@ -23,26 +24,7 @@ include_once('../database/database_instance.php');
         return $proposal != false;
     }
 
-    function acceptProposal($user_id, $post_id) {
-        $db = Database::instance()->db();
-        $stmt = $db->prepare(
-            'UPDATE Proposal
-             SET accepted = 1
-             WHERE user_id = ? AND post_id = ?'
-        );
-        $stmt->execute(array($user_id, $post_id));
-    }
-
-    function rejectProposal($user_id, $post_id) {
-        $db = Database::instance()->db();
-        $stmt = $db->prepare(
-            'UPDATE Proposal
-             SET accepted = 0
-             WHERE user_id = ? AND post_id = ?'
-        );
-        $stmt->execute(array($user_id, $post_id));
-    }
-
+    /* GETTERS */
     function getSentProposals($user_id) {
         $db = Database::instance()->db();
         $stmt = $db->prepare(
@@ -87,5 +69,26 @@ include_once('../database/database_instance.php');
         );
         $stmt->execute(array($user_id, $post_id));
         return $stmt->fetch();
+    }
+
+    /* UPDATES */
+    function acceptProposal($user_id, $post_id) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare(
+            'UPDATE Proposal
+             SET accepted = 1
+             WHERE user_id = ? AND post_id = ?'
+        );
+        $stmt->execute(array($user_id, $post_id));
+    }
+
+    function rejectProposal($user_id, $post_id) {
+        $db = Database::instance()->db();
+        $stmt = $db->prepare(
+            'UPDATE Proposal
+             SET accepted = 0
+             WHERE user_id = ? AND post_id = ?'
+        );
+        $stmt->execute(array($user_id, $post_id));
     }
 ?>
