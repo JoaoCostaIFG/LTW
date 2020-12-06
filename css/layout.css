@@ -1,5 +1,6 @@
 :root {
   --top-bar-height: 4em;
+  --bottom-bar-height: 4em;
   --list_gap: 2em;
   --list_gap_inv: -2em;
   --list-height: 48em;
@@ -82,4 +83,30 @@ h1 {
 
 .list-item {
   display: inline;
+}
+
+/* Confirmation Bar */
+#confirmationBar {
+  position: fixed;
+  left:0;
+  bottom: 0;
+  z-index: 2; /* make top bar show on top */
+  padding: 0.2em;
+
+  overflow: auto;
+  
+}
+
+#confirmationBar p {
+  padding-left: 1em;
+  position: relative;
+  float: left;
+}
+
+#confirmationBar > button {
+  padding: 0.5em;
+  margin: 0.5em;
+
+  position: relative;
+  float: right;
 }
