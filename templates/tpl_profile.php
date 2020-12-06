@@ -25,6 +25,13 @@ function drawProfile($user, $user_posts)
                 <a href='../pages/edit_profile.php'>Edit Profile </a>
 
         <?php  }?>
+        <br>
+        <?php
+            if($user['username'] == $_SESSION['username']){ ?>
+                <a href='../pages/settings.php'>Account Settings</a>
+
+        <?php  }?>
+
 
 
     </div>
@@ -94,4 +101,38 @@ function drawEditProfile($user)
     </section>
 
 <?php 
+}
+
+function drawSettings()
+{
+    /**
+     * Draws an settings page
+     */
+?>
+    <section class="settings">
+        <h2>
+            <b>Settings</b>
+        </h2>
+        <h3>
+            Change Password
+        </h3>
+
+        <form id="changePassword" method="post" action="../actions/action_edit_profile.php" enctype="multipart/form-data">
+            <div class="form-item">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" placeholder="password" required>
+            </div>
+            <div class="form-item" >
+                <label for="password_r">Repeat your password</label>
+                <input id="password_r" type="password" name="password_r" placeholder="password (again)" required>
+            </div>
+
+            <input class="form-button" type="submit" value="Submit">
+        </form>
+        <br>
+        <button>Delete Account</button>
+
+    </section>
+<?php
 }?>
+
