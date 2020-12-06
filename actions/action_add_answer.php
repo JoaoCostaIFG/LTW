@@ -33,3 +33,4 @@
 
   //The response is used by js to draw the answer
   drawAnswer($answer);
+?>

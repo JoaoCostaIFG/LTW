@@ -9,7 +9,6 @@ if (!$_GET['post_id']) { // go to 404 if there is no post id
   require '../database/queries/db_post.php';
   require '../templates/tpl_post.php';
   $post = getPost($_GET['post_id']);
-  // $comments = getComments($_GET['post_id']);
   $questionsAnswers = getQuestionsAnswers($_GET['post_id']);
   drawPost($post, $questionsAnswers);
 

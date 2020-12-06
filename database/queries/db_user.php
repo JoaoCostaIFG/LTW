@@ -1,7 +1,8 @@
 <?php
-include_once('../database/database_instance.php');
+require_once '../database/database_instance.php';
 
-function checkUserPassword($username, $password) {
+function checkUserPassword($username, $password)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         'SELECT * FROM User WHERE username = ?'
@@ -12,19 +13,24 @@ function checkUserPassword($username, $password) {
     return $user !== false && password_verify($password, $user['password']); // Verify hash
 }
 
-function insertUser($username, $password, $picture, $email, $mobile_number) {
+function insertUser($username, $password, $email, $mobile_number)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare(
-        'INSERT INTO User VALUES(NULL, ?, ?, ?, ?, ?)'
+        'INSERT INTO User VALUES(NULL, ?, ?, ?, ?)'
     );
 
     // Default is bcrypt
     $options = ['cost' => 12]; // Default is 10 but 12 is better
-    $stmt->execute(array($username, password_hash($password, PASSWORD_DEFAULT, $options),
-        $picture, $email, $mobile_number));
+    $stmt->execute(
+        array($username, password_hash($password, PASSWORD_DEFAULT, $options),
+        $email, $mobile_number)
+    );
+    return $db->lastInsertId();
 }
 
-function getUserId($username) {
+function getUserId($username)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         'SELECT id FROM User WHERE username LIKE ?'
@@ -46,7 +52,8 @@ function getUsername($user_id) {
     return $stmt->fetch()['username'];
 }
 
-function isOwner($user_id, $post_id) {
+function isOwner($user_id, $post_id) 
+{
         $db = Database::instance()->db();
         $stmt = $db->prepare(
             'SELECT * FROM PetPost 
@@ -57,7 +64,8 @@ function isOwner($user_id, $post_id) {
         return $post != false;
 }
 
-function isFavourite($user_id, $post_id) {
+function isFavourite($user_id, $post_id)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         'SELECT * FROM Favourite 
@@ -68,21 +76,23 @@ function isFavourite($user_id, $post_id) {
     return $favourite != false;
 }
 
-function addFavouritePost($user_id, $post_id) {
+function addFavouritePost($user_id, $post_id)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare(
-      'INSERT INTO Favourite VALUES(?, ?)'
-  );
-  $stmt->execute(array($user_id, $post_id));
+        'INSERT INTO Favourite VALUES(?, ?)'
+    );
+    $stmt->execute(array($user_id, $post_id));
 }
 
-function removeFavouritePost($user_id, $post_id) {
+function removeFavouritePost($user_id, $post_id)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare(
-      'DELETE FROM Favourite 
+        'DELETE FROM Favourite 
       WHERE post_id = ? AND user_id = ?'
-  );
-  $stmt->execute(array($post_id, $user_id));
+    );
+    $stmt->execute(array($post_id, $user_id));
 }
 
 ?>

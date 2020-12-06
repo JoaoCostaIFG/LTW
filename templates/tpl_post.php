@@ -1,7 +1,8 @@
 <?php
 require_once '../templates/tpl_petInfo.php';
-include_once('../database/queries/db_proposal.php');
-include_once('../database/queries/db_user.php');
+require_once '../templates/tpl_utils.php';
+require_once('../database/queries/db_proposal.php');
+require_once('../database/queries/db_user.php');
 
 /* GETTERS */
 
@@ -52,58 +53,71 @@ function sizeToString($size)
 
 function drawPost($post, $questionsAnswers)
 {
-  /**
-   * Draws given a given post page
-   */
-  $photo_path = "../static/images/" . $post['photo_id'] . "." . $post['photo_extension'];
-?>
+    /**
+     * Draws given a given post page
+     */
+    ?>
 
-  <div class="petpost-page">
-    <?php
-    if (isset($_SESSION['username'])) {
+<div class="petpost-page">
+  <?php 
+    $photo_path = "../static/images/" . $post['photo_id'] . "." . $post['photo_extension'];
+    if(isset($_SESSION['username'])){
       $current_user = getUserId($_SESSION['username'])['id'];
-      if (!hasProposal($current_user, $post['id']) && !isOwner($current_user, $post['id'])) { ?>
+      $post_id = $post['id'];
+      if (!hasProposal($current_user, $post_id) && !isOwner($current_user, $post_id)) { ?>
+            <script src="../js/utils.js" type="text/javascript" defer></script>
+            <script src="../js/proposal.js" type="text/javascript" defer></script>
 
-        <form method="post" action="../actions/action_make_proposal.php">
-          <input type="hidden" name="user_id" value="<?php echo $current_user; ?>">
-          <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>">
-          <input type="submit" value="Make pet proposal">
-        </form>
-      <?php } ?>
+            <button id="makeProposalButton" onclick="make_proposal(<?php echo "$post_id, $current_user";?>)">
+                Make Proposal</button>
+            <p id="proposalSentText"></p>
+    <?php }
+      else if (hasProposal($current_user, $post_id)) {
+            $status = getProposalStatus($current_user, $post_id)['status'];
+
+            if ($status == -1)
+                $text = "Your Proposal is Pending";
+            else if ($status == 0)
+                $text = "Your Proposal was Rejected";
+            else if ($status == 1)
+                $text = "Your Proposal was Accepted";
+            ?>
+            <p id="proposalSentText"><?php echo $text; ?></p>
     <?php
+      }
     }
     ?>
 
-    <h2>
-      <b><?php echo $post['name']; ?></b> </br>
-      for adoption from <b><?php echo $post['user']; ?></b>
-    </h2>
+  <h2>
+    <b><?php echo $post['name']; ?></b> </br>
+    for adoption from <b><?php echo $post['user']; ?></b>
+  </h2>
 
-    <div class="petpost">
-      <div class="petpost-img">
-        <!--Need to add if -->
-        <?php if (isset($_SESSION['username'])) { ?>
-          <script src="../js/favourite.js" type="text/javascript" defer></script>
-          <button id="favourite-star" onclick="favourite(<?php echo $post['id'] ?>)">
-            <?php if (isFavourite($current_user, $post['id'])) { ?>
-              &bigstar;
-            <?php } else { ?>
-              &star;
-            <?php } ?>
-          </button>
-        <?php } ?>
-        <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
-      </div>
-      <ul class="petpost-info">
-        <li>Name: <b><?php echo $post['name']; ?></b></li>
-        <li>Age: <b><?php echo ageToString($post['age']); ?></b></li>
-        <li>Breed: <b><?php echo $post['species']; ?></b></li>
-        <li>Genre: <b><?php echo genderToString($post['gender']); ?></b></li>
-        <li>Size: <b><?php echo sizeToString($post['size']); ?></b></li>
-        <li>Location: <b><?php echo $post['location']; ?></b></li>
-        <li>Posted in: <b><?php echo $post['date']; ?></b></li>
-      </ul>
+  <div class="petpost">
+    <div class="petimage petpost-img" >
+      <!--Need to add if -->
+    <?php if(isset($_SESSION['username'])) { ?>
+        <script src="../js/favourite.js" type="text/javascript" defer></script>
+        <button id="favourite-star" onclick="favourite(<?php echo $post['id']?>)">
+        <?php     if(isFavourite($current_user, $post['id'])) {?>
+            &bigstar;
+        <?php } else {?>
+            &star;
+        <?php }?>
+      </button>
+    <?php }?>
+      <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
     </div>
+    <ul class="petpost-info nobullets">
+      <li>Name: <b><?php echo $post['name']; ?></b></li>
+      <li>Age: <b><?php echo ageToString($post['age']); ?></b></li>
+      <li>Breed: <b><?php echo $post['species']; ?></b></li>
+      <li>Genre: <b><?php echo genderToString($post['gender']); ?></b></li>
+      <li>Size: <b><?php echo sizeToString($post['size']); ?></b></li>
+      <li>Location: <b><?php echo $post['location']; ?></b></li>
+      <li>Posted in: <b><?php echo $post['date']; ?></b></li>
+    </ul>
+  </div>
 
     <h3>Description</h3>
     <div class="petpost-description">
@@ -123,41 +137,6 @@ function drawPost($post, $questionsAnswers)
 
 
   </div>
-<?php } ?>
-
-<?php function drawAddPost()
-{
-  /**
-   * TODO Meter min e max's
-   * Draws a form to add a post
-   */
-?>
-  <section id="addPost">
-    <header>
-      <h2>Create a new Post</h2>
-    </header>
-
-    <form method="post" action="../actions/action_add_post.php" enctype="multipart/form-data">
-      <p>Name <input type="text" name="name" placeholder="name of the pet" required></p>
-      <p>Age<input type="number" name="age" placeholder="age of the pet" required></p>
-
-      <label>Photo
-        <input type="file" name="image">
-      </label>
-
-      <p> <?php drawGendersRadio() ?> </p>
-      <p>Size<input type="number" name="size" placeholder="size" required></p>
-      <p>Description<textarea id="description" name="description" rows="4" cols="50"> </textarea></p>
-      <p>Date<input type="date" name="date" placeholder="date of birth of your pet" required></p>
-
-
-      <p><?php drawColors(false, null); ?> </p>
-      <p><?php drawSpecies(false, null); ?> </p>
-      <p><?php drawCities(false, null); ?> </p>
-      <p><input type="submit" value="Add pet"></p>
-    </form>
-  </section>
-
 <?php } ?>
 
 <?php
@@ -214,17 +193,100 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
 
 <?php function drawQuestionForm($post_id)
 { ?>
+  <script src="../js/utils.js" type="text/javascript" defer></script>
   <script src="../js/add_question.js" type="text/javascript" defer></script>
   <section id="question-input">
-    <textarea name="question_text" rows="2" column="40" placeholder="Write your question..." required></textarea>
+    <textarea id="question-input-ta" name="question_text" rows="2" column="40" placeholder="Write your question..." required></textarea>
     <button id="question-input-button" type="button" onclick="addQuestion(<?php echo $post_id ?>)">Post Question</button>
   </section>
+
+
+  <script type="text/javascript">
+    // see: https://stackoverflow.com/questions/7745741/auto-expanding-textarea/24824750#24824750
+    var textarea = document.getElementById("question-input-ta");
+    var limitRows = 5;
+    var messageLastScrollHeight = textarea.scrollHeight;
+
+    textarea.oninput = function() {
+      var rows = parseInt(textarea.getAttribute("rows"));
+      // If we don't decrease the amount of rows, the scrollHeight would show the scrollHeight for all the rows
+      // even if there is no text.
+      textarea.setAttribute("rows", "1");
+
+      if (rows < limitRows && textarea.scrollHeight > messageLastScrollHeight) {
+          rows++;
+      } else if (rows > 1 && textarea.scrollHeight < messageLastScrollHeight) {
+          rows--;
+      }
+
+      messageLastScrollHeight = textarea.scrollHeight;
+      textarea.setAttribute("rows", rows);
+    };
+  </script>
 <?php } ?>
 
 <?php function drawQuestionsLoginPrompt()
 { ?>
   <section id="question-input">
     <p id="question-login-prompt">Log in to post questions</p>
+  </section>
+<?php } ?>
+
+
+<?php function drawAddPost()
+{ 
+    /**
+     * TODO Meter min e max's
+     * Draws a form to add a post
+     */
+    ?>
+  <section id="addPost">
+    <header><h2>Create a new Post</h2></header>
+
+    <form class="verticalform addpostform" method="post" action="../actions/action_add_post.php" enctype="multipart/form-data">
+      <div class="form-item addpostform-item" >
+        <label for="name">Name</label>
+        <input id="name" type="text" name="name" placeholder="name of the pet" required>
+      </div>
+      <div class="form-item addpostform-item" >
+        <label for="age">Age</label>
+        <input id="age" type="number" name="age" placeholder="age of the pet" required>
+      </div>
+      <div class="form-item addpostform-item" >
+        <label for="image">Photo</label>
+        <input id="image" type="file" name="image" required>
+      </div>
+
+      <div class="form-item listfilter-item" >
+        <?php drawGendersRadio() ?>
+      </div>
+
+      <div class="form-item addpostform-item" >
+        <label for="size">Size</label>
+        <input id="size" type="number" name="size" placeholder="size" required>
+      </div>
+      <div class="form-item addpostform-item" >
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="8" cols="86"></textarea>
+      </div>
+      <div class="form-item addpostform-item" >
+        <label for="date">Birth date</label>
+        <input id="date" type="date" name="date" placeholder="date of birth of your pet" required>
+      </div>
+
+      <div class="form-item addpostform-item" >
+        <?php drawColors(false, null); ?>
+      </div>
+      <div class="form-item addpostform-item" >
+        <?php drawSpecies(false, null); ?>
+      </div>
+      <div class="form-item addpostform-item" >
+        <?php drawCities(false, null); ?>
+      </div>
+
+      <br>
+      <input class="form-button addpostform-button" type="submit" value="Add pet">
+    </form>
   </section>
 <?php } ?>
 

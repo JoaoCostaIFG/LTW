@@ -1,5 +1,6 @@
 <?php 
 require_once '../database/queries/db_post.php';
+require_once '../templates/tpl_utils.php';
 ?>
 <?php function drawPostList($posts)
 {
@@ -29,17 +30,14 @@ require_once '../database/queries/db_post.php';
     $post_path = 'post.php?post_id=' . $post['post_id'];
     ?>
 
-  <a href="<?php echo $post_path; ?>" class="list-item">
-    <ul class="list-item-content">
-      <li class="list-item-img">
-        <div style="background: url('<?php echo $photo_path; ?>') no-repeat center /auto 100%"></div>
-      </li>
-      <li class="list-item-txt">
-        <?php echo $post['name']; ?>
-      </li>
-    </ul>
+  <a class="nounderline list-item" href="<?php echo $post_path; ?>">
+    <div class="petimage">
+      <div class="list-item-img" style="background: url('<?php echo $photo_path; ?>') no-repeat center /auto 100%"></div>
+    </div>
+    <div class="list-item-txt">
+      <?php echo $post['name']; ?>
+    </div>
   </a>
-
 <?php } ?>
 
 <?php function drawSearch($values)
@@ -53,8 +51,9 @@ require_once '../database/queries/db_post.php';
     <label for="name">Name</label>
     <input id="name" type="text" name="name" value="<?php echo $values['name'] ?>">
   </div>
-
+  <div class="form-item listfilter-item" >
     <?php drawGenders(true, $values['gender']); ?>
+  </div>
   <div class="form-item listfilter-item" >
     <label for="age">Age</label>
     <input id="age" type="text" name="age" value="<?php echo $values['age'] ?>">
@@ -63,10 +62,12 @@ require_once '../database/queries/db_post.php';
     <label for="size">Size</label>
     <input id="age" type="text" name="size" value="<?php echo $values['size'] ?>">
   </div>
-  
+  <div class="form-item listfilter-item" >
     <?php drawSpecies(true, $values['species']); ?>
+  </div>
+  <div class="form-item listfilter-item" >
     <?php drawCities(true, $values['city']); ?>
-
+  </div>
   <br>
   <input class="form-button listfilter-button" type="submit" value="Search">
 </form>

@@ -1,46 +1,51 @@
 <?php
-include_once('../database/database_instance.php');
+require_once '../database/database_instance.php';
 
     /* INSERTS */
 
-    function insertPost($post) {
-        $db = Database::instance()->db();
-        $stmt = $db->prepare(
-            'INSERT INTO PetPost VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
-        );
-        $stmt->execute($post);
-        return $db->lastInsertId();
-    }
+function insertPost($post)
+{
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'INSERT INTO PetPost VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+    );
+    $stmt->execute($post);
+    return $db->lastInsertId();
+}
 
-    function insertPhoto($post_id, $type) {
-        $db = Database::instance()->db();
-        $stmt = $db->prepare(
-            'INSERT INTO Photo VALUES(NULL, ?, ?, ?)'
-        );
-        $date = date("Y-m-d");
-        $stmt->execute(array($post_id, $type, $date));
-        return $db->lastInsertId();
-    }
+function insertPhoto($post_id, $type)
+{
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'INSERT INTO Photo VALUES(NULL, ?, ?, ?)'
+    );
+    $date = date("Y-m-d");
+    $stmt->execute(array($post_id, $type, $date));
+    return $db->lastInsertId();
+}
 
     /* GETTERS */
 
-    function conditionsToString($query_conditions_array) {
-        if (count($query_conditions_array) == 0)
-            return '';
-        $res = 'WHERE ';
-        $i = 0;
-        while ($i < (count($query_conditions_array) - 1)) {
-            $res .= $query_conditions_array[$i] . ' AND ';
-            $i += 1;
-        }
-        $res .= $query_conditions_array[$i];
-        return $res;
+function conditionsToString($query_conditions_array)
+{
+    if (count($query_conditions_array) == 0) {
+        return '';
     }
+    $res = 'WHERE ';
+    $i = 0;
+    while ($i < (count($query_conditions_array) - 1)) {
+        $res .= $query_conditions_array[$i] . ' AND ';
+        $i += 1;
+    }
+    $res .= $query_conditions_array[$i];
+    return $res;
+}
 
   /**
    * Returns all Posts containing the name and photo of the pet
    */
-  function getPosts($search_options, $query_conditions_array) {
+function getPosts($search_options, $query_conditions_array)
+{
     $query_conditions = conditionsToString($query_conditions_array);
     $db = Database::instance()->db();
     echo '<br>';
@@ -48,17 +53,18 @@ include_once('../database/database_instance.php');
         'SELECT DISTINCT post_id, name, age, gender, size, city_id, species_id,
          Photo.id as photo_id, Photo.extension as photo_extension
          FROM PetPost JOIN Photo ON(PetPost.id = post_id) ' .
-         $query_conditions .
-         ' GROUP BY PetPost.id'
+        $query_conditions .
+        ' GROUP BY PetPost.id'
     );
     $stmt->execute($search_options);
     return $stmt->fetchAll(); 
-  }
+}
 
   /**
    * Returns post information
    */
-  function getPost($post_id) {
+function getPost($post_id)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         '
@@ -74,11 +80,12 @@ include_once('../database/database_instance.php');
     );
     $stmt->execute(array($post_id));
     return $stmt->fetch();
-  }
+}
   /**
    * Returns a post comments
    */
-  function getComments($post_id) {
+function getComments($post_id)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         '
@@ -88,12 +95,13 @@ include_once('../database/database_instance.php');
     );
     $stmt->execute(array($post_id));
     return $stmt->fetchAll();
-  }
+}
 
   /**
    * Returns a post comments
    */
-  function getQuestionsAnswers($post_id) {
+function getQuestionsAnswers($post_id)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         '
@@ -104,9 +112,10 @@ include_once('../database/database_instance.php');
         WHERE Question.post_id=?');
     $stmt->execute(array($post_id));
     return $stmt->fetchAll();
-  }
+}
 
-  function getColors() {
+function getColors()
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         '
@@ -115,9 +124,10 @@ include_once('../database/database_instance.php');
     );
     $stmt->execute();
     return $stmt->fetchAll();
-  }
+}
 
-  function getSpecies() {
+function getSpecies()
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         '
@@ -126,19 +136,21 @@ include_once('../database/database_instance.php');
     );
     $stmt->execute();
     return $stmt->fetchAll();
-  }
+}
 
   // Text input is already validated
-  function insertComment($user_id, $post_id, $text) {
+function insertComment($user_id, $post_id, $text)
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare(
-      'INSERT INTO Comment VALUES(NULL, ?, ?, ?, ?)'
+        'INSERT INTO Comment VALUES(NULL, ?, ?, ?, ?)'
     );
     
     $stmt->execute(array($user_id, $post_id, $text, date("d/m/Y")));
-  }
+}
 
-  function getCities() {
+function getCities()
+{
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         '

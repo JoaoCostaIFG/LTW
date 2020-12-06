@@ -1,24 +1,39 @@
 <?php
-    include_once('../session.php');
-    include_once('../database/queries/db_user.php');
+require_once '../pages/session.php';
+require_once '../database/queries/db_user.php';
+require_once '../actions/action_upload.php';
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $picture = $_POST['picture'];
-    $email = $_POST['email'];
-    $mobile_number = $_POST['mobile_number'];
+function registerFail($msg)
+{
+    $_SESSION['messages'] = array('type' => 'signUpError', 'content' => $msg);
+    die(header('Location: ../pages/register.php'));
+}
 
-    //TODO Verify regex password and username here
-    // TODO Verify repeated password
+$username = $_POST['username'];
+$password = $_POST['password'];
+$password_r = $_POST['password_r'];
+$email = $_POST['email'];
+$mobile_number = $_POST['mobile_number'];
 
-    try {
-        insertUser($username, $password, $picture, $email, $mobile_number);
-        $_SESSION['username'] = $username;
-        $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Signed up and logged in!');
-        header('Location: ../pages/list.php');
-    } catch (PDOException $e) {
-        die($e->getMessage());
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Failed to signup!');
-        header('Location: ../pages/register.php');
-    }
+// TODO Verify regex password and username here
+
+if ($password != $password_r) { // check is passwords are equal
+    registerFail("Passwords don't match!");
+}
+
+$type = photoIsValid($_FILES['image']['tmp_name']);
+if (!$type) { // check if the given image is jpeg/png
+    registerFail("The given image is not valid!");
+}
+
+try {
+    $user_id = insertUser($username, $password, $email, $mobile_number);
+    uploadPhoto($user_id, $type, true);
+
+    $_SESSION['username'] = $username;
+    $_SESSION['messages'] = array('type' => 'success', 'content' => 'Signed up and logged in!');
+    header('Location: ../pages/list.php');
+} catch (PDOException $e) {
+    registerFail('Failed to signup!');
+}
 ?>

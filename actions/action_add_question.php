@@ -34,3 +34,4 @@
 
   //The response is used by js to draw the question
   drawQuestionAnswer($post_id, $_SESSION['username'], $question);
+?>

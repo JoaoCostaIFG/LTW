@@ -12,22 +12,32 @@
   <body>
     <nav id="top-bar">
       <ul id="menu">
-        <li><a href="/index.php">Home</a></li>
-        <li><a href="/pages/list.php">Search</a></li>
-        <li><a href="/pages/contacts.php">Contacts</a></li>
+        <li><a class="nounderline" href="/index.php">Home</a></li>
+        <li><a class="nounderline" href="/pages/list.php">Search</a></li>
+        <li><a class="nounderline" href="/pages/contacts.php">Contacts</a></li>
       </ul>
 
       <?php if (!isset($_SESSION['username'])) { ?>
         <div id="signup">
-          <a href="/pages/register.php">Sign Up</a>
-          <a href="/pages/login.php">Log in</a>
+          <a class="nounderline" href="/pages/register.php">Sign Up</a>
+          <a class="nounderline" href="/pages/login.php">Log in</a>
         </div>
       <?php } else { ?>
         <ul id="logout">
-          <li class="addpost-button"><a href="add_post.php"><input type="submit" value="+"></a></li>
-          <li>Logged in as <b><?php echo $_SESSION['username'] ?></b></li>
-          <li class="logout-button">
-            <a href='../actions/action_logout.php'><input type="submit" value="Logout"></a>
+          <li class="topbar-button">
+            <a class="nounderline" href="list_sent_proposals.php"><input type="submit" value="See sent proposals"></a>
+          </li>
+          <li class="topbar-button">
+            <a class="nounderline" href="list_received_proposals.php"><input type="submit" value="See received proposals"></a>
+          </li>
+          <li class="topbar-button">
+            <a class="nounderline" href="add_post.php"><input type="submit" value="+"></a>
+          </li>
+          <li>
+            Logged in as <b><?php echo $_SESSION['username'] ?></b>
+          </li>
+          <li id="logout-button">
+            <a class="nounderline" href='../actions/action_logout.php'><input type="submit" value="Logout"></a>
           </li>
         </ul>
       <?php }?>

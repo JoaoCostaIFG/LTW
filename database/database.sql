@@ -4,9 +4,8 @@
 drop table if exists User;
 create table User(
     id INTEGER PRIMARY KEY,
-    username TEXT NOT NULL,
+    username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
-    picture TEXT,
     email TEXT UNIQUE NOT NULL,
     mobile_number CHAR(9) UNIQUE NOT NULL
 );
@@ -97,7 +96,7 @@ drop table if exists Proposal;
 create table Proposal(
     user_id INTEGER REFERENCES User(id),
     post_id INTEGER REFERENCES PetPost(id),
-    accepted INTEGER CHECK (accepted = 0 OR accepted = 1),
+    accepted INTEGER CHECK (accepted = 0 OR accepted = 1 OR accepted = -1),
     date DATE NOT NULL,
     PRIMARY KEY(user_id, post_id)
 );

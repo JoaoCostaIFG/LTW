@@ -1,5 +1,6 @@
 <?php
 require_once 'session.php';
+require '../templates/common/tpl_header_noimg.php';
 require '../templates/tpl_post.php';
 
 if (!isset($_SESSION['username'])) {
@@ -7,4 +8,6 @@ if (!isset($_SESSION['username'])) {
 }
 
 drawAddPost();
+
+require '../templates/common/tpl_footer.php';
 ?>
