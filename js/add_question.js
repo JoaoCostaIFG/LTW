@@ -14,11 +14,13 @@ function addQuestion(post_id) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
+            removeNoAnswersText()
             //Trim is used because the reponse text comes with new lines behind
             let response = xhttp.responseText.trim('\n');
-            //Used to append before input
+            //Used to append before question input
             let doc = new DOMParser().parseFromString(response, 'text/html').getElementsByClassName("petpost-question")[0];
             let questions = document.getElementById("petpost-questions");
+            //error in this case
             if(!doc){
                 questions.innerHTML += response;
                 return;
@@ -30,6 +32,13 @@ function addQuestion(post_id) {
 
     xhttp.open("GET", "../actions/action_add_question.php?" + encodeForAjax({ post_id: post_id, question_text: text }), true);
     xhttp.send();
+}
+
+function removeNoAnswersText(){
+    let text = document.getElementById("no-questions");
+    if(text){
+        text.remove();
+    }
 }
 
 function removeError() {
