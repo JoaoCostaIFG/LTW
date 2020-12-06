@@ -8,7 +8,7 @@
   include('../database/queries/db_user.php');
   include('../templates/tpl_profile.php');
 
-  $user = getUserPublicInfo($_SESSION['username']);
+  $user = getUserInfo($_SESSION['username']);
   
   drawEditProfile($user);
 

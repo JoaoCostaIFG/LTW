@@ -8,7 +8,7 @@
         'id' => $user_id,
         'username' => $_POST['username'],
         'email' => $_POST['email'],
-        'mobile_phone' => $_POST['mobile_number'],
+        'mobile_number' => $_POST['mobile_number'],
     );
   
     try {
