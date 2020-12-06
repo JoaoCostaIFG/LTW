@@ -28,7 +28,7 @@ if (!$type) { // check if the given image is jpeg/png
 
 try {
 
-    $user_id = insertUser($username, $password, $email, $mobile_number, NULL);
+    $user_id = insertUser($username, $password, $email, $mobile_number, null);
     $img = uploadUserPhoto($user_id, $type);
     $user_info = array(
         'id' => $user_id,

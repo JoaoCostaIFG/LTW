@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title><?php if($title) { echo $title . ' | ';
+    <title><?php if(isset($title)) { echo $title . ' | ';
            } ?>Become my buddy</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -11,8 +11,7 @@ function photoIsValid($image_path)
         $type = false;
     }
 
-    $type = exif_imagetype($image_path);
-    if ($type == false || ($type !== IMAGETYPE_PNG && $type !== IMAGETYPE_JPEG)) {
+    if ($type === false || ($type !== IMAGETYPE_PNG && $type !== IMAGETYPE_JPEG)) {
         $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Image is not a jpg or png file!');
         return false;
     }
