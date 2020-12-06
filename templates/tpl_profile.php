@@ -7,7 +7,6 @@ function drawProfile($user, $user_posts)
      * Draws an user's profile 
      * note: the image is inside a div so we can center it inside the column.
      */
-print_r($user);
     $photo_path = "../static/users/" . $user['id'] . "." . $user['extension'];
     ?>
 

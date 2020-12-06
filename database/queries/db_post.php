@@ -55,15 +55,15 @@ require_once '../database/database_instance.php';
       /**
        * Returns all Posts containing the name and photo of the pet
        */
-    function getPosts($search_options, $query_conditions_array)
+    function getPosts($search_options, $query_conditions_array, $from_clause)
     {
         $query_conditions = conditionsToString($query_conditions_array);
         $db = Database::instance()->db();
-        echo '<br>';
         $stmt = $db->prepare(
-            'SELECT DISTINCT post_id, name, age, gender, size, city_id, species_id,
+            'SELECT DISTINCT PetPost.id as post_id, name, age, gender, size, city_id, species_id,
              PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
-             FROM PetPost JOIN PetPhoto ON(PetPost.id = post_id) ' .
+             FROM PetPost JOIN PetPhoto ON(PetPost.id = PetPhoto.post_id) ' .
+            $from_clause .
             $query_conditions .
             ' GROUP BY PetPost.id'
         );
