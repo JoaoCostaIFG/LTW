@@ -7,13 +7,14 @@ function drawProfile($user, $user_posts)
      * Draws an user's profile 
      * note: the image is inside a div so we can center it inside the column.
      */
+    $photo_path = "../static/users/" . $user['id'] . "." . $user['extension'];
     ?>
 
     <h2><b><?php echo $user['username'];?></b>&#39;s Profile</h2>
 
     <div id="profile">
         <div id="profile-pic">
-          <img src="<?php echo $user['picture']; ?>" alt="User Profile Picture">
+          <img src="<?php echo $photo_path; ?>" alt="User Profile Picture">
         </div>
         <ul class="nobullets" id="profile-info">
             <li>Email: <b><?php echo $user['email']; ?></b></li>

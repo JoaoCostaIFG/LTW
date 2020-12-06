@@ -33,7 +33,7 @@
 
     try {
         updateUser($user_info);
-        uploadUserPhoto($user_id, $type);
+        uploadPhoto($user_id, $type, true);
         $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully updated user.');
         
     } catch (Exception $e) {

@@ -11,29 +11,61 @@ function photoIsValid($image_path)
         $type = false;
     }
 
-    $type = exif_imagetype($image_path);
-    if ($type == false || ($type !== IMAGETYPE_PNG && $type !== IMAGETYPE_JPEG)) {
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Image is not a jpg or png file!');
+    if ($type === false || ($type !== IMAGETYPE_PNG && $type !== IMAGETYPE_JPEG)) {
+        $_SESSION['messages'] = array('type' => 'error', 'content' => 'Image is not a jpg or png file!');
         return false;
     }
     return $type;
 }
 
-function uploadPetPhoto($post_id, $type)
-{
+function typeToString($type) {
     if ($type === IMAGETYPE_PNG) {
-        $img_type = "png";
+        return "png";
     } else if ($type === IMAGETYPE_JPEG) {
-        $img_type = "jpg";
+        return "jpg";
     } else {
         return;
     }
+}
 
-    $id = insertPhoto($post_id, $img_type);
+function updatePhoto($photo_id, $type, $is_user) {
+    $img_type = typeToString($type);
+    if (!$img_type)
+        return;
+
+    $originalFileName = "../static/";
+    if ($is_user)
+      $originalFileName .= "users/";
+    else
+      $originalFileName .= "images/";
+
+    $originalFileName .= "$photo_id.$img_type";
+    //$smallFileName = "images/thumbs_small/$id.jpg";
+
+    //$mediumFileName = "images/thumbs_medium/$id.jpg";
+
+    // Move the uploaded file to its final destination
+    move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
+}
+
+function uploadPhoto($id, $type, $is_user)
+{
+    $img_type = typeToString($type);
+    if (!$img_type)
+        return;
 
     // Generate filenames for original, small and medium files
-    $originalFileName .= "../static/images/";
-    $originalFileName .= "$id.$img_type";
+    $originalFileName = "../static/";
+    if ($is_user) {
+      $originalFileName .= "users/";
+      $photo_id = $id; // photo id is user_id
+    }
+    else {
+      $originalFileName .= "images/";
+      $photo_id = insertPhoto($id, $img_type);
+    }
+
+    $originalFileName .= "$photo_id.$img_type";
     //$smallFileName = "images/thumbs_small/$id.jpg";
 
     //$mediumFileName = "images/thumbs_medium/$id.jpg";
@@ -67,22 +99,22 @@ function uploadPetPhoto($post_id, $type)
     //imagejpeg($medium, $mediumFileName);
 }
 
-function uploadUserPhoto($user_id, $type)
-{
-    if ($type === IMAGETYPE_PNG) {
-        $img_type = "png";
-    } else if ($type === IMAGETYPE_JPEG) {
-        $img_type = "jpg";
-    } else {
-        return;
-    }
+//function uploadUserPhoto($user_id, $type)
+//{
+    //if ($type === IMAGETYPE_PNG) {
+        //$img_type = "png";
+    //} else if ($type === IMAGETYPE_JPEG) {
+        //$img_type = "jpg";
+    //} else {
+        //return;
+    //}
 
-    // Generate filenames for original, small and medium files
-    $originalFileName .= "../static/users/";
-    $originalFileName .= "$user_id.$img_type";
-    unlink($originalFileName);
-    move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
+    //// Generate filenames for original, small and medium files
+    //$originalFileName = "../static/users/";
+    //$originalFileName .= "$user_id.$img_type";
+    //unlink($originalFileName);
+    //move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
 
-    return $originalFileName;
-}
+    //return $originalFileName;
+//}
 ?>

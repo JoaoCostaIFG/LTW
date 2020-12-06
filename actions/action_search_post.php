@@ -18,11 +18,10 @@
 
     try {
         insertPost($post_info);
-        $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully added post');
+        $_SESSION['messages'] = array('type' => 'success', 'content' => 'Successfully added post');
         header('Location: ../pages/list.php');
     } catch (PDOException $e) {
-        die($e->getMessage()); // TODO is this ok here?
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Failed to add post!');
-        header('Location: ../pages/add_post.php');
+        $_SESSION['messages'] = array('type' => 'error', 'content' => 'Failed to add post!');
+        die(header('Location: ../pages/add_post.php'));
     }
 ?>

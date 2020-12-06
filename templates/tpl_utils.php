@@ -1,15 +1,4 @@
 <?php
-
-//function drawPetPhoto($photo_id, $photo_extension, $class) {
-    //$photo_path = "../static/images/" . $photo_id . "." . $photo_extension;
-?>
-    
-    <!-- <div class="<?php echo $class; ?>" >
-        <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
-    </div> -->
-<?php
-//}
-
 function drawOption($option_id, $option_name, $is_selected)
 {
     /*

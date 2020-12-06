@@ -2,17 +2,17 @@ PRAGMA foreign_keys = ON;
 
 -- User
 --  id    username    password    picture    email    mobile_number
-INSERT INTO User VALUES(1, "Padoru", "Sempre a trolar", "padoru@padoru.com", "912345678", "1.png");
-INSERT INTO User VALUES(2, "Maynardo", "Jaime do rato trovejante", "maynerd@tool.band", "921912912", "2.png");
-INSERT INTO User VALUES(3, "Nachos", "ltweaminhacadeirapreferida123", "nachoMan@hotmail.com", "933333333", "3.png");
-INSERT INTO User VALUES(4, "Irao", "meow33meow", "atchim@gmail.com", "966666666", "4.png");
-INSERT INTO User VALUES(5, "FontaoFontalhao", "ronron#99", "santinho@gmail.com", "911111111", "5.png");
-INSERT INTO User VALUES(6, "Lucas", "desculpeinterromper", "auau@hotmail.com", "933334563", "6.png");
-INSERT INTO User VALUES(7, "Davide", "wafflegood123", "xxxwaffle420hd69@coldmail.com", "932560122", "7.png");
-INSERT INTO User VALUES(8, "João", "fogoistodemoramuito", "ihhhhhh@uimail.com", "911911911", "8.png");
-INSERT INTO User VALUES(9, "CarlosPereira935", "HYN7h68Gohioh", "carlospereira@gmail.com", "932457977", "9.png");
-INSERT INTO User VALUES(10, "Canil da Trofa", "JNNJUHNOHn7N7", "canildatrofa@gmail.com", "252877658", "10.png");
-INSERT INTO User VALUES(11, "Louisse221", "bhH7B667m87y", "louie221@gmail.com", "252586000", "11.png");
+INSERT INTO User VALUES(1, "Padoru", "Sempre a trolar", "padoru@padoru.com", "912345678", "png");
+INSERT INTO User VALUES(2, "Maynardo", "Jaime do rato trovejante", "maynerd@tool.band", "921912912", "png");
+INSERT INTO User VALUES(3, "Nachos", "ltweaminhacadeirapreferida123", "nachoMan@hotmail.com", "933333333", "png");
+INSERT INTO User VALUES(4, "Irao", "meow33meow", "atchim@gmail.com", "966666666", "png");
+INSERT INTO User VALUES(5, "FontaoFontalhao", "ronron#99", "santinho@gmail.com", "911111111", "png");
+INSERT INTO User VALUES(6, "Lucas", "desculpeinterromper", "auau@hotmail.com", "933334563", "png");
+INSERT INTO User VALUES(7, "Davide", "wafflegood123", "xxxwaffle420hd69@coldmail.com", "932560122", "png");
+INSERT INTO User VALUES(8, "João", "fogoistodemoramuito", "ihhhhhh@uimail.com", "911911911", "png");
+INSERT INTO User VALUES(9, "CarlosPereira935", "HYN7h68Gohioh", "carlospereira@gmail.com", "932457977", "png");
+INSERT INTO User VALUES(10, "Canil da Trofa", "JNNJUHNOHn7N7", "canildatrofa@gmail.com", "252877658", "png");
+INSERT INTO User VALUES(11, "Louisse221", "bhH7B667m87y", "louie221@gmail.com", "252586000", "png");
 
 -- Color
 -- id   name

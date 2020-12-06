@@ -8,7 +8,7 @@ create table User(
     password TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
     mobile_number CHAR(9) UNIQUE NOT NULL,
-    picture TEXT
+    extension TEXT
 );
 
 drop table if exists Color;
@@ -54,7 +54,7 @@ create table PetPost(
 drop table if exists PetPhoto; 
 create table PetPhoto( 
     id INTEGER PRIMARY KEY,
-    post_id INTEGER REFERENCES PetPost(id),
+    post_id INTEGER REFERENCES PetPost(id) ON DELETE CASCADE,
     extension TEXT CHECK(extension LIKE "jpg" OR extension LIKE "png"),
     date DATE NOT NULL
 );
