@@ -27,7 +27,6 @@ function addAnswer(question_id){
             let questions = document.getElementById("QA" + question_id);
             questions.innerHTML += response;
             //Error
-            console.log(response.substr(0, 2));
             if(response.substr(0, 2) === "<p"){
                 return;
             }
