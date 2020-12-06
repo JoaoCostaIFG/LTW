@@ -1,9 +1,10 @@
 <?php
-    include_once('../pages/session.php');
+    require_once '../pages/session.php';
+    require_once '../templates/tpl_utils.php';
 
     session_unset();
     session_destroy();
 
-    $_SESSION['messages'] = array('type' => 'success', 'content' => 'Logged out!');
+    setSessionMessage('success', 'Logged out!');
     header('Location: ../index.php');
 ?>

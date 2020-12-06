@@ -242,6 +242,7 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
       if (isset($questionAnswer['answer'])) {
           drawAnswer($questionAnswer);
       } ?>
+</section>
 <?php } ?>
 
 <?php function drawQuestionsAnswers($post_id, $user_id, $questionsAnswers)
