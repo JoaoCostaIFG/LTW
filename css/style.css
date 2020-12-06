@@ -2,25 +2,39 @@
   --fonts: helvetica, sans-serif;
 
   --background: #202124;
+  --background-dark: #161616;
   --main: #cfd3d8;
   --green: #5d8d79;
+  --red: #b94642;
   --darkGreen: #2f5e4a;
   --orange: #8d645d;
   --dark: #121212;
   --light: #3c4042;
+
+  --button-corner-radius: 2em;
+
+  --items-text-corner-radius: 0.6em;
+  --comment-corner-radius: 0.6em;
+
+  --petimage-corner-radius: 1em;
+  --petimage-corner-radius-inner: 0.85em;
+  --petimage-size: 16em;
+  --petpost-img-size: 18em;
 }
+
+/* || GENERAL STYLES */
 
 body {
-  background-color: var(--background);
   font-family: var(--fonts);
   color: var(--main);
+  background-color: var(--background);
 }
 
-#headimg {
-  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
+p {
+  width: 60em;
 }
 
-/* HEADERS */
+/* headers */
 h1 {
   color: var(--orange);
   font-size: 3em;
@@ -32,6 +46,7 @@ h2 {
   font-weight: normal;
 }
 
+/* links */
 h1 a,
 h2 a,
 h3 a,
@@ -40,173 +55,384 @@ h4 a {
   text-decoration: none;
 }
 
-/* MENU */
-#menu {
+a {
+  color: var(--main);
   font-weight: bold;
 }
 
-#menu > ul > li {
-  list-style-type: none;
+/* inputs */
+button,
+input[type="submit"] {
+  border: none;
+  border-radius: var(--button-corner-radius);
+
+  color: var(--main);
+  text-align: center;
 }
 
-#menu > ul > li + li {
+textarea {
+  resize: none;
+
+  margin: 0;
+  padding: 1em;
+  width: 85%;
+
+  border-radius: 0.5em;
+
+  font-size: x-large;
+}
+
+/* || UTILITIES */
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.nobullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nounderline {
+  text-decoration: none;
+}
+
+/* || SITEWIDE */
+
+#headimg {
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2), 0 8px 22px 0 rgba(0, 0, 0, 0.19);
+}
+
+.petimage {
+  border-radius: var(--petimage-corner-radius);
+  background-color: var(--dark);
+}
+
+.petimage div {
+  width: var(--petimage-size);
+  height: var(--petimage-size);
+
+  /* the inner corner radius needs to be smaller than the outer
+   otherwise the image won't cover the corners */
+  border-radius: var(--petimage-corner-radius);
+  background-size: contain;
+}
+
+/* || TOPBAR */
+#top-bar {
+  font-weight: bold;
+
+  width: 100%;
+  padding: 1em;
+  box-sizing: border-box;
+
+  background-color: var(--dark);
+}
+
+#menu {
+  font-size: large;
+}
+
+#menu > li + li {
   margin-left: 3em;
 }
 
-#menu > ul > li > a {
-  text-decoration: none;
-  font-size: large;
-  color: var(--main);
-}
-
-#menu > ul > li > a:hover {
-  color: var(--green);
-}
-
-#signup a {
-  text-decoration: none;
-  font-size: small;
-  color: var(--main);
-}
-
+#menu > li > a:hover,
 #signup a:hover {
   color: var(--green);
 }
 
-#logout input[type="submit"] {
-  border: none;
-  font-weight: bold;
-  font-size: medium;
-  color: var(--main);
+#signup,
+#logout {
+  font-size: small;
 }
 
-#logout > li:first-child {
-  border: none;
+#logout {
   font-weight: normal;
-  font-size: medium;
-  color: var(--main);
 }
 
-#logout input[type="submit"]:hover {
-  color: var(--green);
-}
+.topbar-button input[type="submit"] {
+  /* add post button */
+  border-radius: 20em;
 
-/* LIST */
-.list-item {
-  color: var(--main);
-  background-color: var(--dark);
-  border: 2px solid var(--light);
-
-  text-decoration: none;
-  text-align: center;
-  font-weight: bold;
-
-  border-radius: 14px;
-}
-
-.list-item:hover {
-  border-color: var(--green);
-}
-
-.list-item-content li {
-  list-style-type: none;
-}
-
-.list-item-img div {
-  width: 16em;
-  height: 16em;
-
-  border-radius: 12px 12px 0px 0px;
-  background-size: contain;
-}
-
-.list-item-txt {
-  /* image's description */
-  padding: 0.5em;
-  font-size: 1.5em;
-
-  margin-top: -0.3em; /* TODO this might be problematic */
-
-  /* make this part stand out */
-  background-color: var(--dark); /* hide part of the image that overflows */
+  background-color: var(--background-dark);
   box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
-  /* inner border to make this section thicker */
-  border: 2px solid var(--light);
-  border-radius: 0px 0px 12px 12px;
+
+  font-weight: bold;
 }
 
-/* LIST FORM */
-.listfilter {
-  text-align: center;
+.topbar-button input[type="submit"]:hover {
+  color: var(--dark);
+  background-color: var(--green);
 }
 
-.listfilter input {
-  padding: 0.7em;
+#logout-button input[type="submit"] {
+  color: var(--red);
+  background-color: var(--dark);
+
+  font-weight: bold;
+}
+
+#logout-button input[type="submit"]:hover {
+  display: inline-block;
+
+  background-color: var(--background-dark);
+  box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
+}
+
+/* || FORM */
+.verticalform {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.form-item {
+  position: relative;
+  display: inline-block;
+
+  text-align: left;
+}
+
+.form-item > label {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+
+  font-weight: bold;
+}
+
+.form-item > input,
+.form-item > select {
   border: none;
-  width: 10%; /* important */
+  width: 100%; /* important */
+  padding: 0.7em;
+  box-sizing: border-box;
 
   background-color: var(--light);
   color: var(--main);
   font-weight: bold;
 }
 
-.listfilter input + input {
-  margin-left: 2em;
-}
-
-.listfilter input[type="submit"] {
-  margin-top: 1em;
-  text-align: center;
-
-  border-radius: 20px;
+.form-button {
+  padding: 0.7em;
+  box-sizing: border-box;
 
   background-color: var(--green);
   color: var(--background);
+
+  font-weight: bold;
   font-size: large;
 }
 
-.listfilter input[type="submit"]:hover {
+.form-button:hover {
   background-color: var(--darkGreen);
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 8px 22px 0 rgba(0, 0, 0, 0.3); /* the edgehog */
 }
 
-#showmoreButton {
-  padding: 0.7em 2em;
-  margin-top: 3em;
+/* || SEARCH PAGE */
+.list-item {
+  border: 2px solid var(--light);
+  border-radius: var(--petimage-corner-radius);
 
-  border-radius: 20px;
-  border: none;
-
-  background-color: var(--green);
-  color: var(--background);
-  font-size: large;
+  text-align: center;
   font-weight: bold;
 }
 
-#showmoreButton:hover {
-  background-color: var(--darkGreen);
+.list-item:hover {
+  border-color: var(--green);
 }
 
-/* POST PAGE */
+.list-item-img {
+  /* the inner corner radius needs to be smaller than the outer
+   otherwise the image won't cover the corners */
+  border-radius: var(--petimage-corner-radius-inner) var(--petimage-corner-radius-inner) 0 0 !important;
+}
+
+.list-item-txt {
+  /* image's description */
+  margin-top: -0.3em; /* TODO this might be problematic */
+  padding: 0.5em;
+  font-size: x-large;
+
+  /* inner border to make this section thicker */
+  border: 2px solid var(--light);
+  border-radius: 0 0 var(--items-text-corner-radius)
+    var(--items-text-corner-radius);
+
+  /* make this part stand out */
+  background-color: var(--dark); /* hide part of the image that overflows */
+  box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
+}
+
+/* || LIST FORM */
+.listfilter {
+  text-align: center;
+  margin-bottom: 1em; /* gives space for the list */
+}
+
+.listfilter-item {
+  width: 12%; /* important */
+}
+
+.listfilter-item + .listfilter-item {
+  margin-left: 2em;
+}
+
+.listfilter-button {
+  margin-top: 1em;
+  width: 8em; /* important */
+}
+
+/* || POST PAGE */
+.petpost-page {
+  margin-left: 1em;
+}
+
 .petpost {
-  margin: 0;
-  margin-top: 1.6em;
-  padding: 0;
-  list-style-position: inside;
-  font-size: 1.4em;
-}
-
-.petpost li {
-  list-style-type: none;
-  padding: 0.2em;
-  margin-left: 12em;
+  margin-top: 1em;
+  margin-bottom: 2em;
 }
 
 .petpost-img {
-  width: 16em;
-  height: 16em;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
 
-  border-radius: 12px;
+  border: solid var(--green) 2px;
+  box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
+}
+
+.petpost-img div {
+  width: var(--petpost-img-size);
+  height: var(--petpost-img-size);
+
+  border-radius: var(--petimage-corner-radius-inner);
   background-size: contain;
-  float: left;
+}
+
+#favourite-star {
+  position: absolute;
+  display: inline;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  color: goldenrod;
+  font-size: xx-large;
+}
+
+.petpost-info {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  margin-left: 1em;
+  padding: 0;
+
+  font-size: 1.4em;
+}
+
+.petpost-info li + li {
+  margin-top: 0.5em;
+}
+
+/* || POST PAGE DESCRIPTION + COMMENTS */
+.petpost-description,
+.petpost-comment {
+  display: inline-block;
+  margin-left: 1em;
+  padding: 0.3em 1em;
+  box-sizing: border-box;
+
+  border-radius: var(--comment-corner-radius);
+}
+
+.petpost-description:hover,
+.petpost-comment:hover {
+  background-color: var(--background-dark);
+}
+
+.petpost-description {
+  background-color: var(--dark);
+}
+
+.petpost-comment {
+  margin-bottom: 1em;
+
+  background-color: var(--light);
+}
+
+.petpost-comment p + p {
+  /* date + author */
+  margin-top: 2em;
+  width: 100%;
+
+  text-align: right;
+  font-weight: bold;
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+#comment-input {
+  margin-top: 1em;
+  margin-left: 1em;
+  width: 60em;
+}
+
+#comment-input-ta,
+#comment-input-button {
+  display: inline-block;
+
+  border: none;
+  vertical-align: middle;
+
+  color: var(--main);
+  background-color: var(--light);
+}
+
+#comment-input-button {
+  /*Comment text input button*/
+  font-size: large;
+  padding: 0.3em;
+}
+
+#comment-input-button:hover {
+  background-color: var(--dark);
+}
+
+/* || AUTH FORMS */
+.signupform {
+  margin-top: 3em;
+}
+
+.signupform-item {
+  max-width: 40em; /* important */
+}
+
+.signupform-item + .signupform-item {
+  margin-top: 2em;
+}
+
+.signupform-button {
+  margin-top: 2em;
+  width: 8em; /* important */
+}
+
+/* || ADDPOST FORM */
+.addpostform {
+  margin-top: 3em;
+}
+
+.addpostform-item {
+  max-width: 40em; /* important */
+}
+
+.addpostform-item + .addpostform-item {
+  margin-top: 2em; /* important */
+}
+
+.addpostform-button {
+  margin-top: 2em;
+  width: 8em; /* important */
 }

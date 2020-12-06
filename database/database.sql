@@ -4,9 +4,8 @@
 drop table if exists User;
 create table User(
     id INTEGER PRIMARY KEY,
-    username TEXT NOT NULL,
+    username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
-    picture TEXT,
     email TEXT UNIQUE NOT NULL,
     mobile_number CHAR(9) UNIQUE NOT NULL
 );
@@ -55,7 +54,7 @@ drop table if exists Photo;
 create table Photo( 
     id INTEGER PRIMARY KEY,
     post_id INTEGER REFERENCES PetPost(id),
-    photo_path TEXT,
+    extension TEXT CHECK(extension LIKE "jpg" OR extension LIKE "png"),
     date DATE NOT NULL
 );
 
@@ -95,11 +94,11 @@ create table Favourite(
 
 drop table if exists Proposal;
 create table Proposal(
-    id INTEGER PRIMARY KEY,
     user_id INTEGER REFERENCES User(id),
     post_id INTEGER REFERENCES PetPost(id),
-    accepted INTEGER,
-    date DATE NOT NULL
+    accepted INTEGER CHECK (accepted = 0 OR accepted = 1 OR accepted = -1),
+    date DATE NOT NULL,
+    PRIMARY KEY(user_id, post_id)
 );
 
 

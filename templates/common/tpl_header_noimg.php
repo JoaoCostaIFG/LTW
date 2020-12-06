@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-US">
   <head>
-    <title>Become my buddy</title>    
+    <title><?php if($title) { echo $title . ' | ';
+           } ?>Become my buddy</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../css/style.css" rel="stylesheet">
@@ -9,33 +10,35 @@
     <link href="../css/responsive.css" rel="stylesheet">
   </head>
   <body>
-    <nav id="menu">
-      <ul>
-        <li><a href="/index.php">Home</a></li>
-        <li><a href="/index.php">Search</a></li>
-        <li><a href="/index.php">Contacts</a></li>
+    <nav id="top-bar">
+      <ul id="menu">
+        <li><a class="nounderline" href="/index.php">Home</a></li>
+        <li><a class="nounderline" href="/pages/list.php">Search</a></li>
+        <li><a class="nounderline" href="/pages/contacts.php">Contacts</a></li>
       </ul>
 
-    <?php
-      if (!isset($_SESSION['username'])) {
-          ?>
-          <div id="signup">
-            <a href="register.php">Sign Up</a>
-            <a href="login.php">Log in</a>
-          </div>
-        
-      <?php
-      } else {?>
+      <?php if (!isset($_SESSION['username'])) { ?>
+        <div id="signup">
+          <a class="nounderline" href="/pages/register.php">Sign Up</a>
+          <a class="nounderline" href="/pages/login.php">Log in</a>
+        </div>
+      <?php } else { ?>
         <ul id="logout">
-        <li>Logged in as <?php echo $_SESSION['username'] ?></li>
+          <li class="topbar-button">
+            <a class="nounderline" href="list_sent_proposals.php"><input type="submit" value="See sent proposals"></a>
+          </li>
+          <li class="topbar-button">
+            <a class="nounderline" href="list_received_proposals.php"><input type="submit" value="See received proposals"></a>
+          </li>
+          <li class="topbar-button">
+            <a class="nounderline" href="add_post.php"><input type="submit" value="+"></a>
+          </li>
           <li>
-            <form method="post" action="../actions/action_logout.php">
-              <input type="submit" value="Logout">
-            </form>
+            Logged in as <b><?php echo $_SESSION['username'] ?></b>
+          </li>
+          <li id="logout-button">
+            <a class="nounderline" href='../actions/action_logout.php'><input type="submit" value="Logout"></a>
           </li>
         </ul>
       <?php }?>
-      
-
     </nav>
-
