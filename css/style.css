@@ -67,7 +67,18 @@ input[type="submit"] {
   border-radius: var(--button-corner-radius);
 
   color: var(--main);
+  background-color: var(--background-dark);
   text-align: center;
+}
+
+button:hover,
+input[type="submit"]:hover {
+  color: var(--green);
+  background-color: var(--dark);
+}
+
+.rejbutton:hover {
+  color: var(--red) !important;
 }
 
 textarea {
@@ -85,6 +96,11 @@ textarea {
 
 .error {
   color: red;
+  font-weight: bold;
+}
+
+.success {
+  color: green;
   font-weight: bold;
 }
 
@@ -233,6 +249,8 @@ textarea {
 
 /* || SEARCH PAGE */
 .list-item {
+  position: relative;
+
   border: 2px solid var(--light);
   border-radius: var(--petimage-corner-radius);
 
@@ -329,7 +347,7 @@ textarea {
   margin-left: 1em;
   padding: 0;
 
-  font-size: 1.4em;
+  font-size: x-large;
 }
 
 .petpost-info li + li {
