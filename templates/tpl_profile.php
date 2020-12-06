@@ -56,6 +56,14 @@ function drawEditProfile($user)
             <b>Edit Profile</b>
         </h2>
 
+        <?php
+        if ($_SESSION['messages']['type'] == 'updateUserError') { ?>
+        <p class="error"><?php     
+            echo $_SESSION['messages']['content']; 
+            $_SESSION['messages'] = [];?>
+        </p>
+        <br>
+        <?php }?>
         <form id="editProfile" method="post" action="../actions/action_edit_profile.php" enctype="multipart/form-data">
             <div class="form-item">
                 <label for="username">Username</label>

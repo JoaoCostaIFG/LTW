@@ -3,6 +3,16 @@
     include_once('../database/queries/db_user.php');
     require_once '../actions/action_upload.php';
 
+    function registerFail($msg)
+    {
+        $_SESSION['messages'] = array('type' => 'updateUserError', 'content' => $msg);
+        die(header("Location: ../pages/edit_profile.php"));
+    }
+
+    if(getUserInfo($_POST['username'])){        // Check for repeated username
+        registerFail("Username already exists!");
+    }
+
     $user_id = getUserId($_SESSION['username'])['id'];
 
     $user_info = array(
@@ -19,10 +29,8 @@
         uploadUserPhoto($user_id, $type);
         $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully updated profile.');
         
-    } catch (PDOException $e) {
-        die($e->getMessage());
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Failed to update profile!');
-        header('Location: ../pages/profile.php');
+    } catch (Exception $e) {
+        registerFail($e->getMessage());
     }
 
     if($user_info['username']){
