@@ -41,6 +41,13 @@ img {
 }
 
 /* headers */
+h1,
+h2,
+h3 {
+  overflow: hidden;
+  text-overflow: "...";
+}
+
 h1 {
   color: var(--orange);
   font-size: 3em;
@@ -161,6 +168,13 @@ textarea {
   background-color: var(--dark);
 }
 
+#topbar-username {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: "...";
+  width: 14em;
+}
+
 #menu {
   font-size: large;
 }
@@ -238,7 +252,7 @@ textarea {
 .form-item > input,
 .form-item > select {
   border: none;
-  width: 100%; /* important */
+  width: 100%;
   padding: 0.7em;
   box-sizing: border-box;
 
@@ -304,20 +318,25 @@ textarea {
 /* || LIST FORM */
 .listfilter {
   text-align: center;
+  margin-top: 3em; /* gives space for the search */
   margin-bottom: 1em; /* gives space for the list */
 }
 
 .listfilter-item {
-  width: 12%; /* important */
+  width: 20%;
 }
 
 .listfilter-item + .listfilter-item {
   margin-left: 2em;
 }
 
+.listfilter-item-bottom{
+  margin-top: 2em;
+}
+
 .listfilter-button {
   margin-top: 1em;
-  width: 8em; /* important */
+  width: 8em;
 }
 
 /* || POST PAGE */
@@ -424,7 +443,7 @@ textarea {
 }
 
 .profileform-item {
-  max-width: 40em; /* important */
+  max-width: 40em;
 }
 
 .profileform-item + .profileform-item {
@@ -433,7 +452,7 @@ textarea {
 
 .profileform-button {
   margin-top: 2em;
-  width: 10em; /* important */
+  width: 10em;
 }
 
 /* FORMS */
@@ -455,7 +474,7 @@ textarea {
 .form-item > input,
 .form-item > select {
   border: none;
-  width: 100%; /* important */
+  width: 100%;
   padding: 0.7em;
   box-sizing: border-box;
 
@@ -509,16 +528,16 @@ textarea {
 }
 
 .addpostform-item {
-  max-width: 40em; /* important */
+  max-width: 40em;
 }
 
 .addpostform-item + .addpostform-item {
-  margin-top: 2em; /* important */
+  margin-top: 2em;
 }
 
 .addpostform-button {
   margin-top: 2em;
-  width: 8em; /* important */
+  width: 8em;
 }
 
 /* || Profile */
@@ -551,6 +570,12 @@ textarea {
 #profile-options {
   grid-area: pf-options;
   padding: 1em;
+}
+
+#profile-posts-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: "...";
 }
 
 #profile-posts {

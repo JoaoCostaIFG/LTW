@@ -70,28 +70,32 @@ require_once '../templates/tpl_utils.php';
     <?php drawGenders(true, $values['gender']); ?>
   </div>
   <div class="form-item listfilter-item" >
-    <label for="min_age">Minimum Age (Years)</label>
+    <label for="min_age">Min. Age (Years)</label>
     <input id="min_age" min="0" type="text" name="min_age" value="<?php echo $values['min_age'] ?>">
   </div>
   <div class="form-item listfilter-item" >
-    <label for="max_age">Maximum Age (Years)</label>
+    <label for="max_age">Max. Age (Years)</label>
     <input id="max_age" min="0" type="text" name="max_age" value="<?php echo $values['max_age'] ?>">
   </div>
-  <div class="form-item listfilter-item" >
+  <br>
+  <div class="form-item listfilter-item listfilter-item-bottom" >
     <?php drawSizes(true, $values['size']); ?>
   </div>
-  <div class="form-item listfilter-item" >
+  <div class="form-item listfilter-item listfilter-item-bottom" >
     <?php drawSpecies(true, $values['species']); ?>
   </div>
-  <div class="form-item listfilter-item" >
+  <div class="form-item listfilter-item listfilter-item-bottom" >
     <?php drawCities(true, $values['city']); ?>
   </div>
-  <?php if(isset($_SESSION['username'])) { ?>
-  <div class="form-item listfilter-item" >
-  <label for="favourite">Favourite</label>
-    <input id="favourite" type="checkbox" name="favourite" value="true" <?php if($values['favourite'] == "true") echo 'checked'; ?> >
+    <?php if(isset($_SESSION['username'])) { ?>
+  <div class="form-item listfilter-item listfilter-item-bottom" >
+    <label for="favourite">Favourite</label>
+    <input id="favourite" type="checkbox" name="favourite" value="true"
+        <?php if($values['favourite'] == "true") {
+            echo 'checked';
+        } ?> >
   </div>
-  <?php } ?>
+    <?php } ?>
   <br>
   <input class="form-button listfilter-button" type="submit" value="Search">
 </form>

@@ -28,7 +28,7 @@ function drawProfile($user, $user_posts)
           </ul>
         <?php  }?>
         <div id="profile-posts">
-          <h3><b>Posts by <?php echo $user['username']?></b></h3>
+          <h3 id="profile-posts-title"><b>Posts by <?php echo $user['username']?></b></h3>
           <?php drawPostList($user_posts); ?>
         </div>
     </div>
@@ -49,7 +49,8 @@ function drawEditProfile($user)
         <form class="verticalform" id="profileform" method="post" action="../actions/action_edit_profile.php" enctype="multipart/form-data">
             <div class="form-item profileform-item">
                 <label for="username">Username</label>
-                <input id="username" type="text" name="username" placeholder="<?php echo $user['username']; ?>">
+                <input id="username" type="text" name="username" maxlength="32"
+                  placeholder="<?php echo $user['username']; ?>">
                 <p class="note">This is the name other users will see when interacting with you.
                   You also use this to sign in.</p>
             </div>
@@ -60,7 +61,8 @@ function drawEditProfile($user)
             </div>
             <div class="form-item profileform-item">
                 <label for="mobile_number">Phone Number</label>
-                <input id="mobile_number" type="text" name="mobile_number" placeholder="<?php echo $user['mobile_number']; ?>">
+                <input id="mobile_number" type="text" name="mobile_number"
+                  placeholder="<?php echo $user['mobile_number']; ?>">
                 <p class="note">This is the phone number that other users will use to contact you.</p>
             </div>
             <div class="form-item profileform-item">
@@ -80,9 +82,9 @@ function drawEditProfile($user)
         <p class="error">
         <?php
           $msg = getSessionMessage('updateUserError');
-          if ($msg) {
-              echo $msg; 
-          }?>
+        if ($msg) {
+            echo $msg; 
+        }?>
         </p>
     </section>
 

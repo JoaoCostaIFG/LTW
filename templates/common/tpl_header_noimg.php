@@ -36,7 +36,7 @@
           <li class="topbar-button">
             <a class="nounderline" href="add_post.php"><input type="submit" value="+"></a>
           </li>
-          <li>
+          <li id="topbar-username">
             Logged in as 
             <a href="../pages/profile.php?username=<?php echo $_SESSION['username']; ?>" >
               <b><?php echo $_SESSION['username'] ?></b>

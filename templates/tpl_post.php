@@ -105,8 +105,8 @@ function drawEditOptions($post)
 {
     ?>
     <div class="petpost-edit" style="display: none">
-        
-        <form class="verticalform addpostform" method="post" action="../actions/action_edit_post.php" enctype="multipart/form-data">
+        <form class="verticalform addpostform" method="post" action="../actions/action_edit_post.php"
+          enctype="multipart/form-data">
           <div class="form-item addpostform-item" >
             <label for="name">Name</label>
             <input id="name" type="text" name="name" value="<?php echo $post['name']; ?>" required>

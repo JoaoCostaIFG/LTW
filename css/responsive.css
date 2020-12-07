@@ -35,6 +35,8 @@
 
   /* || PROFILE */
   #profile {
+    margin-left: 0;
+
     grid-template-columns: 1fr;
     grid-template-areas:
       "pf-pic"
@@ -43,6 +45,14 @@
       "pf-posts";
 
     text-align: center;
+  }
+
+  #profile-posts-title {
+    width: 30em;
+  }
+
+  #profile-posts {
+    margin-left: 0;
   }
 
   /* || TOPBAR */
@@ -91,5 +101,9 @@
   #changePassword input[type="submit"] {
     margin-top: 2em;
     width: 10em;
+  }
+
+  #profile-posts-title {
+    width: 20em;
   }
 }
