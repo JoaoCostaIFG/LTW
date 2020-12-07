@@ -15,7 +15,12 @@ if(getUserInfo($_POST['username'])) {
     updateUserFail("Username already exists!");
 }
 
-    // Password
+// Password
+if(checkUserPassword($_SESSION['username'], $_POST['current_password']) == false){
+    setSessionMessage('passwordError', "Current password is incorrect.");
+    die(header("Location: ../pages/settings.php"));
+}
+
 if($_POST['password'] != $_POST['password_r']) {
     setSessionMessage('passwordError', "Passwords do not match.");
     die(header("Location: ../pages/settings.php"));

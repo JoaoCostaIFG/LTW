@@ -44,13 +44,13 @@ function drawEditProfile($user)
     ?>
 
     <section class="profile">
-        <h2><b>Edit Profile</b></h2>
+        <h2><b>Edit Profile (Change only the needed fields)</b></h2>
 
         <form class="verticalform" id="profileform" method="post" action="../actions/action_edit_profile.php" enctype="multipart/form-data">
             <div class="form-item profileform-item">
                 <label for="username">Username</label>
                 <input id="username" type="text" name="username" placeholder="<?php echo $user['username']; ?>">
-                <p class="note">This is the name other users will see when intereacting with you.
+                <p class="note">This is the name other users will see when interacting with you.
                   You also use this to sign in.</p>
             </div>
             <div class="form-item profileform-item">
@@ -64,7 +64,7 @@ function drawEditProfile($user)
                 <p class="note">This is the phone number that other users will use to contact you.</p>
             </div>
             <div class="form-item profileform-item">
-                <?php if($user['picture'] != null) { ?>
+                <?php if(isset($user['picture'])) { ?>
                   <div id="profile-pic">
                     <img src="<?php echo $user['picture'] ?>" alt="User's current profile picture.">
                   </div>
@@ -101,12 +101,16 @@ function drawSettings()
       <h3>Change Password</h3>
       <form id="changePassword" method="post" action="../actions/action_edit_profile.php" enctype="multipart/form-data">
         <div class="form-item">
-          <label for="password">Password</label>
-          <input id="password" type="password" name="password" placeholder="password" required>
+          <label for="current_password">Current password</label>
+          <input id="current_password" type="password" name="current_password" placeholder="Current password" required>
+        </div>
+        <div class="form-item">
+          <label for="password">New Password</label>
+          <input id="password" type="password" name="password" placeholder="New password" required>
         </div>
         <div class="form-item" >
-          <label for="password_r">Repeat your password</label>
-          <input id="password_r" type="password" name="password_r" placeholder="password (again)" required>
+          <label for="password_r">Repeat new password</label>
+          <input id="password_r" type="password" name="password_r" placeholder="New password (again)" required>
         </div>
 
         <input class="form-button" type="submit" value="Submit">
