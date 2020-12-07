@@ -14,8 +14,13 @@ require_once '../templates/tpl_utils.php';
 
 <div class="list">
     <?php 
-    foreach($posts as $post) {
-        drawPostItem($post);
+    if (empty($posts)) {
+        echo "There are no posts to show.";
+    }
+    else {
+        foreach($posts as $post) {
+            drawPostItem($post);
+        }
     }
     ?>
 </div>

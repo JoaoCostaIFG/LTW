@@ -38,7 +38,8 @@ function draw_login()
   <section id="register">
       <header><h2>Create a new account</h2></header>
 
-      <form class="verticalform" id="profileform" method="post" action="../actions/action_register.php" enctype="multipart/form-data">
+      <form class="verticalform" id="profileform" method="post" action="../actions/action_register.php"
+        enctype="multipart/form-data">
         <div class="form-item profileform-item" >
           <label for="username">Username</label>
           <input id="username" type="text" name="username" placeholder="username" maxlength="32" required>

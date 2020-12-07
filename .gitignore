@@ -1,3 +1,4 @@
 CS_SESSION
 database/database.db
+static/users/*
 .vscode

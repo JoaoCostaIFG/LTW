@@ -46,7 +46,8 @@ function drawEditProfile($user)
     <section class="profile">
         <h2><b>Edit Profile (Change only the needed fields)</b></h2>
 
-        <form class="verticalform" id="profileform" method="post" action="../actions/action_edit_profile.php" enctype="multipart/form-data">
+        <form class="verticalform" id="profileform" method="post" action="../actions/action_edit_profile.php"
+          enctype="multipart/form-data">
             <div class="form-item profileform-item">
                 <label for="username">Username</label>
                 <input id="username" type="text" name="username" maxlength="32"

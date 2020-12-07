@@ -172,7 +172,7 @@ textarea {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: "...";
-  width: 14em;
+  max-width: 14em;
 }
 
 #menu {
