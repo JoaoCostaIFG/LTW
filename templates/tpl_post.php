@@ -49,19 +49,23 @@ function sizeToString($size)
     }
 }
 
-function proposalStatusToString($status) {
-    if ($status == -1)
+function proposalStatusToString($status)
+{
+    if ($status == -1) {
         $text = "Your Proposal is Pending";
-    else if ($status == 0)
+    } else if ($status == 0) {
         $text = "Your Proposal was Rejected";
-    else if ($status == 1)
+    } else if ($status == 1) {
         $text = "Your Proposal was Accepted";
+    }
     return $text;
 }
 
 /* DRAWERS */
 
-function drawProposalButton($post_id, $user_id) { ?>
+function drawProposalButton($post_id, $user_id)
+{
+    ?>
     <script src="../js/confirmation_bar.js" type="text/javascript" defer></script>
     <script src="../js/utils.js" type="text/javascript" defer></script>
     <script src="../js/proposal.js" type="text/javascript" defer></script>
@@ -71,11 +75,15 @@ function drawProposalButton($post_id, $user_id) { ?>
     <p id="proposalSentText"></p>
 <?php }
 
-function drawProposalStatus($status) { ?>
+function drawProposalStatus($status)
+{
+    ?>
     <p id="proposalSentText"><?php echo proposalStatusToString($status); ?></p>
 <?php }
 
-function drawEditButtons($post_id) { ?>
+function drawEditButtons($post_id)
+{
+    ?>
     <script src="../js/utils.js" type="text/javascript" defer></script>
     <script src="../js/edit_post.js" type="text/javascript" defer></script>
 
@@ -88,7 +96,9 @@ function drawEditButtons($post_id) { ?>
     </form>
 <?php }
 
-function drawEditOptions($post) { ?>
+function drawEditOptions($post)
+{
+    ?>
     <div class="petpost-edit" style="display: none">
         
         <form class="verticalform addpostform" method="post" action="../actions/action_edit_post.php" enctype="multipart/form-data">
@@ -142,19 +152,19 @@ function drawPost($post, $questionsAnswers)
 <div class="petpost-page">
     <?php 
     $photo_path = "../static/images/" . $post['photo_id'] . "." . $post['photo_extension'];
-    if(isset($_SESSION['username'])){
-      $current_user = getUserId($_SESSION['username'])['id'];
-      $post_id = $post['id'];
-      if (isOwner($current_user, $post_id)) {
-        drawEditButtons($post_id);
-      } else {
-          if (hasProposal($current_user, $post_id)) {
-            $status = getProposalStatus($current_user, $post_id)['status'];
-            drawProposalStatus($status);
-          } else {
-            drawProposalButton($post_id, $current_user);
-          }
-      }
+    if(isset($_SESSION['username'])) {
+        $current_user = getUserId($_SESSION['username'])['id'];
+        $post_id = $post['id'];
+        if (isOwner($current_user, $post_id)) {
+            drawEditButtons($post_id);
+        } else {
+            if (hasProposal($current_user, $post_id)) {
+                $status = getProposalStatus($current_user, $post_id)['status'];
+                drawProposalStatus($status);
+            } else {
+                drawProposalButton($post_id, $current_user);
+            }
+        }
     }
     ?>
 
@@ -170,14 +180,14 @@ function drawPost($post, $questionsAnswers)
         <script src="../js/favourite.js" type="text/javascript" defer></script>
         <button id="favourite-star" onclick="favourite(<?php echo $post['id']?>)">
         <?php     
-          if (!isOwner($current_user, $post['id'])) {
+        if (!isOwner($current_user, $post['id'])) {
             if (isFavourite($current_user, $post['id'])) {?>
               &bigstar;
             <?php }
             else {?>
               &star;
             <?php }
-          }?>
+        }?>
       </button>
     <?php }?>
       <div id="petphoto" style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
@@ -209,8 +219,6 @@ function drawPost($post, $questionsAnswers)
         }
         ?>
     </section>
-
-
   </div>
 <?php } ?>
 
@@ -223,23 +231,27 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
     <section class="petpost-question">
       <p> <?php echo 'Q: ' . $questionAnswer['question']; ?> </p>
       <p> <?php echo $questionAnswer['question_date'] . ", " . getUsername($questionAnswer['user_id']); ?> </p>
-      <?php if (isset($user_id) && isOwner($user_id, $post_id) && !isset($questionAnswer['answer'])) { // Checks if the current user is the owner of the post?>     
-                <script src="../js/add_answer.js" type="text/javascript" defer></script>
-                <button id="<?php echo 'answer-button' . $questionAnswer['id'] ?>" class="answer-button" onclick="toggleAnswerInput(<?php echo $questionAnswer['id'] ?>)">Answer</button>
-              </section>
-              <!-- Used in answer input -->
-              <section class="answer-input" id="<?php echo 'answer-input' . $questionAnswer['id']; ?>" style="display: none;">
-                <textarea name="<?php echo 'answer_text' . $questionAnswer['id'] ?>" rows="2" column="40" placeholder="Write your answer..." required></textarea>
-                <button id="answer-input-button" type="button" onclick="addAnswer(<?php echo $questionAnswer['id'] ?>)">Post Answer</button>
-              </section>
-      <?php } else {?>
-              </section>
-      <?php } ?> 
+      <?php
+        // Checks if the current user is the owner of the post
+        if (isset($user_id) && isOwner($user_id, $post_id) && !isset($questionAnswer['answer'])) { ?>
+          <script src="../js/add_answer.js" type="text/javascript" defer></script>
+          <button id="<?php echo 'answer-button' . $questionAnswer['id'] ?>" class="answer-button"
+            onclick="toggleAnswerInput(<?php echo $questionAnswer['id'] ?>)">Answer</button>
+    </section>
 
-      <?php if (isset($questionAnswer['answer'])) {
-                drawAnswer($questionAnswer);
-            } ?>
-      </section>
+    <!-- Used in answer input -->
+    <section class="answer-input" id="<?php echo 'answer-input' . $questionAnswer['id']; ?>" style="display: none;">
+      <textarea name="<?php echo 'answer_text' . $questionAnswer['id'] ?>" rows="2" column="40"
+        placeholder="Write your answer..." required></textarea>
+      <button id="answer-input-button" type="button"
+        onclick="addAnswer(<?php echo $questionAnswer['id'] ?>)">Post Answer</button>
+        <?php } ?> 
+    </section>
+
+    <?php if (isset($questionAnswer['answer'])) {
+          drawAnswer($questionAnswer);
+    } ?>
+  </section>
 <?php } ?>
 
 <?php function drawQuestionsAnswers($post_id, $user_id, $questionsAnswers)
@@ -270,10 +282,11 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
   <script src="../js/utils.js" type="text/javascript" defer></script>
   <script src="../js/add_question.js" type="text/javascript" defer></script>
   <section id="question-input">
-    <textarea id="question-input-ta" name="question_text" rows="2" column="40" placeholder="Write your question..." required></textarea>
-    <button id="question-input-button" type="button" onclick="addQuestion(<?php echo $post_id ?>)">Post Question</button>
+    <textarea id="question-input-ta" name="question_text" rows="2" column="40"
+      placeholder="Write your question..." required></textarea>
+    <button id="question-input-button" type="button"
+      onclick="addQuestion(<?php echo $post_id ?>)">Post Question</button>
   </section>
-
 
   <script type="text/javascript">
     // see: https://stackoverflow.com/questions/7745741/auto-expanding-textarea/24824750#24824750

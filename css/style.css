@@ -406,7 +406,7 @@ textarea {
 .petpost-answer p + p {
   /* date + author */
   margin-top: 2em;
-  width: 100%;
+  float:right;
 
   text-align: right;
   font-weight: bold;
