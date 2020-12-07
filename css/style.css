@@ -14,7 +14,7 @@
   --button-corner-radius: 2em;
 
   --items-text-corner-radius: 0.6em;
-  --comment-corner-radius: 0.6em;
+  --qa-corner-radius: 0.6em;
 
   --petimage-corner-radius: 1em;
   --petimage-corner-radius-inner: 0.85em;
@@ -371,7 +371,7 @@ textarea {
   margin-top: 0.5em;
 }
 
-/* || POST PAGE DESCRIPTION + COMMENTS */
+/* || POST PAGE DESCRIPTION + QAS */
 .petpost-description:hover,
 .petpost-question:hover,
 .petpost-answer:hover {
@@ -390,7 +390,7 @@ textarea {
   width: 80%;
   max-width: 60em;
 
-  border-radius: var(--comment-corner-radius);
+  border-radius: var(--qa-corner-radius);
 }
 
 .petpost-description {
@@ -493,7 +493,7 @@ textarea {
 
 #question-input-button,
 #answer-input-button {
-  /*Comment text input button*/
+  /* QA text input button */
   font-size: large;
   padding: 0.3em;
 }
