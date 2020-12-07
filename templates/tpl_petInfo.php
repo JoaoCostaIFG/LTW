@@ -73,3 +73,25 @@ function drawGendersRadio()
     drawOptions($any_option, $genders, 'Gender', 'gender', $selected_value);
 }
 ?>
+
+<?php function drawSizes($any_option, $selected_value)
+{
+    /*
+    * Draws all colors in the database
+    */
+    $option_small = array(
+        'id' => '1',
+        'name' => 'Small'
+    );
+    $option_medium = array(
+        'id' => '2',
+        'name' => 'Medium'
+    );
+    $option_big = array(
+        'id' => '3',
+        'name' => 'Big'
+    );
+    $sizes = array($option_small, $option_medium, $option_big);
+    drawOptions($any_option, $sizes, 'Size', 'size', $selected_value);
+}
+?>

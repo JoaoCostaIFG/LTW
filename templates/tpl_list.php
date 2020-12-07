@@ -74,8 +74,7 @@ require_once '../templates/tpl_utils.php';
     <input id="age" type="text" name="age" value="<?php echo $values['age'] ?>">
   </div>
   <div class="form-item listfilter-item" >
-    <label for="size">Size</label>
-    <input id="age" type="text" name="size" value="<?php echo $values['size'] ?>">
+    <?php drawSizes(true, $values['size']); ?>
   </div>
   <div class="form-item listfilter-item" >
     <?php drawSpecies(true, $values['species']); ?>
@@ -132,7 +131,7 @@ require_once '../templates/tpl_utils.php';
     }
 
     $curr_size = '';
-    if (isset($_GET['size']) && $_GET['size'] != null) {
+    if (isset($_GET['size']) && $_GET['size'] != "any") {
         $curr_size = $_GET['size'];
         array_push($search_options, $_GET['size']);
         array_push($query_conditions, 'size = ?');

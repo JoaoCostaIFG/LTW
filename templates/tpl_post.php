@@ -121,8 +121,7 @@ function drawEditOptions($post)
           </div>
 
           <div class="form-item addpostform-item" >
-            <label for="size">Size</label>
-            <input id="size" type="number" name="size" value="<?php echo $post['size']; ?>" required>
+            <?php drawSizes(false, $post['size']); ?>
           </div>
           <div class="form-item addpostform-item" >
             <label for="description">Description</label>
@@ -130,10 +129,10 @@ function drawEditOptions($post)
           </div>
 
           <div class="form-item addpostform-item" >
-            <?php drawColors(false, null); ?>
+            <?php drawColors(false, $post['color_id']); ?>
           </div>
           <div class="form-item addpostform-item" >
-            <?php drawCities(false, null); ?>
+            <?php drawCities(false, $post['city_id']); ?>
           </div>
 
           <br>
@@ -351,9 +350,9 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
       </div>
 
       <div class="form-item addpostform-item" >
-        <label for="size">Size</label>
-        <input id="size" type="number" name="size" placeholder="size" required>
+            <?php drawSizes(false, null); ?>
       </div>
+
       <div class="form-item addpostform-item" >
         <label for="description">Description</label>
         <textarea id="description" name="description" rows="8" cols="86"></textarea>

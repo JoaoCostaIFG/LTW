@@ -83,8 +83,10 @@ require_once '../database/database_instance.php';
             '
             SELECT petpost.id, petpost.name, birth_date,
               cast(julianday(date("now")) - julianday(birth_date) as int) as age,
-              gender, size, description, petpost.date,
-              Color.name as color, Species.name as species, City.name as location,
+              gender, size, description, petpost.date, 
+              Color.id as color_id, Color.name as color,
+              Species.id as species_id, Species.name as species,
+              City.id as city_id, City.name as location,
               User.username as user, PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
             FROM PetPost JOIN Color on(PetPost.color_id=color.id)
                 JOIN Species on(PetPost.species_id=species.id)
