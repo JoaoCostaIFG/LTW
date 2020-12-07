@@ -23,7 +23,6 @@
 }
 
 /* || GENERAL STYLES */
-
 body {
   font-family: var(--fonts);
   color: var(--main);
@@ -33,6 +32,12 @@ body {
 p {
   width: 80%;
   max-width: 60em;
+}
+
+img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
 }
 
 /* headers */
@@ -78,34 +83,25 @@ input[type="submit"]:hover {
   background-color: var(--dark);
 }
 
-.rejbutton:hover {
-  color: var(--red) !important;
-}
-
-.hoverable:hover {
-  color: var(--green);
-}
-
 textarea {
   resize: none;
-
   margin: 0;
   padding: 1em;
 
+  border: none;
   border-radius: 0.5em;
 
   font-size: x-large;
 }
 
 /* || UTILITIES */
-
 .error {
   color: red;
   font-weight: bold;
 }
 
 .success {
-  color: green;
+  color: green;12
   font-weight: bold;
 }
 
@@ -117,6 +113,14 @@ textarea {
 
 .nounderline {
   text-decoration: none;
+}
+
+.rejbutton:hover {
+  color: var(--red) !important;
+}
+
+.hoverable:hover {
+  color: var(--green);
 }
 
 /* || SITEWIDE */
@@ -464,6 +468,7 @@ textarea {
 .answer-input {
   margin-top: 1em;
   margin-left: 1em;
+  max-width: 95%;
   width: 60em;
 }
 
@@ -472,6 +477,7 @@ textarea {
 #answer-input-button,
 .answer-text-area {
   display: inline-block;
+  margin-bottom: 1em;
 
   border: none;
   vertical-align: middle;
@@ -517,9 +523,9 @@ textarea {
 
 /* || Profile */
 #profile {
+  display: grid;
   margin-left: 1em;
 
-  display: grid;
   grid-template-columns: 1fr 3fr;
   grid-template-areas:
     "pf-pic pf-posts"
@@ -549,6 +555,7 @@ textarea {
 
 #profile-posts {
   grid-area: pf-posts;
+  margin-left: 1em;
   padding: 1em;
 
   background-color: var(--background-dark);
