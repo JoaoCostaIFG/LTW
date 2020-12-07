@@ -140,6 +140,12 @@ textarea {
 }
 
 /* || TOPBAR */
+#top-bar-toggle,
+#top-bar-toggle-label {
+  display: none;
+  float: right;
+}
+
 #top-bar {
   font-weight: bold;
 
@@ -159,16 +165,17 @@ textarea {
 }
 
 #menu > li > a:hover,
-#signup a:hover {
+#auth a:hover {
   color: var(--green);
 }
 
-#signup,
-#logout {
+#auth,
+#authlogin {
   font-size: small;
+  background-color: var(--dark); /* useful for responsive (floating menu) */
 }
 
-#logout {
+#authlogin {
   font-weight: normal;
 }
 

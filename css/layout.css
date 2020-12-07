@@ -22,39 +22,32 @@ body {
 /* TOP BAR */
 #top-bar {
   position: fixed;
-  left:0;
+  left: 0;
   top: 0;
   z-index: 2; /* make top bar show on top */
 
   overflow: auto;
 }
 
-#top-bar > ul {
+#menu,
+#authlogin {
   display: inline-block;
-  padding: 0;
-  margin: 0;
 }
 
-#top-bar > ul > li {
+#menu > li,
+#authlogin > li {
   display: inline-block;
   position: relative;
 }
 
-#signup, #logout {
+#auth,
+#authlogin {
   float: right;
 }
 
-#logout > li {
-  display: inline-block;
-  position: relative;
-}
-
-#signup a + a {
-  padding-left: 1em;
-}
-
-#logout * + * {
-  padding-left: 1em;
+#auth * + *,
+#authlogin * + *{
+  margin-left: 1em;
 }
 
 /* HEADERS */
@@ -88,13 +81,12 @@ h1 {
 /* Confirmation Bar */
 #confirmationBar {
   position: fixed;
-  left:0;
+  left: 0;
   bottom: 0;
   z-index: 2; /* make top bar show on top */
   padding: 0.2em;
 
   overflow: auto;
-  
 }
 
 #confirmationBar p {
