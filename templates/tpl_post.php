@@ -111,9 +111,10 @@ function drawEditOptions($post)
             <label for="name">Name</label>
             <input id="name" type="text" name="name" value="<?php echo $post['name']; ?>" required>
           </div>
+
           <div class="form-item addpostform-item" >
             <label for="birth_date">Birth Date</label>
-            <input id="birth_date" type="date" name="birth_date" value="<?php echo $post['birth_date']; ?>" required>
+            <input id="birth_date" max="<?php echo date('Y-m-d'); ?>" type="date" name="birth_date" value="<?php echo $post['birth_date']; ?>" required>
           </div>
           <div class="form-item addpostform-item" >
             <label for="image">Photo</label>
@@ -338,7 +339,7 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
       </div>
       <div class="form-item addpostform-item" >
         <label for="age">Birth Date</label>
-        <input id="birth_date" type="date" name="birth_date" placeholder="birth date of the pet" required>
+        <input id="birth_date" type="date" max="<?php echo date('Y-m-d'); ?>" name="birth_date" placeholder="birth date of the pet" required>
       </div>
       <div class="form-item addpostform-item" >
         <label for="image">Photo</label>
