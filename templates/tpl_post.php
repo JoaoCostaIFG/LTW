@@ -126,7 +126,9 @@ function drawEditOptions($post)
           </div>
           <div class="form-item addpostform-item" >
             <label for="description">Description</label>
-            <textarea id="description" name="description" rows="8" cols="86"><?php echo $post['description']; ?></textarea>
+            <textarea id="description" name="description" rows="1" cols="80" maxlength="2000">
+              <?php echo $post['description']; ?>
+            </textarea>
           </div>
 
           <div class="form-item addpostform-item" >
@@ -178,16 +180,15 @@ function drawPost($post, $questionsAnswers)
     <div class="petimage petpost-img" >
       <!--Need to add if -->
     <?php if(isset($_SESSION['username'])) { ?>
-        <script src="../js/favourite.js" type="text/javascript" defer></script>
-        <button id="favourite-star" onclick="favourite(<?php echo $post['id']?>)">
-        <?php     
-        if (!isOwner($current_user, $post['id'])) {
+      <script src="../js/favourite.js" type="text/javascript" defer></script>
+      <button id="favourite-star" onclick="favourite(<?php echo $post['id']?>)">
+        <?php if (!isOwner($current_user, $post['id'])) {
             if (isFavourite($current_user, $post['id'])) {?>
-              &bigstar;
+          &bigstar;
             <?php }
             else {?>
-              &star;
-            <?php }
+          &star;
+            <?php } 
         }?>
       </button>
     <?php }?>
@@ -242,8 +243,8 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
 
     <!-- Used in answer input -->
     <section class="answer-input" id="<?php echo 'answer-input' . $questionAnswer['id']; ?>" style="display: none;">
-      <textarea class="answer-text-area" name="<?php echo 'answer_text' . $questionAnswer['id'] ?>" rows="2" column="40"
-        placeholder="Write your answer..." required></textarea>
+      <textarea class="answer-text-area" name="<?php echo 'answer_text' . $questionAnswer['id'] ?>" rows="1" cols="80"
+         maxlength="2000" placeholder="Write your answer..." required></textarea>
       <button id="answer-input-button" type="button"
         onclick="addAnswer(<?php echo $questionAnswer['id'] ?>)">Post Answer</button>
         <?php } ?> 
@@ -283,8 +284,8 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
   <script src="../js/utils.js" type="text/javascript" defer></script>
   <script src="../js/add_question.js" type="text/javascript" defer></script>
   <section id="question-input">
-    <textarea id="question-input-ta" name="question_text" rows="2" column="40"
-      placeholder="Write your question..." required></textarea>
+    <textarea id="question-input-ta" name="question_text" rows="1" cols="80"
+       maxlength="2000" placeholder="Write your question..." required></textarea>
     <button id="question-input-button" type="button"
       onclick="addQuestion(<?php echo $post_id ?>)">Post Question</button>
   </section>
@@ -356,7 +357,7 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
 
       <div class="form-item addpostform-item" >
         <label for="description">Description</label>
-        <textarea id="description" name="description" rows="8" cols="86"></textarea>
+        <textarea id="description" name="description" rows="1" cols="80" maxlength="2000"></textarea>
       </div>
 
       <div class="form-item addpostform-item" >
