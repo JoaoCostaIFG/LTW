@@ -3,6 +3,16 @@
 }
 
 @media (max-width: 60em) {
+  /* || TOPBAR */
+  #menu > ul > li > a {
+    font-size: medium;
+  }
+
+  #signup a {
+    font-size: small;
+  }
+
+  /* || LIST FILTER */
   .listfilter {
     display: flex;
     flex-direction: column;
@@ -18,14 +28,12 @@
     margin-top: 2em;
   }
 
-  #menu > ul > li > a {
-    font-size: medium;
+  /* || POST */
+  .petpost-answer {
+    margin-left: 1em;
   }
 
-  #signup a {
-    font-size: small;
-  }
-
+  /* || PROFILE */
   #profile {
     grid-template-columns: 1fr;
     grid-template-areas:
