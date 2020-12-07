@@ -70,11 +70,11 @@ require_once '../templates/tpl_utils.php';
     <?php drawGenders(true, $values['gender']); ?>
   </div>
   <div class="form-item listfilter-item" >
-    <label for="min_age">Min Age</label>
+    <label for="min_age">Minimum Age (Years)</label>
     <input id="min_age" min="0" type="text" name="min_age" value="<?php echo $values['min_age'] ?>">
   </div>
   <div class="form-item listfilter-item" >
-    <label for="max_age">Max Age</label>
+    <label for="max_age">Maximum Age (Years)</label>
     <input id="max_age" min="0" type="text" name="max_age" value="<?php echo $values['max_age'] ?>">
   </div>
   <div class="form-item listfilter-item" >
@@ -123,14 +123,16 @@ require_once '../templates/tpl_utils.php';
     $curr_min_age = '';
     if (isset($_GET['min_age']) && $_GET['min_age'] != null) {
         $curr_min_age = $_GET['min_age'];
-        array_push($search_options, $_GET['min_age']);
+        /* Minimum Age */
+        array_push($search_options, $_GET['min_age'] * 365);
         array_push($query_conditions, 'age >= ?');
     }
 
     $curr_max_age = '';
     if (isset($_GET['max_age']) && $_GET['max_age'] != null) {
         $curr_max_age = $_GET['max_age'];
-        array_push($search_options, $_GET['max_age']);
+        /* Maximum Age */
+        array_push($search_options, $_GET['max_age'] * 365);
         array_push($query_conditions, 'age <= ?');
     }
 
