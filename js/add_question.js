@@ -14,7 +14,8 @@ function addQuestion(post_id) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            removeNoAnswersText()
+            console.log(xhttp.responseText.trim('\n'));
+            removeNoAnswersText();
             //Trim is used because the reponse text comes with new lines behind
             let response = xhttp.responseText.trim('\n');
             //Used to append before question input

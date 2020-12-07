@@ -100,6 +100,9 @@ function getUsername($user_id)
 
 function isOwner($user_id, $post_id) 
 {
+        print_r($user_id);
+        echo '\n';
+        print_r($post_id);
         $db = Database::instance()->db();
         $stmt = $db->prepare(
             'SELECT * FROM PetPost 

@@ -15,26 +15,36 @@ if(getUserInfo($_POST['username'])) {
     updateUserFail("Username already exists!");
 }
 
-// Password
-if(checkUserPassword($_SESSION['username'], $_POST['current_password']) == false){
-    setSessionMessage('passwordError', "Current password is incorrect.");
-    die(header("Location: ../pages/settings.php"));
-}
+// // Password
+// if(isset($_POST['current_password'])){
+//     if(checkUserPassword($_SESSION['username'], $_POST['current_password']) == false){
+//         setSessionMessage('passwordError', "Current password is incorrect.");
+//         die(header("Location: ../pages/settings.php"));
+//     }
+//     if($_POST['password'] != $_POST['password_r']) {
+//         setSessionMessage('passwordError', "Passwords do not match.");
+//         die(header("Location: ../pages/settings.php"));
+//     }
+// }
 
-if($_POST['password'] != $_POST['password_r']) {
-    setSessionMessage('passwordError', "Passwords do not match.");
-    die(header("Location: ../pages/settings.php"));
-}
 
     // Get user information to update
     $user_id = getUserId($_SESSION['username'])['id'];
-    $user_info = array(
-        'id' => $user_id,
-        'username' => $_POST['username'],
-        'password' => $_POST['password'],
-        'email' => $_POST['email'],
-        'mobile_number' => $_POST['mobile_number'],
-    );
+
+    $user_info = array();
+    $user_info['id'] = $user_id;
+    if(isset($_POST['username'])){
+        $user_info['username'] = $_POST['username'];
+    }
+    if(isset($_POST['password'])){
+        $user_info['password'] =  $_POST['password'];
+    }
+    if(isset($_POST['email'])){
+        $user_info['email'] = $_POST['email'];
+    }
+    if(isset($_POST['mobile_number'])){
+        $user_info['mobile_number'] = $_POST['mobile_number'];
+    }
     $type = photoIsValid($_FILES['image']['tmp_name']);
 
     try {
@@ -47,7 +57,7 @@ if($_POST['password'] != $_POST['password_r']) {
     }
 
     // Update session if username changed
-    if($user_info['username']) {
+    if(isset($user_info['username'])) {
         $_SESSION['username'] = $user_info['username'];
     }  // Update username session
 
