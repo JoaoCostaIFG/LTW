@@ -100,17 +100,14 @@ function getUsername($user_id)
 
 function isOwner($user_id, $post_id) 
 {
-        print_r($user_id);
-        echo '\n';
-        print_r($post_id);
-        $db = Database::instance()->db();
-        $stmt = $db->prepare(
-            'SELECT * FROM PetPost 
-             WHERE id = ? AND user_id = ?'
-        );
-        $stmt->execute(array($post_id, $user_id));
-        $post = $stmt->fetch();
-        return $post != false;
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'SELECT * FROM PetPost 
+         WHERE id = ? AND user_id = ?'
+    );
+    $stmt->execute(array($post_id, $user_id));
+    $post = $stmt->fetch();
+    return $post != false;
 }
 
 function isFavourite($user_id, $post_id)
@@ -144,55 +141,49 @@ function removeFavouritePost($user_id, $post_id)
     $stmt->execute(array($post_id, $user_id));
 }
 
-function updateUser($user_info)
+function updateUser(&$user_info)
 {
+    /* for some reason, php casts the NULL inside the array to the empty string */
     $db = Database::instance()->db();
 
-    if(isset($user_info['username'])) {
-        $stmt_username = $db->prepare(
-            'UPDATE User SET username = ? 
-            WHERE id = ?'
-        );
-    
-        $stmt_username->execute(array($user_info['username'], $user_info['id']));
+    $querry_str = 'UPDATE User SET';
+    $querry_array = array();
+
+    if($user_info['username']) {
+        $querry_str .= ' username = ?,';
+        array_push($querry_array, $user_info['username']);
     }
 
-    if(isset($user_info['email'])) {
-        $stmt_email = $db->prepare(
-            'UPDATE User SET email = ? 
-            WHERE id = ?'
-        );
-    
-        $stmt_email->execute(array($user_info['email'], $user_info['id']));
+    if($user_info['email']) {
+        $querry_str .= ' email = ?,';
+        array_push($querry_array, $user_info['email']);
     }
 
-    if(isset($user_info['mobile_number'])) {
-        $stmt_mobile_number = $db->prepare(
-            'UPDATE User SET mobile_number = ? 
-            WHERE id = ?'
-        );
-    
-        $stmt_mobile_number->execute(array($user_info['mobile_number'], $user_info['id']));
+    if($user_info['mobile_number']) {
+        $querry_str .= ' mobile_number = ?,';
+        array_push($querry_array, $user_info['mobile_number']);
     }
 
-    if(isset($user_info['picture'])) {
-        $stmt_mobile_number = $db->prepare(
-            'UPDATE User SET picture = ? 
-            WHERE id = ?'
-        );
-    
-        $stmt_mobile_number->execute(array($user_info['picture'], $user_info['id']));
+    if($user_info['picture']) {
+        $querry_str .= ' picture = ?,';
+        array_push($querry_array, $user_info['picture']);
     }
 
-    if(isset($user_info['password'])) {
+    if($user_info['password']) {
+        $querry_str .= ' password = ?,';
         $options = ['cost' => 12]; // Default is 10 but 12 is better
-        $stmt_password = $db->prepare(
-            'UPDATE User SET password = ? 
-            WHERE id = ?'
-        );
-    
-        $stmt_password->execute(array(password_hash($user_info['password'], PASSWORD_DEFAULT, $options), $user_info['id']));
+        array_push($querry_array, password_hash($user_info['password'], PASSWORD_DEFAULT, $options), $user_info['id']);
     }
-}
 
+    // don't do update if there is nothing to update
+    if(empty($user_info))
+      return false;
+
+    array_push($querry_array, $user_info['id']);
+    $querry_str = trim($querry_str, ",");
+    $querry_str .= ' WHERE id = ?';
+
+    $stmt = $db->prepare($querry_str);
+    $stmt->execute($querry_array);
+}
 ?>
