@@ -241,7 +241,7 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
 
     <!-- Used in answer input -->
     <section class="answer-input" id="<?php echo 'answer-input' . $questionAnswer['id']; ?>" style="display: none;">
-      <textarea name="<?php echo 'answer_text' . $questionAnswer['id'] ?>" rows="2" column="40"
+      <textarea class="answer-text-area" name="<?php echo 'answer_text' . $questionAnswer['id'] ?>" rows="2" column="40"
         placeholder="Write your answer..." required></textarea>
       <button id="answer-input-button" type="button"
         onclick="addAnswer(<?php echo $questionAnswer['id'] ?>)">Post Answer</button>

@@ -460,14 +460,17 @@ textarea {
   font-weight: bold;
 }
 
-#question-input {
+#question-input,
+.answer-input {
   margin-top: 1em;
   margin-left: 1em;
   width: 60em;
 }
 
 #question-input-ta,
-#question-input-button {
+#question-input-button,
+#answer-input-button,
+.answer-text-area {
   display: inline-block;
 
   border: none;
@@ -477,17 +480,20 @@ textarea {
   background-color: var(--light);
 }
 
-#question-input-ta {
+#question-input-ta,
+.answer-text-area {
   width: 80%;
 }
 
-#question-input-button {
+#question-input-button,
+#answer-input-button {
   /*Comment text input button*/
   font-size: large;
   padding: 0.3em;
 }
 
-#question-input-button:hover {
+#question-input-button:hover,
+#answer-input-button:hover {
   background-color: var(--dark);
 }
 
