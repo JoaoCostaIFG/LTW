@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\map;
-
 require_once '../database/queries/db_post.php';
 require_once '../database/queries/db_user.php';
 require_once '../templates/tpl_utils.php';
@@ -85,6 +83,12 @@ require_once '../templates/tpl_utils.php';
   <div class="form-item listfilter-item" >
     <?php drawCities(true, $values['city']); ?>
   </div>
+  <?php if(isset($_SESSION['username'])) { ?>
+  <div class="form-item listfilter-item" >
+  <label for="favourite">Favourite</label>
+    <input id="favourite" type="checkbox" name="favourite" value="true" <?php if($values['favourite'] == "true") echo 'checked'; ?> >
+  </div>
+  <?php } ?>
   <br>
   <input class="form-button listfilter-button" type="submit" value="Search">
 </form>
@@ -96,6 +100,15 @@ require_once '../templates/tpl_utils.php';
 {
     $search_options = array();
     $query_conditions = array();
+    $from_clause = "";
+
+    $curr_favourite = "false";
+    if (isset($_GET['favourite']) && $_GET['favourite'] == "true") {
+        $curr_favourite = $_GET['favourite'];
+        $from_clause .= 'JOIN Favourite ON(Favourite.user_id = ? AND Favourite.post_id = PetPost.id)';
+        $user_id = getUserId($_SESSION['username'])['id'];
+        array_push($search_options, $user_id);
+    }
 
     $curr_name = '';
     if (isset($_GET['name']) && $_GET['name'] != null) {
@@ -145,10 +158,11 @@ require_once '../templates/tpl_utils.php';
       'gender'=> $curr_gender,
       'size'=> $curr_size,
       'city'=> $curr_city,
-      'species'=> $curr_species
+      'species'=> $curr_species,
+      'favourite' => $curr_favourite
     );
 
-    $posts = getPosts($search_options, $query_conditions);
+    $posts = getPosts($search_options, $query_conditions, $from_clause);
 
     //Adds a parameter isFavourite to each post when there are no search options
     if(empty($search_options) && isset($_SESSION['username'])) {
