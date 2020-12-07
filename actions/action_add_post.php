@@ -7,22 +7,21 @@
 
     // Check if file is not image
     $type = photoIsValid($_FILES['image']['tmp_name']);
-if (!$type) {
-    die(header('Location: ../pages/add_post.php'));
-}
+    if (!$type) {
+        die(header('Location: ../pages/add_post.php'));
+    }
 
     $name = $_POST['name'];
-    $age = $_POST['age'];
+    $birth_date = $_POST['birth_date'];
     $gender = $_POST['gender'];
     $size = $_POST['size'];
     $description = $_POST['description'];
-    $date = $_POST['date'];
     $color = $_POST['color'];
     $species = $_POST['species'];
     $city = $_POST['city'];
     $user_id = getUserId($_SESSION['username'])['id'];
-    $post_info = array($name, $age, $gender, $size, $description, $date,
-        $color, $species, $city, $user_id);
+    $post_info = array($name, $birth_date, $gender, $size, $description, $color,
+        $species, $city, $user_id);
 
     try {
         $post_id = insertPost($post_info);

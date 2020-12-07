@@ -40,7 +40,7 @@ drop table if exists PetPost;
 create table PetPost( 
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
-    age INTEGER,
+    birth_date DATE NOT NULL,
     gender INTEGER CHECK (gender = 1 OR gender = 0), -- 0 male, 1 female
     size INTEGER CHECK (size = 1 OR size = 2 OR size = 3), -- 1 small, 2 medium, 3 big
     description TEXT NOT NULL,

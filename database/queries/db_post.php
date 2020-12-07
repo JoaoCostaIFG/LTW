@@ -6,7 +6,7 @@ require_once '../database/database_instance.php';
     {
         $db = Database::instance()->db();
         $stmt = $db->prepare(
-            'INSERT INTO PetPost VALUES(NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+            'INSERT INTO PetPost VALUES(NULL, ?, ?, ?, ?, ?, date("now"), ?, ?, ?, ?)'
         );
         $stmt->execute($post);
         return $db->lastInsertId();
@@ -60,7 +60,9 @@ require_once '../database/database_instance.php';
         $query_conditions = conditionsToString($query_conditions_array);
         $db = Database::instance()->db();
         $stmt = $db->prepare(
-            'SELECT DISTINCT PetPost.id as post_id, name, age, gender, size, city_id, species_id,
+            'SELECT DISTINCT PetPost.id as post_id, name, birth_date,
+               cast(julianday(date("now")) - julianday(birth_date) as int) as age,
+               gender, size, city_id, species_id,
              PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
              FROM PetPost JOIN PetPhoto ON(PetPost.id = PetPhoto.post_id) ' .
             $from_clause .
@@ -79,9 +81,11 @@ require_once '../database/database_instance.php';
         $db = Database::instance()->db();
         $stmt = $db->prepare(
             '
-            SELECT petpost.id, petpost.name, age, gender, size, description, petpost.date,
-            Color.name as color, Species.name as species, City.name as location,
-            User.username as user, PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
+            SELECT petpost.id, petpost.name, birth_date,
+              cast(julianday(date("now")) - julianday(birth_date) as int) as age,
+              gender, size, description, petpost.date,
+              Color.name as color, Species.name as species, City.name as location,
+              User.username as user, PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
             FROM PetPost JOIN Color on(PetPost.color_id=color.id)
                 JOIN Species on(PetPost.species_id=species.id)
                 JOIN City on(city.id = PetPost.city_id)
@@ -209,10 +213,9 @@ require_once '../database/database_instance.php';
         $stmt = $db->prepare(
             'UPDATE PetPost
              SET name = ?,
-                age = ?,
+                birth_date = ?,
                 size = ?,
                 description = ?,
-                date = ?,
                 color_id = ?,
                 city_id = ?
              WHERE id = ?'

@@ -25,13 +25,12 @@ if (!ownsPost($user_id, $post_id)) {
 }
     
     $name = $_POST['name'];
-    $age = $_POST['age'];
+    $birth_date = $_POST['birth_date'];
     $size = $_POST['size'];
     $description = $_POST['description'];
-    $date = $_POST['date'];
     $color = $_POST['color'];
     $city = $_POST['city'];
-    $post_info = array($name, $age, $size, $description, $date, $color, $city, $post_id);
+    $post_info = array($name, $birth_date, $size, $description, $color, $city, $post_id);
 
 try {
     updatePost($post_info);

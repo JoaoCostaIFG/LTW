@@ -6,22 +6,27 @@ require_once '../database/queries/db_user.php';
 
 /* GETTERS */
 
-function ageToString($age)
+function ageToString($age_days)
 {
-    $years = intdiv($age, 12);
-    $months = $age % 12;
+    $months = intdiv($age_days, 30);
+    $age_days = $age_days % 12;
+    $years = intdiv($months, 12);
+    $months = $months % 12;
 
     $ret = "";
     if ($years == 0) {
         if ($months != 0) {
-            $ret = $months . " months old";
+            $ret = $months . " month(s) old";
+            if ($age_days != 0) {
+              $ret .= " and " . $age_days . " day(s) old";
+            }
         } else {
-            $ret = "0 years old";
+            $ret = "$age_days day(s) old";
         }
     } else {
-        $ret = $years . " years";
+        $ret = $years . " year(s)";
         if ($months != 0) {
-            $ret = $ret . " and " . $months . " months old";
+            $ret = $ret . " and " . $months . " month(s) old";
         } else {
             $ret = $ret . " old";
         }
@@ -107,8 +112,8 @@ function drawEditOptions($post)
             <input id="name" type="text" name="name" value="<?php echo $post['name']; ?>" required>
           </div>
           <div class="form-item addpostform-item" >
-            <label for="age">Age</label>
-            <input id="age" type="number" name="age" value="<?php echo $post['age']; ?>" required>
+            <label for="birth_date">Birth Date</label>
+            <input id="birth_date" type="date" name="birth_date" value="<?php echo $post['birth_date']; ?>" required>
           </div>
           <div class="form-item addpostform-item" >
             <label for="image">Photo</label>
@@ -122,10 +127,6 @@ function drawEditOptions($post)
           <div class="form-item addpostform-item" >
             <label for="description">Description</label>
             <textarea id="description" name="description" rows="8" cols="86"><?php echo $post['description']; ?></textarea>
-          </div>
-          <div class="form-item addpostform-item" >
-            <label for="date">Birth date</label>
-            <input id="date" type="date" name="date" value="<?php echo $post['date']; ?>" required>
           </div>
 
           <div class="form-item addpostform-item" >
@@ -337,8 +338,8 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
         <input id="name" type="text" name="name" placeholder="name of the pet" required>
       </div>
       <div class="form-item addpostform-item" >
-        <label for="age">Age</label>
-        <input id="age" type="number" name="age" placeholder="age of the pet" required>
+        <label for="age">Birth Date</label>
+        <input id="birth_date" type="date" name="birth_date" placeholder="birth date of the pet" required>
       </div>
       <div class="form-item addpostform-item" >
         <label for="image">Photo</label>
@@ -356,10 +357,6 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
       <div class="form-item addpostform-item" >
         <label for="description">Description</label>
         <textarea id="description" name="description" rows="8" cols="86"></textarea>
-      </div>
-      <div class="form-item addpostform-item" >
-        <label for="date">Birth date</label>
-        <input id="date" type="date" name="date" placeholder="date of birth of your pet" required>
       </div>
 
       <div class="form-item addpostform-item" >
