@@ -253,19 +253,18 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
     <?php if (isset($questionAnswer['answer'])) {
           drawAnswer($questionAnswer);
     } ?>
-  </section>
+  </section><br>
 <?php } ?>
 
 <?php function drawQuestionsAnswers($post_id, $user_id, $questionsAnswers)
 {
-    $cnt = 0;
-    foreach ($questionsAnswers as $questionAnswer) {
-        $cnt = $cnt + 1;
+
+    if(empty($questionsAnswers)){
+      echo "<i id='no-questions'>There are no questions on this post. Make the first question</i>";
+    } else {
+      foreach ($questionsAnswers as $questionAnswer) {
         drawQuestionAnswer($post_id, $user_id, $questionAnswer);
-        echo '<br>';
-    }
-    if ($cnt == 0) {
-        echo "<i id='no-questions'>There are no questions on this post. Make the first question</i>";
+      }
     }
 
     if (!isOwner($user_id, $post_id)) {
@@ -378,7 +377,8 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
 
 <?php function drawAnswer($questionAnswer)
 {
-    ?>
+	?>
+	<br> <!-- Used to make the answers appear below the questions -->
   <section class="petpost-answer">
     <p> <?php echo 'A: ' . $questionAnswer['answer']; ?> </p>
     <p> <?php echo $questionAnswer['answer_date'] ?> </p>

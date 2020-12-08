@@ -19,7 +19,7 @@ function addQuestion(post_id) {
             //Trim is used because the reponse text comes with new lines behind
             let response = xhttp.responseText.trim('\n');
             //Used to append before question input
-            let doc = new DOMParser().parseFromString(response, 'text/html').getElementsByClassName("petpost-question")[0];
+            let doc = new DOMParser().parseFromString(response, 'text/html').getElementsByClassName("QA")[0];
             let questions = document.getElementById("petpost-questions");
             //error in this case
             if(!doc){
