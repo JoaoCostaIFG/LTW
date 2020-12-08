@@ -2,7 +2,7 @@
 
 require_once '../database/queries/db_post.php';
 require_once '../database/queries/db_user.php';
-require_once '../templates/tpl_utils.php';
+require_once '../includes/utils.php';
 
 ?>
 <?php function drawPostList($posts)

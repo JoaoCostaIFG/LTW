@@ -1,8 +1,8 @@
 <?php
-    require_once '../pages/session.php';
+    require_once '../includes/session.php';
     require_once '../database/queries/db_proposal.php';
     require_once '../database/queries/db_user.php';
-    require_once '../templates/tpl_utils.php';
+    require_once '../includes/utils.php';
 
     $curr_user_id = getUserId($_SESSION['username'])['id'];
 if ($curr_user_id != $_GET['user_id']) {

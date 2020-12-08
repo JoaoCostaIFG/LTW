@@ -1,8 +1,8 @@
 <?php
-  require_once '../pages/session.php';
+  require_once '../includes/session.php';
   require_once '../database/queries/db_user.php';
   require_once '../actions/action_upload.php';
-  require_once '../templates/tpl_utils.php';
+  require_once '../includes/utils.php';
 
 function registerFail($msg)
 {

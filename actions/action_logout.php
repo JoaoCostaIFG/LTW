@@ -1,6 +1,6 @@
 <?php
-    require_once '../pages/session.php';
-    require_once '../templates/tpl_utils.php';
+    require_once '../includes/session.php';
+    require_once '../includes/utils.php';
 
     session_unset();
     session_destroy();

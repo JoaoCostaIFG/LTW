@@ -1,5 +1,5 @@
 <?php
-  require_once 'session.php';
+  require_once '../includes/session.php';
   $title="Sent Proposals";
   require_once '../templates/common/tpl_header_noimg.php';
   require_once '../database/queries/db_user.php';
