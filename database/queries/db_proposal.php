@@ -30,10 +30,10 @@ include_once('../database/database_instance.php');
         $stmt = $db->prepare(
             'SELECT Poster.id as poster_id, Poster.username as poster_username, accepted as status,
                 PetPost.id as post_id, PetPost.name as pet_name,
-                Photo.id as photo_id, Photo.extension as photo_extension
+                PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
              FROM Proposal JOIN
                 PetPost ON(Proposal.post_id = PetPost.id) JOIN
-                Photo ON(Photo.post_id = PetPost.id) JOIN
+                PetPhoto ON(PetPhoto.post_id = PetPost.id) JOIN
                 User as Poster ON(Poster.id = PetPost.user_id)
              WHERE Proposal.user_id = ?
              GROUP BY PetPost.id'
@@ -47,10 +47,10 @@ include_once('../database/database_instance.php');
         $stmt = $db->prepare(
             'SELECT User.id as user_id, User.username as user_username, accepted as status,
                 PetPost.id as post_id, PetPost.name as pet_name,
-                Photo.id as photo_id, Photo.extension as photo_extension
+                PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
              FROM Proposal JOIN
                 PetPost ON(Proposal.post_id = PetPost.id) JOIN
-                Photo ON(Photo.post_id = PetPost.id) JOIN
+                PetPhoto ON(PetPhoto.post_id = PetPost.id) JOIN
                 User as Poster ON(Poster.id = PetPost.user_id) JOIN
                 User ON(User.id = Proposal.user_id)
              WHERE Poster.id = ?

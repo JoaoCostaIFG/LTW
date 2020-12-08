@@ -12,9 +12,9 @@
   <body>
     <nav id="top-bar">
       <ul id="menu" class="nobullets">
-        <li><a class="nounderline" href="/index.php">Home</a></li>
-        <li><a class="nounderline" href="/pages/list.php">Search</a></li>
-        <li><a class="nounderline" href="/pages/contacts.php">Contacts</a></li>
+        <li><a class="nounderline" href="../index.php">Home</a></li>
+        <li><a class="nounderline" href="../pages/list.php">Search</a></li>
+        <li><a class="nounderline" href="../pages/contacts.php">Contacts</a></li>
       </ul>
 
       <label id="top-bar-toggle-label" for="top-bar-toggle">🐶</label>
@@ -22,8 +22,8 @@
 
       <?php if (!isset($_SESSION['username'])) { ?>
         <div id="auth">
-          <a class="nounderline" href="/pages/register.php">Sign Up</a>
-          <a class="nounderline" href="/pages/login.php">Log in</a>
+          <a class="nounderline" href="../pages/register.php">Sign Up</a>
+          <a class="nounderline" href="../pages/login.php">Log in</a>
         </div>
       <?php } else { ?>
         <ul id="authlogin" class="nobullets">

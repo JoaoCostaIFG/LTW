@@ -45,7 +45,7 @@ require_once '../templates/tpl_utils.php';
      * using /100% on background favors portait frame (vertical) photos
      * using /auto 100% seems to favor most photos
      */ 
-    $photo_path = '/static/images/' . $post['photo_id'] . '.' . $post['photo_extension'];
+    $photo_path = '../static/images/' . $post['photo_id'] . '.' . $post['photo_extension'];
     $post_path = 'post.php?post_id=' . $post['post_id'];
     ?>
 

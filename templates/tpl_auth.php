@@ -24,7 +24,7 @@ function draw_login()
       </form>
   
       <footer>
-          <p>Don't have an account? <a href="register.php">Signup!</a></p>
+          <p>Don't have an account? <a href="../pages/register.php">Signup!</a></p>
       </footer>
   </section>
 <?php } ?>
@@ -76,6 +76,6 @@ function draw_login()
     }?>
       </p>
   
-      <p><i>Already have an account? <a href="login.php">Login!</a></i></p>
+      <p><i>Already have an account? <a href="../pages/login.php">Login!</a></i></p>
   </section>
 <?php } ?>
