@@ -7,7 +7,7 @@ create table User(
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
-    mobile_number CHAR(9) UNIQUE NOT NULL,
+    mobile_number TEXT UNIQUE NOT NULL,
     extension TEXT
 );
 

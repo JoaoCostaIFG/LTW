@@ -58,7 +58,7 @@ function draw_login()
         </div>
         <div class="form-item profileform-item" >
           <label for="mobile">Mobile phone number</label>
-          <input id="mobile" type="text" name="mobile number" placeholder="mobile number" required>
+          <input id="mobile" type="text" name="mobile number" placeholder="mobile number" maxlength="20" required>
         </div>
         <div class="form-item profileform-item" >
           <label for="image">Photo</label>
