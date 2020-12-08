@@ -1,6 +1,6 @@
 <?php 
 require_once '../database/queries/db_post.php';
-require_once '../templates/tpl_utils.php';
+require_once '../includes/utils.php';
 
 function drawGendersRadio()
 {

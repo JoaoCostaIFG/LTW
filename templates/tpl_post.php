@@ -1,6 +1,6 @@
 <?php
 require_once '../templates/tpl_petInfo.php';
-require_once '../templates/tpl_utils.php';
+require_once '../includes/utils.php';
 require_once '../database/queries/db_proposal.php';
 require_once '../database/queries/db_user.php';
 

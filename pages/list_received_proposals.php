@@ -1,5 +1,5 @@
 <?php
-  include_once 'session.php';
+  include_once '../includes/session.php';
   $title="Received Proposals";
   include_once '../templates/common/tpl_header_noimg.php';
 

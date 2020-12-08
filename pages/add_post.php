@@ -1,5 +1,5 @@
 <?php
-require_once 'session.php';
+require_once '../includes/session.php';
 require '../templates/common/tpl_header_noimg.php';
 require '../templates/tpl_post.php';
 

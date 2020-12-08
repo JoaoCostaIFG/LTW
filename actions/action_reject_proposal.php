@@ -1,8 +1,8 @@
 <?php
-    require_once '../pages/session.php';
+    require_once '../includes/session.php';
     require_once '../database/queries/db_user.php';
     require_once '../database/queries/db_proposal.php';
-    require_once '../templates/tpl_utils.php';
+    require_once '../includes/utils.php';
 
     $user_id = $_GET['user_id'];
     $post_id = $_GET['post_id'];

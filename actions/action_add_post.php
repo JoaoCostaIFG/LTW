@@ -1,9 +1,9 @@
 <?php
-  require_once '../pages/session.php';
+  require_once '../includes/session.php';
   require_once '../database/queries/db_user.php';
   require_once '../database/queries/db_post.php';
   require_once '../actions/action_upload.php';
-  require_once '../templates/tpl_utils.php';
+  require_once '../includes/utils.php';
 
     // Check if file is not image
     $type = photoIsValid($_FILES['image']['tmp_name']);

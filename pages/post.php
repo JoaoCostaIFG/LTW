@@ -1,5 +1,5 @@
 <?php
-  require_once 'session.php';
+  require_once '../includes/session.php';
 if (!$_GET['post_id']) { // go to 404 if there is no post id
     header('Location: 404.php');
 }

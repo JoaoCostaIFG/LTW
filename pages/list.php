@@ -1,5 +1,5 @@
 <?php
-  require_once 'session.php';
+  require_once '../includes/session.php';
   $title="List";
   require '../templates/common/tpl_header.php';
   require_once '../templates/tpl_petInfo.php';

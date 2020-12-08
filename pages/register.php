@@ -1,5 +1,5 @@
 <?php
-  require 'session.php';
+  require '../includes/session.php';
   $title="Register";
   require_once '../templates/common/tpl_header_noimg.php';
   require_once '../templates/tpl_auth.php';
