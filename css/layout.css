@@ -102,3 +102,16 @@ h1 {
   position: relative;
   float: right;
 }
+
+#persons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.person {
+  text-align: center;
+}
+
+.personimg {
+  width: 90%;
+}
