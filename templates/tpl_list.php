@@ -1,6 +1,9 @@
-<?php 
+<?php
+
 require_once '../database/queries/db_post.php';
-require_once '../templates/tpl_utils.php';
+require_once '../database/queries/db_user.php';
+require_once '../includes/utils.php';
+
 ?>
 <?php function drawPostList($posts)
 {
@@ -11,13 +14,29 @@ require_once '../templates/tpl_utils.php';
 
 <div class="list">
     <?php 
-    foreach($posts as $post) {
-        drawPostItem($post);
+    if (empty($posts)) {
+        echo "There are no posts to show.";
+    }
+    else {
+        foreach($posts as $post) {
+            drawPostItem($post);
+        }
     }
     ?>
 </div>
 
 <?php } ?>
+
+<?php function drawFavouriteStar($post)
+{
+    if(isset($_SESSION['username']) && isset($post['isFavourite'])) { ?>
+    <div id="favourite-star">
+        <?php if ($post['isFavourite']) {
+            echo '&bigstar;';
+        }?>
+    </div>
+    <?php }
+} ?>
 
 <?php function drawPostItem($post)
 {
@@ -26,11 +45,12 @@ require_once '../templates/tpl_utils.php';
      * using /100% on background favors portait frame (vertical) photos
      * using /auto 100% seems to favor most photos
      */ 
-    $photo_path = '/static/images/' . $post['photo_id'] . '.' . $post['photo_extension'];
+    $photo_path = '../static/images/' . $post['photo_id'] . '.' . $post['photo_extension'];
     $post_path = 'post.php?post_id=' . $post['post_id'];
     ?>
 
   <a class="nounderline list-item" href="<?php echo $post_path; ?>">
+    <?php drawFavouriteStar($post); //Draws favourite star if logged in?>
     <div class="petimage">
       <div class="list-item-img" style="background: url('<?php echo $photo_path; ?>') no-repeat center /auto 100%"></div>
     </div>
@@ -55,19 +75,32 @@ require_once '../templates/tpl_utils.php';
     <?php drawGenders(true, $values['gender']); ?>
   </div>
   <div class="form-item listfilter-item" >
-    <label for="age">Age</label>
-    <input id="age" type="text" name="age" value="<?php echo $values['age'] ?>">
+    <label for="min_age">Min. Age (Years)</label>
+    <input id="min_age" min="0" type="text" name="min_age" value="<?php echo $values['min_age'] ?>">
   </div>
   <div class="form-item listfilter-item" >
-    <label for="size">Size</label>
-    <input id="age" type="text" name="size" value="<?php echo $values['size'] ?>">
+    <label for="max_age">Max. Age (Years)</label>
+    <input id="max_age" min="0" type="text" name="max_age" value="<?php echo $values['max_age'] ?>">
   </div>
-  <div class="form-item listfilter-item" >
+  <br>
+  <div class="form-item listfilter-item listfilter-item-bottom" >
+    <?php drawSizes(true, $values['size']); ?>
+  </div>
+  <div class="form-item listfilter-item listfilter-item-bottom" >
     <?php drawSpecies(true, $values['species']); ?>
   </div>
-  <div class="form-item listfilter-item" >
+  <div class="form-item listfilter-item listfilter-item-bottom" >
     <?php drawCities(true, $values['city']); ?>
   </div>
+    <?php if(isset($_SESSION['username'])) { ?>
+  <div class="form-item listfilter-item listfilter-item-bottom" >
+    <label for="favourite">Favourite</label>
+    <input id="favourite" type="checkbox" name="favourite" value="true"
+        <?php if($values['favourite'] == "true") {
+            echo 'checked';
+        } ?> >
+  </div>
+    <?php } ?>
   <br>
   <input class="form-button listfilter-button" type="submit" value="Search">
 </form>
@@ -79,6 +112,15 @@ require_once '../templates/tpl_utils.php';
 {
     $search_options = array();
     $query_conditions = array();
+    $from_clause = "";
+
+    $curr_favourite = "false";
+    if (isset($_GET['favourite']) && $_GET['favourite'] == "true") {
+        $curr_favourite = $_GET['favourite'];
+        $from_clause .= 'JOIN Favourite ON(Favourite.user_id = ? AND Favourite.post_id = PetPost.id)';
+        $user_id = getUserId($_SESSION['username'])['id'];
+        array_push($search_options, $user_id);
+    }
 
     $curr_name = '';
     if (isset($_GET['name']) && $_GET['name'] != null) {
@@ -87,11 +129,20 @@ require_once '../templates/tpl_utils.php';
         array_push($query_conditions, 'name LIKE ?');
     }
 
-    $curr_age = '';
-    if (isset($_GET['age']) && $_GET['age'] != null) {
-        $curr_age = $_GET['age'];
-        array_push($search_options, $_GET['age']);
-        array_push($query_conditions, 'age = ?');
+    $curr_min_age = '';
+    if (isset($_GET['min_age']) && $_GET['min_age'] != null) {
+        $curr_min_age = $_GET['min_age'];
+        /* Minimum Age */
+        array_push($search_options, $_GET['min_age'] * 365);
+        array_push($query_conditions, 'age >= ?');
+    }
+
+    $curr_max_age = '';
+    if (isset($_GET['max_age']) && $_GET['max_age'] != null) {
+        $curr_max_age = $_GET['max_age'];
+        /* Maximum Age */
+        array_push($search_options, $_GET['max_age'] * 365);
+        array_push($query_conditions, 'age <= ?');
     }
 
     $curr_gender = 'any';
@@ -102,7 +153,7 @@ require_once '../templates/tpl_utils.php';
     }
 
     $curr_size = '';
-    if (isset($_GET['size']) && $_GET['size'] != null) {
+    if (isset($_GET['size']) && $_GET['size'] != "any") {
         $curr_size = $_GET['size'];
         array_push($search_options, $_GET['size']);
         array_push($query_conditions, 'size = ?');
@@ -124,15 +175,47 @@ require_once '../templates/tpl_utils.php';
 
     $current_values = array(
       'name'=> $curr_name,
-      'age'=> $curr_age,
+      'min_age'=> $curr_min_age,
+      'max_age'=> $curr_max_age,
       'gender'=> $curr_gender,
       'size'=> $curr_size,
       'city'=> $curr_city,
-      'species'=> $curr_species
+      'species'=> $curr_species,
+      'favourite' => $curr_favourite
     );
 
-    $posts = getPosts($search_options, $query_conditions);
+    $posts = getPosts($search_options, $query_conditions, $from_clause);
+
+    //Adds a parameter isFavourite to each post when there are no search options
+    if(empty($search_options) && isset($_SESSION['username'])) {
+        $posts = tagFavouritesAndSort($posts);
+    }
+
     return array(
       'posts'=>$posts,
       'values'=> $current_values);
 }?>
+
+
+<?php function tagFavouritesAndSort($posts)
+{
+    $posts = array_map(
+        function ($post) {
+            $post['isFavourite'] = isFavourite(getUserId($_SESSION['username'])['id'], $post['post_id']);
+            return $post;
+        },
+        $posts
+    );
+
+    //Places favourite posts before others
+    usort(
+        $posts,
+        function ($p1, $p2) {
+            if ($p1['isFavourite'] == $p2['isFavourite']) {
+                return 0;
+            }
+            return ($p1['isFavourite']) ? -1 : 1;
+        }
+    );
+    return $posts;
+} ?>

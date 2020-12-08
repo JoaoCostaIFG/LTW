@@ -1,5 +1,5 @@
 <?php
-  require_once 'session.php';
+  require_once '../includes/session.php';
 if (!$_GET['post_id']) { // go to 404 if there is no post id
     header('Location: 404.php');
 }
@@ -9,14 +9,8 @@ if (!$_GET['post_id']) { // go to 404 if there is no post id
   require '../database/queries/db_post.php';
   require '../templates/tpl_post.php';
   $post = getPost($_GET['post_id']);
-  $comments = getComments($_GET['post_id']);
-  drawPost($post, $comments);
-
-  if(isset($_SESSION['username'])){
-    drawCommentForm($_GET['post_id']);
-  } else {
-    drawCommentLoginPrompt();
-  }
+  $questionsAnswers = getQuestionsAnswers($_GET['post_id']);
+  drawPost($post, $questionsAnswers);
 
   require '../templates/common/tpl_footer.php';
 ?>

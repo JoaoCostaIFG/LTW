@@ -1,8 +1,9 @@
 <?php
-    include_once('../pages/session.php');
-    include_once('../database/queries/db_user.php');
-    include_once('../database/queries/db_post.php');
-    include_once('../actions/action_upload.php');
+  require_once '../includes/session.php';
+  require_once '../database/queries/db_user.php';
+  require_once '../database/queries/db_post.php';
+  require_once '../actions/action_upload.php';
+  require_once '../includes/utils.php';
 
     // Check if file is not image
     $type = photoIsValid($_FILES['image']['tmp_name']);
@@ -11,27 +12,25 @@
     }
 
     $name = $_POST['name'];
-    $age = $_POST['age'];
+    $birth_date = $_POST['birth_date'];
     $gender = $_POST['gender'];
     $size = $_POST['size'];
     $description = $_POST['description'];
-    $date = $_POST['date'];
     $color = $_POST['color'];
     $species = $_POST['species'];
     $city = $_POST['city'];
     $user_id = getUserId($_SESSION['username'])['id'];
-    $post_info = array($name, $age, $gender, $size, $description, $date,
-        $color, $species, $city, $user_id);
+    $post_info = array($name, $birth_date, $gender, $size, $description, $color,
+        $species, $city, $user_id);
 
     try {
         $post_id = insertPost($post_info);
         uploadPhoto($post_id, $type, false);
 
-        $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully added post');
-        die(header('Location: ../pages/list.php'));
+        setSessionMessage('success', 'Successfully added post');
+        header("Location: ../pages/post.php?post_id=$post_id");
     } catch (PDOException $e) {
-        // die($e->getMessage()); // TODO is this ok here?
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Failed to add post!');
+        setSessionMessage('error', 'Failed to add post!');
         die(header('Location: ../pages/add_post.php'));
     }
-?>
+    ?>

@@ -1,7 +1,8 @@
 <?php
-    include_once('../pages/session.php');
-    include_once('../database/queries/db_user.php');
-    include_once('../database/queries/db_post.php');
+    require_once '../includes/session.php';
+    require_once '../database/queries/db_user.php';
+    require_once '../database/queries/db_post.php';
+    require_once '../includes/utils.php';
 
     $name = $_POST['name'];
     $age = $_POST['age'];
@@ -18,11 +19,10 @@
 
     try {
         insertPost($post_info);
-        $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully added post');
+        setSessionMessage('success', 'Successfully added post');
         header('Location: ../pages/list.php');
     } catch (PDOException $e) {
-        die($e->getMessage()); // TODO is this ok here?
-        $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Failed to add post!');
-        header('Location: ../pages/add_post.php');
+        setSessionMessage('error', 'Failed to add post!');
+        die(header('Location: ../pages/add_post.php'));
     }
-?>
+    ?>

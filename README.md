@@ -2,10 +2,10 @@
 
 ## Members
 
-- Ana Inês Oliveira Barros
-- João de Jesus Costa - up201806560
-- João Lucas Silva Martins - up201806436
-- Ricardo Fontão
+- Ana Inês Oliveira Barros - up201806593@fe.up.pt
+- João de Jesus Costa - up201806560@fe.up.pt
+- João Lucas Silva Martins - up201806436@fe.up.pt
+- Ricardo Fontão - up201806317@fe.up.pt
 
 ## Mockups
 

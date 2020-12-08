@@ -7,7 +7,8 @@ create table User(
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
-    mobile_number CHAR(9) UNIQUE NOT NULL
+    mobile_number TEXT UNIQUE NOT NULL,
+    extension TEXT
 );
 
 drop table if exists Color;
@@ -39,7 +40,7 @@ drop table if exists PetPost;
 create table PetPost( 
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
-    age INTEGER,
+    birth_date DATE NOT NULL,
     gender INTEGER CHECK (gender = 1 OR gender = 0), -- 0 male, 1 female
     size INTEGER CHECK (size = 1 OR size = 2 OR size = 3), -- 1 small, 2 medium, 3 big
     description TEXT NOT NULL,
@@ -50,10 +51,10 @@ create table PetPost(
     user_id INTEGER REFERENCES User(id)
 );
 
-drop table if exists Photo; 
-create table Photo( 
+drop table if exists PetPhoto; 
+create table PetPhoto( 
     id INTEGER PRIMARY KEY,
-    post_id INTEGER REFERENCES PetPost(id),
+    post_id INTEGER REFERENCES PetPost(id) ON DELETE CASCADE,
     extension TEXT CHECK(extension LIKE "jpg" OR extension LIKE "png"),
     date DATE NOT NULL
 );
