@@ -63,7 +63,7 @@ function drawEditProfile($user)
             <div class="form-item profileform-item">
                 <label for="mobile_number">Phone Number</label>
                 <input id="mobile_number" type="text" name="mobile_number"
-                  placeholder="<?php echo $user['mobile_number']; ?>">
+                  placeholder="<?php echo $user['mobile_number']; ?>" maxlength="20">
                 <p class="note">This is the phone number that other users will use to contact you.</p>
             </div>
             <div class="form-item profileform-item">
