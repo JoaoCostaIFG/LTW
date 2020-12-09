@@ -33,4 +33,4 @@
         setSessionMessage('error', 'Failed to add post!');
         die(header('Location: ../pages/add_post.php'));
     }
-    ?>
+?>
