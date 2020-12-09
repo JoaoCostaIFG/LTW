@@ -1,11 +1,11 @@
 <?php
-  include_once '../includes/session.php';
+  require_once '../includes/session.php';
   $title="Received Proposals";
-  include_once '../templates/common/tpl_header_noimg.php';
+  require_once '../templates/common/tpl_header_noimg.php';
 
-  include_once '../database/queries/db_user.php';
-  include_once '../database/queries/db_proposal.php';
-  include_once '../templates/tpl_proposal.php';
+  require_once '../database/queries/db_user.php';
+  require_once '../database/queries/db_proposal.php';
+  require_once '../templates/tpl_proposal.php';
 ?>
 
   <h2><b>Your received proposals</b></h2>
