@@ -5,14 +5,14 @@
   require_once '../templates/tpl_post.php';
 
 if (!isset($_SESSION['username']) || !isset($_GET['post_id']) || !isset($_GET['question_text'])) {
-    echo '<p id="question-error">An error ocurred.</p>';
-    die;
+  echo '<p id="question-error">An error ocurred.</p>';
+  die;
 }
   
-  $text = $_GET['question_text'];
+  $text = htmlspecialchars($_GET['question_text']);
 if ($text == "") {
-    echo '<p id="question-error">An error ocurred.</p>';
-    die;
+  echo '<p id="question-error">An error ocurred.</p>';
+  die;
 }
   
   $user_id = getUserId($_SESSION['username'])['id'];

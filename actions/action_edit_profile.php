@@ -11,7 +11,7 @@ function updateUserFail($msg)
 }
 
 // Check for repeated username
-if(getUserInfo($_POST['username'])) {        
+if(getUserInfo($_POST['username'])) {
     updateUserFail("Username already exists!");
 }
 
@@ -25,6 +25,10 @@ if(isset($_POST['current_password'])) {
         setSessionMessage('passwordError', "Passwords do not match.");
         die(header("Location: ../pages/settings.php"));
     }
+    if(strlen($_POST['password']) < 5){
+        setSessionMessage('passwordError', "Password must have at least 5 characters");
+        die(header("Location: ../pages/settings.php"));
+    }
 }
 
 // Get user information to update
@@ -32,17 +36,24 @@ $user_id = getUserId($_SESSION['username'])['id'];
 
 $user_info = array('id' => $user_id, 'email' => null, 'mobile_number' => null,
   'password' => null, 'username' => null);
+  
 if(isset($_POST['email'])) {
-    $user_info['email'] = $_POST['email'];
+    if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+        $user_info['email'] = $_POST['email'];
+    } else {
+        updateUserFail("Invalid email");
+    }
 }
+
 if(isset($_POST['mobile_number'])) {
-    $user_info['mobile_number'] = $_POST['mobile_number'];
+    $user_info['mobile_number'] = preg_replace("/[^0-9+ \-]/",'', $_POST['mobile_number']);
 }
+
 if(isset($_POST['password'])) {
     $user_info['password'] =  $_POST['password'];
 }
 if(isset($_POST['username'])) {
-    $user_info['username'] = $_POST['username'];
+    $user_info['username'] = htmlspecialchars($_POST['username']);
 }
 
 $type = photoIsValid($_FILES['image']['tmp_name']);

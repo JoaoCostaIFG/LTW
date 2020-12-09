@@ -1,9 +1,9 @@
 <?php
-  require_once '../includes/session.php';
-  require_once '../database/queries/db_user.php';
-  require_once '../database/queries/db_post.php';
-  require_once '../actions/action_upload.php';
-  require_once '../includes/utils.php';
+    require_once '../includes/session.php';
+    require_once '../database/queries/db_user.php';
+    require_once '../database/queries/db_post.php';
+    require_once '../actions/action_upload.php';
+    require_once '../includes/utils.php';
 
     // Check if file is not image
     $type = photoIsValid($_FILES['image']['tmp_name']);
@@ -11,11 +11,15 @@
         die(header('Location: ../pages/add_post.php'));
     }
 
-    $name = $_POST['name'];
+    if(isset($_POST['name'])){
+        $name = preg_replace("/[^a-zA-Z\s]/", '', $_POST['name']);
+    } else {
+        $name = $_POST['name'];
+    }
     $birth_date = $_POST['birth_date'];
     $gender = $_POST['gender'];
     $size = $_POST['size'];
-    $description = $_POST['description'];
+    $description = htmlspecialchars($_POST['description']);
     $color = $_POST['color'];
     $species = $_POST['species'];
     $city = $_POST['city'];

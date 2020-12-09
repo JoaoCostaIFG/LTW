@@ -10,11 +10,34 @@ function registerFail($msg)
     die(header('Location: ../pages/register.php'));
 }
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    $username = htmlspecialchars($_POST['username']);
+    if(isset($_POST['password'])){
+        if(strlen($_POST['password']) < 5){
+            registerFail("Password needs to be at least 5 characters long");
+            die(header("Location: ../pages/settings.php"));
+        }
+    } else {
+        $password = $_POST['username'];
+    }
+
     $password_r = $_POST['password_r'];
-    $email = $_POST['email'];
-    $mobile_number = $_POST['mobile_number'];
+
+    if(isset($_POST['email'])) {
+        if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+            $email = $_POST['email'];
+        } else {
+            updateUserFail("Invalid email");
+        }
+    } else {
+        $email = $_POST['email'];
+    }
+
+
+    if(isset($_POST['mobile_number'])) {
+        $mobile_number = preg_replace("/[^0-9+ \-]/",'', $_POST['mobile_number']);
+    } else {
+        $mobile_number = $_POST['mobile_number'];
+    }
 
     // TODO Verify regex password and username here
 

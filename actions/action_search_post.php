@@ -4,7 +4,7 @@
     require_once '../database/queries/db_post.php';
     require_once '../includes/utils.php';
 
-    $name = $_POST['name'];
+    $name = htmlspecialchars($_POST['name']);
     $age = $_POST['age'];
     $gender = $_POST['gender'];
     $size = $_POST['size'];

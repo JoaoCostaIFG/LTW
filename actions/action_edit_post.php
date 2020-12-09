@@ -24,10 +24,10 @@ if (!ownsPost($user_id, $post_id)) {
     die(header("Location: ../pages/post.php?post_id=$post_id"));
 }
     
-    $name = $_POST['name'];
+    $name =  preg_replace("/[^a-zA-Z\s]/", '', $_POST['name']);
     $birth_date = $_POST['birth_date'];
     $size = $_POST['size'];
-    $description = $_POST['description'];
+    $description = htmlspecialchars($_POST['description']);
     $color = $_POST['color'];
     $city = $_POST['city'];
     $post_info = array($name, $birth_date, $size, $description, $color, $city, $post_id);
@@ -42,6 +42,7 @@ try {
     setSessionMessage('success', 'Successfully edited post');
     header("Location: ../pages/post.php?post_id=$post_id");
 } catch (PDOException $e) {
+    //TODO might be unsafe
     setSessionMessage('error', 'Failed to edit post!');
     die(header("Location: ../pages/post.php?post_id=$post_id"));
 }
