@@ -9,7 +9,7 @@ if (!isset($_SESSION['username']) || !isset($_GET['post_id']) || !isset($_GET['q
   die;
 }
   
-  $text = htmlspecialchars($_GET['question_text']);
+  $text = $_GET['question_text'];
 if ($text == "") {
   echo '<p id="question-error">An error ocurred.</p>';
   die;
@@ -17,7 +17,7 @@ if ($text == "") {
   
   $user_id = getUserId($_SESSION['username'])['id'];
   $post_id = $_GET['post_id'];
-  $safe_text = htmlspecialchars($text);
+  $safe_text = $text;
 
 try {
     $question_id = insertQuestion($user_id, $post_id, $safe_text);

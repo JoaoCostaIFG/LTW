@@ -17,7 +17,7 @@
     
   $user_id = getUserId($_SESSION['username'])['id'];
   $question_id = $_GET['question_id'];
-  $safe_text = htmlspecialchars($text);
+  $safe_text = $text;
 
   try {
       insertAnswer($user_id, $question_id, $safe_text);

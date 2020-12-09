@@ -45,7 +45,7 @@ if (!ownsPost($user_id, $post_id)) {
     $name = preg_replace("/[^a-zA-Z\s]/", '', $_POST['name']);
     $birth_date = $_POST['birth_date'];
     $size = $_POST['size'];
-    $description = htmlspecialchars($_POST['description']);
+    $description = $_POST['description'];
     $color = $_POST['color'];
     $city = $_POST['city'];
     $post_info = array($name, $birth_date, $size, $description, $color, $city, $post_id);

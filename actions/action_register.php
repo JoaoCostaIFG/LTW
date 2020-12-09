@@ -15,13 +15,16 @@ function registerFail($msg)
         !isset($_POST['password_r']) ||
         !isset($_POST['email']) ||
         !isset($_POST['mobile_number'])
-        )
+    ){
+        registerFail("Bad request");
+    }
 
-    $username = htmlspecialchars($_POST['username']);
+    $username = $_POST['username'];
     if(strlen($_POST['password']) < 5){
         registerFail("Password needs to be at least 5 characters long");
     }
 
+    $password = $_POST['password'];
     $password_r = $_POST['password_r'];
     if ($password != $password_r) { // check is passwords are equal
         registerFail("Passwords don't match!");

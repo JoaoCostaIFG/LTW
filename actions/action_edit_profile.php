@@ -36,7 +36,7 @@ $user_id = getUserId($_SESSION['username'])['id'];
 
 $user_info = array('id' => $user_id, 'email' => null, 'mobile_number' => null,
   'password' => null, 'username' => null);
-  
+
 if(isset($_POST['email'])) {
     if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
         $user_info['email'] = $_POST['email'];
@@ -53,7 +53,7 @@ if(isset($_POST['password'])) {
     $user_info['password'] =  $_POST['password'];
 }
 if(isset($_POST['username'])) {
-    $user_info['username'] = htmlspecialchars($_POST['username']);
+    $user_info['username'] = $_POST['username'];
 }
 
 $type = photoIsValid($_FILES['image']['tmp_name']);
