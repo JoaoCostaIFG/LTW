@@ -106,4 +106,8 @@
   #profile-posts-title {
     width: 20em;
   }
+
+  #persons {
+    grid-template-columns: 1fr;
+  }
 }

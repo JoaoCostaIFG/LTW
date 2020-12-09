@@ -3,6 +3,7 @@
 require_once '../database/queries/db_post.php';
 require_once '../database/queries/db_user.php';
 require_once '../includes/utils.php';
+require_once 'tpl_petInfo.php';
 
 ?>
 <?php function drawPostList($posts)
