@@ -25,12 +25,12 @@ function drawSentProposal($proposal)
     ?>
 
   <div class="petpost">
-    <a class="nounderline petimage petpost-img" href="<?php echo $post_path; ?>">
-      <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
+    <a class="nounderline petimage petpost-img" href="<?php echo htmlspecialchars($post_path); ?>">
+      <div style="background: url(<?php echo htmlspecialchars($photo_path); ?>) no-repeat center /auto 100%"></div>
     </a>
     <ul class="petpost-info nobullets">
-      <li><?php echo $proposal_txt; ?></li>
-      <li><?php echo $status_txt; ?></li>
+      <li><?php echo htmlspecialchars($proposal_txt); ?></li>
+      <li><?php echo htmlspecialchars($status_txt); ?></li>
     </ul>
   </div>
 
@@ -55,9 +55,9 @@ function drawAcceptProposal($user_id, $post_id)
     ?>
         <script src="../js/utils.js" type="text/javascript" defer></script>
         <script src="../js/proposal.js" type="text/javascript" defer></script>
-        <button id="acceptButton" onclick="handle_proposal(<?php echo "'accept_proposal', $post_id, $user_id";?>)">
+        <button id="acceptButton" onclick="handle_proposal(<?php echo "'accept_proposal', htmlspecialchars($post_id), htmlspecialchars($user_id)";?>)">
             Accept Proposal</button>
-        <button id="rejectButton" class="rejbutton" onclick="handle_proposal(<?php echo "'reject_proposal', $post_id, $user_id";?>)">
+        <button id="rejectButton" class="rejbutton" onclick="handle_proposal(<?php echo "'reject_proposal', htmlspecialchars($post_id), htmlspecialchars($user_id)";?>)">
             Reject Proposal</button>
         <p id="processedButtonText"></p>
     <?php
@@ -77,11 +77,11 @@ function drawReceivedProposal($proposal)
     ?>
 
     <div class="petpost">
-      <a class="nounderline petimage petpost-img" href="<?php echo $post_path; ?>">
-        <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
+      <a class="nounderline petimage petpost-img" href="<?php echo htmlspecialchars($post_path); ?>">
+        <div style="background: url(<?php echo htmlspecialchars($photo_path); ?>) no-repeat center /auto 100%"></div>
       </a>
       <ul class="petpost-info nobullets">
-        <li><?php echo $proposal_txt; ?></li>
+        <li><?php echo htmlspecialchars($proposal_txt); ?></li>
         <li>
           <?php
           // Proposal status

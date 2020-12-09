@@ -50,13 +50,13 @@ require_once 'tpl_petInfo.php';
     $post_path = 'post.php?post_id=' . $post['post_id'];
     ?>
 
-  <a class="nounderline list-item" href="<?php echo $post_path; ?>">
+  <a class="nounderline list-item" href="<?php echo htmlspecialchars($post_path); ?>">
     <?php drawFavouriteStar($post); //Draws favourite star if logged in?>
     <div class="petimage">
-      <div class="list-item-img" style="background: url('<?php echo $photo_path; ?>') no-repeat center /auto 100%"></div>
+      <div class="list-item-img" style="background: url('<?php echo htmlspecialchars($photo_path); ?>') no-repeat center /auto 100%"></div>
     </div>
     <div class="list-item-txt">
-      <?php echo $post['name']; ?>
+      <?php echo htmlspecialchars($post['name']); ?>
     </div>
   </a>
 <?php } ?>
@@ -77,11 +77,11 @@ require_once 'tpl_petInfo.php';
   </div>
   <div class="form-item listfilter-item" >
     <label for="min_age">Min. Age (Years)</label>
-    <input id="min_age" min="0" type="text" name="min_age" value="<?php echo $values['min_age'] ?>">
+    <input id="min_age" min="0" type="text" name="min_age" value="<?php echo htmlspecialchars($values['min_age']) ?>">
   </div>
   <div class="form-item listfilter-item" >
     <label for="max_age">Max. Age (Years)</label>
-    <input id="max_age" min="0" type="text" name="max_age" value="<?php echo $values['max_age'] ?>">
+    <input id="max_age" min="0" type="text" name="max_age" value="<?php echo htmlspecialchars($values['max_age']) ?>">
   </div>
   <br>
   <div class="form-item listfilter-item listfilter-item-bottom" >

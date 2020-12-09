@@ -72,7 +72,7 @@ function draw_login()
     <?php
     $msg = getSessionMessage('signUpError');
     if ($msg) {
-        echo $msg; 
+        echo htmlspecialchars($msg); 
     }?>
       </p>
   
