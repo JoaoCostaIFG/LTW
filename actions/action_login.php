@@ -3,6 +3,11 @@
     require_once '../database/queries/db_user.php';
     require_once '../includes/utils.php';
 
+
+    if(!isset($_POST['username']) || !isset($_POST['password'])){
+        setSessionMessage('error', 'Logged failed!');
+    }
+    
     $username = $_POST['username'];
     $password = $_POST['password'];
 

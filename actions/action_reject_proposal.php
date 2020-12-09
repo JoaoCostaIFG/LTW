@@ -4,6 +4,19 @@
     require_once '../database/queries/db_proposal.php';
     require_once '../includes/utils.php';
 
+
+    if(!isset($_SESSION['username'])){
+        setSessionMessage('error', 'Not authenticated');
+        die('Location: ../pages/home.php');
+    }
+
+    if(!isset($_GET['user_id']) ||
+        !isset($_GET['post_id'])
+    ){
+        setSessionMessage('error', 'Bad request');
+        die('Location: ../pages/home.php');
+    }
+
     $user_id = $_GET['user_id'];
     $post_id = $_GET['post_id'];
     $poster_id = getUserId($_SESSION['username'])['id'];

@@ -5,6 +5,16 @@
   require_once '../actions/action_upload.php';
   require_once '../includes/utils.php';
 
+
+  if(!isset($_SESSION['username'])){
+    setSessionMessage('error', "Not authenticated!");
+    die(header("Location: ../pages/home.php"));
+  }
+
+  if(!isset($_POST['post_id'])){
+    setSessionMessage('error', "Failed to delete post!");
+    die(header("Location: ../pages/home.php"));
+  }
     // Check if file is not image
     $post_id = $_POST['post_id'];
     $user_id = getUserId($_SESSION['username'])['id'];

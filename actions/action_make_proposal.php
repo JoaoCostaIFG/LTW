@@ -4,6 +4,16 @@
     require_once '../database/queries/db_user.php';
     require_once '../includes/utils.php';
 
+    if(!isset($_SESSION['username'])){
+        setSessionMessage('error', 'Not autheticated');
+        die('Location: ../pages/home.php');
+    }
+
+    if(!isset($_GET['user_id'])){
+        setSessionMessage('error', 'Failed to make proposal');
+        die('Location: ../pages/home.php');
+    }
+
     $curr_user_id = getUserId($_SESSION['username'])['id'];
 if ($curr_user_id != $_GET['user_id']) {
     setSessionMessage('error', 'You are not logged in as this user!');

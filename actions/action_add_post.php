@@ -5,17 +5,31 @@
     require_once '../actions/action_upload.php';
     require_once '../includes/utils.php';
 
+    if(!isset($_SESSION['username'])){
+        setSessionMessage('error', 'Not authenticated');
+        die(header('Location: ../pages/add_post.php'));
+    }
+
+    if(!isset($_POST['name']) ||
+        !isset($_POST['birth_date']) ||
+        !isset($_POST['gender']) ||
+        !isset($_POST['size']) ||
+        !isset($_POST['description']) ||
+        !isset($_POST['color']) ||
+        !isset($_POST['species']) ||
+        !isset($_POST['city'])
+    ){
+        setSessionMessage('error', 'Failed to add post!');
+        die(header('Location: ../pages/add_post.php'));
+    }
+
     // Check if file is not image
     $type = photoIsValid($_FILES['image']['tmp_name']);
     if (!$type) {
         die(header('Location: ../pages/add_post.php'));
     }
 
-    if(isset($_POST['name'])){
-        $name = preg_replace("/[^a-zA-Z\s]/", '', $_POST['name']);
-    } else {
-        $name = $_POST['name'];
-    }
+    $name = preg_replace("/[^a-zA-Z\s]/", '', $_POST['name']);
     $birth_date = $_POST['birth_date'];
     $gender = $_POST['gender'];
     $size = $_POST['size'];

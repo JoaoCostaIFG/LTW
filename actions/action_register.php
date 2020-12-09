@@ -10,40 +10,30 @@ function registerFail($msg)
     die(header('Location: ../pages/register.php'));
 }
 
+    if(!isset($_POST['username']) ||
+        !isset($_POST['password']) ||
+        !isset($_POST['password_r']) ||
+        !isset($_POST['email']) ||
+        !isset($_POST['mobile_number'])
+        )
+
     $username = htmlspecialchars($_POST['username']);
-    if(isset($_POST['password'])){
-        if(strlen($_POST['password']) < 5){
-            registerFail("Password needs to be at least 5 characters long");
-            die(header("Location: ../pages/settings.php"));
-        }
-    } else {
-        $password = $_POST['username'];
+    if(strlen($_POST['password']) < 5){
+        registerFail("Password needs to be at least 5 characters long");
     }
 
     $password_r = $_POST['password_r'];
+    if ($password != $password_r) { // check is passwords are equal
+        registerFail("Passwords don't match!");
+    }
 
-    if(isset($_POST['email'])) {
-        if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-            $email = $_POST['email'];
-        } else {
-            updateUserFail("Invalid email");
-        }
-    } else {
+    if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
         $email = $_POST['email'];
-    }
-
-
-    if(isset($_POST['mobile_number'])) {
-        $mobile_number = preg_replace("/[^0-9+ \-]/",'', $_POST['mobile_number']);
     } else {
-        $mobile_number = $_POST['mobile_number'];
+        registerFail("Invalid email");
     }
 
-    // TODO Verify regex password and username here
-
-if ($password != $password_r) { // check is passwords are equal
-    registerFail("Passwords don't match!");
-}
+    $mobile_number = preg_replace("/[^0-9+ \-]/",'', $_POST['mobile_number']);
 
     $type = photoIsValid($_FILES['image']['tmp_name']);
 if (!$type) { // check if the given image is jpeg/png
