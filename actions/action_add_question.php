@@ -4,19 +4,26 @@
   require_once '../database/queries/db_post.php';
   require_once '../templates/tpl_post.php';
 
-if (!isset($_SESSION['username']) || !isset($_GET['post_id']) || !isset($_GET['question_text'])) {
+if (!isset($_SESSION['username']) || !isset($_POST['post_id']) || !isset($_POST['question_text'])) {
   echo '<p id="question-error">An error ocurred.</p>';
   die;
 }
+
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+  // ERROR: Request does not appear to be legitimate
+  echo '<p id="question-error">An error ocurred.</p>';
+  die;
+}
+
   
-  $text = $_GET['question_text'];
+  $text = $_POST['question_text'];
 if ($text == "") {
   echo '<p id="question-error">An error ocurred.</p>';
   die;
 }
   
   $user_id = getUserId($_SESSION['username'])['id'];
-  $post_id = $_GET['post_id'];
+  $post_id = $_POST['post_id'];
   $safe_text = $text;
 
 try {
