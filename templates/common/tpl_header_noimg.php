@@ -38,7 +38,7 @@
           </li>
           <li id="topbar-username">
             Logged in as 
-            <a href="../pages/profile.php?username=<?php echo $_SESSION['username']; ?>" >
+            <a href="../pages/profile.php" >
               <b><?php echo $_SESSION['username'] ?></b>
             </a>
           </li>

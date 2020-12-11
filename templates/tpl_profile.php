@@ -2,7 +2,7 @@
   require '../templates/tpl_list.php';
   require_once '../includes/utils.php';
 
-function drawProfile($user, $user_posts)
+function drawProfile($is_owner, $user, $user_posts)
 {
     /**
      * Draws an user's profile 
@@ -11,7 +11,12 @@ function drawProfile($user, $user_posts)
     $photo_path = "../static/users/" . $user['id'] . "." . $user['extension'];
     ?>
 
-    <h2><b><?php echo $user['username'];?></b>&#39;s Profile</h2>
+    <h2>
+      <?php
+        if ($is_owner) echo "<b>Your profile</b>";
+        else echo "<b>" . $user['username'] . "</b>&#39;s Profile";
+      ?></b>
+    </h2>
 
     <div id="profile">
         <div id="profile-pic">
