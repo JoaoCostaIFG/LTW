@@ -17,9 +17,9 @@ function handle_proposal(action, post_id, user_id) {
         }
     };
 
-    xhttp.open("GET", "../actions/action_" + action + ".php?" +
-        encodeForAjax({post_id: post_id, user_id: user_id}), true);
-    xhttp.send();
+    xhttp.open("post", "../actions/action_" + action + ".php", true);
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhttp.send(encodeForAjax({ post_id: post_id, user_id: user_id, csrf: document.querySelector("meta[name='csrf-token']").getAttribute("content")}));
 }
 
 function make_proposal(post_id, user_id) {

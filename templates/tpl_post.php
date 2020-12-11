@@ -75,7 +75,7 @@ function drawProposalButton($post_id, $user_id)
     <script src="../js/utils.js" type="text/javascript" defer></script>
     <script src="../js/proposal.js" type="text/javascript" defer></script>
 
-    <button id="makeProposalButton" onclick="make_proposal_confirmation(<?php echo "htmlspecialchars($post_id), htmlspecialchars($user_id)";?>)">
+    <button id="makeProposalButton" onclick="make_proposal_confirmation(<?php echo htmlspecialchars($post_id) . "," . htmlspecialchars($user_id);?>)">
         Make Proposal</button>
     <p id="proposalSentText"></p>
 <?php }

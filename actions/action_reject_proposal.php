@@ -10,15 +10,21 @@
         die('Location: ../pages/home.php');
     }
 
-    if(!isset($_GET['user_id']) ||
-        !isset($_GET['post_id'])
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        // ERROR: Request does not appear to be legitimate
+        setSessionMessage('error', 'This request does not appear to be legitimate');
+        die(header('Location: ../pages/add_post.php'));
+    }
+
+    if(!isset($_POST['user_id']) ||
+        !isset($_POST['post_id'])
     ){
         setSessionMessage('error', 'Bad request');
         die('Location: ../pages/home.php');
     }
 
-    $user_id = $_GET['user_id'];
-    $post_id = $_GET['post_id'];
+    $user_id = $_POST['user_id'];
+    $post_id = $_POST['post_id'];
     $poster_id = getUserId($_SESSION['username'])['id'];
 if (!isOwner($poster_id, $post_id)) {
     setSessionMessage('error', 'You are not the owner of this post!');
