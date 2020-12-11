@@ -291,7 +291,6 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
     <button id="question-input-button" type="button"
       onclick="addQuestion(<?php echo htmlspecialchars($post_id) ?>)">Post Question</button>
   </section>
-  <!-- TODO SECURITY -->
   <script type="text/javascript">
     // see: https://stackoverflow.com/questions/7745741/auto-expanding-textarea/24824750#24824750
     var textarea = document.getElementById("question-input-ta");
