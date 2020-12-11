@@ -52,6 +52,21 @@ function getUserInfo($username)
     }
 }
 
+function getAllUsers() {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        '
+        SELECT id, username, email, mobile_number, extension
+        FROM User'
+    );
+
+    $stmt->execute();
+    $users = $stmt->fetchAll();         
+
+    return $users;
+
+}
+
 /**
  * Returns all Posts made by an User
  */
