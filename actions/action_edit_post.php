@@ -11,6 +11,12 @@
     die(header("Location: ../pages/home.php"));
   }
 
+  if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    // ERROR: Request does not appear to be legitimate
+    setSessionMessage('error', 'This request does not appear to be legitimate');
+    die(header('Location: ../pages/home.php'));
+}
+
   if(!isset($_POST['post_id']) ||
         !isset($_POST['name']) ||
         !isset($_POST['birth_date']) || 

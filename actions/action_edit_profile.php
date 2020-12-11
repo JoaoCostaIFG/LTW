@@ -15,6 +15,12 @@ if(getUserInfo($_POST['username'])) {
     updateUserFail("Username already exists!");
 }
 
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    // ERROR: Request does not appear to be legitimate
+    setSessionMessage('error', 'This request does not appear to be legitimate');
+    die(header('Location: ../pages/home.php'));
+}
+
 // Password
 if(isset($_POST['current_password'])) {
     if(checkUserPassword($_SESSION['username'], $_POST['current_password']) == false) {

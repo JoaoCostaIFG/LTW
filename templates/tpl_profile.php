@@ -76,7 +76,7 @@ function drawEditProfile($user)
                 <label for="image">Profile picture</label>
                 <input id="image" type="file" name="image">
             </div>
-
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input class="form-button profileform-button" type="submit" value="Submit Changes">
         </form>
 
@@ -115,7 +115,7 @@ function drawSettings()
           <label for="password_r">Repeat new password</label>
           <input id="password_r" type="password" name="password_r" placeholder="New password (again)" required>
         </div>
-
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <input class="form-button" type="submit" value="Submit">
       </form>
 

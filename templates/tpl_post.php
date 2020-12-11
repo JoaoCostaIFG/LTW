@@ -97,6 +97,7 @@ function drawEditButtons($post_id)
 
     <form class="deleteButton" method="post" action="../actions/action_delete_post.php">
       <input type="hidden" id="post_id" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>">
+      <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
       <input class="form-button addpostform-button" type="submit" value="Remove post">
     </form>
 <?php }
@@ -140,6 +141,7 @@ function drawEditOptions($post)
 
           <br>
           <input type="hidden" id="post_id" name="post_id" value="<?php echo htmlspecialchars($post['id']); ?>">
+          <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
           <input class="form-button addpostform-button" type="submit" value="Update pet">
         </form>
     </div>
@@ -371,6 +373,7 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
       </div>
 
       <br>
+      <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
       <input class="form-button addpostform-button" type="submit" value="Add pet">
     </form>
   </section>

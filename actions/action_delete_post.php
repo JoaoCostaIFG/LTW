@@ -11,6 +11,12 @@
     die(header("Location: ../pages/home.php"));
   }
 
+  if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    // ERROR: Request does not appear to be legitimate
+    setSessionMessage('error', 'This request does not appear to be legitimate');
+    die(header('Location: ../pages/home.php'));
+}
+
   if(!isset($_POST['post_id'])){
     setSessionMessage('error', "Failed to delete post!");
     die(header("Location: ../pages/home.php"));
