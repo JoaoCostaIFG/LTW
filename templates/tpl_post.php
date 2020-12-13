@@ -176,7 +176,11 @@ function drawPost($post, $questionsAnswers)
 
   <h2>
     <b><?php echo htmlspecialchars($post['name']); ?></b> </br>
-    for adoption from <b><?php echo htmlspecialchars($post['user']); ?></b>
+    for adoption from <b>
+      <a href="../pages/profile.php?username=<?php echo urlencode($post['user']); ?>">
+        <?php echo htmlspecialchars($post['user']); ?>
+      </a>
+    </b>
   </h2>
 
   <div class="petpost">
@@ -235,7 +239,15 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
   <section id="<?php echo 'QA' . htmlspecialchars($questionAnswer['id']) ?>" class="QA">
     <section class="petpost-question">
       <p> <?php echo 'Q: ' . nl2br(htmlspecialchars($questionAnswer['question'])); ?> </p>
-      <p> <?php echo htmlspecialchars($questionAnswer['question_date']) . ", " . htmlspecialchars(getUsername($questionAnswer['user_id'])); ?> </p>
+      <p>
+        <?php
+          $username=getUsername($questionAnswer['user_id']);
+          echo htmlspecialchars($questionAnswer['question_date']) . ', ';
+        ?>
+        <a href="../pages/profile.php?username=<?php echo urlencode($username) ?>">
+          <?php echo htmlspecialchars($username); ?>
+        </a>
+      </p>
       <?php
         // Checks if the current user is the owner of the post
         if (isset($user_id) && isOwner($user_id, $post_id) && !isset($questionAnswer['answer'])) { ?>

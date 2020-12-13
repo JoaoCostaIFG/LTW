@@ -7,12 +7,20 @@
 
   if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     header('Content-Type: application/json');
-    $post_id = $_GET['id'];
-    $post = getPost($post_id);
-    if(!isset($post)){
-        die(json_encode(array('error' => 'post_not_found')));
+    if (!isset($_GET['id'])) {
+      $posts = getPosts(array(), array(), "");
+      if(!isset($posts)){
+          die(json_encode(array('error' => 'posts_not_found')));
+      }
+      echo json_encode($posts);
+    } else {
+      $post_id = $_GET['id'];
+      $post = getPost($post_id);
+      if(!isset($post)){
+          die(json_encode(array('error' => 'post_not_found')));
+      }
+      echo json_encode($post);
     }
-    echo json_encode($post);
   } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if(!isset($_SESSION['username'])){

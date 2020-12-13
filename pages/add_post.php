@@ -1,13 +1,13 @@
 <?php
 require_once '../includes/session.php';
-require '../templates/common/tpl_header_noimg.php';
-require '../templates/tpl_post.php';
+require_once '../templates/common/tpl_header.php';
+require_once '../templates/tpl_post.php';
 
 if (!isset($_SESSION['username'])) {
-    die(header('Location: list.php'));
+  die(header('Location: list.php'));
 }
 
 drawAddPost();
 
-require '../templates/common/tpl_footer.php';
+require_once '../templates/common/tpl_footer.php';
 ?>

@@ -1,13 +1,14 @@
 <?php
-  require_once '../includes/session.php';
+require_once '../includes/session.php';
 
-  if (!isset($_SESSION['username']))
-    die(header('Location: 404.php')); 
+if (!isset($_SESSION['username']))
+  die(header('Location: 404.php')); 
 
-  include_once('../templates/common/tpl_header_noimg.php');
-  include('../templates/tpl_profile.php');
-  
-  drawSettings();
+$title="Settings";
+require_once '../templates/common/tpl_header.php';
+require_once '../templates/tpl_profile.php';
 
-  include_once('../templates/common/tpl_footer.php');
+drawSettings();
+
+require_once '../templates/common/tpl_footer.php';
 ?>
