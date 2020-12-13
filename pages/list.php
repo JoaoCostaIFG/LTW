@@ -1,7 +1,5 @@
 <?php
 require_once '../includes/session.php';
-  print_r($_SESSION);
-  die;
 $title="List";
 require_once '../templates/common/tpl_header.php';
 

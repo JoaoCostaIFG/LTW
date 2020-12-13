@@ -1,13 +1,12 @@
 <?php
 // To mitigate xss
-session_set_cookie_params(0, '/', $_SERVER['HTTP_HOST'], true, true);
+// Importante: manually change domain
+session_set_cookie_params(0, '/', '0.0.0.0', true, true);
 session_start();
 
 //------------------ Da logout a cada ação que se faça -------------------------
 
-// //Prevent session fixation
-// // to prevent session fixation attacks
-
+// Prevents session fixation attacks
 // session_regenerate_id(true);
 
 // // Make sure the following are set in your php.ini file (both are the defaults):

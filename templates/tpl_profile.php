@@ -1,6 +1,6 @@
 <?php 
-  require '../templates/tpl_list.php';
-  require_once '../includes/utils.php';
+require '../templates/tpl_list.php';
+require_once '../includes/utils.php';
 
 function drawProfile($is_owner, $user, $user_posts)
 {

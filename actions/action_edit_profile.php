@@ -50,7 +50,7 @@ if(isset($user_info['email'])) {
   }
 }
 if (isset($user_info['mobile_number'])) {
-  if (!preg_match("/^(\+[0-9\s]+|[0-9\s]+-[0-9\s]+)$/", $user_info['mobile_number'])) {
+  if (!preg_match("/^(\+?[0-9\s]+|[0-9\s]+-[0-9\s]+)$/", $user_info['mobile_number'])) {
     updateUserFail("Mobile number can only contain numbers, spaces, pluses and dashes!");
   }
 }
