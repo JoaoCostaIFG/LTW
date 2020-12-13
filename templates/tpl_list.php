@@ -44,14 +44,14 @@ else {
      * using /100% on background favors portait frame (vertical) photos
      * using /auto 100% seems to favor most photos
      */ 
-    $photo_path = '../static/images/' . $post['photo_id'] . '.' . $post['photo_extension'];
-    $post_path = 'post.php?post_id=' . $post['post_id'];
+    $photo_path = '../static/images/' . urlencode($post['photo_id']) . '.' . urlencode($post['photo_extension']);
+    $post_path = 'post.php?post_id=' . urlencode($post['post_id']);
     ?>
 
-  <a class="nounderline list-item" href="<?php echo urlencode($post_path); ?>">
+  <a class="nounderline list-item" href="<?php echo $post_path; ?>">
     <?php drawFavouriteStar($post); //Draws favourite star if logged in?>
     <div class="petimage">
-      <div class="list-item-img" style="background: url('<?php echo urlencode($photo_path); ?>') no-repeat center /auto 100%"></div>
+      <div class="list-item-img" style="background: url('<?php echo $photo_path; ?>') no-repeat center /auto 100%"></div>
     </div>
     <div class="list-item-txt">
       <?php echo htmlspecialchars($post['name']); ?>
