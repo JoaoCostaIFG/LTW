@@ -1,18 +1,18 @@
 PRAGMA foreign_keys = ON;
 
 -- User
---  id    username    password    picture    email    mobile_number
-INSERT INTO User VALUES(1, "Padoru", "Sempre a trolar", "padoru@padoru.com", "912345678", "png");
-INSERT INTO User VALUES(2, "Maynardo", "Jaime do rato trovejante", "maynerd@tool.band", "921912912", "png");
-INSERT INTO User VALUES(3, "Nachos", "ltweaminhacadeirapreferida123", "nachoMan@hotmail.com", "933333333", "png");
-INSERT INTO User VALUES(4, "Irao", "meow33meow", "atchim@gmail.com", "966666666", "png");
-INSERT INTO User VALUES(5, "FontaoFontalhao", "ronron#99", "santinho@gmail.com", "911111111", "png");
-INSERT INTO User VALUES(6, "Lucas", "desculpeinterromper", "auau@hotmail.com", "933334563", "png");
-INSERT INTO User VALUES(7, "Davide", "wafflegood123", "xxxwaffle420hd69@coldmail.com", "932560122", "png");
-INSERT INTO User VALUES(8, "João", "fogoistodemoramuito", "ihhhhhh@uimail.com", "911911911", "png");
-INSERT INTO User VALUES(9, "CarlosPereira935", "HYN7h68Gohioh", "carlospereira@gmail.com", "932457977", "png");
-INSERT INTO User VALUES(10, "Canil da Trofa", "JNNJUHNOHn7N7", "canildatrofa@gmail.com", "252877658", "png");
-INSERT INTO User VALUES(11, "Louisse221", "bhH7B667m87y", "louie221@gmail.com", "252586000", "png");
+--  id    username    password    picture    email    mobile_number -- password not hashed
+INSERT INTO User VALUES(1, "Padoru", "$2y$12$CmVd1UUSih5O/Xqna/Q6hurAEED2FMP2NwJJDFnFmxg/rERN5Dbye", "padoru@padoru.com", "912345678", "png"); -- Sempre a trolar
+INSERT INTO User VALUES(2, "Maynardo", "$2y$12$ye2TD2fkNfYuAI/O2inQaO1iVZLc0lWOseMjnDmwZo/MlP.jdgHEi", "maynerd@tool.band", "921912912", "png"); -- Jaime do rato trovejante
+INSERT INTO User VALUES(3, "Nachos", "$2y$12$vnRvhFrMOlgkCDqu7D8HVuxV1y7hhFwxO7/Yv59H6hQ6PdF5scciO", "nachoMan@hotmail.com", "933333333", "png"); -- ltweaminhacadeirapreferida123
+INSERT INTO User VALUES(4, "Irao", "$2y$12$Kj0tZBFsd/IlZk0oTAN.tutV7KQeTvHIKfuOwc9bmR1cfP6n9dZO6", "atchim@gmail.com", "966666666", "png"); -- meow33meow
+INSERT INTO User VALUES(5, "FontaoFontalhao", "$2y$12$bYXsq5JQn5TqC5xDrCRfcOtfYrVRaAirHQU/KYTpc0VpWck9LRFji", "santinho@gmail.com", "911111111", "png"); -- ronron#99
+INSERT INTO User VALUES(6, "Lucas", "$2y$12$4KGzkt.3x5JssUOBCtpsv.iHej8vJm40jUxlwARTgTdTZV5.BqR5y", "auau@hotmail.com", "933334563", "png"); -- desculpeinterromper
+INSERT INTO User VALUES(7, "Davide", "$2y$12$Mm/fH0SUk0rEMWUAzUvqiO.d4f/xpZRkL2Fk817uryHQQHaPEv4.K", "xxxwaffle420hd69@coldmail.com", "932560122", "png"); -- wafflegood123
+INSERT INTO User VALUES(8, "João", "$2y$12$cK3ii7/HQpb2bUkJqPGev.uyNgFihYFqvYcXw32bgKkjFAusgJ6U.", "ihhhhhh@uimail.com", "911911911", "png"); -- fogoistodemoramuito
+INSERT INTO User VALUES(9, "CarlosPereira935", "$2y$12$N7sR0I3MUJX/J0I4V7YizOTX2IQghRePHu0ACzP.xd405bKTbfAYO", "carlospereira@gmail.com", "932457977", "png"); -- HYN7h68Gohioh
+INSERT INTO User VALUES(10, "Canil da Trofa", "$2y$12$WaGBOCaKncRWVnqA95JuyeFTXZvu.ZfoLB5HC9MQasq.J8supzVum", "canildatrofa@gmail.com", "252877658", "png"); -- JNNJUHNOHn7N7
+INSERT INTO User VALUES(11, "Louisse221", "$2y$12$37yNGhxjHvDno4GixBppW.0jqZ9RQopZ9aYcMV7vndfhc51GIDp2e", "louie221@gmail.com", "252586000", "png"); -- bhH7B667m87y
 
 -- Color
 -- id   name
