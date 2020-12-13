@@ -22,6 +22,14 @@ function draw_login()
 
         <input class="form-button" type="submit" value="Login">
       </form>
+
+      <p class="error">
+    <?php
+    $msg = getSessionMessage('loginError');
+    if ($msg) {
+        echo $msg; 
+    }?>
+      </p>
   
       <footer>
           <p>Don't have an account? <a href="../pages/register.php">Signup!</a></p>
