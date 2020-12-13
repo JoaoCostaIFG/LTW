@@ -14,11 +14,11 @@ else if (isset($_SESSION['username'])) {
   $is_owner = true;
 }
 else {
-  die(header('Location: ../pages/list.php'));
+  die(header('Location: ../pages/404.php'));
 }
 
 if (!isset($user_info['id']))
-  die(header('Location: ../pages/list.php'));
+  die(header('Location: ../pages/404.php'));
 
 if ($is_owner) $title = "Your profile";
 else $title = $username . " profile";
