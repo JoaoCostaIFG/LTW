@@ -12,31 +12,29 @@ require_once 'tpl_petInfo.php';
      * Draws given posts using the draw_post function.
      */
     ?>
-
 <div class="list">
-    <?php 
-    if (empty($posts)) {
-        echo "There are no posts to show.";
-    }
-    else {
-        foreach($posts as $post) {
-            drawPostItem($post);
-        }
-    }
-    ?>
+<?php 
+if (empty($posts)) {
+  echo "There are no posts to show.";
+}
+else {
+  foreach($posts as $post) {
+    drawPostItem($post);
+  }
+}
+?>
 </div>
-
 <?php } ?>
 
 <?php function drawFavouriteStar($post)
 {
-    if(isset($_SESSION['username']) && isset($post['isFavourite'])) { ?>
-    <div id="favourite-star">
-        <?php if ($post['isFavourite']) {
-            echo '&bigstar;';
-        }?>
-    </div>
-    <?php }
+  if(isset($_SESSION['username']) && isset($post['isFavourite'])) { ?>
+  <div id="favourite-star">
+    <?php if ($post['isFavourite']) {
+        echo '&bigstar;';
+    }?>
+  </div>
+  <?php }
 } ?>
 
 <?php function drawPostItem($post)
@@ -105,7 +103,6 @@ require_once 'tpl_petInfo.php';
   <br>
   <input class="form-button listfilter-button" type="submit" value="Search">
 </form>
-
 <?php }?>
 
 
