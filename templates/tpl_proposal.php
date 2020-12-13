@@ -70,8 +70,8 @@ function drawReceivedProposal($proposal)
     $photo_path = "../static/images/" . urlencode($proposal['photo_id']) . "." . urlencode($proposal['photo_extension']);
 
     // Proposal from/to
-    $proposal_txt = "You received a proposal from <b>" . $proposal['user_username'] . "</b> ";
-    $proposal_txt .= "to adopt <b>" . $proposal['pet_name'] . "</b>.";
+    $proposal_txt = "You received a proposal from <b>" . htmlspecialchars($proposal['user_username']) . "</b> ";
+    $proposal_txt .= "to adopt <b>" . htmlspecialchars($proposal['pet_name']) . "</b>.";
 
     // Pet Image
     ?>
@@ -81,7 +81,7 @@ function drawReceivedProposal($proposal)
         <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
       </a>
       <ul class="petpost-info nobullets">
-        <li><?php echo htmlspecialchars($proposal_txt); ?></li>
+        <li><?php echo $proposal_txt; ?></li>
         <li>
           <?php
           // Proposal status
