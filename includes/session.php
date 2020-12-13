@@ -6,6 +6,7 @@ session_start();
 //------------------ Da logout a cada ação que se faça -------------------------
 
 // //Prevent session fixation
+// // to prevent session fixation attacks
 
 // session_regenerate_id(true);
 

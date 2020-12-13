@@ -5,8 +5,7 @@ require_once '../templates/common/tpl_header.php';
 require_once '../templates/tpl_auth.php';
 
 if (isset($_SESSION['username'])) {
-  // N sei o q isto esta a fazer aqui, mas deixei pq copia do rest
-  die(header('Location: list.php'));
+  die(header('Location: ../pages/list.php'));
 }
 
 draw_login();
