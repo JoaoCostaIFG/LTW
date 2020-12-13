@@ -48,10 +48,10 @@ else {
     $post_path = 'post.php?post_id=' . $post['post_id'];
     ?>
 
-  <a class="nounderline list-item" href="<?php echo htmlspecialchars($post_path); ?>">
+  <a class="nounderline list-item" href="<?php echo urlencode($post_path); ?>">
     <?php drawFavouriteStar($post); //Draws favourite star if logged in?>
     <div class="petimage">
-      <div class="list-item-img" style="background: url('<?php echo htmlspecialchars($photo_path); ?>') no-repeat center /auto 100%"></div>
+      <div class="list-item-img" style="background: url('<?php echo urlencode($photo_path); ?>') no-repeat center /auto 100%"></div>
     </div>
     <div class="list-item-txt">
       <?php echo htmlspecialchars($post['name']); ?>

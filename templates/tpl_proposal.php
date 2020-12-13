@@ -25,8 +25,8 @@ function drawSentProposal($proposal)
     ?>
 
   <div class="petpost">
-    <a class="nounderline petimage petpost-img" href="<?php echo htmlspecialchars($post_path); ?>">
-      <div style="background: url(<?php echo htmlspecialchars($photo_path); ?>) no-repeat center /auto 100%"></div>
+    <a class="nounderline petimage petpost-img" href="<?php echo urlencode($post_path); ?>">
+      <div style="background: url(<?php echo urlencode($photo_path); ?>) no-repeat center /auto 100%"></div>
     </a>
     <ul class="petpost-info nobullets">
       <li><?php echo htmlspecialchars($proposal_txt); ?></li>
@@ -77,8 +77,8 @@ function drawReceivedProposal($proposal)
     ?>
 
     <div class="petpost">
-      <a class="nounderline petimage petpost-img" href="<?php echo htmlspecialchars($post_path); ?>">
-        <div style="background: url(<?php echo htmlspecialchars($photo_path); ?>) no-repeat center /auto 100%"></div>
+      <a class="nounderline petimage petpost-img" href="<?php echo urlencode($post_path); ?>">
+        <div style="background: url(<?php echo urlencode($photo_path); ?>) no-repeat center /auto 100%"></div>
       </a>
       <ul class="petpost-info nobullets">
         <li><?php echo htmlspecialchars($proposal_txt); ?></li>

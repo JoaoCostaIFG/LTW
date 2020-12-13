@@ -198,7 +198,7 @@ function drawPost($post, $questionsAnswers)
         }?>
       </button>
     <?php }?>
-      <div id="petphoto" style="background: url(<?php echo htmlspecialchars($photo_path); ?>) no-repeat center /auto 100%"></div>
+      <div id="petphoto" style="background: url(<?php echo urlencode($photo_path); ?>) no-repeat center /auto 100%"></div>
     </div>
     <?php drawEditOptions($post); ?>
     <ul class="petpost-info nobullets">
