@@ -7,8 +7,8 @@ function drawSentProposal($proposal)
     $photo_path = "../static/images/" . $proposal['photo_id'] . "." . $proposal['photo_extension'];
 
     // Proposal from/to
-    $proposal_txt = "You made a proposal to <b>" . $proposal['poster_username'] . "</b> ";
-    $proposal_txt .= "to adopt <b>" . $proposal['pet_name'] . "</b>.";
+    $proposal_txt = "You made a proposal to <b>" . htmlspecialchars($proposal['poster_username']) . "</b> ";
+    $proposal_txt .= "to adopt <b>" . htmlspecialchars($proposal['pet_name']) . "</b>.";
 
     // Proposal status
     $status_txt =  "Your proposal ";
@@ -29,8 +29,8 @@ function drawSentProposal($proposal)
       <div style="background: url(<?php echo urlencode($photo_path); ?>) no-repeat center /auto 100%"></div>
     </a>
     <ul class="petpost-info nobullets">
-      <li><?php echo htmlspecialchars($proposal_txt); ?></li>
-      <li><?php echo htmlspecialchars($status_txt); ?></li>
+      <li><?php echo $proposal_txt; ?></li>
+      <li><?php echo $status_txt; ?></li>
     </ul>
   </div>
 
