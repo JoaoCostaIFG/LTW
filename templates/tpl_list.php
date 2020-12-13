@@ -65,6 +65,7 @@ else {
      * Draws the search bar
      */
     ?>
+<h1>Pet list</h1>
 <form class="listfilter" action="../pages/list.php" method="GET">
   <div class="form-item listfilter-item" >
     <label for="name">Name</label>

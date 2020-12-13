@@ -4,6 +4,7 @@ require_once '../includes/session.php';
 if (!isset($_SESSION['username']))
   die(header('Location: 404.php')); 
 
+$title="Edit profile";
 require_once '../templates/common/tpl_header.php';
 require_once '../database/queries/db_user.php';
 require_once '../templates/tpl_profile.php';
