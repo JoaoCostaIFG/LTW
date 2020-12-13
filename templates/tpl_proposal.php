@@ -3,8 +3,8 @@ require_once '../includes/utils.php';
 
 function drawSentProposal($proposal)
 {
-    $post_path = 'post.php?post_id=' . $proposal['post_id'];
-    $photo_path = "../static/images/" . $proposal['photo_id'] . "." . $proposal['photo_extension'];
+    $post_path = 'post.php?post_id=' . urlencode($proposal['post_id']);
+    $photo_path = "../static/images/" . urlencode($proposal['photo_id']) . "." . urlencode($proposal['photo_extension']);
 
     // Proposal from/to
     $proposal_txt = "You made a proposal to <b>" . htmlspecialchars($proposal['poster_username']) . "</b> ";
@@ -25,8 +25,8 @@ function drawSentProposal($proposal)
     ?>
 
   <div class="petpost">
-    <a class="nounderline petimage petpost-img" href="<?php echo urlencode($post_path); ?>">
-      <div style="background: url(<?php echo urlencode($photo_path); ?>) no-repeat center /auto 100%"></div>
+    <a class="nounderline petimage petpost-img" href="<?php echo $post_path; ?>">
+      <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
     </a>
     <ul class="petpost-info nobullets">
       <li><?php echo $proposal_txt; ?></li>
@@ -66,8 +66,8 @@ function drawAcceptProposal($user_id, $post_id)
 
 function drawReceivedProposal($proposal)
 {
-    $post_path = 'post.php?post_id=' . $proposal['post_id'];
-    $photo_path = "../static/images/" . $proposal['photo_id'] . "." . $proposal['photo_extension'];
+    $post_path = 'post.php?post_id=' . urlencode($proposal['post_id']);
+    $photo_path = "../static/images/" . urlencode($proposal['photo_id']) . "." . urlencode($proposal['photo_extension']);
 
     // Proposal from/to
     $proposal_txt = "You received a proposal from <b>" . $proposal['user_username'] . "</b> ";
@@ -77,8 +77,8 @@ function drawReceivedProposal($proposal)
     ?>
 
     <div class="petpost">
-      <a class="nounderline petimage petpost-img" href="<?php echo urlencode($post_path); ?>">
-        <div style="background: url(<?php echo urlencode($photo_path); ?>) no-repeat center /auto 100%"></div>
+      <a class="nounderline petimage petpost-img" href="<?php echo $post_path; ?>">
+        <div style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
       </a>
       <ul class="petpost-info nobullets">
         <li><?php echo htmlspecialchars($proposal_txt); ?></li>

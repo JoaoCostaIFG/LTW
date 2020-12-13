@@ -156,7 +156,7 @@ function drawPost($post, $questionsAnswers)
 
 <div class="petpost-page">
     <?php 
-    $photo_path = "../static/images/" . $post['photo_id'] . "." . $post['photo_extension'];
+    $photo_path = "../static/images/" . urlencode($post['photo_id']) . "." . urlencode($post['photo_extension']);
     if(isset($_SESSION['username'])) {
         $current_user = getUserId($_SESSION['username'])['id'];
         $post_id = $post['id'];
@@ -198,7 +198,7 @@ function drawPost($post, $questionsAnswers)
         }?>
       </button>
     <?php }?>
-      <div id="petphoto" style="background: url(<?php echo urlencode($photo_path); ?>) no-repeat center /auto 100%"></div>
+      <div id="petphoto" style="background: url(<?php echo $photo_path; ?>) no-repeat center /auto 100%"></div>
     </div>
     <?php drawEditOptions($post); ?>
     <ul class="petpost-info nobullets">
