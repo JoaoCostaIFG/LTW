@@ -5,6 +5,9 @@
            } ?>Become my buddy</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php if(isset($_SESSION['csrf'])){ ?>
+      <meta name="csrf-token" content="<?=$_SESSION['csrf']?>">
+    <?php } ?>
     <link href="../css/style.css" rel="stylesheet">
     <link href="../css/layout.css" rel="stylesheet">
     <link href="../css/responsive.css" rel="stylesheet">
@@ -39,7 +42,7 @@
         <li id="topbar-username">
           Logged in as 
           <a href="../pages/profile.php" >
-            <b><?php echo $_SESSION['username'] ?></b>
+            <b><?php echo htmlspecialchars($_SESSION['username']) ?></b>
           </a>
         </li>
         <li id="logout-button">

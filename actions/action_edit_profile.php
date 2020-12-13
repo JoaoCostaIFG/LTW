@@ -5,6 +5,7 @@
   require_once '../database/queries/db_user.php';
 
   // TODO email taken message
+  // TODO email, mobile number, etc matching is repeated code with register action
 
 function updateUserFail($msg)
 {
@@ -16,6 +17,12 @@ function updateSettingsFail($msg)
 {
   setSessionMessage('passwordError', $msg);
   die(header("Location: ../pages/settings.php"));
+}
+
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+  // ERROR: Request does not appear to be legitimate
+  setSessionMessage('error', 'This request does not appear to be legitimate');
+  die(header('Location: ../pages/home.php'));
 }
 
 // Get user information to update
@@ -35,6 +42,16 @@ if(isset($user_info['username'])) {
   // Check for repeated username
   if(getUserInfo($user_info['username'])) {        
     updateUserFail("Username already exists!");
+  }
+}
+if(isset($user_info['email'])) {
+  if (!filter_var($user_info['email'], FILTER_VALIDATE_EMAIL)) {
+    updateUserFail("The given email address is invalid!");
+  }
+}
+if (isset($user_info['mobile_number'])) {
+  if (!preg_match("/^(\+?[0-9\s]+|[0-9\s]+-[0-9\s]+)$/", $user_info['mobile_number'])) {
+    updateUserFail("Mobile number can only contain numbers, spaces, pluses and dashes!");
   }
 }
 if(isset($user_info['password'])) {

@@ -1,6 +1,6 @@
 <?php 
-  require '../templates/tpl_list.php';
-  require_once '../includes/utils.php';
+require '../templates/tpl_list.php';
+require_once '../includes/utils.php';
 
 function drawProfile($is_owner, $user, $user_posts)
 {
@@ -14,17 +14,17 @@ function drawProfile($is_owner, $user, $user_posts)
     <h2>
       <?php
         if ($is_owner) echo "<b>Your profile</b>";
-        else echo "<b>" . $user['username'] . "</b>&#39;s Profile";
+        else echo "<b>" . htmlspecialchars($user['username']) . "</b>&#39;s Profile";
       ?></b>
     </h2>
 
     <div id="profile">
         <div id="profile-pic">
-          <img src="<?php echo $photo_path; ?>" alt="User Profile Picture">
+          <img src="<?php echo htmlspecialchars($photo_path); ?>" alt="User Profile Picture">
         </div>
         <ul class="nobullets" id="profile-info">
-            <li>Email: <b><?php echo $user['email']; ?></b></li>
-            <li>Phone number: <b><?php echo $user['mobile_number']; ?></b></li>
+            <li>Email: <b><?php echo htmlspecialchars($user['email']); ?></b></li>
+            <li>Phone number: <b><?php echo htmlspecialchars($user['mobile_number']); ?></b></li>
         </ul>
         <?php if($user['username'] == $_SESSION['username']) { ?>
           <ul class="nobullets" id="profile-options">
@@ -56,32 +56,32 @@ function drawEditProfile($user)
             <div class="form-item profileform-item">
                 <label for="username">Username</label>
                 <input id="username" type="text" name="username" maxlength="32"
-                  placeholder="<?php echo $user['username']; ?>">
+                  placeholder="<?php echo htmlspecialchars($user['username']); ?>">
                 <p class="note">This is the name other users will see when interacting with you.
                   You also use this to sign in.</p>
             </div>
             <div class="form-item profileform-item">
                 <label for="email">Email</label>
-                <input id="email" type="text" name="email" placeholder="<?php echo $user['email']; ?>">
+                <input id="email" type="text" name="email" placeholder="<?php echo htmlspecialchars($user['email']); ?>">
                 <p class="note">This is the email that others will use to contact you and where you'll receive notifications.</p>
             </div>
             <div class="form-item profileform-item">
                 <label for="mobile_number">Phone Number</label>
                 <input id="mobile_number" type="text" name="mobile_number"
-                  placeholder="<?php echo $user['mobile_number']; ?>" maxlength="20">
+                  placeholder="<?php echo htmlspecialchars($user['mobile_number']); ?>" maxlength="20">
                 <p class="note">This is the phone number that other users will use to contact you.</p>
             </div>
             <div class="form-item profileform-item">
                 <?php if(isset($user['picture'])) { ?>
                   <div id="profile-pic">
-                    <img src="<?php echo $user['picture'] ?>" alt="User's current profile picture.">
+                    <img src="<?php echo htmlspecialchars($user['picture']) ?>" alt="User's current profile picture.">
                   </div>
                 <?php }?>
   
                 <label for="image">Profile picture</label>
                 <input id="image" type="file" name="image">
             </div>
-
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <input class="form-button profileform-button" type="submit" value="Submit Changes">
         </form>
 
@@ -89,7 +89,7 @@ function drawEditProfile($user)
         <?php
           $msg = getSessionMessage('updateUserError');
         if ($msg) {
-            echo $msg; 
+            echo htmlspecialchars($msg); 
         }?>
         </p>
     </section>
@@ -120,7 +120,7 @@ function drawSettings()
           <label for="password_r">Repeat new password</label>
           <input id="password_r" type="password" name="password_r" placeholder="New password (again)" required>
         </div>
-
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <input class="form-button" type="submit" value="Submit">
       </form>
 
@@ -128,7 +128,7 @@ function drawSettings()
       <?php
         $msg = getSessionMessage('passwordError');
         if ($msg) {
-            echo $msg; 
+            echo htmlspecialchars($msg); 
         }?>
       </p>
     </section>

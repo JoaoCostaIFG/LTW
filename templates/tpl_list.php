@@ -44,8 +44,8 @@ else {
      * using /100% on background favors portait frame (vertical) photos
      * using /auto 100% seems to favor most photos
      */ 
-    $photo_path = '../static/images/' . $post['photo_id'] . '.' . $post['photo_extension'];
-    $post_path = 'post.php?post_id=' . $post['post_id'];
+    $photo_path = '../static/images/' . urlencode($post['photo_id']) . '.' . urlencode($post['photo_extension']);
+    $post_path = 'post.php?post_id=' . urlencode($post['post_id']);
     ?>
 
   <a class="nounderline list-item" href="<?php echo $post_path; ?>">
@@ -54,7 +54,7 @@ else {
       <div class="list-item-img" style="background: url('<?php echo $photo_path; ?>') no-repeat center /auto 100%"></div>
     </div>
     <div class="list-item-txt">
-      <?php echo $post['name']; ?>
+      <?php echo htmlspecialchars($post['name']); ?>
     </div>
   </a>
 <?php } ?>
@@ -76,11 +76,11 @@ else {
   </div>
   <div class="form-item listfilter-item" >
     <label for="min_age">Min. Age (Years)</label>
-    <input id="min_age" min="0" type="text" name="min_age" value="<?php echo $values['min_age'] ?>">
+    <input id="min_age" min="0" type="text" name="min_age" value="<?php echo htmlspecialchars($values['min_age']) ?>">
   </div>
   <div class="form-item listfilter-item" >
     <label for="max_age">Max. Age (Years)</label>
-    <input id="max_age" min="0" type="text" name="max_age" value="<?php echo $values['max_age'] ?>">
+    <input id="max_age" min="0" type="text" name="max_age" value="<?php echo htmlspecialchars($values['max_age']) ?>">
   </div>
   <br>
   <div class="form-item listfilter-item listfilter-item-bottom" >

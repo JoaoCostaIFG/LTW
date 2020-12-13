@@ -31,8 +31,11 @@ function addQuestion(post_id) {
         }
     };
 
-    xhttp.open("GET", "../actions/action_add_question.php?" + encodeForAjax({ post_id: post_id, question_text: text }), true);
-    xhttp.send();
+    xhttp.open("post", "../actions/action_add_question.php", true);
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhttp.send(encodeForAjax({ post_id: post_id, question_text: text, csrf: document.querySelector("meta[name='csrf-token']").getAttribute("content")}));
+    // xhttp.open("GET", "../actions/action_add_question.php?" + encodeForAjax({ post_id: post_id, question_text: text }), true);
+    // xhttp.send();
 }
 
 function removeNoAnswersText(){
