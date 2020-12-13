@@ -153,7 +153,6 @@ function drawPost($post, $questionsAnswers)
      * Draws given a given post page
      */
     ?>
-<meta name="csrf-token" content="<?=$_SESSION['csrf']?>">
 
 <div class="petpost-page">
     <?php 

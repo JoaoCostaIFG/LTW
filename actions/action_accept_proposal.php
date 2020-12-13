@@ -5,7 +5,7 @@
   require_once '../includes/utils.php';
 
 
-  if(!isset($_GET['user_id']) || !isset($_GET['post_id'])){
+  if(!isset($_POST['user_id']) || !isset($_POST['post_id'])){
     setSessionMessage('error', 'Bad Request');
     die('Location: ../pages/home.php');
   }
@@ -16,8 +16,8 @@
     die(header('Location: ../pages/add_post.php'));
 }
 
-    $user_id = $_GET['user_id'];
-    $post_id = $_GET['post_id'];
+    $user_id = $_POST['user_id'];
+    $post_id = $_POST['post_id'];
     
 try {
     $poster_id = getUserId($_SESSION['username'])['id'];
