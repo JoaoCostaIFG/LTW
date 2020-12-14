@@ -1,42 +1,61 @@
 <?php
   require_once '../includes/session.php';
-  require_once '../database/queries/db_user.php';
-  require_once '../actions/action_upload.php';
   require_once '../includes/utils.php';
+  require_once '../actions/action_upload.php';
+  require_once '../database/queries/db_user.php';
 
 function registerFail($msg)
 {
-    setSessionMessage('signUpError', $msg);
-    die(header('Location: ../pages/register.php'));
+  setSessionMessage('signUpError', $msg);
+  die(header('Location: ../pages/register.php'));
 }
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $password_r = $_POST['password_r'];
-    $email = $_POST['email'];
-    $mobile_number = $_POST['mobile_number'];
+// user info
+$username = treatInputNonEmpty($_POST['username']);
+if (!isset($username)) {
+  registerFail("Need a username!");
+}
+if (!preg_match("/^[0-9a-zA-Z\s_\-]+$/", $username)) {
+  registerFail("Username can only contain letters, numbers, spaces, underscores and dashes!");
+}
+$email = treatInputNonEmpty($_POST['email']);
+if (!isset($email)) {
+  registerFail("Need an email address!");
+}
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+  registerFail("The given email address is invalid!");
+}
+$mobile_number = treatInputNonEmpty($_POST['mobile_number']);
+if (!isset($mobile_number)) {
+  registerFail("Need a mobile number!");
+}
+if (!preg_match("/^(\+?[0-9\s]+|[0-9\s]+-[0-9\s]+)$/", $mobile_number)) {
+  registerFail("Mobile number can only contain numbers, spaces, pluses and dashes!");
+}
 
-    // TODO Verify regex password and username here
-
+// password
+$password = $_POST['password'];
+$password_r = $_POST['password_r'];
+if (strlen($password) < 5) {
+  registerFail("Passwords need to be at least 5 chars long!");
+}
 if ($password != $password_r) { // check is passwords are equal
-    registerFail("Passwords don't match!");
+  registerFail("Passwords don't match!");
 }
 
-    $type = photoIsValid($_FILES['image']['tmp_name']);
+$type = photoIsValid($_FILES['image']['tmp_name']);
 if (!$type) { // check if the given image is jpeg/png
-    registerFail("The given image is not valid!");
+  registerFail("The given image is not valid!");
 }
 
 try {
+  $user_id = insertUser($username, $password, $email, $mobile_number, typeToString($type));
+  uploadPhoto($user_id, $type, true);
 
-    $user_id = insertUser($username, $password, $email, $mobile_number, typeToString($type));
-    uploadPhoto($user_id, $type, true);
-
-    $_SESSION['username'] = $username;
-    setSessionMessage('success', 'Signed up and logged in!');
-    header('Location: ../pages/list.php');
+  $_SESSION['username'] = $username;
+  setSessionMessage('success', 'Signed up and logged in!');
+  header('Location: ../pages/list.php');
 } catch (PDOException $e) {
-    registerFail('Failed to signup!');
+  registerFail('Failed to signup!');
 }
-
 ?>

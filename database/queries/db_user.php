@@ -52,6 +52,21 @@ function getUserInfo($username)
     }
 }
 
+function getAllUsers() {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        '
+        SELECT id, username, email, mobile_number, extension
+        FROM User'
+    );
+
+    $stmt->execute();
+    $users = $stmt->fetchAll();         
+
+    return $users;
+
+}
+
 /**
  * Returns all Posts made by an User
  */
@@ -153,22 +168,18 @@ function updateUser(&$user_info)
         $querry_str .= ' username = ?,';
         array_push($querry_array, $user_info['username']);
     }
-
     if($user_info['email']) {
         $querry_str .= ' email = ?,';
         array_push($querry_array, $user_info['email']);
     }
-
     if($user_info['mobile_number']) {
         $querry_str .= ' mobile_number = ?,';
         array_push($querry_array, $user_info['mobile_number']);
     }
-
     if($user_info['picture']) {
         $querry_str .= ' picture = ?,';
         array_push($querry_array, $user_info['picture']);
     }
-
     if($user_info['password']) {
         $querry_str .= ' password = ?,';
         $options = ['cost' => 12]; // Default is 10 but 12 is better

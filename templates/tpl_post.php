@@ -75,7 +75,7 @@ function drawProposalButton($post_id, $user_id)
     <script src="../js/utils.js" type="text/javascript" defer></script>
     <script src="../js/proposal.js" type="text/javascript" defer></script>
 
-    <button id="makeProposalButton" onclick="make_proposal_confirmation(<?php echo "$post_id, $user_id";?>)">
+    <button id="makeProposalButton" onclick="make_proposal_confirmation(<?php echo htmlspecialchars($post_id) . "," . htmlspecialchars($user_id);?>)">
         Make Proposal</button>
     <p id="proposalSentText"></p>
 <?php }
@@ -96,7 +96,8 @@ function drawEditButtons($post_id)
         Edit Post</button>
 
     <form class="deleteButton" method="post" action="../actions/action_delete_post.php">
-      <input type="hidden" id="post_id" name="post_id" value="<?php echo $post_id; ?>">
+      <input type="hidden" id="post_id" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>">
+      <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
       <input class="form-button addpostform-button" type="submit" value="Remove post">
     </form>
 <?php }
@@ -109,12 +110,12 @@ function drawEditOptions($post)
           enctype="multipart/form-data">
           <div class="form-item addpostform-item" >
             <label for="name">Name</label>
-            <input id="name" type="text" name="name" value="<?php echo $post['name']; ?>" required>
+            <input id="name" type="text" name="name" value="<?php echo htmlspecialchars($post['name']); ?>" required>
           </div>
 
           <div class="form-item addpostform-item" >
             <label for="birth_date">Birth Date</label>
-            <input id="birth_date" max="<?php echo date('Y-m-d'); ?>" type="date" name="birth_date" value="<?php echo $post['birth_date']; ?>" required>
+            <input id="birth_date" max="<?php echo date('Y-m-d'); ?>" type="date" name="birth_date" value="<?php echo htmlspecialchars($post['birth_date']); ?>" required>
           </div>
           <div class="form-item addpostform-item" >
             <label for="image">Photo</label>
@@ -127,7 +128,7 @@ function drawEditOptions($post)
           <div class="form-item addpostform-item" >
             <label for="description">Description</label>
             <textarea id="description" name="description" rows="1" cols="80" maxlength="2000">
-              <?php echo $post['description']; ?>
+              <?php echo htmlspecialchars($post['description']); ?>
             </textarea>
           </div>
 
@@ -139,7 +140,8 @@ function drawEditOptions($post)
           </div>
 
           <br>
-          <input type="hidden" id="post_id" name="post_id" value="<?php echo $post['id']; ?>">
+          <input type="hidden" id="post_id" name="post_id" value="<?php echo htmlspecialchars($post['id']); ?>">
+          <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
           <input class="form-button addpostform-button" type="submit" value="Update pet">
         </form>
     </div>
@@ -154,7 +156,7 @@ function drawPost($post, $questionsAnswers)
 
 <div class="petpost-page">
     <?php 
-    $photo_path = "../static/images/" . $post['photo_id'] . "." . $post['photo_extension'];
+    $photo_path = "../static/images/" . urlencode($post['photo_id']) . "." . urlencode($post['photo_extension']);
     if(isset($_SESSION['username'])) {
         $current_user = getUserId($_SESSION['username'])['id'];
         $post_id = $post['id'];
@@ -172,8 +174,12 @@ function drawPost($post, $questionsAnswers)
     ?>
 
   <h2>
-    <b><?php echo $post['name']; ?></b> </br>
-    for adoption from <b><?php echo $post['user']; ?></b>
+    <b><?php echo htmlspecialchars($post['name']); ?></b> </br>
+    for adoption from <b>
+      <a href="../pages/profile.php?username=<?php echo urlencode($post['user']); ?>">
+        <?php echo htmlspecialchars($post['user']); ?>
+      </a>
+    </b>
   </h2>
 
   <div class="petpost">
@@ -196,19 +202,19 @@ function drawPost($post, $questionsAnswers)
     </div>
     <?php drawEditOptions($post); ?>
     <ul class="petpost-info nobullets">
-      <li>Name: <b><?php echo $post['name']; ?></b></li>
-      <li>Age: <b><?php echo ageToString($post['age']); ?></b></li>
-      <li>Breed: <b><?php echo $post['species']; ?></b></li>
-      <li>Genre: <b><?php echo genderToString($post['gender']); ?></b></li>
-      <li>Size: <b><?php echo sizeToString($post['size']); ?></b></li>
-      <li>Location: <b><?php echo $post['location']; ?></b></li>
-      <li>Posted in: <b><?php echo $post['date']; ?></b></li>
+      <li>Name: <b><?php echo htmlspecialchars($post['name']); ?></b></li>
+      <li>Age: <b><?php echo htmlspecialchars(ageToString($post['age'])); ?></b></li>
+      <li>Breed: <b><?php echo htmlspecialchars($post['species']); ?></b></li>
+      <li>Genre: <b><?php echo htmlspecialchars(genderToString($post['gender'])); ?></b></li>
+      <li>Size: <b><?php echo htmlspecialchars(sizeToString($post['size'])); ?></b></li>
+      <li>Location: <b><?php echo htmlspecialchars($post['location']); ?></b></li>
+      <li>Posted in: <b><?php echo htmlspecialchars($post['date']); ?></b></li>
     </ul>
   </div>
 
     <h3>Description</h3>
     <div class="petpost-description">
-      <p> <?php echo $post['description']; ?> </p>
+      <p> <?php echo nl2br(htmlspecialchars($post['description'])); ?> </p>
     </div>
 
     <h3>Questions & Answers</h3>
@@ -229,24 +235,32 @@ function drawPost($post, $questionsAnswers)
 function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
 {
     ?>
-  <section id="<?php echo 'QA' . $questionAnswer['id'] ?>" class="QA">
+  <section id="<?php echo 'QA' . htmlspecialchars($questionAnswer['id']) ?>" class="QA">
     <section class="petpost-question">
-      <p> <?php echo 'Q: ' . $questionAnswer['question']; ?> </p>
-      <p> <?php echo $questionAnswer['question_date'] . ", " . getUsername($questionAnswer['user_id']); ?> </p>
+      <p> <?php echo 'Q: ' . nl2br(htmlspecialchars($questionAnswer['question'])); ?> </p>
+      <p>
+        <?php
+          $username=getUsername($questionAnswer['user_id']);
+          echo htmlspecialchars($questionAnswer['question_date']) . ', ';
+        ?>
+        <a href="../pages/profile.php?username=<?php echo urlencode($username) ?>">
+          <?php echo htmlspecialchars($username); ?>
+        </a>
+      </p>
       <?php
         // Checks if the current user is the owner of the post
         if (isset($user_id) && isOwner($user_id, $post_id) && !isset($questionAnswer['answer'])) { ?>
           <script src="../js/add_answer.js" type="text/javascript" defer></script>
-          <button id="<?php echo 'answer-button' . $questionAnswer['id'] ?>" class="answer-button"
-            onclick="toggleAnswerInput(<?php echo $questionAnswer['id'] ?>)">Answer</button>
+          <button id="<?php echo 'answer-button' . htmlspecialchars($questionAnswer['id']) ?>" class="answer-button"
+            onclick="toggleAnswerInput(<?php echo htmlspecialchars($questionAnswer['id']) ?>)">Answer</button>
     </section>
 
     <!-- Used in answer input -->
-    <section class="answer-input" id="<?php echo 'answer-input' . $questionAnswer['id']; ?>" style="display: none;">
-      <textarea class="answer-text-area" name="<?php echo 'answer_text' . $questionAnswer['id'] ?>" rows="1" cols="80"
+    <section class="answer-input" id="<?php echo 'answer-input' . htmlspecialchars($questionAnswer['id']); ?>" style="display: none;">
+      <textarea class="answer-text-area" name="<?php echo 'answer_text' . htmlspecialchars($questionAnswer['id']) ?>" rows="1" cols="80"
          maxlength="2000" placeholder="Write your answer..." required></textarea>
       <button id="answer-input-button" type="button"
-        onclick="addAnswer(<?php echo $questionAnswer['id'] ?>)">Post Answer</button>
+        onclick="addAnswer(<?php echo htmlspecialchars($questionAnswer['id']) ?>)">Post Answer</button>
         <?php } ?> 
     </section>
 
@@ -286,9 +300,8 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
     <textarea id="question-input-ta" name="question_text" rows="1" cols="80"
        maxlength="2000" placeholder="Write your question..." required></textarea>
     <button id="question-input-button" type="button"
-      onclick="addQuestion(<?php echo $post_id ?>)">Post Question</button>
+      onclick="addQuestion(<?php echo htmlspecialchars($post_id) ?>)">Post Question</button>
   </section>
-
   <script type="text/javascript">
     // see: https://stackoverflow.com/questions/7745741/auto-expanding-textarea/24824750#24824750
     var textarea = document.getElementById("question-input-ta");
@@ -333,6 +346,7 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
     <header><h2>Create a new Post</h2></header>
 
     <form class="verticalform addpostform" method="post" action="../actions/action_add_post.php" enctype="multipart/form-data">
+    <!-- <form class="verticalform addpostform" method="post" action="../api/post.php" enctype="multipart/form-data"> -->
       <div class="form-item addpostform-item" >
         <label for="name">Name</label>
         <input id="name" type="text" name="name" placeholder="name of the pet" required>
@@ -370,6 +384,7 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
       </div>
 
       <br>
+      <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
       <input class="form-button addpostform-button" type="submit" value="Add pet">
     </form>
   </section>
@@ -380,7 +395,7 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
 	?>
 	<br> <!-- Used to make the answers appear below the questions -->
   <section class="petpost-answer">
-    <p> <?php echo 'A: ' . $questionAnswer['answer']; ?> </p>
-    <p> <?php echo $questionAnswer['answer_date'] ?> </p>
+    <p> <?php echo 'A: ' . nl2br(htmlspecialchars($questionAnswer['answer'])); ?> </p>
+    <p> <?php echo htmlspecialchars($questionAnswer['answer_date']); ?> </p>
   </section>
 <?php } ?>

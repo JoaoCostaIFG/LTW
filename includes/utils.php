@@ -56,4 +56,15 @@ function getSessionMessage($type)
     $_SESSION['messages'] = [];
     return $ret;
 }
+
+function treatInputNonEmpty($input) {
+  if (!isset($input))
+    return null;
+
+  $trimmedInput = trim($input);
+  if (empty($trimmedInput))
+    return null;
+
+  return $trimmedInput;
+}
 ?>

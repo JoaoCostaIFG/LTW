@@ -1,19 +1,32 @@
 <?php
-  require_once '../includes/session.php';
+require_once '../includes/session.php';
+require_once '../database/queries/db_user.php';
 
-if (!isset($_SESSION['username'])) {
-    die(header('Location: 404.php'));
-} 
-
-  require_once '../templates/common/tpl_header_noimg.php';
-  require '../database/queries/db_user.php';
-  require '../templates/tpl_profile.php';
-
+if (isset($_GET['username'])) {
   $username = $_GET['username'];
   $user_info = getUserInfo($username);
-  $user_posts = getPostsByUser($username);
-  
-  drawProfile($user_info, $user_posts);
+  $is_owner = false;
+}
+else if (isset($_SESSION['username'])) {
+  // if no username is given, check current signed in user (if any)
+  $username = $_SESSION['username'];
+  $user_info = getUserInfo($_SESSION['username']);
+  $is_owner = true;
+}
+else {
+  die(header('Location: ../pages/404.php'));
+}
 
-  require_once '../templates/common/tpl_footer.php';
+if (!isset($user_info['id']))
+  die(header('Location: ../pages/404.php'));
+
+if ($is_owner) $title = "Your profile";
+else $title = $username . " profile";
+require_once '../templates/common/tpl_header.php';
+
+$user_posts = getPostsByUser($username);
+require_once '../templates/tpl_profile.php';
+drawProfile($is_owner, $user_info, $user_posts);
+
+require_once '../templates/common/tpl_footer.php';
 ?>

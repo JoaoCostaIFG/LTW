@@ -1,16 +1,17 @@
 <?php
-  require_once '../includes/session.php';
+require_once '../includes/session.php';
 
-  if (!isset($_SESSION['username']))
-    die(header('Location: 404.php')); 
+if (!isset($_SESSION['username']))
+  die(header('Location: 404.php')); 
 
-  include_once('../templates/common/tpl_header_noimg.php');
-  include('../database/queries/db_user.php');
-  include('../templates/tpl_profile.php');
+$title="Edit profile";
+require_once '../templates/common/tpl_header.php';
+require_once '../database/queries/db_user.php';
+require_once '../templates/tpl_profile.php';
 
-  $user = getUserInfo($_SESSION['username']);
-  
-  drawEditProfile($user);
+$user = getUserInfo($_SESSION['username']);
 
-  include_once('../templates/common/tpl_footer.php');
+drawEditProfile($user);
+
+require_once '../templates/common/tpl_footer.php';
 ?>
