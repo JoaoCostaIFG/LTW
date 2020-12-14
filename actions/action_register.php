@@ -10,6 +10,10 @@ function registerFail($msg)
   die(header('Location: ../pages/register.php'));
 }
 
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+  registerFail("Request method not supported");
+}
+
 // user info
 $username = treatInputNonEmpty($_POST['username']);
 if (!isset($username)) {
@@ -34,6 +38,11 @@ if (!isValidMobileNumber($mobile_number)) {
 }
 
 // password
+
+if(!isset($_POST['password']) || !isset($_POST['password_r'])){
+  registerFail("Password fields are required");
+}
+
 $password = $_POST['password'];
 $password_r = $_POST['password_r'];
 if (strlen($password) < 5) {
