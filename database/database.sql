@@ -45,6 +45,8 @@ create table PetPost(
     size INTEGER CHECK (size = 1 OR size = 2 OR size = 3), -- 1 small, 2 medium, 3 big
     description TEXT NOT NULL,
     date DATE NOT NULL,
+    -- 1 being prepared for adopt, 2 ready for adoption, 3 being prep and accepted, 4 being delivered, 5 delivered
+    state INTEGER CHECK (state = 1 OR state = 2 OR state = 3 OR state = 4 OR state = 5) ,
     color_id INTEGER REFERENCES Color(id),
     species_id INTEGER REFERENCES Species(id),
     city_id INTEGER REFERENCES City(id),

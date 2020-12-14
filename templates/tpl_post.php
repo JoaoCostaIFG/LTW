@@ -66,6 +66,35 @@ function proposalStatusToString($status)
     return $text;
 }
 
+function statusToString($status, $post_id)
+{
+    $current_user = getUserId($_SESSION['username'])['id'];
+    if (hasProposal($current_user, $post_id) || isOwner($current_user, $post_id)) {
+        if ($status == 1)
+            $text = "The pet is being prepared for adoption";
+        else if ($status == 2)
+            $text = "The pet ready for adoption";
+        else if ($status == 3)
+            $text = "The pet is being prepared for adoption and has a confirmed adopter";
+        else if ($status == 4) // TODO add button to confirm delivery
+            $text = "The pet is being delivered";
+        else if ($status == 5)
+            $text = "The pet was delivered";
+        else
+            $text = "Unkown status";
+    } else { // Normal user
+        if ($status == 1)
+            $text = "The pet is being prepared for adoption";
+        else if ($status == 2)
+            $text = "The pet ready for adoption";
+        else if ($status > 2 && $status < 6)
+            $text = "This pet has already benn adopted";
+        else
+            $text = "Unkown status";
+    }
+    return $text;
+}
+
 /* DRAWERS */
 
 function drawProposalButton($post_id, $user_id)
@@ -166,7 +195,7 @@ function drawPost($post, $questionsAnswers)
             if (hasProposal($current_user, $post_id)) {
                 $status = getProposalStatus($current_user, $post_id)['status'];
                 drawProposalStatus($status);
-            } else {
+            } else if ($post['status'] > 2 && $:ost['status'] < 6) {
                 drawProposalButton($post_id, $current_user);
             }
         }
@@ -207,6 +236,7 @@ function drawPost($post, $questionsAnswers)
       <li>Breed: <b><?php echo htmlspecialchars($post['species']); ?></b></li>
       <li>Genre: <b><?php echo htmlspecialchars(genderToString($post['gender'])); ?></b></li>
       <li>Size: <b><?php echo htmlspecialchars(sizeToString($post['size'])); ?></b></li>
+      <li>Status: <b><?php echo htmlspecialchars(statusToString($post['status'])); ?></b></li>
       <li>Location: <b><?php echo htmlspecialchars($post['location']); ?></b></li>
       <li>Posted in: <b><?php echo htmlspecialchars($post['date']); ?></b></li>
     </ul>
