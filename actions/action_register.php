@@ -10,6 +10,10 @@ function registerFail($msg)
   die(header('Location: ../pages/register.php'));
 }
 
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+  registerFail("Request method not supported");
+}
+
 // user info
 $username = treatInputNonEmpty($_POST['username']);
 if (!isset($username)) {

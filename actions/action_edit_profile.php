@@ -19,6 +19,11 @@ function updateSettingsFail($msg)
   die(header("Location: ../pages/settings.php"));
 }
 
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+  setSessionMessage('error', 'Request method not supported');
+  die('Location: ../pages/home.php');
+}
+
 if ($_SESSION['csrf'] !== $_POST['csrf']) {
   // ERROR: Request does not appear to be legitimate
   setSessionMessage('error', 'This request does not appear to be legitimate');

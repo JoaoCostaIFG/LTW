@@ -4,6 +4,11 @@ require_once '../database/queries/db_user.php';
 require_once '../database/queries/db_post.php';
 require_once '../templates/tpl_post.php';
 
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    echo '<p id="question-error">An error ocurred.</p>';
+    die;
+}
+
 if (!isset($_POST['csrf']) || $_SESSION['csrf'] !== $_POST['csrf']) {
     // ERROR: Request does not appear to be legitimate
     echo '<p id="question-error">An error ocurred.</p>';
@@ -19,14 +24,14 @@ if (!isset($_SESSION['username']) || !isset($post_id) || !isset($question_text))
 
 $user_id = getUserId($_SESSION['username'])['id'];
 try {
-    $question_id = insertQuestion($user_id, $post_id, $safe_text);
+    $question_id = insertQuestion($user_id, $post_id, $question_text);
 } catch (PDOException $e) {
     echo '<p id="question-error">An error ocurred.</p>';
     die;
 }
 
 $question = [
-  "question" => $safe_text,
+  "question" => $question_text,
   "question_date" => date("d/m/Y"),
   "user_id" => $user_id,
   "id" => $question_id

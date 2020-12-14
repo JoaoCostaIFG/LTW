@@ -6,6 +6,11 @@ require_once '../actions/action_upload.php';
 require_once '../includes/utils.php';
 
 
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    setSessionMessage('error', 'Request method not supported');
+    die('Location: ../pages/home.php');
+  }
+
 if(!isset($_SESSION['username'])) {
     setSessionMessage('error', "Invalid photo!");
     die(header("Location: ../pages/home.php"));
@@ -17,21 +22,28 @@ if (!isset($_POST['csrf']) || $_SESSION['csrf'] !== $_POST['csrf']) {
     die(header('Location: ../pages/home.php'));
 }
 
+$post_id = $_POST['post_id'];
 $name = treatInputNonEmpty($_POST['name']);
-if(!isset($_POST['post_id']) 
-    || !isset($name) 
-    || !isset($_POST['birth_date'])  
-    || !isset($_POST['size']) 
-    || !isset($_POST['description']) 
-    || !isset($_POST['color']) 
-    || !isset($_POST['city'])
+$name = preg_replace("/[^a-zA-Z\s]/", '', $_POST['name']);
+$birth_date = treatInputNonEmpty($_POST['birth_date']);
+$size = $_POST['size'];
+$description = treatInputNonEmpty($_POST['description']);
+$color = treatInputNonEmpty($_POST['color']);
+$city = $_POST['city'];
+$post_info = array($name, $birth_date, $size, $description, $color, $city, $post_id);
+if(!isset($post_id)
+    || !isset($name)
+    || !isset($birth_date)
+    || !isset($size)
+    || !isset($description)
+    || !isset($color)
+    || !isset($city)
 ) {
     setSessionMessage('error', "Failed to edit post!");
     die(header("Location: ../pages/post.php?post_id=$post_id"));
 }
 
 // Check if file is not image
-$post_id = $_POST['post_id'];
 if (file_exists($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
     $has_photo = true;
     $type = photoIsValid($_FILES['image']['tmp_name']);
@@ -39,23 +51,16 @@ if (file_exists($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image
         setSessionMessage('error', "Invalid photo!");
         die(header("Location: ../pages/post.php?post_id=$post_id"));
     }
-
-} else { $has_photo = false;
+} else {
+    $has_photo = false;
 }
 
-    $user_id = getUserId($_SESSION['username'])['id'];
+$user_id = getUserId($_SESSION['username'])['id'];
 if (!ownsPost($user_id, $post_id)) {
     setSessionMessage('error', "User doesn't own this post!");
     die(header("Location: ../pages/post.php?post_id=$post_id"));
 }
     
-    $name = preg_replace("/[^a-zA-Z\s]/", '', $_POST['name']);
-    $birth_date = $_POST['birth_date'];
-    $size = $_POST['size'];
-    $description = $_POST['description'];
-    $color = $_POST['color'];
-    $city = $_POST['city'];
-    $post_info = array($name, $birth_date, $size, $description, $color, $city, $post_id);
 
 try {
     updatePost($post_info);

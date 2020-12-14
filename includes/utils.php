@@ -64,12 +64,12 @@ function treatInputNonEmpty($input)
         return null;
     }
 
-    $trimmedInput = trim($input);
-    if (empty($trimmedInput)) {
+    $input = trim($input);
+    if (empty($input)) {
         return null;
     }
 
-    return $trimmedInput;
+    return $input;
 }
 
 function isValidMobileNumber($mobile_number)

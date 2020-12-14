@@ -4,6 +4,11 @@
     require_once '../database/queries/db_user.php';
     require_once '../includes/utils.php';
 
+    if ($_SERVER["REQUEST_METHOD"] != "POST") {
+        setSessionMessage('error', 'Request method not supported');
+        die('Location: ../pages/home.php');
+    }
+
     if(!isset($_SESSION['username'])){
         setSessionMessage('error', 'Not autheticated');
         die('Location: ../pages/home.php');

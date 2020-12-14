@@ -4,6 +4,11 @@ require_once '../database/queries/db_user.php';
 require_once '../database/queries/db_post.php';
 require_once '../templates/tpl_post.php';
   
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    echo '<p id="question-error">An error ocurred.</p>';
+    die;
+}
+
 if (!isset($_POST['csrf']) || $_SESSION['csrf'] !== $_POST['csrf']) {
     // ERROR: Request does not appear to be legitimate
     echo '<p id="question-error">An error ocurred.</p>';
