@@ -100,7 +100,7 @@ function drawGendersRadio()
 {
     /*
     * -- 1 being prepared for adopt, 2 ready for adoption, 3 being prep and accepted, 4 being delivered, 5 delivered
-    * Draws all colors in the database
+    * Draws all states
     */
     $option_preparing = array(
         'id' => '1',
@@ -128,5 +128,29 @@ function drawGendersRadio()
         array_push($states, $option_ready_adoption);
     }
     drawOptions(false, $states, 'State', 'state', $selected_value);
+}
+?>
+
+<?php function drawStatesSearch($selected_value)
+{
+    /*
+    * -- 1 being prepared for adopt, 2 ready for adoption, 3 being prep and accepted, 4 being delivered, 5 delivered
+    * Draws all states to be used for searching
+    */
+    $option_preparing = array(
+        'id' => '1',
+        'name' => 'Preparing for Adoption'
+    );
+    $option_ready_adoption = array(
+        'id' => '2',
+        'name' => 'Ready for Adoption'
+    );
+    $option_already_accepted = array(
+        'id' => '-1',
+        'name' => 'Already adopted'
+    );
+
+    $states = array($option_preparing, $option_ready_adoption, $option_already_accepted);
+    drawOptions(true, $states, 'State', 'state', $selected_value);
 }
 ?>

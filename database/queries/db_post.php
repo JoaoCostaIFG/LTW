@@ -224,6 +224,7 @@ function updatePost($post_info)
                 birth_date = ?,
                 size = ?,
                 description = ?,
+                state = ?,
                 color_id = ?,
                 city_id = ?
              WHERE id = ?'

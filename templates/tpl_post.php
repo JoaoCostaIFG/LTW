@@ -69,13 +69,14 @@ function proposalStatusToString($status)
 function stateToString($state, $post_id)
 {
     $current_user = getUserId($_SESSION['username'])['id'];
-    if (hasProposal($current_user, $post_id) || isOwner($current_user, $post_id)) {
+    $accepted_user = hasAcceptedProposal($post_id)['user_id'];
+    if (($accepted_user == $current_user) || isOwner($current_user, $post_id)) {
         if ($state == 1)
             $text = "The pet is being prepared for adoption";
         else if ($state == 2)
             $text = "The pet ready for adoption";
         else if ($state == 3)
-            $text = "The pet is being prepared for adoption and has a confirmed adopter";
+            $text = "The pet is being prepared for adoption and is adopted";
         else if ($state == 4)
             $text = "The pet is being delivered";
         else if ($state == 5)
@@ -83,14 +84,18 @@ function stateToString($state, $post_id)
         else
             $text = "Unkown status";
     } else { // Normal user
-        if ($state == 1)
-            $text = "The pet is being prepared for adoption";
-        else if ($state == 2)
-            $text = "The pet ready for adoption";
-        else if ($state > 2 && $state < 6)
+        if ($accepted_user != false)
             $text = "This pet has already been adopted";
-        else
-            $text = "Unkown status";
+        else {
+            if ($state == 1)
+                $text = "The pet is being prepared for adoption";
+            else if ($state == 2)
+                $text = "The pet ready for adoption";
+            else if ($state > 2 && $state < 6)
+                $text = "This pet has already been adopted";
+            else
+                $text = "Unkown status";
+        }
     }
     return $text;
 }
@@ -156,7 +161,7 @@ function drawEditOptions($post)
           </div>
 
           <div class="form-item addpostform-item" >
-            <?php drawStates(hasAcceptedProposal($post['id']), $post['state']); ?>
+            <?php drawStates(hasAcceptedProposal($post['id']) != false, $post['state']); ?>
           </div>
 
           <div class="form-item addpostform-item" >
@@ -194,7 +199,6 @@ function drawPost($post, $questionsAnswers)
     if(isset($_SESSION['username'])) {
         $current_user = getUserId($_SESSION['username'])['id'];
         $post_id = $post['id'];
-        echo "-----" . $post['state'] . "-------";
         if (isOwner($current_user, $post_id)) {
             drawEditButtons($post_id);
         } else {

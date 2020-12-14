@@ -28,20 +28,22 @@ $name = preg_replace("/[^a-zA-Z\s]/", '', $_POST['name']);
 $birth_date = treatInputNonEmpty($_POST['birth_date']);
 $size = $_POST['size'];
 $description = treatInputNonEmpty($_POST['description']);
+$state = $_POST['state'];
 $color = treatInputNonEmpty($_POST['color']);
 $city = $_POST['city'];
-$post_info = array($name, $birth_date, $size, $description, $color, $city, $post_id);
 if(!isset($post_id)
     || !isset($name)
     || !isset($birth_date)
     || !isset($size)
     || !isset($description)
+    || !isset($state)
     || !isset($color)
     || !isset($city)
 ) {
     setSessionMessage('error', "Failed to edit post!");
     die(header("Location: ../pages/post.php?post_id=$post_id"));
 }
+$post_info = array($name, $birth_date, $size, $description, $state, $color, $city, $post_id);
 
 // Check if file is not image
 if (file_exists($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['tmp_name'])) {

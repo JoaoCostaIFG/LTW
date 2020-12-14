@@ -29,13 +29,13 @@ function hasProposal($user_id, $post_id)
 function hasAcceptedProposal($post_id) {
     $db = Database::instance()->db();
     $stmt = $db->prepare(
-        'SELECT accepted FROM Proposal 
+        'SELECT user_id FROM Proposal 
              WHERE accepted = 1 AND
              post_id = ?'
     );
     $stmt->execute(array($post_id));
     $proposal = $stmt->fetch();
-    return $proposal != false;
+    return $proposal;
 }
 
     /* GETTERS */
