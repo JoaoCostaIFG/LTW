@@ -66,28 +66,28 @@ function proposalStatusToString($status)
     return $text;
 }
 
-function statusToString($status, $post_id)
+function stateToString($state, $post_id)
 {
     $current_user = getUserId($_SESSION['username'])['id'];
     if (hasProposal($current_user, $post_id) || isOwner($current_user, $post_id)) {
-        if ($status == 1)
+        if ($state == 1)
             $text = "The pet is being prepared for adoption";
-        else if ($status == 2)
+        else if ($state == 2)
             $text = "The pet ready for adoption";
-        else if ($status == 3)
+        else if ($state == 3)
             $text = "The pet is being prepared for adoption and has a confirmed adopter";
-        else if ($status == 4) // TODO add button to confirm delivery
+        else if ($state == 4) // TODO add button to confirm delivery
             $text = "The pet is being delivered";
-        else if ($status == 5)
+        else if ($state == 5)
             $text = "The pet was delivered";
         else
             $text = "Unkown status";
     } else { // Normal user
-        if ($status == 1)
+        if ($state == 1)
             $text = "The pet is being prepared for adoption";
-        else if ($status == 2)
+        else if ($state == 2)
             $text = "The pet ready for adoption";
-        else if ($status > 2 && $status < 6)
+        else if ($state > 2 && $state < 6)
             $text = "This pet has already benn adopted";
         else
             $text = "Unkown status";
@@ -189,13 +189,14 @@ function drawPost($post, $questionsAnswers)
     if(isset($_SESSION['username'])) {
         $current_user = getUserId($_SESSION['username'])['id'];
         $post_id = $post['id'];
+        echo "-----" . $post['state'] . "-------";
         if (isOwner($current_user, $post_id)) {
             drawEditButtons($post_id);
         } else {
             if (hasProposal($current_user, $post_id)) {
                 $status = getProposalStatus($current_user, $post_id)['status'];
                 drawProposalStatus($status);
-            } else if ($post['status'] > 2 && $:ost['status'] < 6) {
+            } else if ($post['state'] > 0 && $post['state'] < 3) {
                 drawProposalButton($post_id, $current_user);
             }
         }
@@ -236,7 +237,7 @@ function drawPost($post, $questionsAnswers)
       <li>Breed: <b><?php echo htmlspecialchars($post['species']); ?></b></li>
       <li>Genre: <b><?php echo htmlspecialchars(genderToString($post['gender'])); ?></b></li>
       <li>Size: <b><?php echo htmlspecialchars(sizeToString($post['size'])); ?></b></li>
-      <li>Status: <b><?php echo htmlspecialchars(statusToString($post['status'])); ?></b></li>
+      <li>Status: <b><?php echo htmlspecialchars(stateToString($post['state'], $post['id'])); ?></b></li>
       <li>Location: <b><?php echo htmlspecialchars($post['location']); ?></b></li>
       <li>Posted in: <b><?php echo htmlspecialchars($post['date']); ?></b></li>
     </ul>
@@ -396,6 +397,10 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
 
       <div class="form-item addpostform-item" >
             <?php drawSizes(false, null); ?>
+      </div>
+
+      <div class="form-item addpostform-item" >
+            <?php drawStates(null, false); ?>
       </div>
 
       <div class="form-item addpostform-item" >

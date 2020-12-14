@@ -14,12 +14,14 @@ function handle_proposal(action, post_id, user_id) {
                 processedText.innerHTML = "Your accepted this proposal";
             else if (action === "reject_proposal")
                 processedText.innerHTML = "Your rejected this proposal";
+            let response = xhttp.responseText.trim('\n');
+            console.log(response);
         }
     };
 
     xhttp.open("post", "../actions/action_" + action + ".php", true);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhttp.send(encodeForAjax({ post_id: post_id, user_id: user_id, csrf: document.querySelector("meta[name='csrf-token']").getAttribute("content")}));
+    xhttp.send(encodeForAjax({post_id: post_id, user_id: user_id, csrf: document.querySelector("meta[name='csrf-token']").getAttribute("content")}));
 }
 
 function make_proposal(post_id, user_id) {
@@ -36,7 +38,7 @@ function make_proposal(post_id, user_id) {
 
     xhttp.open("post", "../actions/action_make_proposal.php", true);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhttp.send(encodeForAjax({ post_id: post_id, user_id: user_id, csrf: document.querySelector("meta[name='csrf-token']").getAttribute("content")}));
+    xhttp.send(encodeForAjax({post_id: post_id, user_id: user_id, csrf: document.querySelector("meta[name='csrf-token']").getAttribute("content")}));
 }
 
 function make_proposal_confirmation(post_id, user_id) {

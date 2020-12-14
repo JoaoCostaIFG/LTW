@@ -14,7 +14,7 @@ function addQuestion(post_id) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(xhttp.responseText.trim('\n'));
+            //console.log(xhttp.responseText.trim('\n'));
             removeNoAnswersText();
             //Trim is used because the reponse text comes with new lines behind
             let response = xhttp.responseText.trim('\n');
@@ -22,7 +22,7 @@ function addQuestion(post_id) {
             let doc = new DOMParser().parseFromString(response, 'text/html').getElementsByClassName("QA")[0];
             let questions = document.getElementById("petpost-questions");
             //error in this case
-            if(!doc){
+            if (!doc) {
                 questions.innerHTML += response;
                 return;
             }
@@ -33,14 +33,14 @@ function addQuestion(post_id) {
 
     xhttp.open("post", "../actions/action_add_question.php", true);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhttp.send(encodeForAjax({ post_id: post_id, question_text: text, csrf: document.querySelector("meta[name='csrf-token']").getAttribute("content")}));
+    xhttp.send(encodeForAjax({post_id: post_id, question_text: text, csrf: document.querySelector("meta[name='csrf-token']").getAttribute("content")}));
     // xhttp.open("GET", "../actions/action_add_question.php?" + encodeForAjax({ post_id: post_id, question_text: text }), true);
     // xhttp.send();
 }
 
-function removeNoAnswersText(){
+function removeNoAnswersText() {
     let text = document.getElementById("no-questions");
-    if(text){
+    if (text) {
         text.remove();
     }
 }
