@@ -31,7 +31,7 @@
 <?php } else { 
       require_once '../database/queries/db_proposal.php';
       require_once '../database/queries/db_user.php';
-      $proposals_count = sizeof(getReceivedProposals(getUserId($_SESSION['username'])['id']));?>
+      $proposals_count = sizeof(getReceivedNotAcceptedProposals(getUserId($_SESSION['username'])['id']));?>
       <ul id="authlogin" class="nobullets">
         <li class="topbar-button">
           <a class="nounderline" href="list_sent_proposals.php"><input type="submit" value="See sent proposals"></a>
