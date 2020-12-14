@@ -227,6 +227,16 @@ textarea {
   box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
 }
 
+.notification {
+  position: absolute;
+  top: -0.5em;
+  right: -0.5em;
+  padding: 0.05em 0.4em;
+  border-radius: 50%;
+  background: red;
+  color: var(--main);
+}
+
 /* || FORM */
 .verticalform {
   display: flex;

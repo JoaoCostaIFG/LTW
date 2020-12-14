@@ -28,13 +28,21 @@
         <a class="nounderline" href="../pages/register.php">Sign Up</a>
         <a class="nounderline" href="../pages/login.php">Log in</a>
       </div>
-<?php } else { ?>
+<?php } else { 
+      require_once '../database/queries/db_proposal.php';
+      require_once '../database/queries/db_user.php';
+      $proposals_count = sizeof(getReceivedProposals(getUserId($_SESSION['username'])['id']));?>
       <ul id="authlogin" class="nobullets">
         <li class="topbar-button">
           <a class="nounderline" href="list_sent_proposals.php"><input type="submit" value="See sent proposals"></a>
         </li>
         <li class="topbar-button">
-          <a class="nounderline" href="list_received_proposals.php"><input type="submit" value="See received proposals"></a>
+          <a class="nounderline" href="list_received_proposals.php">
+            <input type="submit" value="See received proposals">
+<?php if($proposals_count > 0){ ?>
+            <span class="notification"><?=$proposals_count?></span>
+<?php } ?>
+          </a>
         </li>
         <li class="topbar-button">
           <a class="nounderline" href="add_post.php"><input type="submit" value="+"></a>
