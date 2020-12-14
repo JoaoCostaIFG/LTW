@@ -64,6 +64,25 @@ function getReceivedProposals($user_id)
     return $stmt->fetchAll();
 }
 
+function getReceivedNotAcceptedProposals($user_id)
+{
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'SELECT User.id as user_id, User.username as user_username, accepted as status,
+                PetPost.id as post_id, PetPost.name as pet_name,
+                PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
+             FROM Proposal JOIN
+                PetPost ON(Proposal.post_id = PetPost.id) JOIN
+                PetPhoto ON(PetPhoto.post_id = PetPost.id) JOIN
+                User as Poster ON(Poster.id = PetPost.user_id) JOIN
+                User ON(User.id = Proposal.user_id)
+             WHERE Poster.id = ? AND Proposal.accepted <= 0
+             GROUP BY PetPost.id'
+    );
+    $stmt->execute(array($user_id));
+    return $stmt->fetchAll();
+}
+
 function getProposalStatus($user_id, $post_id)
 {
     $db = Database::instance()->db();

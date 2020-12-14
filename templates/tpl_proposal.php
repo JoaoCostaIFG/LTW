@@ -52,12 +52,15 @@ function drawSentProposals($proposals)
 
 function drawAcceptProposal($user_id, $post_id)
 {
+    $user_id = htmlspecialchars($user_id);
+    $post_id = htmlspecialchars($post_id);
+
     ?>
         <script src="../js/utils.js" type="text/javascript" defer></script>
         <script src="../js/proposal.js" type="text/javascript" defer></script>
-        <button id="acceptButton" onclick="handle_proposal(<?php echo "'accept_proposal', htmlspecialchars($post_id), htmlspecialchars($user_id)";?>)">
+        <button id="acceptButton" onclick="handle_proposal(<?php echo "'accept_proposal', $post_id, $user_id";?>)">
             Accept Proposal</button>
-        <button id="rejectButton" class="rejbutton" onclick="handle_proposal(<?php echo "'reject_proposal', htmlspecialchars($post_id), htmlspecialchars($user_id)";?>)">
+        <button id="rejectButton" class="rejbutton" onclick="handle_proposal(<?php echo "'reject_proposal', $post_id, $user_id";?>)">
             Reject Proposal</button>
         <p id="processedButtonText"></p>
     <?php
