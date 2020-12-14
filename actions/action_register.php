@@ -34,6 +34,11 @@ if (!isValidMobileNumber($mobile_number)) {
 }
 
 // password
+
+if(!isset($_POST['password']) || !isset($_POST['password_r'])){
+  registerFail("Password fields are required");
+}
+
 $password = $_POST['password'];
 $password_r = $_POST['password_r'];
 if (strlen($password) < 5) {
