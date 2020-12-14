@@ -7,6 +7,11 @@ require_once '../includes/utils.php';
 
 // TODO check valid locations && species
 
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    setSessionMessage('error', 'Request method not supported');
+    die('Location: ../pages/add_post.php');
+}
+
 if(!isset($_SESSION['username'])) {
     setSessionMessage('errorAddPost', 'Not authenticated');
     die(header('Location: ../pages/add_post.php'));

@@ -4,6 +4,10 @@ require_once '../includes/utils.php';
 require_once '../database/queries/db_proposal.php';
 require_once '../database/queries/db_user.php';
 
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    setSessionMessage('error', 'This request method in not supported');
+    die(header('Location: ../pages/home.php'));
+}
 
 $user_id = $_POST['user_id'];
 $post_id = $_POST['post_id'];

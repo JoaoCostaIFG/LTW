@@ -2,6 +2,11 @@
   require_once '../includes/session.php';
   require_once '../database/queries/db_user.php';
   require_once '../includes/utils.php';
+
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    echo 'error';
+    die;
+}
   
 if (!isset($_SESSION['username']) || !isset($_GET['post_id'])) {
     echo 'error';
