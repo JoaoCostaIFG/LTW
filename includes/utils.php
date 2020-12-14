@@ -67,4 +67,8 @@ function treatInputNonEmpty($input) {
 
   return $trimmedInput;
 }
+
+function isValidMobileNumber($mobile_number) {
+  return preg_match("/^(\+?[0-9\s]+|[0-9\s]+-[0-9\s]+)$/", $mobile_number);
+}
 ?>

@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo json_encode($user);
     }
 } else if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
+    $username = treatInputNonEmpty($_POST['username']);
     if(!isset($username)) {
         http_response_code(400);
         echo json_encode(array('message' => 'Request failed: username is not defined/invalid'));
@@ -35,13 +35,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         die;
     }
     $email = treatInputNonEmpty($_POST['email']);
-    if(!isset($email)) {
+    if(!isset($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         http_response_code(400);
         echo json_encode(array('message' => 'Request failed: email is not defined/invalid'));
         die;
     }
     $mobile_number = treatInputNonEmpty($_POST['mobile_number']);
-    if(!isset($mobile_number)) {
+    if(!isset($mobile_number) || !isValidMobileNumber($mobile_number)) {
         http_response_code(400);
         echo json_encode(array('message' => 'Request failed: mobile_number is not defined/invalid'));
         die;

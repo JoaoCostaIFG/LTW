@@ -29,7 +29,7 @@ $mobile_number = treatInputNonEmpty($_POST['mobile_number']);
 if (!isset($mobile_number)) {
   registerFail("Need a mobile number!");
 }
-if (!preg_match("/^(\+?[0-9\s]+|[0-9\s]+-[0-9\s]+)$/", $mobile_number)) {
+if (!isValidMobileNumber($mobile_number)) {
   registerFail("Mobile number can only contain numbers, spaces, pluses and dashes!");
 }
 
