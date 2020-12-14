@@ -13,28 +13,28 @@ require_once 'tpl_petInfo.php';
      */
     ?>
 <div class="list">
-<?php 
-if (empty($posts)) {
-  echo "There are no posts to show.";
-}
-else {
-  foreach($posts as $post) {
-    drawPostItem($post);
-  }
-}
-?>
+    <?php 
+    if (empty($posts)) {
+        echo "There are no posts to show.";
+    }
+    else {
+        foreach($posts as $post) {
+            drawPostItem($post);
+        }
+    }
+    ?>
 </div>
 <?php } ?>
 
 <?php function drawFavouriteStar($post)
 {
-  if(isset($_SESSION['username']) && isset($post['isFavourite'])) { ?>
+    if(isset($_SESSION['username']) && isset($post['isFavourite'])) { ?>
   <div id="favourite-star">
-    <?php if ($post['isFavourite']) {
-        echo '&bigstar;';
-    }?>
+        <?php if ($post['isFavourite']) {
+            echo '&bigstar;';
+        }?>
   </div>
-  <?php }
+    <?php }
 } ?>
 
 <?php function drawPostItem($post)

@@ -387,6 +387,14 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
       <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
       <input class="form-button addpostform-button" type="submit" value="Add pet">
     </form>
+
+    <?php
+    $msg = getSessionMessage('errorAddPost');
+    if ($msg) {
+        echo $msg; 
+    }?>
+      </p>
+
   </section>
 <?php } ?>
 
