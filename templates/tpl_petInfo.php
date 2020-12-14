@@ -96,7 +96,7 @@ function drawGendersRadio()
 }
 ?>
 
-<?php function drawStates($selected_value, $has_accepted_proposal)
+<?php function drawStates($has_accepted_proposal, $selected_value)
 {
     /*
     * -- 1 being prepared for adopt, 2 ready for adoption, 3 being prep and accepted, 4 being delivered, 5 delivered
@@ -127,6 +127,6 @@ function drawGendersRadio()
         );
         array_push($states, $option_ready_adoption);
     }
-    drawOptions(false, $states, 'States', 'states', $selected_value);
+    drawOptions(false, $states, 'State', 'state', $selected_value);
 }
 ?>

@@ -76,7 +76,7 @@ function stateToString($state, $post_id)
             $text = "The pet ready for adoption";
         else if ($state == 3)
             $text = "The pet is being prepared for adoption and has a confirmed adopter";
-        else if ($state == 4) // TODO add button to confirm delivery
+        else if ($state == 4)
             $text = "The pet is being delivered";
         else if ($state == 5)
             $text = "The pet was delivered";
@@ -88,7 +88,7 @@ function stateToString($state, $post_id)
         else if ($state == 2)
             $text = "The pet ready for adoption";
         else if ($state > 2 && $state < 6)
-            $text = "This pet has already benn adopted";
+            $text = "This pet has already been adopted";
         else
             $text = "Unkown status";
     }
@@ -154,6 +154,11 @@ function drawEditOptions($post)
           <div class="form-item addpostform-item" >
             <?php drawSizes(false, $post['size']); ?>
           </div>
+
+          <div class="form-item addpostform-item" >
+            <?php drawStates(hasAcceptedProposal($post['id']), $post['state']); ?>
+          </div>
+
           <div class="form-item addpostform-item" >
             <label for="description">Description</label>
             <textarea id="description" name="description" rows="1" cols="80" maxlength="2000">
@@ -422,6 +427,14 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
       <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
       <input class="form-button addpostform-button" type="submit" value="Add pet">
     </form>
+
+    <?php
+    $msg = getSessionMessage('errorAddPost');
+    if ($msg) {
+        echo $msg; 
+    }?>
+      </p>
+
   </section>
 <?php } ?>
 

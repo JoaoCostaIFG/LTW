@@ -1,7 +1,7 @@
 <?php
 // To mitigate xss
-// IMP: manually change domain
-// session_set_cookie_params(0, '/', 'web.fe.up.pt', true, true);
+// session_set_cookie_params(0, '/', '.up.pt', true, true);
+
 session_start();
 
 // Prevents session fixation attacks

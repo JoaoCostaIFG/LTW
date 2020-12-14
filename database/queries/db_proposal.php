@@ -17,11 +17,23 @@ function hasProposal($user_id, $post_id)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare(
-        'SELECT * FROM Proposal 
+        'SELECT accepted FROM Proposal 
              WHERE user_id = ? AND
              post_id = ?'
     );
     $stmt->execute(array($user_id, $post_id));
+    $proposal = $stmt->fetch();
+    return $proposal != false;
+}
+
+function hasAcceptedProposal($post_id) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'SELECT accepted FROM Proposal 
+             WHERE accepted = 1 AND
+             post_id = ?'
+    );
+    $stmt->execute(array($post_id));
     $proposal = $stmt->fetch();
     return $proposal != false;
 }

@@ -38,8 +38,9 @@ function drawOptions($any_option, $options, $options_name, $options_id, $selecte
     <?php
 }
 
-function setSessionMessage($type, $content) {
-  $_SESSION['messages'] = array('type' => $type, 'content' => $content);
+function setSessionMessage($type, $content)
+{
+    $_SESSION['messages'] = array('type' => $type, 'content' => $content);
 }
 
 function getSessionMessage($type)
@@ -57,18 +58,22 @@ function getSessionMessage($type)
     return $ret;
 }
 
-function treatInputNonEmpty($input) {
-  if (!isset($input))
-    return null;
+function treatInputNonEmpty($input)
+{
+    if (!isset($input)) {
+        return null;
+    }
 
-  $trimmedInput = trim($input);
-  if (empty($trimmedInput))
-    return null;
+    $trimmedInput = trim($input);
+    if (empty($trimmedInput)) {
+        return null;
+    }
 
-  return $trimmedInput;
+    return $trimmedInput;
 }
 
-function isValidMobileNumber($mobile_number) {
-  return preg_match("/^(\+?[0-9\s]+|[0-9\s]+-[0-9\s]+)$/", $mobile_number);
+function isValidMobileNumber($mobile_number)
+{
+    return preg_match("/^(\+?[0-9\s]+|[0-9\s]+-[0-9\s]+)$/", $mobile_number);
 }
 ?>
