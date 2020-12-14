@@ -611,13 +611,13 @@ textarea {
 #acceptConfirmationButton {
   background-color: green;
   font-size: large;
-  width: 10%;
+  width: 40%;
   border-radius: var(--button-corner-radius);
 }
 
 #rejectConfirmationButton {
   background-color: red;
-  width: 10%;
+  width: 40%;
   font-size: large;
   border-radius: var(--button-corner-radius);
 }
