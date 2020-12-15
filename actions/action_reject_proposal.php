@@ -4,13 +4,17 @@
     require_once '../database/queries/db_proposal.php';
     require_once '../includes/utils.php';
 
+    if ($_SERVER["REQUEST_METHOD"] != "POST") {
+        setSessionMessage('error', 'Request method not supported');
+        die('Location: ../pages/home.php');
+    }
 
     if(!isset($_SESSION['username'])){
         setSessionMessage('error', 'Not authenticated');
         die('Location: ../pages/home.php');
     }
 
-    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    if (!isset($_SESSION['csrf']) || $_SESSION['csrf'] !== $_POST['csrf']) {
         // ERROR: Request does not appear to be legitimate
         setSessionMessage('error', 'This request does not appear to be legitimate');
         die(header('Location: ../pages/add_post.php'));

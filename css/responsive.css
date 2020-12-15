@@ -85,6 +85,21 @@
     margin-left: 0;
     margin-top: 1em;
   }
+
+  /* || Confirmation bar */
+  #confirmationBar {
+    text-align: center;
+  }
+
+  #confirmationBar p {
+    width: 100%;
+  }
+
+  #confirmationButtons {
+    width: 100%;
+    text-align: center;
+    float: initial;
+  }
 }
 
 @media (max-width: 40em) {

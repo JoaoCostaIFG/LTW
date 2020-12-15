@@ -13,28 +13,28 @@ require_once 'tpl_petInfo.php';
      */
     ?>
 <div class="list">
-<?php 
-if (empty($posts)) {
-  echo "There are no posts to show.";
-}
-else {
-  foreach($posts as $post) {
-    drawPostItem($post);
-  }
-}
-?>
+    <?php 
+    if (empty($posts)) {
+        echo "There are no posts to show.";
+    }
+    else {
+        foreach($posts as $post) {
+            drawPostItem($post);
+        }
+    }
+    ?>
 </div>
 <?php } ?>
 
 <?php function drawFavouriteStar($post)
 {
-  if(isset($_SESSION['username']) && isset($post['isFavourite'])) { ?>
+    if(isset($_SESSION['username']) && isset($post['isFavourite'])) { ?>
   <div id="favourite-star">
-    <?php if ($post['isFavourite']) {
-        echo '&bigstar;';
-    }?>
+        <?php if ($post['isFavourite']) {
+            echo '&bigstar;';
+        }?>
   </div>
-  <?php }
+    <?php }
 } ?>
 
 <?php function drawPostItem($post)
@@ -87,12 +87,16 @@ else {
     <?php drawSizes(true, $values['size']); ?>
   </div>
   <div class="form-item listfilter-item listfilter-item-bottom" >
+    <?php drawStatesSearch($values['state']); ?>
+  </div>
+  <div class="form-item listfilter-item listfilter-item-bottom" >
     <?php drawSpecies(true, $values['species']); ?>
   </div>
   <div class="form-item listfilter-item listfilter-item-bottom" >
     <?php drawCities(true, $values['city']); ?>
   </div>
     <?php if(isset($_SESSION['username'])) { ?>
+  <br>
   <div class="form-item listfilter-item listfilter-item-bottom" >
     <label for="favourite">Favourite</label>
     <input id="favourite" type="checkbox" name="favourite" value="true"
@@ -101,7 +105,6 @@ else {
         } ?> >
   </div>
     <?php } ?>
-  <br>
   <input class="form-button listfilter-button" type="submit" value="Search">
 </form>
 <?php }?>
@@ -144,6 +147,17 @@ else {
         array_push($query_conditions, 'age <= ?');
     }
 
+    $curr_state = 'any';
+    if (isset($_GET['state']) && $_GET['state'] != "any") {
+        $curr_state = $_GET['state'];
+        if ($curr_state == -1)
+            array_push($query_conditions, 'state > 2');
+        else {
+            array_push($query_conditions, 'state = ?');
+            array_push($search_options, $_GET['state']);
+        }
+    }
+
     $curr_gender = 'any';
     if (isset($_GET['gender']) && $_GET['gender'] != "any") {
         $curr_gender = $_GET['gender'];
@@ -178,6 +192,7 @@ else {
       'max_age'=> $curr_max_age,
       'gender'=> $curr_gender,
       'size'=> $curr_size,
+      'state'=> $curr_state,
       'city'=> $curr_city,
       'species'=> $curr_species,
       'favourite' => $curr_favourite

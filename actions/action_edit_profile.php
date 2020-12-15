@@ -19,6 +19,11 @@ function updateSettingsFail($msg)
   die(header("Location: ../pages/settings.php"));
 }
 
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+  setSessionMessage('error', 'Request method not supported');
+  die('Location: ../pages/home.php');
+}
+
 if ($_SESSION['csrf'] !== $_POST['csrf']) {
   // ERROR: Request does not appear to be legitimate
   setSessionMessage('error', 'This request does not appear to be legitimate');
@@ -50,7 +55,7 @@ if(isset($user_info['email'])) {
   }
 }
 if (isset($user_info['mobile_number'])) {
-  if (!preg_match("/^(\+?[0-9\s]+|[0-9\s]+-[0-9\s]+)$/", $user_info['mobile_number'])) {
+  if (!isValidMobileNumber($user_info['mobile_number'])) {
     updateUserFail("Mobile number can only contain numbers, spaces, pluses and dashes!");
   }
 }

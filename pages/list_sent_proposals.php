@@ -1,5 +1,10 @@
 <?php
 require_once '../includes/session.php';
+
+if (!isset($_SESSION['username'])) {
+  die(header('Location: ../pages/list.php'));
+}
+
 $title="Sent Proposals";
 require_once '../templates/common/tpl_header.php';
 require_once '../database/queries/db_user.php';

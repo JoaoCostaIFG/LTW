@@ -52,15 +52,24 @@ function drawSentProposals($proposals)
 
 function drawAcceptProposal($user_id, $post_id)
 {
+    static $id = 0;
+    $user_id = htmlspecialchars($user_id);
+    $post_id = htmlspecialchars($post_id);
+
     ?>
         <script src="../js/utils.js" type="text/javascript" defer></script>
         <script src="../js/proposal.js" type="text/javascript" defer></script>
-        <button id="acceptButton" onclick="handle_proposal(<?php echo "'accept_proposal', htmlspecialchars($post_id), htmlspecialchars($user_id)";?>)">
-            Accept Proposal</button>
-        <button id="rejectButton" class="rejbutton" onclick="handle_proposal(<?php echo "'reject_proposal', htmlspecialchars($post_id), htmlspecialchars($user_id)";?>)">
-            Reject Proposal</button>
-        <p id="processedButtonText"></p>
+        <div class="proposalButtonsFromPost<?php echo $post_id ?>" id="proposalButtons<?php echo $id ?>">
+            <button id="acceptButton"
+                onclick="handle_proposal(<?php echo "$id, 'accept_proposal', $post_id, $user_id";?>)">
+                Accept Proposal</button>
+            <button id="rejectButton" class="rejbutton"
+                onclick="handle_proposal(<?php echo "$id, 'reject_proposal', $post_id, $user_id";?>)">
+                Reject Proposal</button>
+            <p id="processedButtonText"></p>
+        </div>
     <?php
+    $id++;
 }
 
 
@@ -89,9 +98,9 @@ function drawReceivedProposal($proposal)
           if ($proposal['status'] == -1) {
               drawAcceptProposal($proposal['user_id'], $proposal['post_id']);
           } else if ($proposal['status'] == 0) {
-              echo "You refused this proposal.";
+              echo "You <b>rejected</b> this proposal.";
           } else if ($proposal['status'] == 1) {
-              echo "You accepted this proposal.";
+              echo "You <b>accepted</b> this proposal.";
           }
           ?>
         </li>

@@ -247,21 +247,21 @@ INSERT INTO Species VALUES(44, "Any", 6);
 INSERT INTO Species VALUES(45, "Any", 7);
 
 -- PetPost
--- id   name    age    gender   size    description   date    color_id    species_id  city_id    user_id
-INSERT INTO PetPost VALUES(1, "Pantufa", "2011-11-09", 0, 3, "Gatus Gordus", "10/08/2020", 3, 1, 2, 4);
-INSERT INTO PetPost VALUES(2, "Bobi", "2015-05-02", 0, 2, "Good doggo pls adopt.", "01/08/2020", 2, 4, 1, 3);
-INSERT INTO PetPost VALUES(3, "Poki", "2013-01-05", 0, 1, "Poki is a very lazy cat.", "01/09/2020", 3, 2, 3, 1);
-INSERT INTO PetPost VALUES(4, "Lourito", "2008-09-20", 0, 2, "This parrot is really cool and will keep you company!", "14/09/2020", 4, 5, 4, 7);
-INSERT INTO PetPost VALUES(5, "Sisel", "2019-12-02", 1, 1, "A young cat that loves to play!", "14/11/2020", 5, 3, 5, 8);
-INSERT INTO PetPost VALUES(6, "Ninja", "2017-04-15", 0, 3, "Ninja likes to sleep a lot but is always ready to play!", "20/11/2020", 6, 6, 6, 8);
-INSERT INTO PetPost VALUES(7, "Bolinhas", "2013-06-12", 1, 2, "She's a very calm and amicable kitten (nya~). Everyone loves her constantly surprised look.", "01/11/2020", 5, 11, 5, 5);
-INSERT INTO PetPost VALUES(8, "Daisy", "2020-09-08", 1, 1, "Daisy is really sweat and loves attention", "01/11/2020", 1, 11, 7, 9);
-INSERT INTO PetPost VALUES(9, "Mia", "2011-03-03", 1, 1, "Mia loves being outside! She would love living in a house with a big garden!", "03/11/2020", 1, 11, 7, 9);
-INSERT INTO PetPost VALUES(10, "Spot", "2020-10-09", 0, 2, "Spot is a playful who is looking for someone to play with him. He enjoys going on walks and meeting other dogs. He is very good with children of all ages and is sure to bring smiles to your household!", "03/10/2020", 1, 12, 1, 10);
-INSERT INTO PetPost VALUES(11, "Golden", "2011-09-13", 0, 2, "Golden was abandoned during is childhood. Luckily, we found him! He loves meeting new people and he would love to meet his new family soon :)", "09/10/2020", 1, 4, 1, 10);
-INSERT INTO PetPost VALUES(12, "Bazinga", "2020-11-29", 0, 1, "Bazinga is looking for a new home!", "29/11/2020", 6, 6, 7, 1);
-INSERT INTO PetPost VALUES(13, "Chico", "2013-08-06", 0, 2, "Chico was living on the streets but now he is too old to find food for himself He is looking for someone who can give him lots of love and delicious food!", "29/12/2020", 3, 11, 1, 10);
-INSERT INTO PetPost VALUES(14, "Gatoplank", "2009-10-26", 0, 2, "Well behaved cat. He is really good with children.", "20/12/2020", 5, 11, 3, 2);
+-- id   name    age    gender   size    description   date  state   color_id    species_id  city_id    user_id
+INSERT INTO PetPost VALUES(1, "Pantufa", "2011-11-09", 0, 3, "Gatus Gordus", "2020-08-10", 1, 3, 1, 2, 4);
+INSERT INTO PetPost VALUES(2, "Bobi", "2015-05-02", 0, 2, "Good doggo pls adopt.", "2020-08-01", 1, 2, 4, 1, 3);
+INSERT INTO PetPost VALUES(3, "Poki", "2013-01-05", 0, 1, "Poki is a very lazy cat.", "2020-09-01", 1, 3, 2, 3, 1);
+INSERT INTO PetPost VALUES(4, "Lourito", "2008-09-20", 0, 2, "This parrot is really cool and will keep you company!", "2020-09-14", 1, 4, 5, 4, 7);
+INSERT INTO PetPost VALUES(5, "Sisel", "2019-12-02", 1, 1, "A young cat that loves to play!", "2020-11-14", 1, 5, 3, 5, 8);
+INSERT INTO PetPost VALUES(6, "Ninja", "2017-04-15", 0, 3, "Ninja likes to sleep a lot but is always ready to play!", "2020-11-20", 1, 6, 6, 6, 8);
+INSERT INTO PetPost VALUES(7, "Bolinhas", "2013-06-12", 1, 2, "She's a very calm and amicable kitten (nya~). Everyone loves her constantly surprised look.", "2020-11-01", 1, 5, 11, 5, 5);
+INSERT INTO PetPost VALUES(8, "Daisy", "2020-09-08", 1, 1, "Daisy is really sweat and loves attention", "2020-11-01", 1, 1, 11, 7, 9);
+INSERT INTO PetPost VALUES(9, "Mia", "2011-03-03", 1, 1, "Mia loves being outside! She would love living in a house with a big garden!", "2020-11-03", 1, 1, 11, 7, 9);
+INSERT INTO PetPost VALUES(10, "Spot", "2020-10-09", 0, 2, "Spot is a playful who is looking for someone to play with him. He enjoys going on walks and meeting other dogs. He is very good with children of all ages and is sure to bring smiles to your household!", "2020-10-03", 1, 1, 12, 1, 10);
+INSERT INTO PetPost VALUES(11, "Golden", "2011-09-13", 0, 2, "Golden was abandoned during is childhood. Luckily, we found him! He loves meeting new people and he would love to meet his new family soon :)", "2020-10-09", 1, 1, 4, 1, 10);
+INSERT INTO PetPost VALUES(12, "Bazinga", "2020-11-29", 0, 1, "Bazinga is looking for a new home!", "2020-11-29", 1, 6, 6, 7, 1);
+INSERT INTO PetPost VALUES(13, "Chico", "2013-08-06", 0, 2, "Chico was living on the streets but now he is too old to find food for himself He is looking for someone who can give him lots of love and delicious food!", "2020-12-29", 1, 3, 11, 1, 10);
+INSERT INTO PetPost VALUES(14, "Gatoplank", "2009-10-26", 0, 2, "Well behaved cat. He is really good with children.", "2020-12-20", 1, 5, 11, 3, 2);
 
 -- Photo
 -- id   post_id extension  date
@@ -285,27 +285,27 @@ INSERT INTO PetPhoto VALUES(NULL, 14, "png", "2020-12-20");
 
 -- Comment
 -- id   user_id     post_id     text    date
-INSERT INTO Comment VALUES(NULL, 1, 1, "Cute cat.", "18/09/2020");
-INSERT INTO Comment VALUES(NULL, 3, 1, "Fat.", "19/09/2020");
-INSERT INTO Comment VALUES(NULL, 8, 4, "That is a cool looking parrot.", "20/09/2020");
-INSERT INTO Comment VALUES(NULL, 6, 5, "Soo cutee", "20/11/2020");
-INSERT INTO Comment VALUES(NULL, 2, 9, "Meow Meow!!", "20/12/2020");
-INSERT INTO Comment VALUES(NULL, 9, 7, "What a cutie! uwu", "02/12/2020");
-INSERT INTO Comment VALUES(NULL, 11, 7, "If I wasn't so occupied with my two kittens, I'd take her in...:(", "07/12/2020");
-INSERT INTO Comment VALUES(NULL, 2, 12, "Cute turtle.BAZINGA", "18/09/2020");
+INSERT INTO Comment VALUES(NULL, 1, 1, "Cute cat.", "2020-09-18");
+INSERT INTO Comment VALUES(NULL, 3, 1, "Fat.", "2020-09-19");
+INSERT INTO Comment VALUES(NULL, 8, 4, "That is a cool looking parrot.", "2020-09-20");
+INSERT INTO Comment VALUES(NULL, 6, 5, "Soo cutee", "2020-11-20");
+INSERT INTO Comment VALUES(NULL, 2, 9, "Meow Meow!!", "2020-12-20");
+INSERT INTO Comment VALUES(NULL, 9, 7, "What a cutie! uwu", "2020-12-02");
+INSERT INTO Comment VALUES(NULL, 11, 7, "If I wasn't so occupied with my two kittens, I'd take her in...:(", "2020-12-07");
+INSERT INTO Comment VALUES(NULL, 2, 12, "Cute turtle.BAZINGA", "2020-09-18");
 
 -- Question
 -- id   user_id     post_id     text    date
-INSERT INTO Question VALUES(NULL, 3, 1, "Why is it so fat?", "19/09/2020");
-INSERT INTO Question VALUES(NULL, 5, 4, "Is it real?", "22/09/2020");
-INSERT INTO Question VALUES(NULL, 5, 3, "At what time of the day does he sleep?", "22/09/2020");
-INSERT INTO Question VALUES(NULL, 11, 7, "Has she been vaccinated?", "22/11/2020");
+INSERT INTO Question VALUES(NULL, 3, 1, "Why is it so fat?", "2020-09-19");
+INSERT INTO Question VALUES(NULL, 5, 4, "Is it real?", "2020-09-22");
+INSERT INTO Question VALUES(NULL, 5, 3, "At what time of the day does he sleep?", "2020-09-22");
+INSERT INTO Question VALUES(NULL, 11, 7, "Has she been vaccinated?", "2020-11-22");
 
 -- Answer
 -- id   user_id      question_id    text    date
-INSERT INTO Answer VALUES(NULL, 4, 1, "Dunno.", "20/09/2020");
-INSERT INTO Answer VALUES(NULL, 8, 2, "Maybe uwu.", "23/09/2020");
-INSERT INTO Answer VALUES(NULL, 1, 3, "He sleeps a lot. I would say he sleeps 10 hours a day. More or less.", "23/09/2020");
+INSERT INTO Answer VALUES(NULL, 4, 1, "Dunno.", "2020-09-20");
+INSERT INTO Answer VALUES(NULL, 8, 2, "Maybe uwu.", "2020-09-23");
+INSERT INTO Answer VALUES(NULL, 1, 3, "He sleeps a lot. I would say he sleeps 10 hours a day. More or less.", "2020-09-23");
 
 -- Favourite
 -- user_id      post_id
@@ -315,9 +315,9 @@ INSERT INTO Favourite VALUES(6, 5);
 
 -- Proposal
 -- id   user_id      post_id    accepted    date
-INSERT INTO Proposal VALUES(2, 1, 0, "21/09/2020");
-INSERT INTO Proposal VALUES(5, 2, 1, "21/10/2020");
-INSERT INTO Proposal VALUES(4, 4, 1, "23/10/2020");
-INSERT INTO Proposal VALUES(5, 9, 0, "21/12/2020");
-
-
+INSERT INTO Proposal VALUES(2, 1, 0, "2020-09-21");
+INSERT INTO Proposal VALUES(5, 2, 1, "2020-10-21");
+INSERT INTO Proposal VALUES(4, 4, 1, "2020-10-23");
+INSERT INTO Proposal VALUES(5, 9, 0, "2020-12-21");
+INSERT INTO Proposal VALUES(4, 6, -1, "2020-12-14");
+INSERT INTO Proposal VALUES(3, 6, -1, "2020-12-15");

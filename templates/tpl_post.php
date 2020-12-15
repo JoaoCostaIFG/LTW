@@ -66,6 +66,40 @@ function proposalStatusToString($status)
     return $text;
 }
 
+function stateToString($state, $post_id)
+{
+    $current_user = getUserId($_SESSION['username'])['id'];
+    $accepted_user = hasAcceptedProposal($post_id)['user_id'];
+    if (($accepted_user == $current_user) || isOwner($current_user, $post_id)) {
+        if ($state == 1)
+            $text = "The pet is being prepared for adoption";
+        else if ($state == 2)
+            $text = "The pet ready for adoption";
+        else if ($state == 3)
+            $text = "The pet is being prepared for adoption and is adopted";
+        else if ($state == 4)
+            $text = "The pet is being delivered";
+        else if ($state == 5)
+            $text = "The pet was delivered";
+        else
+            $text = "Unkown status";
+    } else { // Normal user
+        if ($accepted_user != false)
+            $text = "This pet has already been adopted";
+        else {
+            if ($state == 1)
+                $text = "The pet is being prepared for adoption";
+            else if ($state == 2)
+                $text = "The pet ready for adoption";
+            else if ($state > 2 && $state < 6)
+                $text = "This pet has already been adopted";
+            else
+                $text = "Unkown status";
+        }
+    }
+    return $text;
+}
+
 /* DRAWERS */
 
 function drawProposalButton($post_id, $user_id)
@@ -125,6 +159,11 @@ function drawEditOptions($post)
           <div class="form-item addpostform-item" >
             <?php drawSizes(false, $post['size']); ?>
           </div>
+
+          <div class="form-item addpostform-item" >
+            <?php drawStates(hasAcceptedProposal($post['id']) != false, $post['state']); ?>
+          </div>
+
           <div class="form-item addpostform-item" >
             <label for="description">Description</label>
             <textarea id="description" name="description" rows="1" cols="80" maxlength="2000">
@@ -166,7 +205,7 @@ function drawPost($post, $questionsAnswers)
             if (hasProposal($current_user, $post_id)) {
                 $status = getProposalStatus($current_user, $post_id)['status'];
                 drawProposalStatus($status);
-            } else {
+            } else if ($post['state'] > 0 && $post['state'] < 3) {
                 drawProposalButton($post_id, $current_user);
             }
         }
@@ -207,6 +246,7 @@ function drawPost($post, $questionsAnswers)
       <li>Breed: <b><?php echo htmlspecialchars($post['species']); ?></b></li>
       <li>Genre: <b><?php echo htmlspecialchars(genderToString($post['gender'])); ?></b></li>
       <li>Size: <b><?php echo htmlspecialchars(sizeToString($post['size'])); ?></b></li>
+      <li>Status: <b><?php echo htmlspecialchars(stateToString($post['state'], $post['id'])); ?></b></li>
       <li>Location: <b><?php echo htmlspecialchars($post['location']); ?></b></li>
       <li>Posted in: <b><?php echo htmlspecialchars($post['date']); ?></b></li>
     </ul>
@@ -369,6 +409,10 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
       </div>
 
       <div class="form-item addpostform-item" >
+            <?php drawStates(null, false); ?>
+      </div>
+
+      <div class="form-item addpostform-item" >
         <label for="description">Description</label>
         <textarea id="description" name="description" rows="1" cols="80" maxlength="2000"></textarea>
       </div>
@@ -387,6 +431,14 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
       <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
       <input class="form-button addpostform-button" type="submit" value="Add pet">
     </form>
+
+    <?php
+    $msg = getSessionMessage('errorAddPost');
+    if ($msg) {
+        echo $msg; 
+    }?>
+      </p>
+
   </section>
 <?php } ?>
 

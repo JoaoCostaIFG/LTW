@@ -95,3 +95,62 @@ function drawGendersRadio()
     drawOptions($any_option, $sizes, 'Size', 'size', $selected_value);
 }
 ?>
+
+<?php function drawStates($has_accepted_proposal, $selected_value)
+{
+    /*
+    * -- 1 being prepared for adopt, 2 ready for adoption, 3 being prep and accepted, 4 being delivered, 5 delivered
+    * Draws all states
+    */
+    $option_preparing = array(
+        'id' => '1',
+        'name' => 'Preparing for Adoption'
+    );
+    $states = array($option_preparing);
+
+    if ($has_accepted_proposal) {
+        $option_ready_delivery = array(
+            'id' => '4',
+            'name' => 'Ready for Delivery'
+        );
+
+        $option_delivered = array(
+            'id' => '5',
+            'name' => 'Delivered'
+        );
+
+        array_push($states, $option_delivered, $option_ready_delivery);
+    } else {
+        $option_ready_adoption = array(
+            'id' => '2',
+            'name' => 'Ready for Adoption'
+        );
+        array_push($states, $option_ready_adoption);
+    }
+    drawOptions(false, $states, 'State', 'state', $selected_value);
+}
+?>
+
+<?php function drawStatesSearch($selected_value)
+{
+    /*
+    * -- 1 being prepared for adopt, 2 ready for adoption, 3 being prep and accepted, 4 being delivered, 5 delivered
+    * Draws all states to be used for searching
+    */
+    $option_preparing = array(
+        'id' => '1',
+        'name' => 'Preparing for Adoption'
+    );
+    $option_ready_adoption = array(
+        'id' => '2',
+        'name' => 'Ready for Adoption'
+    );
+    $option_already_accepted = array(
+        'id' => '-1',
+        'name' => 'Already adopted'
+    );
+
+    $states = array($option_preparing, $option_ready_adoption, $option_already_accepted);
+    drawOptions(true, $states, 'State', 'state', $selected_value);
+}
+?>

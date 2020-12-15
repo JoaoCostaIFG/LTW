@@ -45,6 +45,8 @@ create table PetPost(
     size INTEGER CHECK (size = 1 OR size = 2 OR size = 3), -- 1 small, 2 medium, 3 big
     description TEXT NOT NULL,
     date DATE NOT NULL,
+    -- 1 being prepared for adopt, 2 ready for adoption, 3 being prep and accepted, 4 being delivered, 5 delivered
+    state INTEGER CHECK (state = 1 OR state = 2 OR state = 3 OR state = 4 OR state = 5),
     color_id INTEGER REFERENCES Color(id),
     species_id INTEGER REFERENCES Species(id),
     city_id INTEGER REFERENCES City(id),
@@ -97,9 +99,25 @@ drop table if exists Proposal;
 create table Proposal(
     user_id INTEGER REFERENCES User(id),
     post_id INTEGER REFERENCES PetPost(id),
-    accepted INTEGER CHECK (accepted = 0 OR accepted = 1 OR accepted = -1),
+    accepted INTEGER CHECK (accepted = 0 OR accepted = 1 OR accepted = -1), -- 0 Rejected, 1 Accepted, -1 Pending
     date DATE NOT NULL,
     PRIMARY KEY(user_id, post_id)
 );
 
+DROP TRIGGER IF EXISTS UpdateStatus;
+CREATE TRIGGER UpdateStatus
+AFTER UPDATE OF accepted ON Proposal
+FOR EACH ROW
+WHEN
+    New.accepted = 1 AND
+    (SELECT PetPost.state FROM PetPost WHERE PetPost.id = New.post_id) < 3
+BEGIN
+    UPDATE PetPost
+    SET state = state + 2
+    WHERE PetPost.id = New.post_id;
 
+    UPDATE Proposal
+    SET accepted = 0
+    WHERE Proposal.post_id = New.post_id AND
+        Proposal.user_id != New.user_id;
+END;

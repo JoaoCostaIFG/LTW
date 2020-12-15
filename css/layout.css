@@ -66,7 +66,7 @@ h1 {
   width: calc(100% + var(--list_gap));
 
   /* have scroll */
-  max-height: var(--list-height); /* TODO var */
+  max-height: var(--list-height);
   overflow: auto;
 }
 
@@ -90,17 +90,25 @@ h1 {
 }
 
 #confirmationBar p {
+  width: 60%;
   padding-left: 1em;
+  box-sizing: border-box;
   position: relative;
-  float: left;
+  display: inline-block;
 }
 
-#confirmationBar > button {
+#confirmationButtons {
+  width: 35%;
+  display: inline-block;
+  text-align: right;
+  float: right;
+}
+
+#confirmationButtons > button {
   padding: 0.5em;
   margin: 0.5em;
 
   position: relative;
-  float: right;
 }
 
 #persons {
