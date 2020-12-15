@@ -70,7 +70,7 @@ function getReceivedProposals($user_id)
                 User as Poster ON(Poster.id = PetPost.user_id) JOIN
                 User ON(User.id = Proposal.user_id)
              WHERE Poster.id = ?
-             GROUP BY PetPost.id'
+             GROUP BY User.id'
     );
     $stmt->execute(array($user_id));
     return $stmt->fetchAll();
@@ -88,7 +88,7 @@ function getReceivedNotAcceptedProposals($user_id)
                 PetPhoto ON(PetPhoto.post_id = PetPost.id) JOIN
                 User as Poster ON(Poster.id = PetPost.user_id) JOIN
                 User ON(User.id = Proposal.user_id)
-             WHERE Poster.id = ? AND Proposal.accepted <= 0
+             WHERE Poster.id = ? AND Proposal.accepted < 0
              GROUP BY PetPost.id'
     );
     $stmt->execute(array($user_id));

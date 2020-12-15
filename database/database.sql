@@ -115,4 +115,9 @@ BEGIN
     UPDATE PetPost
     SET state = state + 2
     WHERE PetPost.id = New.post_id;
+
+    UPDATE Proposal
+    SET accepted = 0
+    WHERE Proposal.post_id = New.post_id AND
+        Proposal.user_id != New.user_id;
 END;

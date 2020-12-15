@@ -1,31 +1,53 @@
 'use strict'
 
-function handle_proposal(action, post_id, user_id) {
-    var xhttp = new XMLHttpRequest();
+function rejectProposalFromDiv(div) {
+    let buttons = div.getElementsByTagName("button");
+
+    let acceptProposal = buttons[0];
+    let rejectProposal = buttons[1];
+    acceptProposal.remove();
+    rejectProposal.remove();
+
+    let processedText = div.getElementsByTagName("p")[0];
+    processedText.innerHTML = "Your <b>rejected</b> this proposal";
+}
+
+function handle_proposal(id, action, post_id, user_id) {
+    let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             //Trim is used because the reponse text comes with new lines behind
-            let acceptProposal = document.getElementById("acceptButton");
-            let rejectProposal = document.getElementById("rejectButton");
+            let currDiv = document.getElementById("proposalButtons" + id);
+            let buttons = currDiv.getElementsByTagName("button");
+
+            let acceptProposal = buttons[0];
+            let rejectProposal = buttons[1];
             acceptProposal.remove();
             rejectProposal.remove();
-            let processedText = document.getElementById("processedButtonText");
-            if (action === "accept_proposal")
-                processedText.innerHTML = "Your accepted this proposal";
+            let processedText = currDiv.getElementsByTagName("p")[0];
+            if (action === "accept_proposal") {
+                processedText.innerHTML = "Your <b>accepted</b> this proposal";
+                let samePostButtons = document.getElementsByClassName("proposalButtonsFromPost" + post_id);
+                for (let i = 0, len = samePostButtons.length; i < len; i++) {
+                    if (samePostButtons[i].id != ("proposalButtons" + id))
+                        rejectProposalFromDiv(samePostButtons[i]);
+                }
+            }
             else if (action === "reject_proposal")
-                processedText.innerHTML = "Your rejected this proposal";
+                processedText.innerHTML = "Your <b>rejected</b> this proposal";
             let response = xhttp.responseText.trim('\n');
             console.log(response);
         }
     };
 
+    console.log(id);
     xhttp.open("post", "../actions/action_" + action + ".php", true);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhttp.send(encodeForAjax({post_id: post_id, user_id: user_id, csrf: document.querySelector("meta[name='csrf-token']").getAttribute("content")}));
 }
 
 function make_proposal(post_id, user_id) {
-    var xhttp = new XMLHttpRequest();
+    let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             //Trim is used because the reponse text comes with new lines behind
