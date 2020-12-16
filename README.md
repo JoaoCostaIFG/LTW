@@ -9,13 +9,26 @@
 
 ## Mockups
 
+### Search Page
+
 ![Main list interface](/documentation/mockups/list.png)
+
+### Post Page
+
 ![Pet post page](/documentation/mockups/petPage.png)
+
+### Profile Page
+
+![Profile page](/documentation/mockups/profilePase.png)
 
 ## Navigation
 
-![Navigation Diagram](/documentation/mockups/navigation_diagram.png)
+![Navigation Diagram](/documentation/navigation_diagram.png)
 
 ## Database
 
-![SQLite Mockup](/documentation/mockups/database_mockup.png)
+![Relational SQLite](/documentation/database_relational.png)
+
+![UML](/documentation/uml.png)
+
+
