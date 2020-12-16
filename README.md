@@ -19,7 +19,7 @@
 
 ### Profile Page
 
-![Profile page](/documentation/mockups/profilePase.png)
+![Profile page](/documentation/mockups/profilePage.png)
 
 ## Navigation
 
