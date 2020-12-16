@@ -22,6 +22,13 @@ INSERT INTO Color VALUES(3,"Black");
 INSERT INTO Color VALUES(4,"Blonde");
 INSERT INTO Color VALUES(5,"Grey");
 INSERT INTO Color VALUES(6,"Green");
+INSERT INTO Color VALUES(7,"Orange");
+INSERT INTO Color VALUES(8,"Purple");
+INSERT INTO Color VALUES(9,"Red");
+INSERT INTO Color VALUES(10,"Blue");
+INSERT INTO Color VALUES(11,"Beige");
+INSERT INTO Color VALUES(12,"Dotted");
+INSERT INTO Color VALUES(13,"Stripped");
 
 -- City
 -- id   name
