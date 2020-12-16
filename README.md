@@ -45,7 +45,7 @@ None
      - SQL using prepare/execute: yes
      - Passwords: Bcrypt [work = 12] with random salt
      - Data Validation: regex / php
-     - Other: Session fixation / Session hijacking / 
+     - Other: Session fixation / Session hijacking
  - Technologies
      - Separated logic/database/presentation: yes
      - Semantic HTML tags: yes
