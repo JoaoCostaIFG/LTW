@@ -74,7 +74,7 @@ try {
     setSessionMessage('success', 'Successfully edited post');
     header("Location: ../pages/post.php?post_id=$post_id");
 } catch (PDOException $e) {
-    //TODO might be unsafe
+    //die($e->getMessage());
     setSessionMessage('error', 'Failed to edit post!');
     die(header("Location: ../pages/post.php?post_id=$post_id"));
 }

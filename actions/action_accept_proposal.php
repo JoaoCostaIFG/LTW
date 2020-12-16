@@ -30,7 +30,7 @@ try {
     }
     acceptProposal($user_id, $post_id);
 } catch (PDOException $e) {
-    die($e->getMessage());
+    //die($e->getMessage());
     setSessionMessage('error', 'Failed to accept proposal!');
     header('Location: ../pages/add_post.php');
 }

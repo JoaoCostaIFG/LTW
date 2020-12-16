@@ -6,7 +6,7 @@ function insertPost($post)
 {
     $db = Database::instance()->db();
     $stmt = $db->prepare(
-        'INSERT INTO PetPost VALUES(NULL, ?, ?, ?, ?, ?, date("now"), ?, ?, ?, ?)'
+        'INSERT INTO PetPost VALUES(NULL, ?, ?, ?, ?, ?, date("now"), ?, ?, ?, ?, ?)'
     );
     $stmt->execute($post);
     return $db->lastInsertId();
@@ -230,6 +230,16 @@ function updatePost($post_info)
              WHERE id = ?'
     );
     $stmt->execute($post_info);
+}
+
+function updatePhotoExtension($photo_id, $extension) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'UPDATE PetPhoto
+             SET extension = ?
+             WHERE id = ?'
+    );
+    $stmt->execute(array($extension, $photo_id));
 }
 
     /* DELETE */
