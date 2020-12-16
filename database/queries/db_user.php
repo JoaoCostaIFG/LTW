@@ -164,7 +164,7 @@ function updateUser(&$user_info)
     $querry_str = 'UPDATE User SET';
     $querry_array = array();
 
-    if($user_info['username']) {
+    if ($user_info['username']) {
         $querry_str .= ' username = ?,';
         array_push($querry_array, $user_info['username']);
     }
@@ -180,6 +180,10 @@ function updateUser(&$user_info)
         $querry_str .= ' picture = ?,';
         array_push($querry_array, $user_info['picture']);
     }
+    if($user_info['extension']) {
+        $querry_str .= ' extension = ?,';
+        array_push($querry_array, $user_info['extension']);
+    }
     if($user_info['password']) {
         $querry_str .= ' password = ?,';
         $options = ['cost' => 12]; // Default is 10 but 12 is better
@@ -194,6 +198,7 @@ function updateUser(&$user_info)
     $querry_str = trim($querry_str, ",");
     $querry_str .= ' WHERE id = ?';
 
+    echo($querry_str);
     $stmt = $db->prepare($querry_str);
     $stmt->execute($querry_array);
 }
