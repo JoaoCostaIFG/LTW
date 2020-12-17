@@ -73,7 +73,7 @@ if (!isset($city)) {
 }
 
 // Check if file is image
-$type = photoIsValid($_FILES['image']['tmp_name']);
+$type = isset($_FILES['image']['tmp_name']) && photoIsValid($_FILES['image']['tmp_name']);
 if (!$type) {
     $isInvalid = true;
 }

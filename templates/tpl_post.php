@@ -456,6 +456,8 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
       <input class="form-button addpostform-button" type="submit" value="Add pet">
     </form>
 
+    <script src="../js/store_session.js" type="text/javascript" defer></script>
+
     <?php
     $msg = getSessionMessage('errorAddPost');
     if ($msg) {
