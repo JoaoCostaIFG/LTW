@@ -22,6 +22,11 @@ if (!isset($username)) {
 if (!preg_match("/^[0-9a-zA-Z\s_\-]+$/", $username)) {
   registerFail("Username can only contain letters, numbers, spaces, underscores and dashes!");
 }
+
+if(getUserInfo($username)) {        
+  registerFail("Username already taken.");
+}
+
 $email = treatInputNonEmpty($_POST['email']);
 if (!isset($email)) {
   registerFail("Need an email address!");
