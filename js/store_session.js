@@ -3,6 +3,7 @@
 function saveForm() {
   if (typeof window.sessionStorage === "undefined") return;
 
+  clearForm();
   saveValues("input");
   saveValues("select");
 
@@ -17,19 +18,39 @@ function loadForm() {
 }
 
 function saveValues(tag) {
-  var inputs = document.getElementsByTagName(tag);
+  var inputs = document.querySelectorAll("form " + tag);
 
   for (var i = 0; i < inputs.length; i++) {
-    window.sessionStorage.setItem(inputs[i].name, inputs[i].value);
+    if (
+      inputs[i].name == "password" ||
+      inputs[i].name == "password_r" ||
+      inputs[i].name == "image"
+    )
+      continue;
+
+    if (inputs[i].name && inputs[i].value) {
+      window.sessionStorage.setItem(inputs[i].name, inputs[i].value);
+      console.log(inputs[i].name + " " + inputs[i].value);
+    }
   }
 }
 
 function setValues(tag) {
-  var inputs = document.getElementsByTagName(tag);
+  var inputs = document.querySelectorAll("form " + tag);
 
   for (var i = 0; i < inputs.length; i++) {
-    if (inputs[i].name != "password" && inputs[i].name != "password_r")
-      inputs[i].value = window.sessionStorage.getItem(inputs[i].name);
+    if (
+      inputs[i].name == "password" ||
+      inputs[i].name == "password_r" ||
+      inputs[i].name == "image" ||
+      inputs[i].type == "submit"
+    )
+      continue;
+
+    console.log(inputs[i]);
+
+    let val = window.sessionStorage.getItem(inputs[i].name);
+    if (val) inputs[i].value = val;
   }
 }
 
@@ -40,5 +61,5 @@ function clearForm() {
 }
 
 // this are called automatically (script should be loaded with 'defer' option)
-// loadForm();
-// clearForm();
+loadForm();
+clearForm();
