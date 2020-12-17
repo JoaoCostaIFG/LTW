@@ -187,18 +187,20 @@ function updateUser(&$user_info)
     if($user_info['password']) {
         $querry_str .= ' password = ?,';
         $options = ['cost' => 12]; // Default is 10 but 12 is better
-        array_push($querry_array, password_hash($user_info['password'], PASSWORD_DEFAULT, $options), $user_info['id']);
+        array_push($querry_array, password_hash($user_info['password'], PASSWORD_DEFAULT, $options));
     }
 
     // don't do update if there is nothing to update
     if(empty($user_info))
       return false;
 
-    array_push($querry_array, $user_info['id']);
     $querry_str = trim($querry_str, ",");
     $querry_str .= ' WHERE id = ?';
+    array_push($querry_array, $user_info['id']);
 
-    echo($querry_str);
+    // echo($querry_str);
+    // echo("<br>");
+    // print_r($querry_array);
     $stmt = $db->prepare($querry_str);
     $stmt->execute($querry_array);
 }
