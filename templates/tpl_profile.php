@@ -49,7 +49,7 @@ function drawEditProfile($user)
     ?>
 
     <section class="profile">
-        <h2><b>Edit Profile (Change only the needed fields)</b></h2>
+        <header><h2><b>Edit Profile (Change only the needed fields)</b></h2></header>
 
         <form class="verticalform" id="profileform" method="post" action="../actions/action_edit_profile.php"
           enctype="multipart/form-data">
@@ -104,7 +104,7 @@ function drawSettings()
      */
     ?>
     <section class="settings">
-      <h2><b>Settings</b></h2>
+      <header><h2><b>Settings</b></h2></header>
 
       <h3>Change Password</h3>
       <form id="changePassword" method="post" action="../actions/action_edit_profile.php" enctype="multipart/form-data">

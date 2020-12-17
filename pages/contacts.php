@@ -4,7 +4,7 @@ $title="Contacts";
 require_once '../templates/common/tpl_header.php';
 ?>
 
-<h2>Contacts</h2>
+<header><h2>Contacts</h2></header>
 
 <div id="persons">
   <div class="person">

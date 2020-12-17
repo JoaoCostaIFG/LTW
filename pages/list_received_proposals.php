@@ -13,7 +13,7 @@ require_once '../database/queries/db_proposal.php';
 require_once '../templates/tpl_proposal.php';
 ?>
 
-<h2><b>Your received proposals</b></h2>
+<header><h2><b>Your received proposals</b></h2></header>
 
 <?php
 $user_id = getUserId($_SESSION['username'])['id'];
