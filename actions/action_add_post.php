@@ -84,7 +84,7 @@ if($isInvalid) {
 }
 
 $user_id = getUserId($_SESSION['username'])['id'];
-$post_info = array($name, $birth_date, $gender, $size, $state, $description, $color,
+$post_info = array($name, $birth_date, $gender, $state, $description, $state, $color,
     $species, $city, $user_id);
 
 try {
