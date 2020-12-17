@@ -66,6 +66,9 @@ require_once 'tpl_petInfo.php';
      */
     ?>
 <h1>Pet list</h1>
+
+<script src="../js/proposal.js" type="text/javascript"></script>
+
 <form class="listfilter" action="../pages/list.php" method="GET">
   <div class="form-item listfilter-item" >
     <label for="name">Name</label>
@@ -105,8 +108,14 @@ require_once 'tpl_petInfo.php';
         } ?> >
   </div>
     <?php } ?>
-  <input class="form-button listfilter-button" type="submit" value="Search">
+  <input class="form-button listfilter-button" type="submit" value="Search" onclick="saveForm()">
 </form>
+
+<script>
+  loadForm();
+  clearForm();
+</script>
+
 <?php }?>
 
 
