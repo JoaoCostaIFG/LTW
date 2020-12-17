@@ -4,7 +4,7 @@ $title="Home";
 require_once '../templates/common/tpl_header_img.php';
 ?>
 
-<h2><b>Welcome to our website!</b></h2>
+<header><h2><b>Welcome to our website!</b></h2></header>
 <p>We are a company that connects pets with owners who'll take good care of
   them.<br>If you're looking to adopt a pet, want to offer a pet for adoption
   or just want to look at all of the cute photos, you've found the right

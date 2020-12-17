@@ -47,6 +47,11 @@ if (!isset($size)) {
     $isInvalid = true;
 }
 
+$state = treatInputNonEmpty($_POST['state']);
+if (!isset($state)) {
+    $isInvalid = true;
+}
+
 $description = treatInputNonEmpty($_POST['description']);
 if (!isset($description)) {
     $isInvalid = true;
@@ -79,7 +84,7 @@ if($isInvalid) {
 }
 
 $user_id = getUserId($_SESSION['username'])['id'];
-$post_info = array($name, $birth_date, $gender, $size, $description, $color,
+$post_info = array($name, $birth_date, $gender, $size, $state, $description, $color,
     $species, $city, $user_id);
 
 try {
@@ -89,6 +94,7 @@ try {
     setSessionMessage('success', 'Successfully added post');
     header("Location: ../pages/post.php?post_id=$post_id");
 } catch (PDOException $e) {
+    die($e->getMessage());
     setSessionMessage('errorAddPost', 'Failed to add post!');
     die(header('Location: ../pages/add_post.php'));
 }

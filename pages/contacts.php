@@ -4,30 +4,30 @@ $title="Contacts";
 require_once '../templates/common/tpl_header.php';
 ?>
 
-<h2>Contacts</h2>
+<header><h2>Contacts</h2></header>
 
 <div id="persons">
-  <div class="person">
+  <figure class="person">
     <img class="personimg" src="../static/person1.jpg" alt="Person1" >
     <ul class="nobullets">
-      <li><b>Joakim das couves</b></li>
-      <li>joakim.couves@example.com</li>
+      <li><b>John Doe </b></li>
+      <li>john.doe@example.com</li>
     </ul>
-  </div>
-  <div class="person">
+  </figure>
+  <figure class="person">
     <img class="personimg" src="../static/person2.jpg" alt="Person2" >
     <ul class="nobullets">
-      <li><b>Joakina das couves</b></li>
-      <li>joakina.couves@example.com</li>
+      <li><b>Jane Doe</b></li>
+      <li>jane.doe@example.com</li>
     </ul>
-  </div>
-  <div class="person">
+  </figure>
+  <figure class="person">
     <img class="personimg" src="../static/person3.jpg" alt="Person3" >
     <ul class="nobullets">
-      <li><b>Josefina das couves</b></li>
-      <li>josefina.couves@example.com</li>
+      <li><b>Mary Doe</b></li>
+      <li>mary.doe@example.com</li>
     </ul>
-  </div>
+  </figure>
 </div>
 
 <?php

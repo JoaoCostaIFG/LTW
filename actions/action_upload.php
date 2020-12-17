@@ -41,6 +41,7 @@ function updatePhoto($photo_id, $type, $is_user) {
       $originalFileName .= "images/";
 
     $originalFileName .= "$photo_id.$img_type";
+    updatePhotoExtension($photo_id, typeToString($type));
     //$smallFileName = "images/thumbs_small/$id.jpg";
 
     //$mediumFileName = "images/thumbs_medium/$id.jpg";
@@ -99,23 +100,4 @@ function uploadPhoto($id, $type, $is_user)
     //imagecopyresized($medium, $original, 0, 0, 0, 0, $mediumwidth, $mediumheight, $width, $height);
     //imagejpeg($medium, $mediumFileName);
 }
-
-//function uploadUserPhoto($user_id, $type)
-//{
-    //if ($type === IMAGETYPE_PNG) {
-        //$img_type = "png";
-    //} else if ($type === IMAGETYPE_JPEG) {
-        //$img_type = "jpg";
-    //} else {
-        //return;
-    //}
-
-    //// Generate filenames for original, small and medium files
-    //$originalFileName = "../static/users/";
-    //$originalFileName .= "$user_id.$img_type";
-    //unlink($originalFileName);
-    //move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
-
-    //return $originalFileName;
-//}
 ?>

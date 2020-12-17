@@ -24,10 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
   die('Location: ../pages/home.php');
 }
 
-if ($_SESSION['csrf'] !== $_POST['csrf']) {
+if (!isset($_POST['csrf']) || ($_SESSION['csrf'] !== $_POST['csrf'])) {
   // ERROR: Request does not appear to be legitimate
-  setSessionMessage('error', 'This request does not appear to be legitimate');
-  die(header('Location: ../pages/home.php'));
+  setSessionMessage('error', 'Bad request: csrf not defined');
+  die(header("Location: ../pages/profile.php"));
 }
 
 // Get user information to update
@@ -36,7 +36,9 @@ $username = treatInputNonEmpty($_POST['username']);
 $email = treatInputNonEmpty($_POST['email']);
 $mobile_number = treatInputNonEmpty($_POST['mobile_number']);
 $password = $_POST['password'];
-if(!isset($username) && !isset($email) && !isset($mobile_number) && !isset($password))
+$sent_image =  file_exists($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['tmp_name']);
+
+if(!isset($username) && !isset($email) && !isset($mobile_number) && !isset($password) && !$sent_image)
   updateUserFail("You need to specify at least one field to be changed.");
 
 $user_info = array('id' => $user_id, 'email' => $email,
@@ -74,13 +76,22 @@ if(isset($user_info['password'])) {
     updateSettingsFail("Passwords is too small (needs at least 5 chars).");
 }
 
+if ($sent_image) {
+  $type = photoIsValid($_FILES['image']['tmp_name']);
+  if ($type == null)
+      updateSettingsFail("Invalid photo format");
+}
 
-$type = photoIsValid($_FILES['image']['tmp_name']);
 try {
+  if ($type) {
+    $user_info['extension'] = typeToString($type);
+    uploadPhoto($user_id, $type, true);
+  }
   updateUser($user_info);
-  uploadPhoto($user_id, $type, true);
+
   setSessionMessage('success', 'Successfully updated user.');
 } catch (Exception $e) {
+  //die($e->getMessage());
   updateUserFail("Changing info failed.");
 }
 

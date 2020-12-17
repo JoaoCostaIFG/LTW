@@ -1,7 +1,7 @@
 <?php
 require_once '../includes/session.php';
 
-if (isset($_SESSION['username'])) {
+if (!isset($_SESSION['username'])) {
   die(header('Location: ../pages/list.php'));
 }
 

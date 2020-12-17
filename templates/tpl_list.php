@@ -65,7 +65,10 @@ require_once 'tpl_petInfo.php';
      * Draws the search bar
      */
     ?>
-<h1>Pet list</h1>
+<header><h1>Pet list</h1></header>
+
+<script src="../js/proposal.js" type="text/javascript"></script>
+
 <form class="listfilter" action="../pages/list.php" method="GET">
   <div class="form-item listfilter-item" >
     <label for="name">Name</label>
@@ -95,18 +98,24 @@ require_once 'tpl_petInfo.php';
   <div class="form-item listfilter-item listfilter-item-bottom" >
     <?php drawCities(true, $values['city']); ?>
   </div>
-    <?php if(isset($_SESSION['username'])) { ?>
   <br>
+<?php if(isset($_SESSION['username'])) { ?>
   <div class="form-item listfilter-item listfilter-item-bottom" >
     <label for="favourite">Favourite</label>
     <input id="favourite" type="checkbox" name="favourite" value="true"
-        <?php if($values['favourite'] == "true") {
-            echo 'checked';
-        } ?> >
+    <?php if($values['favourite'] == "true") {
+        echo 'checked';
+    } ?> >
   </div>
-    <?php } ?>
-  <input class="form-button listfilter-button" type="submit" value="Search">
+<?php } ?>
+  <input class="form-button listfilter-button" type="submit" value="Search" onclick="saveForm()">
 </form>
+
+<script>
+  loadForm();
+  clearForm();
+</script>
+
 <?php }?>
 
 
@@ -150,9 +159,9 @@ require_once 'tpl_petInfo.php';
     $curr_state = 'any';
     if (isset($_GET['state']) && $_GET['state'] != "any") {
         $curr_state = $_GET['state'];
-        if ($curr_state == -1)
+        if ($curr_state == -1) {
             array_push($query_conditions, 'state > 2');
-        else {
+        } else {
             array_push($query_conditions, 'state = ?');
             array_push($search_options, $_GET['state']);
         }

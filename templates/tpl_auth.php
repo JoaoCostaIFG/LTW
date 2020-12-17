@@ -46,6 +46,8 @@ function draw_login()
   <section id="register">
       <header><h2>Create a new account</h2></header>
 
+      <script src="../js/proposal.js" type="text/javascript"></script>
+
       <form class="verticalform" id="profileform" method="post" action="../actions/action_register.php"
         enctype="multipart/form-data">
         <div class="form-item profileform-item" >
@@ -73,8 +75,14 @@ function draw_login()
             <input id="image" type="file" name="image" required>
         </div>
 
-        <input class="form-button profileform-button" type="submit" value="Signup">
+        <input class="form-button profileform-button" type="submit" value="Signup" onclick="saveForm()">
+
       </form>
+
+      <script>
+        loadForm();
+        clearForm();
+      </script>
 
       <p class="error">
     <?php
