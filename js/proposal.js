@@ -40,7 +40,6 @@ function handle_proposal(id, action, post_id, user_id) {
         }
     };
 
-    console.log(id);
     xhttp.open("post", "../actions/action_" + action + ".php", true);
     xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhttp.send(encodeForAjax({post_id: post_id, user_id: user_id, csrf: document.querySelector("meta[name='csrf-token']").getAttribute("content")}));
