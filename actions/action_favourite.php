@@ -3,7 +3,7 @@
   require_once '../database/queries/db_user.php';
   require_once '../includes/utils.php';
 
-if ($_SERVER["REQUEST_METHOD"] != "POST") {
+if ($_SERVER["REQUEST_METHOD"] != "GET") {
     echo 'error';
     die;
 }

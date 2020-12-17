@@ -26,8 +26,8 @@ if (!isset($_POST['csrf']) || $_SESSION['csrf'] !== $_POST['csrf']) {
 // used to track any invalid information
 $isInvalid = false;
 
-$name = preg_replace("/[^a-zA-Z\s]/", '', $name);
 $name = treatInputNonEmpty($_POST['name']);
+$name = preg_replace("/[^a-zA-Z\s]/", '', $name);
 if (!isset($name)) {
     $isInvalid = true;
 }
