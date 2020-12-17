@@ -31,40 +31,50 @@
 
 ![UML](/documentation/uml.png)
 
-# Credentials (username/password)
-**Normal Users:**
- - Padoru/123456
- - Maynardo/123456
- - Nachos/123456
- - Irao/123456
- - FontaoFontalhao/123456
- - Lucas/123456
- - Davide/123456
- - João/123456
- - CarlosPereira935/123456
- - Canil da Trofa/123456
- - Louisse221/12345
+## Credentials (username/password)
 
-# Libraries:
-None
+**There are no admin accounts**.
 
-# Features:
- - Security
-     - XSS: yes
-     - CSRF: yes
-     - SQL using prepare/execute: yes
-     - Passwords: Bcrypt [work = 12] with random salt
-     - Data Validation: regex / php
-     - Other: Session fixation / Session hijacking
- - Technologies
-     - Separated logic/database/presentation: yes
-     - Semantic HTML tags: yes
-     - Responsive CSS: yes
-     - Javascript: yes
-     - Ajax: yes
-     - REST API: yes
-     - Other: 
-  Usability:
-     - Error/success messages: yes
-     - Forms don't lose data on error: no
+**User accounts:**
 
+- Padoru/123456
+- Maynardo/123456
+- Nachos/123456
+- Irao/123456
+- FontaoFontalhao/123456
+- Lucas/123456
+- Davide/123456
+- João/123456
+- CarlosPereira935/123456
+- Canil da Trofa/123456
+- Louisse221/12345
+
+## Libraries
+
+No libraries were used.
+
+## Features
+
+- **Security**:
+
+  - XSS: **yes**
+  - CSRF: **yes**
+  - SQL using prepare/execute: **yes**
+  - Passwords: **Bcrypt [work = 12] with random salt**
+  - Data Validation: **regex** / **php**
+  - Other: **Session fixation** / **Session hijacking**
+
+- **Technologies**:
+
+  - Separated logic/database/presentation: **yes**
+  - Semantic HTML tags: **yes**
+  - Responsive CSS: **yes**
+  - Javascript: **yes**
+  - Ajax: **yes**
+  - REST API: **yes**
+  - Other: **sessionStorage**
+
+- **Usability**:
+
+  - Error/success messages: **yes**
+  - Forms don't lose data on error: **yes**

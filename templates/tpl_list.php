@@ -67,8 +67,6 @@ require_once 'tpl_petInfo.php';
     ?>
 <header><h1>Pet list</h1></header>
 
-<script src="../js/proposal.js" type="text/javascript"></script>
-
 <form class="listfilter" action="../pages/list.php" method="GET">
   <div class="form-item listfilter-item" >
     <label for="name">Name</label>
@@ -99,22 +97,19 @@ require_once 'tpl_petInfo.php';
     <?php drawCities(true, $values['city']); ?>
   </div>
   <br>
-<?php if(isset($_SESSION['username'])) { ?>
+    <?php if(isset($_SESSION['username'])) { ?>
   <div class="form-item listfilter-item listfilter-item-bottom" >
     <label for="favourite">Favourite</label>
     <input id="favourite" type="checkbox" name="favourite" value="true"
-    <?php if($values['favourite'] == "true") {
-        echo 'checked';
-    } ?> >
+        <?php if($values['favourite'] == "true") {
+            echo 'checked';
+        } ?> >
   </div>
-<?php } ?>
+    <?php } ?>
   <input class="form-button listfilter-button" type="submit" value="Search" onclick="saveForm()">
 </form>
 
-<script>
-  loadForm();
-  clearForm();
-</script>
+<script src="../js/store_session.js" type="text/javascript" defer></script>
 
 <?php }?>
 

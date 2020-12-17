@@ -36,7 +36,7 @@ $username = treatInputNonEmpty($_POST['username']);
 $email = treatInputNonEmpty($_POST['email']);
 $mobile_number = treatInputNonEmpty($_POST['mobile_number']);
 $password = $_POST['password'];
-$sent_image =  file_exists($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['tmp_name']);
+$sent_image = isset($_FILES['image']['tmp_name']) && file_exists($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['tmp_name']);
 
 if(!isset($username) && !isset($email) && !isset($mobile_number) && !isset($password) && !$sent_image)
   updateUserFail("You need to specify at least one field to be changed.");
@@ -91,7 +91,8 @@ try {
 
   setSessionMessage('success', 'Successfully updated user.');
 } catch (Exception $e) {
-  //die($e->getMessage());
+  print_r("asd");
+  die($e->getMessage());
   updateUserFail("Changing info failed.");
 }
 
