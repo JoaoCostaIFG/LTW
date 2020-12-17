@@ -461,7 +461,7 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
     <?php
     $msg = getSessionMessage('errorAddPost');
     if ($msg) {
-        echo $msg; 
+        echo htmlspecialchars($msg); 
     }?>
       </p>
 
