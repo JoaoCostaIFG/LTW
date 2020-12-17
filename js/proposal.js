@@ -5,10 +5,13 @@ function rejectProposalFromDiv(div) {
 
     let acceptProposal = buttons[0];
     let rejectProposal = buttons[1];
+    let processedText = div.getElementsByTagName("p")[0];
+
+    if (processedText.innerHTML != "") // Already rejected
+        return;
     acceptProposal.remove();
     rejectProposal.remove();
 
-    let processedText = div.getElementsByTagName("p")[0];
     processedText.innerHTML = "Your <b>rejected</b> this proposal";
 }
 

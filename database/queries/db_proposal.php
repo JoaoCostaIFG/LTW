@@ -66,11 +66,17 @@ function getReceivedProposals($user_id)
                 PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
              FROM Proposal JOIN
                 PetPost ON(Proposal.post_id = PetPost.id) JOIN
-                PetPhoto ON(PetPhoto.post_id = PetPost.id) JOIN
                 User as Poster ON(Poster.id = PetPost.user_id) JOIN
-                User ON(User.id = Proposal.user_id)
-             WHERE Poster.id = ?
-             GROUP BY User.id'
+                User ON(User.id = Proposal.user_id) JOIN
+                PetPhoto
+             WHERE Poster.id = ? AND
+                PetPhoto.id IN(
+                    SELECT PetPhoto.id
+                    FROM PetPhoto
+                    WHERE PetPhoto.post_id = PetPost.id
+                    GROUP BY PetPhoto.post_id
+                )
+         ORDER BY Proposal.accepted ASC'
     );
     $stmt->execute(array($user_id));
     return $stmt->fetchAll();
@@ -81,15 +87,12 @@ function getReceivedNotAcceptedProposals($user_id)
     $db = Database::instance()->db();
     $stmt = $db->prepare(
         'SELECT User.id as user_id, User.username as user_username, accepted as status,
-                PetPost.id as post_id, PetPost.name as pet_name,
-                PetPhoto.id as photo_id, PetPhoto.extension as photo_extension
+                PetPost.id as post_id, PetPost.name as pet_name
              FROM Proposal JOIN
                 PetPost ON(Proposal.post_id = PetPost.id) JOIN
-                PetPhoto ON(PetPhoto.post_id = PetPost.id) JOIN
                 User as Poster ON(Poster.id = PetPost.user_id) JOIN
                 User ON(User.id = Proposal.user_id)
-             WHERE Poster.id = ? AND Proposal.accepted < 0
-             GROUP BY PetPost.id'
+             WHERE Poster.id = ? AND Proposal.accepted < 0'
     );
     $stmt->execute(array($user_id));
     return $stmt->fetchAll();

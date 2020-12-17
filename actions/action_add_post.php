@@ -26,8 +26,8 @@ if (!isset($_POST['csrf']) || $_SESSION['csrf'] !== $_POST['csrf']) {
 // used to track any invalid information
 $isInvalid = false;
 
-$name = preg_replace("/[^a-zA-Z\s]/", '', $name);
 $name = treatInputNonEmpty($_POST['name']);
+$name = preg_replace("/[^a-zA-Z\s]/", '', $name);
 if (!isset($name)) {
     $isInvalid = true;
 }
@@ -84,7 +84,7 @@ if($isInvalid) {
 }
 
 $user_id = getUserId($_SESSION['username'])['id'];
-$post_info = array($name, $birth_date, $gender, $size, $state, $description, $color,
+$post_info = array($name, $birth_date, $gender, $state, $description, $state, $color,
     $species, $city, $user_id);
 
 try {
