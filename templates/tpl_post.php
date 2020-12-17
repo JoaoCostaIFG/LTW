@@ -68,9 +68,11 @@ function proposalStatusToString($status)
 
 function stateToString($state, $post_id)
 {
-    $current_user = getUserId($_SESSION['username'])['id'];
+    if(isset($_SESSION['username'])){
+      $current_user = getUserId($_SESSION['username'])['id'];
+    }
     $accepted_user = hasAcceptedProposal($post_id)['user_id'];
-    if (($accepted_user == $current_user) || isOwner($current_user, $post_id)) {
+    if (isset($_SESSION['username']) && (($accepted_user == $current_user) || isOwner($current_user, $post_id))) {
         if ($state == 1)
             $text = "The pet is being prepared for adoption";
         else if ($state == 2)
