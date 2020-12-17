@@ -31,9 +31,19 @@
 
 ![UML](/documentation/uml.png)
 
-# Credentials (username/password (role))
- - john/1234 (admin)
- - mary/9999 (client)
+# Credentials (username/password)
+**Normal Users:**
+ - Padoru/123456
+ - Maynardo/123456
+ - Nachos/123456
+ - Irao/123456
+ - FontaoFontalhao/123456
+ - Lucas/123456
+ - Davide/123456
+ - João/123456
+ - CarlosPereira935/123456
+ - Canil da Trofa/123456
+ - Louisse221/12345
 
 # Libraries:
 None
