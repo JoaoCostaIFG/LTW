@@ -62,7 +62,10 @@ if ($password != $password_r) { // check is passwords are equal
 }
 
 // profile picture
-$type = isset($_FILES['image']['tmp_name']) && photoIsValid($_FILES['image']['tmp_name']);
+if (!isset($_FILES['image']['tmp_name'])) {
+  registerFail("An image is needed!");
+}
+$type = photoIsValid($_FILES['image']['tmp_name']);
 if (!$type) { // check if the given image is jpeg/png
   registerFail("The given image is not valid!");
 }
