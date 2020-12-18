@@ -91,8 +91,7 @@ try {
 
   setSessionMessage('success', 'Successfully updated user.');
 } catch (Exception $e) {
-  print_r("asd");
-  die($e->getMessage());
+  //die($e->getMessage());
   updateUserFail("Changing info failed.");
 }
 

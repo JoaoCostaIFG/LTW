@@ -94,7 +94,7 @@ try {
     setSessionMessage('success', 'Successfully added post');
     header("Location: ../pages/post.php?post_id=$post_id");
 } catch (PDOException $e) {
-    die($e->getMessage());
+    //die($e->getMessage());
     setSessionMessage('errorAddPost', 'Failed to add post!');
     die(header('Location: ../pages/add_post.php'));
 }
