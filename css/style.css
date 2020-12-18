@@ -371,10 +371,15 @@ textarea {
   margin-bottom: 2em;
 }
 
+.petpost p {
+  width: 100%;
+}
+
 .petpost-img {
   display: inline-block;
   vertical-align: middle;
   position: relative;
+  margin-right: 1em;
 
   /* we want the rounded corners on the bottom */
   border-radius: var(--petimage-corner-radius) !important;
@@ -405,7 +410,7 @@ textarea {
   display: inline-block;
   vertical-align: middle;
   margin: 0;
-  margin-left: 1em;
+  /* margin-left: 1em; */
   padding: 0;
 
   font-size: x-large;
@@ -636,3 +641,7 @@ textarea {
   font-size: large;
   border-radius: var(--button-corner-radius);
 }
+
+/* * { */
+/* border: orange solid 1px !important; */
+/* } */
