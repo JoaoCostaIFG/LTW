@@ -23,6 +23,8 @@ function draw_login()
         <input class="form-button" type="submit" value="Login">
       </form>
 
+      <script src="../js/store_session.js" type="text/javascript" defer></script>
+
       <p class="error">
     <?php
     $msg = getSessionMessage('loginError');

@@ -18,7 +18,7 @@ function ageToString($age_days)
         if ($months != 0) {
             $ret = $months . " month(s) old";
             if ($age_days != 0) {
-              $ret .= " and " . $age_days . " day(s) old";
+                $ret .= " and " . $age_days . " day(s) old";
             }
         } else {
             $ret = "$age_days day(s) old";
@@ -68,35 +68,39 @@ function proposalStatusToString($status)
 
 function stateToString($state, $post_id)
 {
-    if(isset($_SESSION['username'])){
-      $current_user = getUserId($_SESSION['username'])['id'];
+    if(isset($_SESSION['username'])) {
+        $current_user = getUserId($_SESSION['username'])['id'];
     }
-    $accepted_user = hasAcceptedProposal($post_id)['user_id'];
-    if (isset($_SESSION['username']) && (($accepted_user == $current_user) || isOwner($current_user, $post_id))) {
-        if ($state == 1)
+    $accepted_user = hasAcceptedProposal($post_id);
+    if (isset($_SESSION['username']) 
+        && (($accepted_user != false && $accepted_user['user_id'] == $current_user) || isOwner($current_user, $post_id))
+    ) {
+        if ($state == 1) {
             $text = "The pet is being prepared for adoption";
-        else if ($state == 2)
+        } else if ($state == 2) {
             $text = "The pet ready for adoption";
-        else if ($state == 3)
+        } else if ($state == 3) {
             $text = "The pet is being prepared for adoption and is adopted";
-        else if ($state == 4)
+        } else if ($state == 4) {
             $text = "The pet is being delivered";
-        else if ($state == 5)
+        } else if ($state == 5) {
             $text = "The pet was delivered";
-        else
+        } else {
             $text = "Unkown status";
+        }
     } else { // Normal user
-        if ($accepted_user != false)
+        if ($accepted_user != false && $accepted_user['user_id'] != false) {
             $text = "This pet has already been adopted";
-        else {
-            if ($state == 1)
+        } else {
+            if ($state == 1) {
                 $text = "The pet is being prepared for adoption";
-            else if ($state == 2)
+            } else if ($state == 2) {
                 $text = "The pet ready for adoption";
-            else if ($state > 2 && $state < 6)
+            } else if ($state > 2 && $state < 6) {
                 $text = "This pet has already been adopted";
-            else
+            } else {
                 $text = "Unkown status";
+            }
         }
     }
     return $text;
@@ -133,7 +137,7 @@ function drawEditButtons($post_id)
 
     <form class="deleteButton" method="post" action="../actions/action_delete_post.php">
       <input type="hidden" id="post_id" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>">
-      <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+      <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf']?>">
       <input class="form-button addpostform-button" type="submit" value="Remove post">
     </form>
 <?php }
@@ -182,7 +186,7 @@ function drawEditOptions($post)
 
           <br>
           <input type="hidden" id="post_id" name="post_id" value="<?php echo htmlspecialchars($post['id']); ?>">
-          <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+          <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf']?>">
           <input class="form-button addpostform-button" type="submit" value="Update pet">
         </form>
     </div>
@@ -315,12 +319,12 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
 <?php function drawQuestionsAnswers($post_id, $user_id, $questionsAnswers)
 {
 
-    if(empty($questionsAnswers)){
-      echo "<i id='no-questions'>There are no questions on this post. Make the first question</i>";
+    if(empty($questionsAnswers)) {
+        echo "<i id='no-questions'>There are no questions on this post. Make the first question</i>";
     } else {
-      foreach ($questionsAnswers as $questionAnswer) {
-        drawQuestionAnswer($post_id, $user_id, $questionAnswer);
-      }
+        foreach ($questionsAnswers as $questionAnswer) {
+            drawQuestionAnswer($post_id, $user_id, $questionAnswer);
+        }
     }
 
     if (!isOwner($user_id, $post_id)) {
@@ -452,24 +456,27 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
       </div>
 
       <br>
-      <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+      <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf']?>">
       <input class="form-button addpostform-button" type="submit" value="Add pet">
     </form>
 
+    <script src="../js/store_session.js" type="text/javascript" defer></script>
+
+    <p class="error">
     <?php
     $msg = getSessionMessage('errorAddPost');
     if ($msg) {
-        echo $msg; 
+        echo htmlspecialchars($msg); 
     }?>
-      </p>
+    </p>
 
   </section>
 <?php } ?>
 
 <?php function drawAnswer($questionAnswer)
 {
-	?>
-	<br> <!-- Used to make the answers appear below the questions -->
+    ?>
+    <br> <!-- Used to make the answers appear below the questions -->
   <section class="petpost-answer">
     <p> <?php echo 'A: ' . nl2br(htmlspecialchars($questionAnswer['answer'])); ?> </p>
     <p> <?php echo htmlspecialchars($questionAnswer['answer_date']); ?> </p>

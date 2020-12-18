@@ -15,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
 }
 
 // user info
+// username
 $username = treatInputNonEmpty($_POST['username']);
 if (!isset($username)) {
   registerFail("Need a username!");
@@ -22,11 +23,14 @@ if (!isset($username)) {
 if (!preg_match("/^[0-9a-zA-Z\s_\-]+$/", $username)) {
   registerFail("Username can only contain letters, numbers, spaces, underscores and dashes!");
 }
-
+if (strlen($username) > 32) {
+  registerFail("Username must be 32 chars long or fewer");
+}
 if(getUserInfo($username)) {        
   registerFail("Username already taken.");
 }
 
+// email
 $email = treatInputNonEmpty($_POST['email']);
 if (!isset($email)) {
   registerFail("Need an email address!");
@@ -34,6 +38,8 @@ if (!isset($email)) {
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
   registerFail("The given email address is invalid!");
 }
+
+// phone number
 $mobile_number = treatInputNonEmpty($_POST['mobile_number']);
 if (!isset($mobile_number)) {
   registerFail("Need a mobile number!");
@@ -43,11 +49,9 @@ if (!isValidMobileNumber($mobile_number)) {
 }
 
 // password
-
 if(!isset($_POST['password']) || !isset($_POST['password_r'])){
   registerFail("Password fields are required");
 }
-
 $password = $_POST['password'];
 $password_r = $_POST['password_r'];
 if (strlen($password) < 5) {
@@ -57,6 +61,10 @@ if ($password != $password_r) { // check is passwords are equal
   registerFail("Passwords don't match!");
 }
 
+// profile picture
+if (!isset($_FILES['image']['tmp_name'])) {
+  registerFail("An image is needed!");
+}
 $type = photoIsValid($_FILES['image']['tmp_name']);
 if (!$type) { // check if the given image is jpeg/png
   registerFail("The given image is not valid!");

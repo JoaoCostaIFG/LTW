@@ -13,12 +13,12 @@
 
   --button-corner-radius: 2em;
 
-  --items-text-corner-radius: 0.6em;
   --qa-corner-radius: 0.6em;
 
   --petimage-corner-radius: 1em;
   --petimage-corner-radius-inner: 0.85em;
-  --petimage-size: 16em;
+  --items-text-corner-radius: calc(var(--petimage-corner-radius) * 0.9);
+  --petimage-size: 11em;
   --petpost-img-size: 18em;
 }
 
@@ -141,7 +141,7 @@ textarea {
 }
 
 .petimage {
-  border-radius: var(--petimage-corner-radius);
+  border-radius: var(--petimage-corner-radius) var(--petimage-corner-radius) 0 0;
   background-color: var(--dark);
 }
 
@@ -151,7 +151,7 @@ textarea {
 
   /* the inner corner radius needs to be smaller than the outer
    otherwise the image won't cover the corners */
-  border-radius: var(--petimage-corner-radius);
+  border-radius: inherit;
   background-size: contain;
 }
 
@@ -299,6 +299,7 @@ textarea {
   border: 2px solid var(--light);
   border-radius: var(--petimage-corner-radius);
 
+  font-size: x-large;
   text-align: center;
   font-weight: bold;
 }
@@ -318,7 +319,7 @@ textarea {
   /* image's description */
   margin-top: -0.3em; /* TODO this might be problematic */
   padding: 0.5em;
-  font-size: x-large;
+  box-sizing: border-box;
 
   /* inner border to make this section thicker */
   border: 2px solid var(--light);
@@ -328,6 +329,12 @@ textarea {
   /* make this part stand out */
   background-color: var(--dark); /* hide part of the image that overflows */
   box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
+
+  /* ellipsis on names that are too long */
+  max-width: var(--petimage-size);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: "...";
 }
 
 /* || LIST FORM */
@@ -345,7 +352,7 @@ textarea {
   margin-left: 2em;
 }
 
-.listfilter-item-bottom{
+.listfilter-item-bottom {
   margin-top: 2em;
 }
 
@@ -368,6 +375,9 @@ textarea {
   display: inline-block;
   vertical-align: middle;
   position: relative;
+
+  /* we want the rounded corners on the bottom */
+  border-radius: var(--petimage-corner-radius) !important;
 
   border: solid var(--green) 2px;
   box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
@@ -444,7 +454,7 @@ textarea {
 .petpost-answer p + p {
   /* date + author */
   margin-top: 2em;
-  float:right;
+  float: right;
 
   text-align: right;
   font-weight: bold;
