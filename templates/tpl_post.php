@@ -172,9 +172,32 @@ function drawEditOptions($post)
 
           <div class="form-item addpostform-item" >
             <label for="description">Description</label>
-            <textarea id="description" name="description" rows="1" cols="80" maxlength="2000">
-              <?php echo htmlspecialchars($post['description']); ?>
-            </textarea>
+            <textarea id="description" name="description" rows="1" cols="80" maxlength="2000"><?php echo htmlspecialchars($post['description']); ?></textarea>
+            <script type="text/javascript">
+              // see: https://stackoverflow.com/questions/7745741/auto-expanding-textarea/24824750#24824750
+              var textarea = document.getElementById("description");
+              var limitRows = 5;
+              var messageLastScrollHeight = textarea.scrollHeight;
+
+              function resizeTextArea() {
+                console.log(textarea);
+                let rows = parseInt(textarea.getAttribute("rows"));
+                // If we don't decrease the amount of rows, the scrollHeight would show the scrollHeight for all the rows
+                // even if there is no text.
+                textarea.setAttribute("rows", "1");
+
+                if (rows < limitRows && textarea.scrollHeight > messageLastScrollHeight) {
+                    rows++;
+                } else if (rows > 1 && textarea.scrollHeight < messageLastScrollHeight) {
+                    rows--;
+                }
+
+                console.log(rows);
+                messageLastScrollHeight = textarea.scrollHeight;
+                textarea.setAttribute("rows", rows);
+              };
+              textarea.oninput = resizeTextArea;
+            </script>
           </div>
 
           <div class="form-item addpostform-item" >
