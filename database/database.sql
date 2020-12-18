@@ -65,7 +65,7 @@ drop table if exists Comment;
 create table Comment(
     id INTEGER PRIMARY KEY,
     user_id INTEGER REFERENCES User(id),
-    post_id INTEGER REFERENCES PetPost(id),
+    post_id INTEGER REFERENCES PetPost(id) ON DELETE CASCADE,
     text TEXT NOT NULL,
     date DATE NOT NULL
 );
@@ -74,7 +74,7 @@ drop table if exists Question;
 create table Question(
     id INTEGER PRIMARY KEY,
     user_id INTEGER REFERENCES User(id),
-    post_id INTEGER REFERENCES PetPost(id),
+    post_id INTEGER REFERENCES PetPost(id) ON DELETE CASCADE,
     text TEXT NOT NULL,
     date DATE NOT NULL
 );
@@ -83,22 +83,22 @@ drop table if exists Answer;
 create table Answer(
     id INTEGER PRIMARY KEY,
     user_id INTEGER REFERENCES User(id),
-    question_id INTEGER REFERENCES Question(id),
+    question_id INTEGER REFERENCES Question(id) ON DELETE CASCADE,
     text TEXT NOT NULL,
     date DATE NOT NULL
 );
 
 drop table if exists Favourite;
 create table Favourite(
-    user_id INTEGER REFERENCES User(id),
-    post_id INTEGER REFERENCES PetPost(id),
+    user_id INTEGER REFERENCES User(id) ON DELETE CASCADE,
+    post_id INTEGER REFERENCES PetPost(id) ON DELETE CASCADE,
     PRIMARY KEY(user_id, post_id)
 );
 
 drop table if exists Proposal;
 create table Proposal(
     user_id INTEGER REFERENCES User(id),
-    post_id INTEGER REFERENCES PetPost(id),
+    post_id INTEGER REFERENCES PetPost(id) ON DELETE CASCADE,
     accepted INTEGER CHECK (accepted = 0 OR accepted = 1 OR accepted = -1), -- 0 Rejected, 1 Accepted, -1 Pending
     date DATE NOT NULL,
     PRIMARY KEY(user_id, post_id)

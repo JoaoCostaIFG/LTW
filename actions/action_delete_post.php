@@ -40,6 +40,7 @@ try {
     setSessionMessage('success', 'Successfully deleted post');
     header("Location: ../pages/list.php");
 } catch (PDOException $e) {
+    die($e->getMessage());
     setSessionMessage('error', 'Failed to delete post!');
     die(header("Location: ../pages/post.php?post_id=$post_id"));
 }
