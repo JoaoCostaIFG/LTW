@@ -172,7 +172,8 @@ function drawEditOptions($post)
 
           <div class="form-item addpostform-item" >
             <label for="description">Description</label>
-            <textarea id="description" name="description" rows="1" cols="80" maxlength="2000"><?php echo htmlspecialchars($post['description']); ?></textarea>
+            <textarea id="description" name="description" rows="1" cols="80"
+maxlength="2000"><?php echo htmlspecialchars(html_entity_decode($post['description'], ENT_QUOTES)); ?></textarea>
             <script type="text/javascript">
               // see: https://stackoverflow.com/questions/7745741/auto-expanding-textarea/24824750#24824750
               var textarea = document.getElementById("description");

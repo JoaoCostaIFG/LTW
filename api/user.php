@@ -64,4 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
           (some information might already be in sue by another user).'));
     }
 }
+else {
+    http_response_code(501);
+    echo json_encode(array('message' => 'Request failed: request method not recognized/implemented'));
+    die;
+}
 ?>

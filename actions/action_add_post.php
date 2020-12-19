@@ -56,6 +56,7 @@ $description = treatInputNonEmpty($_POST['description']);
 if (!isset($description)) {
     $isInvalid = true;
 }
+$description = htmlentities($description, ENT_QUOTES);
 
 $color = treatInputNonEmpty($_POST['color']);
 if (!isset($color)) {

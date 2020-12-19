@@ -34,11 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         die;
     }
 
-    $type = photoIsValid($_FILES['image']['tmp_name']);
-    if (!$type) {
-        http_response_code(400);
-        echo json_encode(array('message' => 'Request failed: photo is not defined/invalid'));
-        die;
+    if (!isset($_FILES['image']['tmp_name'])) {
+      $isInvalid = true;
+    }
+    else {
+      $type = photoIsValid($_FILES['image']['tmp_name']);
+      if (!$type) {
+          http_response_code(400);
+          echo json_encode(array('message' => 'Request failed: photo is not defined/invalid'));
+          die;
+      }
     }
     $name = treatInputNonEmpty($_POST['name']);
     if(!isset($name)) {
@@ -64,25 +69,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo json_encode(array('message' => 'Request failed: size is not defined/invalid'));
         die;
     }
-    $description = $_POST['description'];
+    $description = treatInputNonEmpty($_POST['description']);
     if(!isset($description)) {
         http_response_code(400);
         echo json_encode(array('message' => 'Request failed: description is not defined/invalid'));
         die;
     }
-    $color = $_POST['color'];
+    $description = htmlentities($description, ENT_QUOTES);
+    $color = treatInputNonEmpty($_POST['color']);
     if(!isset($color)) {
         http_response_code(400);
         echo json_encode(array('message' => 'Request failed: color is not defined/invalid'));
         die;
     }
-    $species = $_POST['species'];
+    $species = treatInputNonEmpty($_POST['species'];)
     if(!isset($species)) {
         http_response_code(400);
         echo json_encode(array('message' => 'Request failed: species is not defined/invalid'));
         die;
     }
-    $city = $_POST['city'];
+    $city = treatInputNonEmpty($_POST['city']);
     if(!isset($city)) {
         http_response_code(400);
         echo json_encode(array('message' => 'Request failed: city is not defined/invalid'));
@@ -102,5 +108,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         http_response_code(503);
         echo json_encode(array('message' => 'Request failed: Request was OK but server failed.'));
     }
+}
+else {
+    http_response_code(501);
+    echo json_encode(array('message' => 'Request failed: request method not recognized/implemented'));
+    die;
 }
 ?>
