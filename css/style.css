@@ -203,7 +203,7 @@ textarea {
   font-weight: normal;
 }
 
-.topbar-button input[type="submit"] {
+.topbar-button button {
   /* add post button */
   border-radius: 20em;
 
@@ -213,19 +213,19 @@ textarea {
   font-weight: bold;
 }
 
-.topbar-button input[type="submit"]:hover {
+.topbar-button button:hover {
   color: var(--dark);
   background-color: var(--green);
 }
 
-#logout-button input[type="submit"] {
+#logout-button button {
   color: var(--red);
   background-color: var(--dark);
 
   font-weight: bold;
 }
 
-#logout-button input[type="submit"]:hover {
+#logout-button button:hover {
   display: inline-block;
 
   background-color: var(--background-dark);

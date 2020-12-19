@@ -34,18 +34,18 @@
       $proposals_count = sizeof(getReceivedNotAcceptedProposals(getUserId($_SESSION['username'])['id']));?>
       <ul id="authlogin" class="nobullets">
         <li class="topbar-button">
-          <a class="nounderline" href="list_sent_proposals.php"><input type="submit" value="See sent proposals"></a>
+          <a class="nounderline" href="list_sent_proposals.php"><button type="button">See sent proposals</button></a>
         </li>
         <li class="topbar-button">
           <a class="nounderline" href="list_received_proposals.php">
-            <input type="submit" value="See received proposals">
+            <button type="button">See received proposals</button>
 <?php if($proposals_count > 0){ ?>
             <span class="notification"><?=$proposals_count?></span>
 <?php } ?>
           </a>
         </li>
         <li class="topbar-button">
-          <a class="nounderline" href="add_post.php"><input type="submit" value="+"></a>
+          <a class="nounderline" href="add_post.php"><button type="button">+</button></a>
         </li>
         <li id="topbar-username">
           Logged in as 
@@ -54,7 +54,7 @@
           </a>
         </li>
         <li id="logout-button">
-          <a class="nounderline" href='../actions/action_logout.php'><input type="submit" value="Logout"></a>
+          <a class="nounderline" href='../actions/action_logout.php'><button type="button">Logout</button></a>
         </li>
       </ul> 
 <?php } ?>

@@ -80,10 +80,10 @@ No libraries were used.
   - Forms don't lose data on error: **yes**
 
 - **Extras**:
+  - User profile pages with pet post list.
   - Pet states.
   - Notifications about adoption proposals.
   - Accepting a proposal for a pet, automatically declines all other proposals
     for the same pet.
   - REST API: get all users, get a single user, create a new user, get all pet
     posts, get a single pet post, create a new pet post.
-
