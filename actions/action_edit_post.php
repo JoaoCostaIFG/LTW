@@ -5,10 +5,15 @@ require_once '../database/queries/db_post.php';
 require_once '../actions/action_upload.php';
 require_once '../includes/utils.php';
 
-
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     setSessionMessage('error', 'Request method not supported');
-    die('Location: ../pages/home.php');
+    die(header('Location: ../pages/list.php'));
+}
+
+$post_id = $_POST['post_id'];
+if (!isset($post_id)) {
+    setSessionMessage('error', 'Post id not defined');
+    die(header('Location: ../pages/list.php'));
 }
 
 if(!isset($_SESSION['username'])) {
@@ -22,7 +27,6 @@ if (!isset($_POST['csrf']) || ($_SESSION['csrf'] !== $_POST['csrf'])) {
     die(header("Location: ../pages/post.php?post_id=$post_id"));
 }
 
-$post_id = $_POST['post_id'];
 $name = treatInputNonEmpty($_POST['name']);
 if (preg_match("/[^a-zA-Z\s]/", $_POST['name'])) {
     setSessionMessage('editPostError', 'Pet names can only contain letters and spaces!');
@@ -34,8 +38,7 @@ $description = treatInputNonEmpty($_POST['description']);
 $state = $_POST['state'];
 $color = treatInputNonEmpty($_POST['color']);
 $city = treatInputNonEmpty($_POST['city']);
-if(!isset($post_id)
-    || !isset($name)
+if(!isset($name)
     || !isset($birth_date)
     || !isset($size)
     || !isset($description)
@@ -49,7 +52,10 @@ if(!isset($post_id)
 $post_info = array($name, $birth_date, $size, $description, $state, $color, $city, $post_id);
 
 // Check if file is not image
-if (file_exists($_FILES['image']['tmp_name']) && is_uploaded_file($_FILES['image']['tmp_name'])) {
+if (isset($_FILES['image']['tmp_name']) 
+    && file_exists($_FILES['image']['tmp_name']) 
+    && is_uploaded_file($_FILES['image']['tmp_name'])
+) {
     $has_photo = true;
     $type = photoIsValid($_FILES['image']['tmp_name']);
     if ($type == null) {
@@ -65,7 +71,6 @@ if (!ownsPost($user_id, $post_id)) {
     setSessionMessage('editPostError', "User doesn't own this post!");
     die(header("Location: ../pages/post.php?post_id=$post_id"));
 }
-    
 
 try {
     updatePost($post_info);

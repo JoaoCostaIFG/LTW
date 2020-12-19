@@ -133,17 +133,15 @@ function drawEditButtons($post_id)
     <script src="../js/edit_post.js" type="text/javascript" defer></script>
 
     <p class="error">
-<?php
-$msg = getSessionMessage('editPostError');
-if ($msg) {
-    echo $msg; 
-}?>
-</p>
-    <button id="editButton" onclick="edit_post()">
-        Edit Post</button>
-
+    <?php
+    $msg = getSessionMessage('editPostError');
+    if ($msg) {
+        echo $msg; 
+    }?>
+    </p>
+    <button id="editButton" onclick="edit_post()">Edit Post</button>
     <form class="deleteButton" method="post" action="../actions/action_delete_post.php">
-      <input type="hidden" id="post_id" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>">
+      <input type="hidden" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>">
       <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf']?>">
       <input class="form-button addpostform-button" type="submit" value="Remove post">
     </form>

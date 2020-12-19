@@ -29,7 +29,7 @@ require_once 'tpl_petInfo.php';
 <?php function drawFavouriteStar($post)
 {
     if(isset($_SESSION['username']) && isset($post['isFavourite'])) { ?>
-  <div id="favourite-star">
+  <div class="favourite-star">
         <?php if ($post['isFavourite']) {
             echo '&bigstar;';
         }?>

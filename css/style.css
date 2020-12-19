@@ -203,9 +203,10 @@ textarea {
   font-weight: normal;
 }
 
-.topbar-button button {
-  /* add post button */
+.topbar-button a {
+  padding: 0.5em;
   border-radius: 20em;
+  /* border-radius: var(--button-corner-radius); */
 
   background-color: var(--background-dark);
   box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
@@ -213,23 +214,18 @@ textarea {
   font-weight: bold;
 }
 
-.topbar-button button:hover {
+.topbar-button a:hover {
   color: var(--dark);
   background-color: var(--green);
 }
 
-#logout-button button {
+#logout-button a {
   color: var(--red);
   background-color: var(--dark);
-
-  font-weight: bold;
 }
 
-#logout-button button:hover {
-  display: inline-block;
-
+#logout-button a:hover {
   background-color: var(--background-dark);
-  box-shadow: 0 -0.1em 0.5em 0 rgba(0, 0, 0, 0.8); /* the edgehog */
 }
 
 .notification {
@@ -396,7 +392,8 @@ textarea {
   background-size: contain;
 }
 
-#favourite-star {
+#favourite-star,
+.favourite-star {
   position: absolute;
   display: inline;
   top: 0;
@@ -418,6 +415,23 @@ textarea {
 
 .petpost-info li + li {
   margin-top: 0.5em;
+}
+
+#editButton {
+  display: inline-block;
+  padding: 0.7em;
+  box-sizing: border-box;
+
+  background-color: var(--green);
+  color: var(--background);
+
+  font-weight: bold;
+  font-size: large;
+}
+
+#editButton:hover {
+  background-color: var(--darkGreen);
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.3), 0 8px 22px 0 rgba(0, 0, 0, 0.3); /* the edgehog */
 }
 
 /* || POST PAGE DESCRIPTION + QAS */
