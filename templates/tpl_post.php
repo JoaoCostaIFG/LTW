@@ -132,6 +132,13 @@ function drawEditButtons($post_id)
     <script src="../js/utils.js" type="text/javascript" defer></script>
     <script src="../js/edit_post.js" type="text/javascript" defer></script>
 
+    <p class="error">
+<?php
+$msg = getSessionMessage('editPostError');
+if ($msg) {
+    echo $msg; 
+}?>
+</p>
     <button id="editButton" onclick="edit_post()">
         Edit Post</button>
 
