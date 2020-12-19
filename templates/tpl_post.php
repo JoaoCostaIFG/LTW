@@ -284,7 +284,7 @@ function drawPost($post, $questionsAnswers)
 
     <h3>Description</h3>
     <div class="petpost-description">
-      <p> <?php echo nl2br(htmlspecialchars($post['description'])); ?> </p>
+      <p> <?php echo nl2br(htmlspecialchars(html_entity_decode($post['description'], ENT_QUOTES))); ?> </p>
     </div>
 
     <h3>Questions & Answers</h3>
