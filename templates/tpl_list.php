@@ -77,11 +77,11 @@ require_once 'tpl_petInfo.php';
   </div>
   <div class="form-item listfilter-item" >
     <label for="min_age">Min. Age (Years)</label>
-    <input id="min_age" min="0" type="text" name="min_age" value="<?php echo htmlspecialchars($values['min_age']) ?>">
+    <input id="min_age" min="0" type="number" name="min_age" value="<?php echo htmlspecialchars($values['min_age']) ?>">
   </div>
   <div class="form-item listfilter-item" >
     <label for="max_age">Max. Age (Years)</label>
-    <input id="max_age" min="0" type="text" name="max_age" value="<?php echo htmlspecialchars($values['max_age']) ?>">
+    <input id="max_age" min="0" type="number" name="max_age" value="<?php echo htmlspecialchars($values['max_age']) ?>">
   </div>
   <br>
   <div class="form-item listfilter-item listfilter-item-bottom" >

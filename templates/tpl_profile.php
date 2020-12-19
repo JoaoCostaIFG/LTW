@@ -15,7 +15,7 @@ function drawProfile($is_owner, $user, $user_posts)
       <?php
         if ($is_owner) echo "<b>Your profile</b>";
         else echo "<b>" . htmlspecialchars($user['username']) . "</b>&#39;s Profile";
-      ?></b>
+      ?>
     </h2>
 
     <div id="profile">

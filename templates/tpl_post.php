@@ -242,7 +242,7 @@ function drawPost($post, $questionsAnswers)
     ?>
 
   <h2>
-    <b><?php echo htmlspecialchars($post['name']); ?></b> </br>
+    <b><?php echo htmlspecialchars($post['name']); ?></b> <br>
     for adoption from <b>
       <a href="../pages/profile.php?username=<?php echo urlencode($post['user']); ?>">
         <?php echo htmlspecialchars($post['user']); ?>
@@ -421,8 +421,8 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
         <input id="name" type="text" name="name" placeholder="name of the pet" required>
       </div>
       <div class="form-item addpostform-item" >
-        <label for="age">Birth Date</label>
-        <input id="birth_date" type="date" max="<?php echo date('Y-m-d'); ?>" name="birth_date" placeholder="birth date of the pet" required>
+        <label for="birth_date">Birth Date</label>
+        <input id="birth_date" type="date" max="<?php echo date('Y-m-d'); ?>" name="birth_date" required>
       </div>
       <div class="form-item addpostform-item" >
         <label for="image">Photo</label>

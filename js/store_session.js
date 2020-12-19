@@ -30,7 +30,6 @@ function saveValues(tag) {
 
     if (inputs[i].name && inputs[i].value) {
       window.sessionStorage.setItem(inputs[i].name, inputs[i].value);
-      console.log(inputs[i].name + " " + inputs[i].value);
     }
   }
 }
@@ -46,8 +45,6 @@ function setValues(tag) {
       inputs[i].type == "submit"
     )
       continue;
-
-    console.log(inputs[i]);
 
     let val = window.sessionStorage.getItem(inputs[i].name);
     if (val) inputs[i].value = val;
