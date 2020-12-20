@@ -1,5 +1,5 @@
 <?php
-require_once '../database/database_instance.php';
+require_once '../includes/database.php';
 
 function checkUserPassword($username, $password)
 {

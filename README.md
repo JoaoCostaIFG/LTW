@@ -91,6 +91,8 @@ No libraries were used.
 
 ## Notes
 
+### XSS mitigation on session.php file
+
 In the [session.php file](includes/session.php), the line:
 
 ```php
@@ -99,3 +101,13 @@ session_set_cookie_params(0, '/', '.up.pt', true, true);
 
 helps mitigate the effects of XSS. It should be uncommented when the website
 code is being hosted (be careful to set the correct domain).
+
+### Database regeneration
+
+The database can be regenerated (information restored to starting example info)
+by calling `make` on the database directory.
+
+### Deploying
+
+The deploy script is used to deploy the website on a given user's public html
+area (FEUP).

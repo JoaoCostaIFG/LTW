@@ -256,8 +256,8 @@ INSERT INTO Species VALUES(45, "Any", 7);
 -- PetPost
 -- id   name    age    gender   size    description   date  state   color_id    species_id  city_id    user_id
 INSERT INTO PetPost VALUES(1, "Pantufa", "2011-11-09", 0, 3, "Gatus Gordus", "2020-08-10", 1, 3, 1, 2, 4);
-INSERT INTO PetPost VALUES(2, "Bobi", "2015-05-02", 0, 2, "Good doggo pls adopt.", "2020-08-01", 1, 2, 4, 1, 3);
-INSERT INTO PetPost VALUES(3, "Poki", "2013-01-05", 0, 1, "Poki is a very lazy cat.", "2020-09-01", 1, 3, 2, 3, 1);
+INSERT INTO PetPost VALUES(2, "Bobi", "2015-05-02", 0, 2, "Good doggo pls adopt.", "2020-08-01", 2, 2, 4, 1, 3);
+INSERT INTO PetPost VALUES(3, "Poki", "2013-01-05", 0, 1, "Poki is a very lazy cat.", "2020-09-01", 2, 3, 2, 3, 1);
 INSERT INTO PetPost VALUES(4, "Lourito", "2008-09-20", 0, 2, "This parrot is really cool and will keep you company!", "2020-09-14", 1, 4, 5, 4, 7);
 INSERT INTO PetPost VALUES(5, "Sisel", "2019-12-02", 1, 1, "A young cat that loves to play!", "2020-11-14", 1, 5, 3, 5, 8);
 INSERT INTO PetPost VALUES(6, "Ninja", "2017-04-15", 0, 3, "Ninja likes to sleep a lot but is always ready to play!", "2020-11-20", 1, 6, 6, 6, 8);
