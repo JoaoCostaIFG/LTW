@@ -4,6 +4,7 @@ function toggleAnsEdit(ans_id) {
   let toggleButton = document.getElementById("edit-ans-button" + ans_id);
   let inputField = document.getElementById("edit-ans-field" + ans_id);
   let confirmButton = document.getElementById("edit-ans-confirm" + ans_id);
+  let errorP = document.getElementById("edit-ans-error" + ans_id);
   if (inputField.style.display == "none") {
     toggleButton.innerHTML = "Cancel edit";
     confirmButton.style.display = "initial";
@@ -12,6 +13,9 @@ function toggleAnsEdit(ans_id) {
     toggleButton.innerHTML = "Edit";
     confirmButton.style.display = "none";
     inputField.style.display = "none";
+    // clear errors
+    errorP.value = "";
+    errorP.style.display = "none";
   }
 }
 
@@ -24,8 +28,11 @@ function edit_ans(ans_id) {
       let response = xhttp.responseText.trim("\n");
       let answer = document.getElementById("Answer" + ans_id);
       // Error
-      if (response.substr(0, 2) === "<p") {
-        console.log(response);
+      if (response.substr(0, 3) !== "A: ") {
+        // show an error
+        let errorP = document.getElementById("edit-ans-error" + ans_id);
+        errorP.style.display = "initial";
+        errorP.innerHTML = response;
         return;
       }
       answer.innerHTML = response;

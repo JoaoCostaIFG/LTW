@@ -81,6 +81,7 @@ No libraries were used.
 
 - **Extras**:
   - User profile pages with pet post list.
+  - Answer editing.
   - Pet states.
   - Notifications about adoption proposals.
   - Accepting a proposal for a pet, automatically declines all other proposals

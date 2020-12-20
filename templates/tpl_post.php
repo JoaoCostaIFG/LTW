@@ -328,8 +328,10 @@ function drawPost($post, $questionsAnswers)
     <p> <?php echo htmlspecialchars($questionAnswer['answer_date']); ?> </p>
 
     <?php if (isAnswerOwner($questionAnswer['id'], $user_id)) { ?>
+    <p class="error" id="<?php echo 'edit-ans-error' . htmlspecialchars($questionAnswer['id']) ?>"
+      style="display: none;"></p>
     <textarea id="<?php echo 'edit-ans-field' . htmlspecialchars($questionAnswer['id']) ?>"
-      placeholder="Type" style="display: none;"></textarea>
+      placeholder="Type the new answer here" style="display: none;"></textarea>
     <?php } ?>
   </section>
 <?php } ?>
