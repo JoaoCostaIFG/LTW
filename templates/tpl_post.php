@@ -3,6 +3,7 @@ require_once '../templates/tpl_petInfo.php';
 require_once '../includes/utils.php';
 require_once '../database/queries/db_proposal.php';
 require_once '../database/queries/db_user.php';
+require_once '../database/queries/db_post.php';
 
 /* GETTERS */
 
@@ -305,6 +306,34 @@ function drawPost($post, $questionsAnswers)
   </div>
 <?php } ?>
 
+<?php function drawAnswer($questionAnswer)
+{
+    $user_id = null;
+    if (isset($_SESSION['username'])) {
+        $user_id = getUserId($_SESSION['username'])['id'];
+    }
+    ?>
+  <br> <!-- Used to make the answers appear below the questions -->
+  <section class="petpost-answer">
+    <?php if (isAnswerOwner($questionAnswer['id'], $user_id)) { ?>
+    <br>
+    <button id="<?php echo 'edit-ans-button' . htmlspecialchars($questionAnswer['id']) ?>"
+      onclick="toggleAnsEdit(<?php echo htmlspecialchars($questionAnswer['id']) ?>)">Edit</button>
+    <button id="<?php echo 'edit-ans-confirm' . htmlspecialchars($questionAnswer['id']) ?>" style="display: none;"
+      onclick="edit_ans(<?php echo htmlspecialchars($questionAnswer['id']) ?>)">Confirm</button>
+    <?php } ?>
+
+    <p id="<?php echo 'Answer' . htmlspecialchars($questionAnswer['id']) ?>">
+      <?php echo 'A: ' . nl2br(htmlspecialchars($questionAnswer['answer'])); ?> </p>
+    <p> <?php echo htmlspecialchars($questionAnswer['answer_date']); ?> </p>
+
+    <?php if (isAnswerOwner($questionAnswer['id'], $user_id)) { ?>
+    <textarea id="<?php echo 'edit-ans-field' . htmlspecialchars($questionAnswer['id']) ?>"
+      placeholder="Type" style="display: none;"></textarea>
+    <?php } ?>
+  </section>
+<?php } ?>
+
 <?php
 //user_id is the one currently on the page
 function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
@@ -347,7 +376,10 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
 
 <?php function drawQuestionsAnswers($post_id, $user_id, $questionsAnswers)
 {
+    ?>
+    <script src="../js/edit_qa.js" type="text/javascript" defer></script>
 
+    <?php
     if(empty($questionsAnswers)) {
         echo "<i id='no-questions'>There are no questions on this post. Make the first question</i>";
     } else {
@@ -499,15 +531,5 @@ function drawQuestionAnswer($post_id, $user_id, $questionAnswer)
     }?>
     </p>
 
-  </section>
-<?php } ?>
-
-<?php function drawAnswer($questionAnswer)
-{
-    ?>
-    <br> <!-- Used to make the answers appear below the questions -->
-  <section class="petpost-answer">
-    <p> <?php echo 'A: ' . nl2br(htmlspecialchars($questionAnswer['answer'])); ?> </p>
-    <p> <?php echo htmlspecialchars($questionAnswer['answer_date']); ?> </p>
   </section>
 <?php } ?>

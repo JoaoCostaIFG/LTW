@@ -214,7 +214,29 @@ function insertAnswer($user_id, $question_id, $answer)
     $stmt->execute(array($user_id, $question_id, $answer, date("d/m/Y")));
 }
 
+function isAnswerOwner($answer_id, $user_id) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'SELECT user_id FROM Answer
+             WHERE id = ?'
+    );
+      
+    $stmt->execute(array($answer_id));
+    $user = $stmt->fetch();
+    return $user['user_id'] == $user_id;
+}
+
   /* UPDATES */
+function updateAnswer($answer_id, $answer_txt) {
+    $db = Database::instance()->db();
+    $stmt = $db->prepare(
+        'UPDATE Answer
+             SET text = ?
+             WHERE id = ?'
+    );
+    $stmt->execute(array($answer_txt, $answer_id));
+}
+
 function updatePost($post_info)
 {
     $db = Database::instance()->db();

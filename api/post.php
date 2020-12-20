@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo json_encode(array('message' => 'Request failed: color is not defined/invalid'));
         die;
     }
-    $species = treatInputNonEmpty($_POST['species'];)
+    $species = treatInputNonEmpty($_POST['species']);
     if(!isset($species)) {
         http_response_code(400);
         echo json_encode(array('message' => 'Request failed: species is not defined/invalid'));
