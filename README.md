@@ -109,5 +109,5 @@ by calling `make` on the database directory.
 
 ### Deploying
 
-The deploy script is used to deploy the website on a given user's public html
-area (FEUP).
+The [deploy script](deploy.sh) is used to deploy the website on a given user's
+public html area (FEUP).
