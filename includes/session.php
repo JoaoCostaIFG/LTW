@@ -1,6 +1,7 @@
 <?php
 // To mitigate xss
-session_set_cookie_params(0, '/', '.up.pt', true, true);
+// IMP uncomments the line bellow when hosting (not localhost)
+// session_set_cookie_params(0, '/', '.up.pt', true, true);
 
 session_start();
 

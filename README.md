@@ -88,3 +88,14 @@ No libraries were used.
     for the same pet.
   - REST API: get all users, get a single user, create a new user, get all pet
     posts, get a single pet post, create a new pet post.
+
+## Note
+
+In the [session.php file](includes/session.php), the line:
+
+```php
+session_set_cookie_params(0, '/', '.up.pt', true, true);
+```
+
+helps mitigate the effects of XSS. It should be uncommented when the website
+code is being hosted.
