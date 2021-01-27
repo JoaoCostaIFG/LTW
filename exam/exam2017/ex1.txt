@@ -1,0 +1,63 @@
+a)
+  R1: 0 0 1 1
+  R2: 0 0 0 2
+  R3: 0 1 1 2
+  R4: 0 1 1 2
+  R5: 0 0 1 2
+  R6: 0 0 0 3
+
+b)
+  blue, red, red, red
+
+c)
+  blue, red, green, cyan
+
+2)
+  a) Washing the [washing machine while watching the washing machine washing washing]
+  b) Wash[ing] the washing machine while watching the washing machine washing washing
+  c) Wash[ing the washing] machine while watching the washing machine washing washing
+  d) [Washing] the washing machine while watching the washing machine washing washing
+  e) Washing the washing ma[ch]ine while watching the washing machine washing washing
+  f) W[ashing the wa]shing machine while watching the washing machine washing washing
+
+3)
+  a)
+  let links = document.querySelectorAll("div#products ul li");
+  for (let i = 0; i < links.length; ++i) {
+    let children = links[i].childNodes;
+    children[1].addEventListener("click", function() {
+      children[0].innerHTML = parseInt(children[0].innerHTML) + 1;
+    });
+  }
+
+  b)
+  Enunciado:
+    When the link having a class buy is clicked, an array called products, containing a list of all pro-
+    ducts and their quantities, should be sent in an Ajax POST request to the address calculatetotal.php.
+
+    When the result of that request is received, the text of the paragraph total should be replaced
+    by the received result (or by not enough stock if the received result is less than 0).
+    Example of the array to be sent:
+    [{"name":"Apple","qty":3},{"name":"Banana","qty":5},{"name":"Pear","qty":6}]
+
+  Resolução:
+    let req = new XMLHttpRequest();
+    req.onreadystatechange = function() {
+      if (req.readyState == 4) {
+        let stockNum = req.responseText;
+        let p = document.getElementsByClassName("total")[0];
+        p.innerHTML = stockNum < 0 ? "not enough stock" : stockNum;
+      }
+    };
+
+    req.open("post", "calculatetotal.php", true);
+    req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    req.send(encodeForAjax()); // TODO
+
+    document.getElementsByClassName("total")
+
+4)
+  a) //author/@name
+  b) //book[@type="Novel"]/text()
+  c) //author[count(book) > 1]/@name
+  d) //author[book[text()="Ensaio sobre a Cegueira "]]/@name

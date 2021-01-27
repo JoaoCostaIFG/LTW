@@ -1,0 +1,97 @@
+@media (max-width: 60em) {
+  body {
+    display: block;
+  }
+
+  aside#related {
+    display: none;
+  }
+
+  #news {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 30em) {
+  body {
+    margin: 0;
+  }
+
+  body header h2 {
+    display: none;
+  }
+
+  body header {
+    display: block;
+  }
+
+  body header #signup {
+    text-align: left;
+  }
+
+  #news article > header {
+    color: black;
+    position: relative;
+    max-width: 100%;
+    text-shadow: none;
+  }
+
+  #menu {
+    margin-bottom: 0;
+  }
+
+  #menu > ul {
+    display: none;
+  }
+
+  #menu > ul > li {
+    border-top: none;
+    border-left: 5px solid;
+    text-align: left;
+    padding: 1em;
+    width: auto;
+    font-weight: normal;
+  }
+
+  #menu > ul > li:nth-child(1) {
+    border-left-color: #E1493E;
+  }
+  #menu > ul > li:nth-child(2) {
+    border-left-color: #8ABA56;
+  }
+  #menu > ul > li:nth-child(3) {
+    border-left-color: #5B4282;
+  }
+  #menu > ul > li:nth-child(4) {
+    border-left-color: #FF8932;
+  }
+  #menu > ul > li:nth-child(5) {
+    border-left-color: #19B6E9;
+  }
+  #menu > ul > li:nth-child(6) {
+    border-left-color: #E84C8B;
+  }
+
+  #menu .hamburger {
+    display: block;
+    background-color: #292E32;
+    color: white;
+    padding: 1em;
+  }
+
+  #menu .hamburger::before {
+    content: '\2630';
+  }
+
+  nav #hamburger:checked + .hamburger::before {
+    content: '\2715';
+  }
+
+  nav #hamburger:checked ~ ul {
+    display: initial;
+  }
+
+  #news article > p:first-of-type::first-letter {
+    font-size: 1em;
+  }
+}

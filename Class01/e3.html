@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>New news</title>
+    <meta charset="UTF-8">
+  </head>
+
+  <body>
+    <form action="save.php" method="post">
+      <label>Name:
+        <input type="text" name="name">
+      </label><br>
+
+      Age:<br>
+      <label for="<18">Age:</label><br>
+      <input type="radio" id="<18" name="age" value="<18">
+      <label for="<18">&lt;18</label>
+      <input type="radio" id="19-35" name="age" value="19-35">
+      <label for="19-35">19-35</label>
+      <input type="radio" id="36-48" name="age" value="36-48">
+      <label for="36-48">36-48</label>
+      <input type="radio" id=">49" name="age" value=">49">
+      <label for=">49">&gt;49</label><br>
+
+      <label>Profession:
+        <input type="text" name="prof"><br>
+      </label>
+
+      <label>Country:
+        <select name="country">
+          <optgroup label="c:">
+            <option value="Portugal">Portugal</option>
+          </optgroup>
+          <optgroup label=":c">
+            <option value="England">England is my city</option>
+            <option value="Brasil">I've been stabbed</option>
+          </optgroup>
+        </select>
+      </label><br>
+
+      <label>Interests:<br>
+        <select name="interests" multiple="multiple">
+          <option value="Portugal">Portugal</option>
+          <option value="England">England is my city</option>
+          <option value="Brasil">I've been stabbed</option>
+        </select>
+      </label><br>
+
+      <label>How did you get here¿:
+        <textarea name="gothere" rows="4" cols="50">
+          How the hell did u get here¿
+        </textarea><br>
+      </label><br>
+
+      <input type="submit" value="send">
+    </form>
+  </body>
+
+</html>

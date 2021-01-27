@@ -1,0 +1,34 @@
+#comments {
+  margin: 1em;
+}
+
+#comments h1 {
+  font-size: 1em;
+  margin-bottom: 2em;
+}
+
+#comments p:before {
+  content: '\201C';
+  font-size: 3em;
+  position: relative;
+  top: 15px;
+  color: #ccc;
+}
+
+#comments p {
+  background-color: #edeff0;
+  padding: 1em;
+}
+
+#comments .comment .user {
+  font-style: italic;
+}
+
+#comments .comment .user:after {
+  font-style: normal;
+  content: " said:";
+}
+
+#comments .comment .date {
+  float: right;
+}

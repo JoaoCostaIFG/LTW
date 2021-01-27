@@ -1,0 +1,9 @@
+29)
+  //ingredient/text()
+30)
+  count(//ingredient[../../name="Mixed Toast"])
+31)
+  count(//recipe[@difficulty="medium"])
+32)
+  //recipe[ingredients[ingredient="Apple"]]/name/text()
+
